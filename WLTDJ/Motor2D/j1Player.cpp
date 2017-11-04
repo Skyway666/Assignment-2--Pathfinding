@@ -117,7 +117,6 @@ bool j1Player::Start()
 	return ret;
 }
 
-// Update: draw background
 bool j1Player::PostUpdate()
 {
 	if (contact.x != 0)
@@ -252,8 +251,7 @@ bool j1Player::PostUpdate()
 		  collider->SetPos(position.x + 30, position.y + 30);
 		else
 		{ 
-			    collider->SetPos(position.x + 30, position.y + 547 * 0.2 - App->map->data.tile_height - 1 + 50);
-		
+		  collider->SetPos(position.x + 30, position.y + 547 * 0.2 - App->map->data.tile_height - 1 + 50);
 		}
 	}
 
