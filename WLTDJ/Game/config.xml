@@ -1,0 +1,40 @@
+<!-- Config file for the game -->
+
+<config>
+  <app>
+    <title>Who let the dog jump?</title>
+    <organization>UPC</organization>
+  </app>
+	
+  <renderer>
+    <vsync value="true"/>
+  </renderer>
+  
+  <player>
+    <jump_time value =" 15"/>
+    <slide_time value =" 15"/>
+    <walljump_time value =" 20"/>
+    <speed_modifier.y value =" 12"/>
+    <speed_modifier.x value =" 10"/>
+    <walljump_speed.y value =" 15"/>
+    <walljump_speed.x value =" 10"/>
+    <gravity value =" 6"/>
+  </player>
+  
+  <window>
+    <resolution width="1024" height="768" scale="1"/>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="false"/>
+    <fullscreen_window value="false"/>
+  </window>
+
+  <file_system>
+    <path>data.zip</path>
+  </file_system>
+
+  <map>
+    <folder>maps/</folder>
+  </map>
+
+</config>
