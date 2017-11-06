@@ -86,7 +86,7 @@ bool j1Enemies::CleanUp()
 {
 	LOG("Freeing all enemies");
 
-	App->tex->Unload(sprites);
+	App->tex->UnLoad(sprites);
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -111,7 +111,7 @@ bool j1Enemies::AddEnemy(int path, ENEMY_TYPES type, int x, int y)
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
-			queue[i]._path = path;//assignes a path to the enemy
+
 			ret = true;
 			break;
 		}
