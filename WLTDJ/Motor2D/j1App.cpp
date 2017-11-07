@@ -14,6 +14,7 @@
 #include "j1Collisions.h"
 #include "j1Player.h"
 #include "j1Enemies.h"
+#include "Pathfinding.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -31,6 +32,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collision = new j1Collisions();
 	player = new j1Player();
 	enemies = new j1Enemies();
+	pathfinding = new Pathfinding();
 
 	AddModule(input);
 	AddModule(win);
@@ -41,7 +43,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(collision);
 	AddModule(enemies);
+	AddModule(pathfinding);
+
+	//Render allways last
 	AddModule(render);
+	
 }
 
 // Destructor

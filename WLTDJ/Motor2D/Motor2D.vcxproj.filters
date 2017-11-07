@@ -46,6 +46,9 @@
     <ClCompile Include="j1Enemies.cpp">
       <Filter>Modules, scenes and tools\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Pathfinding.cpp">
+      <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -113,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="j1Enemies.h">
       <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinding.h">
+      <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
