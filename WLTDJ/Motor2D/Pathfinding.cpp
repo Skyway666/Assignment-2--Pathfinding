@@ -37,7 +37,7 @@ void Pathfinding::CreatePath(iPoint origin, iPoint destination)
 			neighbors[3].create(curr.x + 0, curr.y - 1);
 			for (uint i = 0; i < 4; ++i)
 			{
-				if (IsWalkable(neighbors[i]) > 0)
+				if (IsWalkable(neighbors[i]) == 0)
 				{
 					int new_cost = neighbors[i].DistanceManhattan(destination);
 
