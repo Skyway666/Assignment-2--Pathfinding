@@ -50,9 +50,8 @@ bool j1Collisions::Update(float dt)
 			if (colliders[i]->type == COLLIDER_WALL)
 			{
 				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, ceil(App->player->speed_modifier.y), ceil(App->player->gravity));
-				if (App->player->collider->CheckCollision(colliders[i]->rect) == true)
+				if (App->player->collider->CheckCollision(colliders[i]->rect))
 				{
-					App->player->position.y -= ceil(App->player->gravity);
 					if (App->player->speed.x > 0)
 						App->player->position.x -= App->player->speed_modifier.x;
 					else
@@ -61,7 +60,7 @@ bool j1Collisions::Update(float dt)
 			}
 			else if (colliders[i]->type == COLLIDER_BONE || colliders[i]->type == COLLIDER_DEADLY)
 			{
-				if (App->player->collider->CheckCollision(colliders[i]->rect) == true)
+				if (App->player->collider->CheckCollision(colliders[i]->rect))
 				{
 
 					if (matrix[App->player->collider->type][colliders[i]->type])
