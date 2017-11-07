@@ -5,6 +5,14 @@
 
 struct SDL_Texture;
 
+
+struct Test_monster
+{
+	SDL_Texture* graphics;
+	SDL_Texture* path_indicator;
+	iPoint pos;
+};
+
 class j1Scene : public j1Module
 {
 public:
@@ -38,7 +46,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+    Test_monster flying_eye;
 private:
+	
 };
 
 #endif // __j1SCENE_H__

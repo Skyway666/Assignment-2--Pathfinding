@@ -123,6 +123,8 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, float size_scaling, cons
 	else
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+		rect.w *=  size_scaling;
+		rect.h *=  size_scaling;
 	}
 
 

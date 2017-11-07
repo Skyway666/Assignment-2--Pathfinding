@@ -19,8 +19,9 @@ private:
 
 	//Private attributes
 	uint height, width;
-	uint* walkability_values;
+	uint* walkability_values;	
 	p2DynArray<iPoint> last_path;
+
 
 	p2PQueue<iPoint>	frontier;
 	p2List<iPoint>		visited;
@@ -31,8 +32,10 @@ public:
 	void CreatePath(iPoint origin, iPoint destination); //This will fill "last path"
 	void Path_BackTracking(iPoint goal);
 	bool CleanUp();
-	bool IsWalkable(const iPoint& pos)const;
-	p2DynArray<iPoint> GetLastPath()const;
+	bool IsWalkable(const iPoint& pos)const; //Returns 0 if walkable and -1 if not walkable
+	p2DynArray<iPoint>* GetLastPath();
+
+
 	//Public attributes
 	
 };

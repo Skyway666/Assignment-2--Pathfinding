@@ -102,6 +102,7 @@ bool j1Player::Start()
 	App->map->bone_graphics = App->tex->Load("textures/BONE.png");
 	App->scene->win_screen = App->tex->Load("textures/WinScreen.png");
 
+
 	SDL_Rect r{ 0, 0, 481, 547 };
 
 	SDL_Rect ground{ r.x + 1000, r.y + 900, r.w, 100 };
@@ -240,9 +241,10 @@ bool j1Player::PostUpdate()
 
 	App->render->Blit(graphics, position.x, position.y, 0.3, &current_animation->GetCurrentFrame(), flip);
 
-	// Set camera to follow the player
-	App->render->camera.x = -position.x + 400;
-	App->render->camera.y = -position.y + 400;
+	// Set camera to follow the player (commented in order to debug better)
+
+	//App->render->camera.x = -position.x + 400;
+	//App->render->camera.y = -position.y + 400;
 
 	//Put collider next to player
 	if (collider != nullptr)

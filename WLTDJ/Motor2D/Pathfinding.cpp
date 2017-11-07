@@ -13,7 +13,7 @@ Pathfinding::~Pathfinding()
 
 void Pathfinding::CreatePath(iPoint origin, iPoint destination) 
 {
-	
+	last_path.Clear();
 	iPoint curr = origin;
 	frontier.Push(curr,curr.DistanceManhattan(destination));
 
@@ -54,9 +54,17 @@ void Pathfinding::Path_BackTracking(iPoint goal)
 {
 	last_path.PushBack(goal);
 
-	for (int i = visited.find(goal); i != 0; i = visited.find(breadcrumbs.At(i)->data))
+	int last_value = visited.find(goal) + 1;
+	for (int i = visited.find(goal); i < last_value; i = visited.find(breadcrumbs.At(i)->data))
 	{
+
 		last_path.PushBack(breadcrumbs.At(i)->data);
+
+
+		if (i < last_value)
+		{
+			last_value = i;
+		}
 	}
 
 	last_path.Flip();
@@ -76,9 +84,9 @@ bool Pathfinding::CleanUp()
 	return true;
 }
 
-p2DynArray<iPoint> Pathfinding::GetLastPath() const
+p2DynArray<iPoint>* Pathfinding::GetLastPath()
 {
-	return last_path;
+	return &last_path;
 }
 
 bool Pathfinding::IsWalkable(const iPoint& pos)const
