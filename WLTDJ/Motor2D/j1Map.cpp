@@ -46,7 +46,7 @@ void j1Map::CreateColliders()
 			int id = data.layer_array.At(1)->data->data[counter]; 
 			int x = counter; 
 			int y = data.layer_array.At(1)->data->width;
-			Get(&x, &y); 
+			Get_coordinates_from_id(&x, &y);
 
 			//Now, x and y are the coordinates of the tileset
 			
@@ -88,7 +88,7 @@ void j1Map::Draw()
 			{ 
 				int x = counter;
 				int y = data.layer_array.At(0)->data->width;
-				Get(&x, &y);
+				Get_coordinates_from_id(&x, &y);
 
 				//Now, x and y are the coordinates of the tileset
 
@@ -476,13 +476,18 @@ bool j1Map::LoadMapPropierties(pugi::xml_node& node)
 	return true;
 }
 
-void j1Map::Get(int* x, int* y)
+void j1Map::Get_coordinates_from_id(int* x, int* y)
 {
 	int row = *x / *y;
 	int column = *x - row*(*y);
 
 	*x = column;
 	*y = row;
+}
+
+int j1Map::Get_id_from_coordinates(int x, int y)
+{
+	return (y*data.width) + x;
 }
 
 void j1Map::convert_to_real_world(int* x, int* y)

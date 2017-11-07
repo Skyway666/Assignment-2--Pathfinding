@@ -120,6 +120,9 @@
     <ClInclude Include="Pathfinding.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="p2PQueue.h">
+      <Filter>p2 libraries</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="p2 libraries">

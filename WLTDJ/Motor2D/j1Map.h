@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "Animation.h"
+#include "j1Render.h"
 
 struct TileSet
 {
@@ -90,7 +91,9 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 
-	void Get(int* x, int* y); //la x is id,  y how much elements are there in a row
+	void Get_coordinates_from_id(int* x, int* y); //la x is id,  y how much elements are there in a row
+
+	int Get_id_from_coordinates(int x, int y);
 
 	SDL_Rect Tile_Rect(int tileid);
 
