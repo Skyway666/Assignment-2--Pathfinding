@@ -6,9 +6,10 @@
 	<audio />
 	<map />
 	<player>
-		<player_position x="230" y="813" map="1" />
+		<player_position x="2020" y="812" map="0" />
 	</player>
 	<scene />
+	<:anonymous />
 	<:anonymous />
 	<renderer />
 </game_state>

@@ -43,11 +43,7 @@ struct Collider
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;
-	bool WillCollideLeft(const SDL_Rect& r, int distance) const;
-	bool WillCollideRight(const SDL_Rect& r, int distance) const;
-	bool WillCollideGround(const SDL_Rect& r, int distance) const;
-	bool WillCollideTop(const SDL_Rect& r, int distance) const;
-
+	void WillCollide(const SDL_Rect& r, int speed_x, int speed_y, int gravity);
 
 };
 
