@@ -1,15 +1,6 @@
-#include "p2Defs.h"
-#include "p2Log.h"
-#include "j1App.h"
-#include "j1Input.h"
-#include "j1Textures.h"
-#include "j1Audio.h"
-#include "j1Render.h"
-#include "j1Window.h"
-#include "j1Map.h"
+
 #include "j1Scene.h"
-#include "j1Player.h"
-#include "Pathfinding.h"
+
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -35,12 +26,23 @@ bool j1Scene::Start()
 	App->map->Load("Level 1 final.tmx");
 	App->map->map = 0;
 
+
+
+
+
+	//JUST A TEST
+	App->pathfinding->SetMap();	
 	flying_eye.graphics = App->tex->Load("textures/Flying Monster/frame-1.png");
     flying_eye.path_indicator = App->tex->Load("textures/path_indicator.png");
 	flying_eye.pos.x = App->map->data.player_starting_value.x + 500;
 	flying_eye.pos.y = App->map->data.player_starting_value.y;
 
-	App->pathfinding->SetMap();
+
+	iPoint player_map_pos(App->player->position.x / App->map->data.tilesets.At(0)->data->tile_height, App->player->position.y / App->map->data.tilesets.At(0)->data->tile_height);
+	iPoint monster_map_pos(flying_eye.pos.x / App->map->data.tilesets.At(0)->data->tile_height, flying_eye.pos.y / App->map->data.tilesets.At(0)->data->tile_height);
+	App->pathfinding->CreatePath(monster_map_pos, player_map_pos);
+
+	path = App->pathfinding->GetLastPath();
 
 	return true;
 }
@@ -79,16 +81,27 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
+
+
+
+
+
+	//JUST A TEST
 	App->render->Blit(flying_eye.graphics, flying_eye.pos.x, flying_eye.pos.y, 0.1);
 
 
 	iPoint player_map_pos(App->player->position.x/ App->map->data.tilesets.At(0)->data->tile_height, App->player->position.y/ App->map->data.tilesets.At(0)->data->tile_height);
 	iPoint monster_map_pos(flying_eye.pos.x / App->map->data.tilesets.At(0)->data->tile_height, flying_eye.pos.y / App->map->data.tilesets.At(0)->data->tile_height);
 
-	App->pathfinding->CreatePath(monster_map_pos, player_map_pos);
+	
 
 
-	p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT || first_path)
+	{
+		App->pathfinding->CreatePath(monster_map_pos, player_map_pos);
+	    path = App->pathfinding->GetLastPath();
+		first_path = false;
+	}
 
 
 	for (int i = 0; i < path->Count(); i++)

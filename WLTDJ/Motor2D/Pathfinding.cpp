@@ -39,8 +39,7 @@ void Pathfinding::CreatePath(iPoint origin, iPoint destination)
 			{
 				if (IsWalkable(neighbors[i]) == 0)
 				{
-					int new_cost = neighbors[i].DistanceManhattan(destination);
-
+					int new_cost = neighbors[i].DistanceTo(destination);
 					frontier.Push(neighbors[i], new_cost);
 					visited.add(neighbors[i]);
 					breadcrumbs.add(curr);
@@ -55,7 +54,7 @@ void Pathfinding::Path_BackTracking(iPoint goal)
 	last_path.PushBack(goal);
 
 	int last_value = visited.find(goal) + 1;
-	for (int i = visited.find(goal); i < last_value; i = visited.find(breadcrumbs.At(i)->data))
+	for (int i = visited.find(goal); i < last_value && i >= 0; i = visited.find(breadcrumbs.At(i)->data))
 	{
 
 		last_path.PushBack(breadcrumbs.At(i)->data);
