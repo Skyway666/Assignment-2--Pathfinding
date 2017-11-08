@@ -4,6 +4,7 @@
 #include "j1Collisions.h"
 #include "j1Player.h"
 #include "j1Map.h"
+#include "Pathfinding.h"
 
 j1Collisions::j1Collisions()
 {
@@ -77,6 +78,7 @@ bool j1Collisions::Update(float dt)
 								App->map->CleanUp();
 								App->map->Load("Level 2 final.tmx"); 
 								App->map->map = 1;
+								App->pathfinding->SetMap();
 							}
 							else if (App->map->map == 1)
 							{

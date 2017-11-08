@@ -14,20 +14,20 @@ Pathfinding::~Pathfinding()
 void Pathfinding::CreatePath(iPoint origin, iPoint destination) 
 {
 	last_path.Clear();
+	frontier.Clear();
+	visited.clear();
+	breadcrumbs.clear();
 	iPoint curr = origin;
 	frontier.Push(curr,curr.DistanceManhattan(destination));
 
 	//Expanding Loop
-	while (visited.count() <= width*height)
+	for(int i = 0; i != width*height; i++)
 	{
 		frontier.Pop(curr);
 
 		if (curr == destination) //Create path
 		{
 			Path_BackTracking(curr);
-			frontier.Clear();
-			visited.clear();
-			breadcrumbs.clear();
 			break;
 		}
 			iPoint neighbors[4];
@@ -37,7 +37,7 @@ void Pathfinding::CreatePath(iPoint origin, iPoint destination)
 			neighbors[3].create(curr.x + 0, curr.y - 1);
 			for (uint i = 0; i < 4; ++i)
 			{
-				if (IsWalkable(neighbors[i]) == 0)
+				if (IsWalkable(neighbors[i]) == 0 && visited.find(neighbors[i]) == -1)
 				{
 					int new_cost = neighbors[i].DistanceTo(destination);
 					frontier.Push(neighbors[i], new_cost);
