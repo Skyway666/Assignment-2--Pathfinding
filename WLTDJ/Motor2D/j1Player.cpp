@@ -8,6 +8,8 @@
 #include "j1Audio.h"
 #include "j1Scene.h"
 
+//This module should be a child of "entity" and the execution should be managed by the entity system
+
 j1Player::j1Player()
 {
 	name.create("player");

@@ -20,7 +20,7 @@ j1Enemies::~j1Enemies()
 {
 }
 
-bool j1Enemies::Init()
+bool j1Enemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	// sprites = App->tex->Load("assets/ ENEMY SPRITE SHEET HERE.png");
@@ -146,6 +146,7 @@ void j1Enemies::OnCollision(Collider* c1, Collider* c2)
 
 	}
 }
+
 
 void j1Enemies::EraseEnemies()
 {

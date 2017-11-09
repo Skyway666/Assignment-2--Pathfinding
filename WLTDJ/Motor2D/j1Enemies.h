@@ -28,17 +28,15 @@ public:
 	j1Enemies();
 	~j1Enemies();
 
-	int bossmain;
-	int counter = 0;
-	bool Init();
-	bool PreUpdate();
-	bool Update();
-	bool PostUpdate();
-	bool CleanUp();
-	void EraseEnemies();
-	void OnCollision(Collider* c1, Collider* c2);
-	bool AddEnemy(int path, ENEMY_TYPES type, int x, int y);
-	void SpawnEnemy(const EnemyInfo& info);
+	bool Start(); //Load enemy textures
+	bool PreUpdate(); //Potentially decide what enemies to spawn
+	bool Update(); //Update all enemies in "enemies"
+	bool PostUpdate(); //Potentially check camera position to decide what to despawn
+	bool CleanUp(); //Called when app is closed
+	void EraseEnemies(); //To erase all enemies left on the map
+	void OnCollision(Collider* c1, Collider* c2); //Called by the callback of "j1Collisions", should iterate over all enemies and call their OnCollision method if the collider is theirs
+	bool AddEnemy(int path, ENEMY_TYPES type, int x, int y); //Adds an enemy to the list with a certain type and position || Potentially to the queue
+	void SpawnEnemy(const EnemyInfo& info); //Potencially spawns an enemy of the queue
 
 private:
 
