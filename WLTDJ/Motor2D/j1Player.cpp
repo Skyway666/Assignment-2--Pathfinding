@@ -184,6 +184,14 @@ bool j1Player::Update(float dt)
 				speed.x = -speed_modifier.x;
 		}
 
+		// Stop moving if both A and D are pressed
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			speed.x = 0;
+			if (current_animation == &run)
+				current_animation = &idle;
+		}
+
 		// Jumping
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
 		{
