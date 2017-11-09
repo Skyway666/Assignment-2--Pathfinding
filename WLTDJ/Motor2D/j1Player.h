@@ -31,7 +31,7 @@ public:
 
 public:
 
-	Collider* collider;
+	Collider* collider = nullptr;
 
 	SDL_Rect rect_after_sliding;
 	int frames = 0;
@@ -64,7 +64,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	Animation* current_animation;
+	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation run;
 	Animation jump;

@@ -40,8 +40,6 @@ bool j1Collisions::PreUpdate()
 // Called before render is available
 bool j1Collisions::Update(float dt)
 {
-	Collider* c;
-
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 			// skip empty and player colliders
