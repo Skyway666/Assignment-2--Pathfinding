@@ -41,9 +41,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
-	AddModule(player);
 	AddModule(scene);
 	AddModule(collision);
+	AddModule(player);
 	AddModule(enemies);
 	AddModule(pathfinding);
 
@@ -178,7 +178,10 @@ void j1App::PrepareUpdate()
 {
 	frame_count++;
 	last_sec_frame_count++;
-	dt = frame_time.ReadSec();
+	if ((float)frame_time.Read() < 1000 / (float)framerate_cap)
+		(float)dt = (1 / (float)framerate_cap) * 60;
+	else
+		(float)dt = ((float)frame_time.Read()) / 1000 * 60;
 	frame_time.Start();
 }
 
@@ -212,15 +215,15 @@ void j1App::FinishUpdate()
 	App->win->SetTitle(title);
 
 	timer.Start();
-	expected_delay = 1000 / framerate_cap - last_frame_ms;
+	expected_delay = 1000 / (float)framerate_cap - (float)last_frame_ms;
 
-	/*if (expected_delay > 0)
+	if (expected_delay > 0)
 	{
 		SDL_Delay(expected_delay);
 		real_delay = timer.ReadMs();
 
 		LOG("We waited for %f milliseconds and got back in %f", expected_delay, real_delay);
-	}*/
+	}
 }
 
 // Call modules before each loop iteration

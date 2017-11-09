@@ -50,13 +50,15 @@ bool j1Collisions::Update(float dt)
 
 			if (colliders[i]->type == COLLIDER_WALL)
 			{
-				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, ceil(App->player->speed_modifier.y), ceil(App->player->gravity));
+				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, (App->player->speed_modifier.y), (App->player->gravity), dt);
 				if (App->player->collider->CheckCollision(colliders[i]->rect))
 				{
+						App->player->position.y -= (App->player->speed_modifier.y * dt);
+
 					if (App->player->speed.x > 0)
-						App->player->position.x -= App->player->speed_modifier.x;
+						App->player->position.x -= (App->player->speed_modifier.x * dt);
 					else
-						App->player->position.x += App->player->speed_modifier.x;
+						App->player->position.x += (App->player->speed_modifier.x * dt);
 				}
 			}
 			else if (colliders[i]->type == COLLIDER_BONE || colliders[i]->type == COLLIDER_DEADLY)
@@ -195,19 +197,23 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 	}
 }
 
-void Collider::WillCollide(const SDL_Rect& r, int speed_x, int speed_y, int gravity)
+void Collider::WillCollide(const SDL_Rect& r, int speed_x, int speed_y, int gravity, float dt)
 {
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + speed_x && r.x + r.w > rect.x) // Will collide left
+	speed_x *= dt;
+	speed_y *= dt;
+	gravity *= dt;
+
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + (speed_x) && r.x + r.w > rect.x) // Will collide left
 		App->player->contact.x = 1;
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - speed_x && r.x < rect.x + rect.w) // Will collide right
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - (speed_x) && r.x < rect.x + rect.w) // Will collide right
 		App->player->contact.x = 2;
-	if (r.y < rect.y + rect.h && r.y + r.h > rect.y - gravity && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
+	if (r.y < rect.y + rect.h && r.y + r.h > rect.y - (gravity) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
 		App->player->contact.y = 1;
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + speed_y && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + (speed_y) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
 		App->player->contact.y = 2;
 }
 
-bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance) const
+bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance, float dt) const
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -215,7 +221,9 @@ bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance) const
 		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 			continue;
 
-		if (colliders[i]->type == COLLIDER_WALL && r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + distance && r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
+		distance *= dt;
+
+		if (colliders[i]->type == COLLIDER_WALL && r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + (distance) && r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 		{
 			return true;
 		}

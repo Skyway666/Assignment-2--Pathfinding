@@ -5,10 +5,11 @@
 	<textures />
 	<audio />
 	<map />
-	<player>
-		<player_position x="2020" y="812" map="0" />
-	</player>
 	<scene />
+	<:anonymous />
+	<player>
+		<player_position x="5511" y="1150" map="1" />
+	</player>
 	<:anonymous />
 	<:anonymous />
 	<renderer />

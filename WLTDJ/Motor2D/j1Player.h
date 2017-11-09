@@ -18,7 +18,7 @@ public:
 	bool Awake(pugi::xml_node& conf);
 
 	bool Start();
-	bool PostUpdate();
+	bool Update(float dt);
 	
 
 	// Load / Save
@@ -54,6 +54,7 @@ public:
 	iPoint sprite_distance;
 	fPoint speed_modifier;
 	fPoint walljump_speed;
+	float player_dt;
 	float gravity;
 	float player_x_displacement;
 	int jump_time;

@@ -113,7 +113,6 @@ private:
 	// Framerate management
 	double				expected_delay;
 	double				real_delay;
-	uint				framerate_cap;
 	uint32				last_sec_frame_count = 0;
 	uint32				prev_last_sec_frame_count = 0;
 	uint64				frame_count = 0;
@@ -122,6 +121,10 @@ private:
 	j1Timer				startup_time;
 	j1Timer				frame_time;
 	j1Timer				last_sec_frame_time;
+
+public:
+
+	uint	framerate_cap;
 };
 
 extern j1App* App;

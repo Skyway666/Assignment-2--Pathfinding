@@ -118,8 +118,9 @@ bool j1Player::Start()
 	return ret;
 }
 
-bool j1Player::PostUpdate()
+bool j1Player::Update(float dt)
 {
+	player_dt = dt;
 	if (contact.x != 0)
 		speed.y = speed_modifier.y;
 	else
@@ -225,13 +226,13 @@ bool j1Player::PostUpdate()
 
 
 	if (!walljumping)
-		position.x += speed.x;
+		position.x += ceil(speed.x * dt);
 
 	if (contact.y != 1 && StickToWall)
-		position.y += gravity / 2;
+		position.y += ceil(gravity / 2 * dt);
 
 	else if (contact.y != 1)
-		position.y += gravity;
+		position.y += ceil(gravity * dt);
 
 	StickToWall = false;
 	contact.x = 0;
@@ -312,10 +313,10 @@ void j1Player::Jump()
 			fall.Reset();
 		}
 
-		if (frames - time <= jump_time && contact.y == 0)
+		if (frames - time <= jump_time / (60 / App->framerate_cap) && contact.y == 0)
 		{
 			current_animation = &jump;
-			position.y -= speed.y;
+			position.y -= ceil(speed.y * player_dt);
 		}
 		else
 		{
@@ -345,18 +346,18 @@ void j1Player::Jump()
 			App->audio->PlayFx(1);
 		}
 
-		if (frames - time <= walljump_time && contact.x == 0)
+		if (frames - time <= walljump_time / (60 / App->framerate_cap) && contact.x == 0)
 		{
 			current_animation = &jump;
-			position.y -= walljump_speed.y;
+			position.y -= ceil(walljump_speed.y * player_dt);
 
 			if (jcontact == 1)
 			{
-				position.x += walljump_speed.x;
+				position.x += ceil(walljump_speed.x * player_dt);
 				flip = true;
 			}
 			else if (jcontact == 2)
-				position.x -= walljump_speed.x;
+				position.x -= ceil(walljump_speed.x * player_dt);
 		}
 		else
 		{
@@ -387,7 +388,7 @@ void j1Player::Slide()
 			player_height_before_sliding = position.y;
 			App->audio->PlayFx(2);
 		}
-		if (frames - time <= slide_time) 
+		if (frames - time <= slide_time / (60 / App->framerate_cap))
 		{
 			current_animation = &slide;
 			rect_after_sliding.x = position.x;
@@ -398,7 +399,7 @@ void j1Player::Slide()
 		}
 
 	
-		else if (App->collision->WillCollideAfterSlide(rect_after_sliding , 1) && contact.x == 0)
+		else if (App->collision->WillCollideAfterSlide(rect_after_sliding , 1, player_dt) && contact.x == 0)
 		{
 			time = frames;
 		}
