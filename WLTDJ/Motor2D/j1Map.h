@@ -19,7 +19,7 @@ struct TileSet
 	int					spacing;
 	int					tile_width;
 	int					tile_height;
-	SDL_Texture*		texture;
+	SDL_Texture*		texture = nullptr;
 	int					tex_width;
 	int					tex_height;
 	int					num_tiles_width;
@@ -57,7 +57,7 @@ struct MapData
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*> layer_array;
 	fPoint player_starting_value; 
-	SDL_Texture* background_image; 
+	SDL_Texture* background_image = nullptr;
 	float parallax_speed; 
 	int camera_y_limit; 
 	iPoint bone_position;
