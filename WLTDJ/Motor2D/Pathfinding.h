@@ -19,7 +19,7 @@ private:
 
 	//Private attributes
 	uint height, width;
-	uint* walkability_values;	
+	uint* walkability_values = nullptr;	
 	p2DynArray<iPoint> last_path;
 
 
