@@ -95,7 +95,8 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
-		framerate_cap = app_config.attribute("framerate_cap").as_uint();
+		config_framerate_cap = app_config.attribute("framerate_cap").as_uint();
+		framerate_cap = config_framerate_cap;
 	}
 
 	if(ret == true)
@@ -179,9 +180,9 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 	if ((float)frame_time.Read() < 1000 / (float)framerate_cap)
-		(float)dt = (1 / (float)framerate_cap) * 60;
+		dt = (1 / (float)framerate_cap) * 60;
 	else
-		(float)dt = ((float)frame_time.Read()) / 1000 * 60;
+		dt = ((float)frame_time.Read()) / 1000 * 60;
 	frame_time.Start();
 }
 

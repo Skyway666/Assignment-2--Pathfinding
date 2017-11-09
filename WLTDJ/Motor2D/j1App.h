@@ -125,6 +125,7 @@ private:
 public:
 
 	uint	framerate_cap;
+	uint	config_framerate_cap;
 };
 
 extern j1App* App;

@@ -223,10 +223,9 @@ bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance, float 
 
 		distance *= dt;
 
-		if (colliders[i]->type == COLLIDER_WALL && r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + (distance) && r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
-		{
+		if (colliders[i]->type == COLLIDER_WALL && r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + (distance)
+			&& r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 			return true;
-		}
 	}
 
 	return false;

@@ -56,6 +56,14 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		if (App->framerate_cap != 30)
+			App->framerate_cap = 30;
+		else
+			App->framerate_cap = App->config_framerate_cap;
+	}
+
 	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
 
@@ -75,16 +83,9 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 50;
 	
 	if (App->render->camera.y < App->map->data.camera_y_limit)
-	{
 		App->render->camera.y = App->map->data.camera_y_limit;
-	}
 
 	App->map->Draw();
-
-
-
-
-
 
 	//JUST A TEST
 	App->render->Blit(flying_eye.graphics, flying_eye.pos.x, flying_eye.pos.y, 0.1);
