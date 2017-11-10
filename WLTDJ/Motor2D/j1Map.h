@@ -89,15 +89,15 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
-	iPoint MapToWorld(int x, int y) const;
+	void MapToWorld(int* x, int* y) const;
+
+	void WorldToMap(int* x, int* y) const;
 
 	void Get_coordinates_from_id(int* x, int* y); //la x is id,  y how much elements are there in a row
 
 	int Get_id_from_coordinates(int x, int y);
 
 	SDL_Rect Tile_Rect(int tileid);
-
-	void convert_to_real_world(int*, int*);
   
 	int map = 0; //Starting map
 

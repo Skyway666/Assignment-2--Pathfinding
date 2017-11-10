@@ -50,7 +50,7 @@ void j1Map::CreateColliders()
 
 			//Now, x and y are the coordinates of the tileset
 			
-			convert_to_real_world(&x, &y);
+			MapToWorld(&x, &y);
 
 			//Now they are in pixels
 			if(id == 11)
@@ -96,7 +96,7 @@ void j1Map::Draw()
 
 				//Now, x and y are the coordinates of the tileset
 
-				convert_to_real_world(&x, &y);
+				MapToWorld(&x, &y);
 
 				//Now they are in pixels
 		
@@ -107,14 +107,18 @@ void j1Map::Draw()
 }
 
 
-iPoint j1Map::MapToWorld(int x, int y) const
+void j1Map::MapToWorld(int* x, int* y) const
 {
-	iPoint ret;
+	*x = *x * data.tilesets.At(0)->data->tile_height;
 
-	ret.x = x * data.tile_width;
-	ret.y = y * data.tile_height;
+	*y = *y * data.tilesets.At(0)->data->tile_width;
+}
 
-	return ret;
+void j1Map::WorldToMap(int* x, int* y) const
+{
+	*x = *x /data.tilesets.At(0)->data->tile_height;
+
+	*y = *y /data.tilesets.At(0)->data->tile_width;
 }
 
 SDL_Rect TileSet::GetTileRect(int id) const
@@ -494,11 +498,5 @@ int j1Map::Get_id_from_coordinates(int x, int y)
 	return (y*data.width) + x;
 }
 
-void j1Map::convert_to_real_world(int* x, int* y)
-{
-	*x = *x * data.tilesets.At(0)->data->tile_height;
-
-	*y = *y * data.tilesets.At(0)->data->tile_width;
-}
 
 
