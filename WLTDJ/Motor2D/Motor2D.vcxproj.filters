@@ -40,13 +40,7 @@
     <ClCompile Include="j1Player.cpp">
       <Filter>Modules, scenes and tools\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Enemies.cpp">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Pathfinding.cpp">
-      <Filter>Modules, scenes and tools\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClCompile>
     <ClCompile Include="j1PerfTimer.cpp">
@@ -54,6 +48,12 @@
     </ClCompile>
     <ClCompile Include="j1Timer.cpp">
       <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Entities.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,23 +117,23 @@
     <ClInclude Include="Animation.h">
       <Filter>Modules, scenes and tools</Filter>
     </ClInclude>
-    <ClInclude Include="j1Enemies.h">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Pathfinding.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
     <ClInclude Include="p2PQueue.h">
       <Filter>p2 libraries</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Modules, scenes and tools\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="j1PerfTimer.h">
       <Filter>Modules, scenes and tools\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Timer.h">
       <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Entities.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +154,12 @@
     </Filter>
     <Filter Include="Modules, scenes and tools\Modules">
       <UniqueIdentifier>{244722d1-90ce-423d-8e7a-556211865a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\EntitySystem">
+      <UniqueIdentifier>{3440bd59-782f-4c6f-8d91-6eef3d3b2091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\EntitySystem\Entities">
+      <UniqueIdentifier>{582c0144-da82-47f7-8799-3232d36e2297}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
