@@ -57,9 +57,13 @@ void j1Map::CreateColliders()
 			{ 
 				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL);
 			}
-			if (id == 12)
+			else if (id == 12)
 			{
 				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_DEADLY);
+			}
+			else if (id == 23)
+			{
+				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_PIT);
 			}
 			counter++;
 		}

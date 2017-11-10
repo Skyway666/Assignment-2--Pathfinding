@@ -158,6 +158,15 @@ bool j1Player::Update(float dt)
 
 	if (!win && !dead)
 	{ 
+		// Godmode
+		if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		{
+			if (godmode)
+				godmode = false;
+			else
+				godmode = true;
+		}
+
 		// Sliding
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
 		{
