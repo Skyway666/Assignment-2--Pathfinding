@@ -32,10 +32,12 @@ bool j1Scene::Start()
 
 	//JUST A TEST
 	App->pathfinding->SetMap();	
-	flying_eye.graphics = App->tex->Load("textures/Flying Monster/frame-1.png");
+
     flying_eye.path_indicator = App->tex->Load("textures/path_indicator.png");
-	flying_eye.pos.x = App->map->data.player_starting_value.x + 500;
-	flying_eye.pos.y = App->map->data.player_starting_value.y;
+
+	App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y);
+	//flying_eye.pos.x = App->map->data.player_starting_value.x + 500;
+	//flying_eye.pos.y = App->map->data.player_starting_value.y;
 
 
 	iPoint player_map_pos(App->player->position.x / App->map->data.tilesets.At(0)->data->tile_height, App->player->position.y / App->map->data.tilesets.At(0)->data->tile_height);

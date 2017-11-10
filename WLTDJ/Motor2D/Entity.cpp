@@ -21,11 +21,5 @@ const Collider* Entity::GetCollider() const
 
 void Entity::Draw(SDL_Texture* sprites)
 {
-	App->render->Blit(sprites, position.x, position.y, scale, &(animation->GetCurrentFrame()));
-}
-
-void Entity::OnCollision(Collider* collider)
-{
-
-
+	//App->render->Blit(sprites, position.x, position.y, scale, &(animation->GetCurrentFrame()));
 }

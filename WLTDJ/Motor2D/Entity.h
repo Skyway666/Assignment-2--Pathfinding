@@ -25,10 +25,12 @@ public:
 	virtual ~Entity();
 
 	const Collider* GetCollider() const;
+	
+	void Draw(SDL_Texture* sprites); //Draw and update collider position
 
-	virtual void Update() {}; //Update movement and enemy logic
-	virtual void Draw(SDL_Texture* sprites); //Draw and update collider position
-	virtual void OnCollision(Collider* collider); //Every entity has its own "OnCollision
+	virtual void Update() {}; //Update enemy logic
+	virtual void ManagePhysics() {};//Manage Physics of grounded enemies
+	virtual void OnCollision(Collider* collider){}; //Every entity has its own "OnCollision"
 };
 
 #endif // __ENEMY_H__
