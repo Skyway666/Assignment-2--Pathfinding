@@ -33,7 +33,7 @@ bool j1Scene::Start()
 	//JUST A TEST
 	App->pathfinding->SetMap();	
 
-    flying_eye.path_indicator = App->tex->Load("textures/path_indicator.png");
+    App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 
 	App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y);
 	//flying_eye.pos.x = App->map->data.player_starting_value.x + 500;
@@ -106,12 +106,7 @@ bool j1Scene::Update(float dt)
 		first_path = false;
 	}
 
-
-	for (int i = 0; i < path->Count(); i++)
-	{
-		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		App->render->Blit(flying_eye.path_indicator,pos.x ,pos.y, 0.1);
-	}
+	App->pathfinding->DebugDraw();
 	return true;
 }
 

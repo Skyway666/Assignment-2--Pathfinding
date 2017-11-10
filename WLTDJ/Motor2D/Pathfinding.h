@@ -5,6 +5,7 @@
 #include "p2PQueue.h"
 #include "j1App.h"
 #include "j1Map.h"
+#include "j1Textures.h"
 
 //This class will be used by any entity in order to get a path to a certain destination. It will have a public attribute called "last_path" 
 //and a public method called "create path", that when used will fill last path with a set of tiles, that will represent the path. It will be a part of App
@@ -33,6 +34,7 @@ public:
 	void Path_BackTracking(iPoint goal);
 	bool CleanUp();
 	bool IsWalkable(const iPoint& pos)const; //Returns 0 if walkable and -1 if not walkable
+	void DebugDraw();
 	p2DynArray<iPoint>* GetLastPath();
 
 

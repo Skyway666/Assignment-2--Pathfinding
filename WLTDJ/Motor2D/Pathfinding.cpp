@@ -101,3 +101,12 @@ bool Pathfinding::IsWalkable(const iPoint& pos)const
 	}
 	return -1;
 }
+
+void Pathfinding::DebugDraw()
+{
+	for (int i = 0; i < last_path.Count(); i++)
+	{
+		iPoint pos = App->map->MapToWorld(last_path.At(i)->x, last_path.At(i)->y);
+		App->render->Blit(App->map->path_indicator, pos.x, pos.y, 0.1);
+	}
+}
