@@ -18,6 +18,8 @@ enum COLLIDER_TYPE
 	COLLIDER_PLAYER,
 	COLLIDER_PIT,
 	COLLIDER_MAX,
+	COLLIDER_SUPER_GOD,
+	COLLIDER_GOD
 };
 
 struct Collider
@@ -61,7 +63,7 @@ public:
 	void Erase_Non_Player_Colliders();
 
 	bool WillCollideAfterSlide(const SDL_Rect& r, int distance, float dt) const; //checks if any rectangle would be colliding with the ceiling
-
+	//void ManageGroundCollisions(Entity* entity, float dt);
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type);
 
 	void DebugDraw();

@@ -125,10 +125,18 @@ bool j1Player::Start()
 bool j1Player::Update(float dt)
 {
 	player_dt = dt;
+
 	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
 	else if (!super_godmode)
 		speed.y = speed_modifier.y * 1.5;
+
+	if (godmode)
+		collider->type = COLLIDER_GOD;
+	else if (super_godmode)
+		collider->type = COLLIDER_SUPER_GOD;
+	else
+		collider->type = COLLIDER_PLAYER;
 
 	player_x_displacement = App->map->data.player_starting_value.x - position.x;
 
