@@ -46,7 +46,7 @@ bool j1Collisions::Update(float dt)
 			if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 				continue;
 
-			if (!App->player->super_godmode && colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->godmode))
+			if (App->player->collider->type != COLLIDER_SUPER_GOD && colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->collider->type == COLLIDER_GOD))
 			{
 				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, (App->player->speed_modifier.y), (App->player->gravity), dt);
 				if (App->player->collider->CheckCollision(colliders[i]->rect))
@@ -68,7 +68,7 @@ bool j1Collisions::Update(float dt)
 
 					if (matrix[App->player->collider->type][colliders[i]->type])
 					{
-						if (!App->player->super_godmode && !App->player->godmode && colliders[i]->type == COLLIDER_DEADLY)
+						if (App->player->collider->type != COLLIDER_SUPER_GOD && App->player->collider->type != COLLIDER_GOD && colliders[i]->type == COLLIDER_DEADLY)
 						{
 							App->player->dead = true;
 						}
@@ -124,6 +124,12 @@ void j1Collisions::DebugDraw()
 			break;
 		case COLLIDER_PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha, false);
+			break;
+		case COLLIDER_GOD: // black
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
+			break;
+		case COLLIDER_SUPER_GOD: // black
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
 			break;
 		case COLLIDER_WALL: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, false);
@@ -227,7 +233,7 @@ bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance, float 
 
 		distance *= dt;
 
-		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->godmode))
+		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->collider->type == COLLIDER_GOD))
 			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + ceil(distance * 2)
 			&& r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 			return true;
@@ -235,3 +241,40 @@ bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance, float 
 
 	return false;
 }
+/*
+void j1Collisions::ManageGroundCollisions(Entity* entity, float dt)
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		// skip empty and non-wall colliders
+		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER || colliders[i]->type == COLLIDER_BONE
+			|| colliders[i]->type == COLLIDER_ENEMY || colliders[i]->type == COLLIDER_GOD || colliders[i]->type == COLLIDER_SUPER_GOD)
+			continue;
+
+		if (entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && collider->type == COLLIDER_GOD)))
+		{
+			colliders[i]->WillCollide(entity->collider->rect, entity->speed_modifier.x, entity->speed_modifier.y, entity->gravity, dt);
+			if (entity->collider->CheckCollision(colliders[i]->rect)) // In case the entity somehow passes thorugh a wall
+			{
+				if (collider->type == COLLIDER_PLAYER)
+				{
+					if (App->player->flip && !App->player->walljumping)
+						App->player->position.x += App->player->speed_modifier.x * dt;
+					else if (!App->player->flip && !App->player->walljumping)
+						App->player->position.x -= App->player->speed_modifier.x * dt;
+					else if (App->player->walljumping && App->player->speed.x > 0)
+						App->player->position.x -= App->player->speed_modifier.x * dt;
+					else if (App->player->walljumping && App->player->speed.x < 0)
+						App->player->position.x += App->player->speed_modifier.x * dt;
+				}
+				else
+				{
+					if (entity->flip)
+						entity->position.x += App->player->speed_modifier.x * dt;
+					else if (!entity->flip)
+						entity->position.x -= App->player->speed_modifier.x * dt;
+				}
+			}
+		}
+	}
+}*/
