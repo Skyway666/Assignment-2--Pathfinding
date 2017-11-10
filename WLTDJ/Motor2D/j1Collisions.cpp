@@ -40,13 +40,13 @@ bool j1Collisions::PreUpdate()
 // Called before render is available
 bool j1Collisions::Update(float dt)
 {
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
+		for (uint i = 0; i < MAX_COLLIDERS; ++i)
+		{
 			// skip empty and player colliders
 			if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 				continue;
 
-			if (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->godmode))
+			if (!App->player->super_godmode && colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->godmode))
 			{
 				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, (App->player->speed_modifier.y), (App->player->gravity), dt);
 				if (App->player->collider->CheckCollision(colliders[i]->rect))
@@ -68,17 +68,17 @@ bool j1Collisions::Update(float dt)
 
 					if (matrix[App->player->collider->type][colliders[i]->type])
 					{
-						if (colliders[i]->type == COLLIDER_DEADLY && !App->player->godmode)
+						if (!App->player->super_godmode && !App->player->godmode && colliders[i]->type == COLLIDER_DEADLY)
 						{
 							App->player->dead = true;
 						}
 						else if (colliders[i]->type == COLLIDER_BONE)
 						{
-							if(App->map->map == 0)
-							{ 
+							if (App->map->map == 0)
+							{
 								App->collision->Erase_Non_Player_Colliders();
 								App->map->CleanUp();
-								App->map->Load("Level 2 final.tmx"); 
+								App->map->Load("Level 2 final.tmx");
 								App->map->map = 1;
 								App->pathfinding->SetMap();
 							}
@@ -86,7 +86,7 @@ bool j1Collisions::Update(float dt)
 							{
 								App->collision->Erase_Non_Player_Colliders();
 								App->map->CleanUp();
-								App->map->Load("Level 1 final.tmx"); 
+								App->map->Load("Level 1 final.tmx");
 								App->map->map = 0;
 								App->player->win = true;
 							}
@@ -95,7 +95,8 @@ bool j1Collisions::Update(float dt)
 
 				}
 			}
-	}
+		}
+
 
 	DebugDraw();
 

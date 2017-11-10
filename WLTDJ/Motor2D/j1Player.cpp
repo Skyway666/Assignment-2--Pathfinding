@@ -125,9 +125,9 @@ bool j1Player::Start()
 bool j1Player::Update(float dt)
 {
 	player_dt = dt;
-	if (contact.x != 0)
+	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
-	else
+	else if (!super_godmode)
 		speed.y = speed_modifier.y * 1.5;
 
 	player_x_displacement = App->map->data.player_starting_value.x - position.x;
@@ -159,8 +159,21 @@ bool j1Player::Update(float dt)
 	if (!win && !dead)
 	{ 
 		// Godmode
-		if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		{
+			if (godmode)
+				godmode = false;
+
+			if (super_godmode)
+				super_godmode = false;
+			else
+				super_godmode = true;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		{
+			if (super_godmode)
+				super_godmode = false;
+
 			if (godmode)
 				godmode = false;
 			else
@@ -168,10 +181,13 @@ bool j1Player::Update(float dt)
 		}
 
 		// Sliding
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
+		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
 		{
-			sliding = true;
+			if (!super_godmode)
+				sliding = true;
 		}
+		else if (super_godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			speed.y = speed_modifier.y;
 
 		// Moving right
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !sliding)
@@ -204,17 +220,22 @@ bool j1Player::Update(float dt)
 		}
 
 		// Jumping
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
+		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
 		{
-			if (contact.y == 1)
+			if (!super_godmode)
 			{
-				jumping = true;
-			}
-			else if (contact.x == 1 || contact.x == 2)
-			{
-				walljumping = true;
+				if (contact.y == 1)
+				{
+					jumping = true;
+				}
+				else if (contact.x == 1 || contact.x == 2)
+				{
+					walljumping = true;
+				}
 			}
 		}
+		else if (super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			speed.y = -speed_modifier.y;
 
 		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		{
@@ -249,11 +270,19 @@ bool j1Player::Update(float dt)
 	if (!walljumping)
 		position.x += ceil(speed.x * dt);
 
-	if (contact.y != 1 && StickToWall)
-		position.y += ceil(gravity / 2 * dt);
+	if (contact.y != 1 && !super_godmode)
+	{
+		if (StickToWall)
+			position.y += ceil(gravity / 2 * dt);
+		else if (contact.y != 1)
+			position.y += ceil(gravity * dt);
+	}
 
-	else if (contact.y != 1)
-		position.y += ceil(gravity * dt);
+	if (super_godmode)
+	{
+		position.y += speed.y;
+		speed.y = 0;
+	}
 
 	StickToWall = false;
 	contact.x = 0;
