@@ -46,7 +46,7 @@ bool j1Collisions::Update(float dt)
 			if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 				continue;
 
-			if (colliders[i]->type == COLLIDER_WALL)
+			if (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->godmode))
 			{
 				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, (App->player->speed_modifier.y), (App->player->gravity), dt);
 				if (App->player->collider->CheckCollision(colliders[i]->rect))
@@ -68,7 +68,7 @@ bool j1Collisions::Update(float dt)
 
 					if (matrix[App->player->collider->type][colliders[i]->type])
 					{
-						if (colliders[i]->type == COLLIDER_DEADLY)
+						if (colliders[i]->type == COLLIDER_DEADLY && !App->player->godmode)
 						{
 							App->player->dead = true;
 						}
@@ -126,6 +126,9 @@ void j1Collisions::DebugDraw()
 			break;
 		case COLLIDER_WALL: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, false);
+			break;
+		case COLLIDER_PIT: // pink
+			App->render->DrawQuad(colliders[i]->rect, 243, 64, 147, alpha, false);
 			break;
 		case COLLIDER_DEADLY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha, true);
@@ -223,7 +226,8 @@ bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance, float 
 
 		distance *= dt;
 
-		if (colliders[i]->type == COLLIDER_WALL && r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + ceil(distance * 2)
+		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->godmode))
+			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + ceil(distance * 2)
 			&& r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 			return true;
 	}
