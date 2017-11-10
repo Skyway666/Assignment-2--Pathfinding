@@ -91,7 +91,9 @@ bool j1Player::Awake(pugi::xml_node& conf)
 	speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
 	walljump_speed.y = conf.child("walljump_speed.y").attribute("value").as_float();
 	walljump_speed.x = conf.child("walljump_speed.x").attribute("value").as_float();
-	gravity = conf.child("gravity").attribute("value").as_float();
+	gravity = conf.child("gravity").attribute("value").as_float();	
+	
+
 
 	return true;
 }
@@ -99,7 +101,7 @@ bool j1Player::Awake(pugi::xml_node& conf)
 bool j1Player::Start()
 {
 	LOG("Loading player textures");
-	bool ret = true;
+	bool ret = true;	
 	graphics = App->tex->Load("textures/SpriteSheet.png");
 	App->map->bone_graphics = App->tex->Load("textures/BONE.png");
 	App->scene->win_screen = App->tex->Load("textures/WinScreen.png");

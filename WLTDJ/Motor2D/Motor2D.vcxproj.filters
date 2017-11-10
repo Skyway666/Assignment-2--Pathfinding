@@ -52,7 +52,13 @@
     <ClCompile Include="j1Entities.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Entity.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundEnemy.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Air_enemy.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,7 +138,13 @@
     <ClInclude Include="j1Entities.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Entity.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundEnemy.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Air_enemy.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClInclude>
   </ItemGroup>

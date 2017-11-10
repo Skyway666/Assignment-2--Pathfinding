@@ -1,30 +1,30 @@
 #include "j1App.h"
-#include "Enemy.h"
+#include "Entity.h"
 #include "j1Collisions.h"
 #include "j1Render.h"
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Entity::Entity(int x, int y) : position(x, y)
 {
 
 }
 
-Enemy::~Enemy()
+Entity::~Entity()
 {
 	if (collider != nullptr)
 		collider->to_delete = true;
 }
 
-const Collider* Enemy::GetCollider() const
+const Collider* Entity::GetCollider() const
 {
 	return collider;
 }
 
-void Enemy::Draw(SDL_Texture* sprites)
+void Entity::Draw(SDL_Texture* sprites)
 {
 	App->render->Blit(sprites, position.x, position.y, scale, &(animation->GetCurrentFrame()));
 }
 
-void Enemy::OnCollision(Collider* collider)
+void Entity::OnCollision(Collider* collider)
 {
 
 

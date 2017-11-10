@@ -3,7 +3,7 @@
 #include "j1Render.h"
 #include "j1Entities.h"
 #include "j1Textures.h"
-#include "Enemy.h"
+#include "Entity.h"
 #include "j1Map.h"
 #include "j1Audio.h"
 #include "p2Log.h"
@@ -30,14 +30,14 @@ bool j1Entities::Start()
 // Called before render is available
 bool j1Entities::Update(float dt)
 {
-	/*for (uint i = 0; i < MAX_ENTITIES; ++i)
-		if (entities[i] != nullptr) entities[i]->Move();
+	//for (uint i = 0; i < MAX_ENTITIES; ++i)
+	//	if (entities->At(i)->data != nullptr) entities[i]->Move();
 
-	for (uint i = 0; i < MAX_ENTITIES; ++i)
-		if (entities[i] != nullptr)
-		{
-				entities[i]->Draw(sprites);
-		}*/
+	//for (uint i = 0; i < MAX_ENTITIES; ++i)
+	//	if (entities[i] != nullptr)
+	//	{
+	//			entities[i]->Draw(sprites);
+	//	}
 	return true;
 }
 

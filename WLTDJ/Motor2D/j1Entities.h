@@ -11,7 +11,9 @@
 
 enum ENTITY_TYPES
 {
-	NO_TYPE
+	PLAYER,
+	GROUND_ENEMY,
+	AIR_ENEMY
 };
 
 class Entity;
