@@ -12,7 +12,7 @@
 
 j1Entities::j1Entities()
 {
-
+	name.create("entities");
 }
 
 // Destructor
@@ -20,6 +20,20 @@ j1Entities::~j1Entities()
 {
 }
 
+bool j1Entities::Awake(pugi::xml_node& conf)
+{
+	p_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
+	p_ini_inf.slide_time = conf.child("slide_time").attribute("value").as_int();
+	p_ini_inf.walljump_time = conf.child("walljump_time").attribute("value").as_int();
+	p_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
+	p_ini_inf.speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
+	p_ini_inf.walljump_speed.y = conf.child("walljump_speed.y").attribute("value").as_float();
+	p_ini_inf.walljump_speed.x = conf.child("walljump_speed.x").attribute("value").as_float();
+	p_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
+
+
+	return true;
+}
 bool j1Entities::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
@@ -33,7 +47,7 @@ bool j1Entities::Update(float dt)
 {
 	//Update all entities
 	for (uint i = 0; i < entities.count(); ++i)
-		if (entities[i] != nullptr) entities[i]->Update();
+		if (entities[i] != nullptr) entities[i]->Update(dt);
 
 	//Draw all entities
 	for (uint i = 0; i < entities.count(); ++i)

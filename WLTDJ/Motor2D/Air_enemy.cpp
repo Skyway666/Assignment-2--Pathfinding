@@ -13,7 +13,7 @@ Air_enemy::~Air_enemy()
 
 }
 
-void Air_enemy::Update()
+void Air_enemy::Update(float dt)
 {
 	iPoint player_map_pos(App->player->position.x, App->player->position.y);
 	iPoint monster_map_pos(position.x, position.y);

@@ -12,7 +12,7 @@ public:
 	Air_enemy(int x, int y);
 	~Air_enemy();
 
-	void Update();
+	void Update(float dt);
 	void OnCollision();
 };
 

@@ -61,6 +61,9 @@
     <ClCompile Include="Air_enemy.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -145,6 +148,9 @@
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Air_enemy.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClInclude>
   </ItemGroup>
