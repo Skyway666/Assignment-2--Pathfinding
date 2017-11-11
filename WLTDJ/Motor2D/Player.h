@@ -47,7 +47,6 @@ private:
 
 	iPoint contact; // y = 0 -> none, y = 1 -> ground, y = 2 -> ceiling /// x = 0 -> none, x = 1 -> left, x = 2 -> right
 	fPoint speed;
-	fPoint position;
 	iPoint sprite_distance;
 	fPoint speed_modifier;
 	fPoint walljump_speed;

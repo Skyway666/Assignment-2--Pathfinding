@@ -49,10 +49,13 @@ public:
 	void OnCollision(Collider* c1, Collider* c2); //Called by the callback of "j1Collisions", should iterate over all entities and call their OnCollision method if the collider is theirs
 	bool AddEntity(ENTITY_TYPES type, int x, int y); //Adds an enemy to the list with a certain type and position (should return a pointer to the enemy)
 
+	Entity* player = nullptr; //Really special entity
+
 private:
 
 	p2List<Entity*> entities;
 	SDL_Texture* sprites = nullptr;
+	SDL_Texture* player_sprites = nullptr;
 
 	Player_Initial_Inf p_ini_inf;
 	Flying_Enemy_Initial_Inf fe_ini_inf;

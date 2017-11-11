@@ -298,7 +298,7 @@ bool j1Player::Update(float dt)
 
 	// Draw everything --------------------------------------
 
-	App->render->Blit(graphics, position.x, position.y, 0.3, &current_animation->GetCurrentFrame(), flip);
+	//App->render->Blit(graphics, position.x, position.y, 0.3, &current_animation->GetCurrentFrame(), flip);
 
 	// Set camera to follow the player (commented in order to debug better)
 
