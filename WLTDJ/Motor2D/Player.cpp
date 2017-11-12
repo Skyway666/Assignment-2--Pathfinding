@@ -437,3 +437,8 @@ void Player::Animation_Loading()
 
 	wallslideright.speed = 0.1;
 }
+
+void Player::ManagePhysics(float dt)
+{
+	App->collision->ManageGroundCollisions(this, dt);
+}

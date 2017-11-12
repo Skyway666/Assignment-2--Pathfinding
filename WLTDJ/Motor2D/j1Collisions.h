@@ -5,10 +5,12 @@
 
 #include "j1Module.h"
 #include "p2Log.h"
+#include "Entity.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
+
 enum COLLIDER_TYPE
 {
 	COLLIDER_NONE = -1,
@@ -19,8 +21,10 @@ enum COLLIDER_TYPE
 	COLLIDER_PIT,
 	COLLIDER_MAX,
 	COLLIDER_SUPER_GOD,
-	COLLIDER_GOD
+	COLLIDER_GOD,
+	COLLIDER_ENEMY
 };
+
 
 struct Collider
 {
@@ -46,7 +50,7 @@ struct Collider
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;
-	void WillCollide(const SDL_Rect& r, int speed_x, int speed_y, int gravity, float dt);
+	fPoint WillCollide(const SDL_Rect& r, fPoint speed, int gravity, float dt);
 
 };
 
@@ -63,7 +67,7 @@ public:
 	void Erase_Non_Player_Colliders();
 
 	bool WillCollideAfterSlide(const SDL_Rect& r, int distance, float dt) const; //checks if any rectangle would be colliding with the ceiling
-	//void ManageGroundCollisions(Entity* entity, float dt);
+	void ManageGroundCollisions(Entity* entity, float dt);
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type);
 
 	void DebugDraw();

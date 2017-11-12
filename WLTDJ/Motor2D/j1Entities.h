@@ -24,6 +24,7 @@ struct Player_Initial_Inf
 	int slide_time;
 	int walljump_time;
 };
+
 struct Flying_Enemy_Initial_Inf
 {
 
@@ -32,6 +33,7 @@ struct Ground_Enemy_Initial_Inf
 {
 
 };
+
 class Entity;
 
 class j1Entities : public j1Module

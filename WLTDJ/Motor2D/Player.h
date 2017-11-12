@@ -16,9 +16,7 @@ public:
 	~Player();
 	
 	void Update(float dt);	
-
-
-
+	void ManagePhysics(float dt);
 
 private:
 
@@ -36,7 +34,6 @@ private:
 	float player_height_before_sliding;
 	bool jumping = false;
 	bool walljumping = false;
-	bool flip = false;
 	bool StickToWall = false;
 	bool dead = false;
 	bool sliding = false;
@@ -45,13 +42,10 @@ private:
 	bool super_godmode = false;
 	int jcontact = 0; // for Jump() function
 
-	iPoint contact; // y = 0 -> none, y = 1 -> ground, y = 2 -> ceiling /// x = 0 -> none, x = 1 -> left, x = 2 -> right
 	fPoint speed;
 	iPoint sprite_distance;
-	fPoint speed_modifier;
 	fPoint walljump_speed;
 	float player_dt;
-	float gravity;
 	float player_x_displacement;
 	int jump_time;
 	int slide_time;

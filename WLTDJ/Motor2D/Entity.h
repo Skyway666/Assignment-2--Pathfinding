@@ -14,11 +14,15 @@ class Entity //: public Path
 {
 protected:
 	Animation* animation;
-	Collider* collider = nullptr;
 
 public:
 	fPoint position;
+	fPoint contact;
 	float scale;
+	Collider* collider = nullptr;
+	fPoint speed_modifier;
+	float gravity;
+	bool flip = false;
 
 public:
 	Entity(int x, int y);
@@ -26,11 +30,11 @@ public:
 
 	const Collider* GetCollider() const;
 	
-	void Draw(SDL_Texture* sprites); //Draw and update collider position
+	void Draw(SDL_Texture* sprites); // Draw and update collider position
 
-	virtual void Update(float dt) {}; //Update enemy logic
-	virtual void ManagePhysics() {};//Manage Physics of grounded enemies
-	virtual void OnCollision(Collider* collider){}; //Every entity has its own "OnCollision"
+	virtual void Update(float dt) {}; // Update enemy logic
+	virtual void ManagePhysics(float dt) {}; // Manage Physics of grounded entities
+	virtual void OnCollision(Collider* collider) {}; // Every entity has its own "OnCollision"
 };
 
 #endif // __ENEMY_H__

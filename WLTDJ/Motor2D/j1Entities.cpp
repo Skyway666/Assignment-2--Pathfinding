@@ -53,25 +53,35 @@ bool j1Entities::Start()
 // Called before render is available
 bool j1Entities::Update(float dt)
 {
-	//Update all entities
+	// Manage entities' physics
 	for (uint i = 0; i < entities.count(); ++i)
-	{ 
-		if (entities[i] != nullptr) entities[i]->Update(dt);
-		if (player != nullptr) player->Update(dt);
+	{
+		if (entities[i] != nullptr)
+			entities[i]->ManagePhysics(dt);
 	}
 
-	//Draw all entities
+	if (player != nullptr)
+		player->ManagePhysics(dt);
+
+	// Update all entities
 	for (uint i = 0; i < entities.count(); ++i)
 	{ 
 		if (entities[i] != nullptr)
-		{
-			entities[i]->Draw(sprites);
-		}
-		if (player != nullptr)
-		{
-			player->Draw(player_sprites);
-		}
+			entities[i]->Update(dt);
 	}
+
+	if (player != nullptr)
+		player->Update(dt);
+
+	// Draw all entities
+	for (uint i = 0; i < entities.count(); ++i)
+	{ 
+		if (entities[i] != nullptr)
+			entities[i]->Draw(sprites);
+	}
+
+	if (player != nullptr)
+		player->Draw(player_sprites);
 
 	return true;
 }
@@ -119,12 +129,13 @@ bool j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 			break;
 		}
 	}
+
 	return true;
 }
 
 void j1Entities::OnCollision(Collider* c1, Collider* c2) 
 {
-    // Once the collision module is fixed, it will call this function whenever enemy and player collides. C1 will be the entity collider
+    // Once the collision module is fixed, it will call this function whenever an enemy and the player collide. C1 will be the entity collider
 	// and c2 one which has collided. This module will compare c1 with the colliders of all the entities, and call the virtual "OnCollision" method of
 	// the entity that has the same collider
 }

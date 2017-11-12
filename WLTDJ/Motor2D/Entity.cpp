@@ -25,5 +25,5 @@ void Entity::Draw(SDL_Texture* sprites)
 	if(animation == nullptr)
 		App->render->Blit(sprites, position.x, position.y, scale);
 	else
-		App->render->Blit(sprites, position.x, position.y, scale, &(animation->GetCurrentFrame()));
+		App->render->Blit(sprites, position.x, position.y, scale, &(animation->GetCurrentFrame()), flip);
 }
