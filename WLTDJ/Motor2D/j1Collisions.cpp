@@ -6,6 +6,7 @@
 #include "j1Map.h"
 #include "Pathfinding.h"
 #include "j1Entities.h"
+#include "Player.h"
 
 j1Collisions::j1Collisions()
 {
@@ -75,6 +76,8 @@ bool j1Collisions::Update(float dt)
 			}
 		}
 	}
+
+	DebugDraw();
 
 	return true;
 }

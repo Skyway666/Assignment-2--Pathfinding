@@ -16,7 +16,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : Entity(x, y)
 	gravity = initial_inf.gravity;
 	
 	scale = 0.3;
-	//type = ENTITY_TYPES::PLAYER;
+	type = ENTITY_TYPES::PLAYER;
 	SDL_Rect r{ 0, 0, 481, 547 };
 	SDL_Rect collider_rect{ 0, 0, r.w * 0.2, r.h * 0.2 };
 	contact.x = 0;

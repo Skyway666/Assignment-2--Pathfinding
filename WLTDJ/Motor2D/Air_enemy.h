@@ -17,5 +17,14 @@ public:
 
 	void Update(float dt);
 	void OnCollision();
+	void Exec_idle();
+	void Exec_atack();
+	void Find_path();
+private:
+	
+	int ideling_heigh;
+
+	bool is_idle;
+	
 };
 
