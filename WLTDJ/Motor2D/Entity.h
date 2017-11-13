@@ -17,12 +17,16 @@ protected:
 
 public:
 	fPoint position;
-	fPoint contact;
-	float scale;
 	Collider* collider = nullptr;
+	float scale;
+	//ENTITY_TYPES type;
+	bool flip = false;
+
+	
+    fPoint contact;
 	fPoint speed_modifier;
 	float gravity;
-	bool flip = false;
+	
 
 public:
 	Entity(int x, int y);
