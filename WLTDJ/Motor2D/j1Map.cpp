@@ -7,6 +7,8 @@
 #include "j1Collisions.h"
 #include "j1Player.h"
 #include <math.h>
+#include "j1Entities.h"
+#include "Player.h"
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
@@ -74,9 +76,9 @@ void j1Map::Draw()
 	if (map_loaded == false)
 		return;
 
-
+	Player* player = (Player*)App->entities->player;
 	//Blit background
-     App->render->Blit(data.background_image, data.background_offset.x - App->player->player_x_displacement * data.parallax_speed, data.background_offset.y);
+     App->render->Blit(data.background_image, data.background_offset.x - player->player_x_displacement * data.parallax_speed, data.background_offset.y);
 
 
 	//Blit bone

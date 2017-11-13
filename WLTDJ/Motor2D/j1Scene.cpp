@@ -34,7 +34,7 @@ bool j1Scene::Start()
 	App->pathfinding->SetMap();	
 
     App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
-	App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y);
+	App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y - 250);
 	return true;
 }
 

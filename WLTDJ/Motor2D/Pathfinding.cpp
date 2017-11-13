@@ -13,40 +13,43 @@ Pathfinding::~Pathfinding()
 
 void Pathfinding::CreatePath(iPoint origin, iPoint destination) 
 {
-	last_path.Clear();
-	frontier.Clear();
-	visited.clear();
-	breadcrumbs.clear();
-	iPoint curr = origin;
-	frontier.Push(curr,curr.DistanceManhattan(destination));
-
-	//Expanding Loop
-	for(int i = 0; i != width*height; i++)
-	{
-		frontier.Pop(curr);
-
-		if (curr == destination) //Create path
+	if(IsWalkable(origin) && IsWalkable(destination))
+	{ 
+		last_path.Clear();
+		frontier.Clear();
+		visited.clear();
+		breadcrumbs.clear();
+		iPoint curr = origin;
+		frontier.Push(curr,curr.DistanceManhattan(destination));
+    
+		//Expanding Loop
+		for(int i = 0; i != width*height; i++)
 		{
-			Path_BackTracking(curr);
-			break;
-		}
-			iPoint neighbors[4];
-			neighbors[0].create(curr.x + 1, curr.y + 0);
-			neighbors[1].create(curr.x + 0, curr.y + 1);
-			neighbors[2].create(curr.x - 1, curr.y + 0);
-			neighbors[3].create(curr.x + 0, curr.y - 1);
-			for (uint i = 0; i < 4; ++i)
+			frontier.Pop(curr);
+
+			if (curr == destination) //Create path
 			{
-				if (IsWalkable(neighbors[i]) == 0 && visited.find(neighbors[i]) == -1)
-				{
-					int new_cost = neighbors[i].DistanceTo(destination);
-					frontier.Push(neighbors[i], new_cost);
-					visited.add(neighbors[i]);
-					breadcrumbs.add(curr);
-					
-				}
+				Path_BackTracking(curr);
+				break;
 			}
-		}
+				iPoint neighbors[4];
+				neighbors[0].create(curr.x + 1, curr.y + 0);
+				neighbors[1].create(curr.x + 0, curr.y + 1);
+				neighbors[2].create(curr.x - 1, curr.y + 0);
+				neighbors[3].create(curr.x + 0, curr.y - 1);
+				for (uint i = 0; i < 4; ++i)
+				{
+					if (IsWalkable(neighbors[i]) && visited.find(neighbors[i]) == -1)
+					{
+						int new_cost = neighbors[i].DistanceTo(destination);
+						frontier.Push(neighbors[i], new_cost);
+						visited.add(neighbors[i]);
+						breadcrumbs.add(curr);
+					
+					}
+				}
+			} 
+	}
 }
 
 void Pathfinding::Path_BackTracking(iPoint goal)
@@ -97,9 +100,9 @@ bool Pathfinding::IsWalkable(const iPoint& pos)const
 
 	if (boundaries && walkable) //Check boundaries
 	{
-		return 0;
+		return true;
 	}
-	return -1;
+	return false;
 }
 
 void Pathfinding::DebugDraw()

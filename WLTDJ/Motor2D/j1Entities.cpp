@@ -13,7 +13,7 @@
 
 j1Entities::j1Entities()
 {
-	name.create("player"); //Should obviously be called "entities", as to recive all their information, but untill "moduleplayer" is completelly erased, it's easier this way
+	name.create("entities"); //Should obviously be called "entities", as to recive all their information, but untill "moduleplayer" is completelly erased, it's easier this way
 }
 
 // Destructor

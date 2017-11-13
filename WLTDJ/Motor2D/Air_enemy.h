@@ -7,6 +7,7 @@
 #include "Pathfinding.h"
 #include "j1Entities.h"
 #include "Animation.h"
+#include "Cronometer.h"
 
 class Air_enemy : public Entity
 {
@@ -17,5 +18,17 @@ public:
 
 	void Update(float dt);
 	void OnCollision();
+	void Exec_idle(float dt);
+	void Exec_atack();
+	void Find_path();
+private:
+	
+	float side_fly_time;
+	int ideling_heigh;
+	bool is_idle;
+	Cronometer side_fly_timer;
+
+	iPoint speed;
+	
 };
 

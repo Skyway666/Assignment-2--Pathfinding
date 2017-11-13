@@ -18,6 +18,8 @@ public:
 	void Update(float dt);	
 	void ManagePhysics(float dt);
 	void OnCollision(Collider* collider);
+	
+	float player_x_displacement; //Used by parallax
 
 private:
 
@@ -38,6 +40,7 @@ private:
 	bool StickToWall = false;
 	//bool dead = false;
 	//bool sliding = false;
+	bool dead = false;
 	bool win = false;
 	bool godmode = false;
 	bool super_godmode = false;
@@ -47,10 +50,12 @@ private:
 	iPoint sprite_distance;
 	fPoint walljump_speed;
 	float player_dt;
-	float player_x_displacement;
+	
 	int jump_time;
 	int slide_time;
 	int walljump_time;
+
+
 
 	Animation idle;
 	Animation run;

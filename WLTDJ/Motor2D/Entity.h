@@ -9,6 +9,7 @@
 
 struct SDL_Texture;
 struct Collider;
+enum ENTITY_TYPES;
 
 class Entity //: public Path
 {
@@ -20,10 +21,9 @@ public:
 	fPoint speed;
 	Collider* collider = nullptr;
 	float scale;
-	//ENTITY_TYPES type;
+	ENTITY_TYPES type;
 	bool flip = false;
 
-	bool dead;//temporal
     fPoint contact;
 	fPoint speed_modifier;
 	// provisionally here:

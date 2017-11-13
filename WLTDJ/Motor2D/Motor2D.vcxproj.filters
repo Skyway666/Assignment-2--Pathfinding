@@ -43,12 +43,6 @@
     <ClCompile Include="Pathfinding.cpp">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="j1PerfTimer.cpp">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="j1Timer.cpp">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="j1Entities.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem</Filter>
     </ClCompile>
@@ -63,6 +57,12 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1PerfTimer.cpp">
+      <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Timer.cpp">
+      <Filter>Modules, scenes and tools\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,12 +132,6 @@
     <ClInclude Include="p2PQueue.h">
       <Filter>p2 libraries</Filter>
     </ClInclude>
-    <ClInclude Include="j1PerfTimer.h">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Timer.h">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="j1Entities.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem</Filter>
     </ClInclude>
@@ -152,6 +146,15 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1PerfTimer.h">
+      <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Timer.h">
+      <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Cronometer.h">
+      <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

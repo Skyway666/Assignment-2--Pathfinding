@@ -10,7 +10,7 @@
     <vsync value="true"/>
   </renderer>
   
-  <player>
+  <entities>
     <jump_time value =" 15"/>
     <slide_time value =" 15"/>
     <walljump_time value =" 20"/>
@@ -19,7 +19,7 @@
     <walljump_speed.y value =" 15"/>
     <walljump_speed.x value =" 10"/>
     <gravity value =" 6"/>
-  </player>
+  </entities>
   
   <window>
     <resolution width="1024" height="768" scale="1"/>
