@@ -215,7 +215,7 @@ bool j1Collisions::WillCollideAfterSlide(Entity* entity, float dt) const
 		speed *= dt;
 
 		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD))
-			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + ceil(speed)
+			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + App->map->data.tile_height
 			&& r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 			return true;
 	}
@@ -240,13 +240,13 @@ void j1Collisions::ManageGroundCollisions(Entity* entity, float dt)
 			{
 				if (entity->collider->type == COLLIDER_PLAYER)
 				{
-					if (entity->flip && !App->player->walljumping)
+					if (entity->flip && !entity->walljumping)
 						entity->position.x += entity->speed_modifier.x * dt;
-					else if (!entity->flip && !App->player->walljumping)
+					else if (!entity->flip && !entity->walljumping)
 						entity->position.x -= entity->speed_modifier.x * dt;
-					else if (App->player->walljumping && App->player->speed.x > 0)
+					else if (entity->walljumping && entity->speed.x > 0)
 						entity->position.x -= entity->speed_modifier.x * dt;
-					else if (App->player->walljumping && App->player->speed.x < 0)
+					else if (entity->walljumping && entity->speed.x < 0)
 						entity->position.x += entity->speed_modifier.x * dt;
 				}
 				else

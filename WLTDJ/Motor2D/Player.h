@@ -34,16 +34,16 @@ private:
 
 	float player_height_before_sliding;
 	bool jumping = false;
-	bool walljumping = false;
+	//bool walljumping = false;
 	bool StickToWall = false;
 	//bool dead = false;
-	bool sliding = false;
+	//bool sliding = false;
 	bool win = false;
 	bool godmode = false;
 	bool super_godmode = false;
 	int jcontact = 0; // for Jump() function
 
-	fPoint speed;
+	//fPoint speed;
 	iPoint sprite_distance;
 	fPoint walljump_speed;
 	float player_dt;

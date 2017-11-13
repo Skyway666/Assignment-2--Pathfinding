@@ -17,6 +17,7 @@ protected:
 
 public:
 	fPoint position;
+	fPoint speed;
 	Collider* collider = nullptr;
 	float scale;
 	//ENTITY_TYPES type;
@@ -25,7 +26,11 @@ public:
 	bool dead;//temporal
     fPoint contact;
 	fPoint speed_modifier;
+	// provisionally here:
 	float gravity;
+	bool walljumping = false;
+	bool sliding = false;
+	//
 	
 
 public:
