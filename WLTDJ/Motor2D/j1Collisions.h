@@ -7,6 +7,7 @@
 #include "p2Log.h"
 #include "Entity.h"
 
+
 #include "SDL/include/SDL.h"
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
@@ -31,10 +32,12 @@ struct Collider
 	SDL_Rect rect;
 	bool to_delete = false;
 	COLLIDER_TYPE type;
+	j1Module* callback;
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type) :
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback) :
 		rect(rectangle),
-		type(type)
+		type(type),
+		callback(callback)
 	{}
 
 	void SetPos(int x, int y)
@@ -68,7 +71,7 @@ public:
 
 	bool WillCollideAfterSlide(Entity* entity, float dt) const; //checks if any rectangle would be colliding with the ceiling
 	void ManageGroundCollisions(Entity* entity, float dt);
-	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type);
+	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
 
 	void DebugDraw();
 

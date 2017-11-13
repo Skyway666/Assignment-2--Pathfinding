@@ -138,6 +138,24 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2)
     // Once the collision module is fixed, it will call this function whenever an enemy and the player collide. C1 will be the entity collider
 	// and c2 one which has collided. This module will compare c1 with the colliders of all the entities, and call the virtual "OnCollision" method of
 	// the entity that has the same collider
+	for (uint i = 0; i < entities.count(); ++i)
+	{
+		if (entities[i] != nullptr)
+		{ 
+			if(entities[i]->GetCollider() == c1)
+			{ 
+			    entities[i]->OnCollision(c2);
+				break;
+			}
+		}
+	}
+
+	if (player != nullptr)
+	{ 
+		if(player->GetCollider() == c1)
+			player->OnCollision(c2);
+	}
+
 }
 
 

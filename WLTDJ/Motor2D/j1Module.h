@@ -10,6 +10,7 @@
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
+struct Collider;
 
 class j1Module
 {
@@ -57,6 +58,11 @@ public:
 	virtual bool CleanUp()
 	{
 		return true;
+	}
+
+	virtual void OnCollision(Collider*, Collider*) 
+	{
+	
 	}
 
 	virtual bool Load(pugi::xml_node&)

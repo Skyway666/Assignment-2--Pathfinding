@@ -21,7 +21,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : Entity(x, y)
 	SDL_Rect collider_rect{ 0, 0, r.w * 0.2, r.h * 0.2 };
 	contact.x = 0;
 	contact.y = 0;
-	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER);
+	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER,App->entities);
 }
 
 
@@ -442,4 +442,37 @@ void Player::Animation_Loading()
 void Player::ManagePhysics(float dt)
 {
 	App->collision->ManageGroundCollisions(this, dt);
+}
+
+void Player::OnCollision(Collider* collider)
+{
+	if (collider->type == COLLIDER_BONE)
+	{
+		if (App->map->map == 0)
+		{
+			App->collision->Erase_Non_Player_Colliders();
+			App->map->CleanUp();
+			App->map->Load("Level 2 final.tmx");
+			App->map->map = 1;
+			App->pathfinding->SetMap();
+	
+			position.x = App->map->data.player_starting_value.x;
+			position.y = App->map->data.player_starting_value.y;
+		}
+		else if (App->map->map == 1)
+		{
+			App->collision->Erase_Non_Player_Colliders();
+			App->map->CleanUp();
+			App->map->Load("Level 1 final.tmx");
+			App->map->map = 0;
+			win = true;
+			
+			position.x = App->map->data.player_starting_value.x;
+			position.y = App->map->data.player_starting_value.y;
+		}
+	}
+	else if (collider->type == COLLIDER_DEADLY)
+	{
+		dead = true;
+	}
 }

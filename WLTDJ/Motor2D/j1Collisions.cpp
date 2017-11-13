@@ -15,6 +15,7 @@ j1Collisions::j1Collisions()
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_BONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_DEADLY] = true;
+
 }
 
 // Destructor
@@ -41,50 +42,39 @@ bool j1Collisions::PreUpdate()
 // Called before render is available
 bool j1Collisions::Update(float dt)
 {
+	Collider* c1;
+	Collider* c2;
+
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		// skip empty colliders
+		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_WALL)
+			continue;
+
+		c1 = colliders[i];
+
+		// avoid checking collisions already checked
+		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
 		{
-			// skip empty and player colliders
-			if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
+			// skip empty colliders
+			if (colliders[k] == nullptr)
 				continue;
 
-			if (colliders[i]->type == COLLIDER_BONE || colliders[i]->type == COLLIDER_DEADLY)
+			c2 = colliders[k];
+
+			if (c1->CheckCollision(c2->rect) == true)
 			{
-				if (App->entities->player->collider->CheckCollision(colliders[i]->rect))
-				{
 
-					if (matrix[App->entities->player->collider->type][colliders[i]->type])
-					{
-						if (App->entities->player->collider->type != COLLIDER_SUPER_GOD && App->entities->player->collider->type != COLLIDER_GOD && colliders[i]->type == COLLIDER_DEADLY)
-						{
-							App->entities->player->dead = true;
-						}
-						else if (colliders[i]->type == COLLIDER_BONE)
-						{
-							if (App->map->map == 0)
-							{
-								App->collision->Erase_Non_Player_Colliders();
-								App->map->CleanUp();
-								App->map->Load("Level 2 final.tmx");
-								App->map->map = 1;
-								App->pathfinding->SetMap();
-							}
-							else if (App->map->map == 1)
-							{
-								App->collision->Erase_Non_Player_Colliders();
-								App->map->CleanUp();
-								App->map->Load("Level 1 final.tmx");
-								App->map->map = 0;
-								App->player->win = true;
-							}
-						}
-					}
+				if (matrix[c1->type][c2->type] && c1->callback)
+					c1->callback->OnCollision(c1, c2);
 
-				}
+
+				if (matrix[c2->type][c1->type] && c2->callback)
+					c2->callback->OnCollision(c2, c1);
+
 			}
 		}
-
-
-	DebugDraw();
+	}
 
 	return true;
 }
@@ -150,7 +140,7 @@ bool j1Collisions::CleanUp()
 	return true;
 }
 
-Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type)
+Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback)
 {
 	Collider* ret = nullptr;
 
@@ -158,7 +148,7 @@ Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type)
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type);
+			ret = colliders[i] = new Collider(rect, type,callback);
 			break;
 		}
 	}

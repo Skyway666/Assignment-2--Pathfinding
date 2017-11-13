@@ -262,10 +262,6 @@ bool j1Map::Load(const char* file_name)
 		CreateColliders();
 	}
 
-    //Set player starting position (THIS SHOULD BE IN "PLAYER")
-	App->player->position.x = data.player_starting_value.x;
-	App->player->position.y = data.player_starting_value.y;
-
 	
 
 	map_loaded = ret;

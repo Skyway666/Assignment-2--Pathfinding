@@ -17,6 +17,7 @@ public:
 	
 	void Update(float dt);	
 	void ManagePhysics(float dt);
+	void OnCollision(Collider* collider);
 
 private:
 
