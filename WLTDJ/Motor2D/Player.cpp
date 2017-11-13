@@ -206,10 +206,7 @@ void Player::Update(float dt)
 
 	// Draw everything --------------------------------------
 
-	// Set camera to follow the player (commented in order to debug better)
 
-	//App->render->camera.x = -position.x + 400;
-	//App->render->camera.y = -position.y + 400;
 
 	//Put collider next to player (Should be done in "draw")
 	if (collider != nullptr)

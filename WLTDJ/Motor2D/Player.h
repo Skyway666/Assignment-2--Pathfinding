@@ -55,6 +55,7 @@ private:
 	int slide_time;
 	int walljump_time;
 
+	bool camera_following = true; //Bool to know if camera should be following player
 
 
 	Animation idle;
