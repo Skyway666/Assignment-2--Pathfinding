@@ -19,8 +19,10 @@ Air_enemy::Air_enemy(int x, int y): Entity(x,y)
 
 	idle.loop = true;
 	idle.speed = 0.3;
-
+	side_fly_time = 2; //Could be initialized with an argument
+	speed.x = 2;
 	ideling_heigh = y;
+	side_fly_timer.Start(side_fly_time);
 }
 
 
@@ -33,7 +35,7 @@ void Air_enemy::Update(float dt)
 {
 
     animation = &idle;
-
+	Exec_idle(dt);
 	
 
 
@@ -43,9 +45,23 @@ void Air_enemy::Update(float dt)
 
 	App->pathfinding->DebugDraw();
 }
-void Air_enemy::Exec_idle()
+void Air_enemy::Exec_idle(float dt)
 {
+	if (side_fly_timer.IsOver())
+	{
+		flip = !flip;
+		side_fly_timer.Start(side_fly_time);
+	}
 
+	if (!flip)
+	{
+		position.x += speed.x * dt;
+	}
+	else
+	{
+		position.x -= speed.x * dt;
+	}
+	
 }
 
 void Air_enemy::Exec_atack()

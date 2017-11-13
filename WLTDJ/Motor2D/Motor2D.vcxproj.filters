@@ -153,6 +153,9 @@
     <ClInclude Include="j1Timer.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Cronometer.h">
+      <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="p2 libraries">
