@@ -13,7 +13,7 @@ class Air_enemy : public Entity
 public:
 	Air_enemy(int x, int y);
 	~Air_enemy();
-	Animation Idle;
+	Animation idle;
 
 	void Update(float dt);
 	void OnCollision();

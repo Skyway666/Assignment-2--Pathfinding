@@ -38,7 +38,7 @@ bool j1Entities::Awake(pugi::xml_node& conf)
 bool j1Entities::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
-	sprites = App->tex->Load("textures/Flying Monster/frame-1.png");
+	sprites = App->tex->Load("textures/Flying_eye_sprites.png");
 	player_sprites = App->tex->Load("textures/SpriteSheet.png");
 
 	//Shouldn't be loading here

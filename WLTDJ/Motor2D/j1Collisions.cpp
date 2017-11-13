@@ -5,6 +5,7 @@
 #include "j1Player.h"
 #include "j1Map.h"
 #include "Pathfinding.h"
+#include "j1Entities.h"
 
 j1Collisions::j1Collisions()
 {
@@ -40,37 +41,22 @@ bool j1Collisions::PreUpdate()
 // Called before render is available
 bool j1Collisions::Update(float dt)
 {
-	/*for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		{
 			// skip empty and player colliders
 			if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 				continue;
 
-			if (App->player->collider->type != COLLIDER_SUPER_GOD && colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->collider->type == COLLIDER_GOD))
+			if (colliders[i]->type == COLLIDER_BONE || colliders[i]->type == COLLIDER_DEADLY)
 			{
-				colliders[i]->WillCollide(App->player->collider->rect, App->player->speed_modifier.x, (App->player->speed_modifier.y), (App->player->gravity), dt);
-				if (App->player->collider->CheckCollision(colliders[i]->rect))
-				{
-					if (App->player->flip && !App->player->walljumping)
-						App->player->position.x += App->player->speed_modifier.x * dt;
-					else if (!App->player->flip && !App->player->walljumping)
-						App->player->position.x -= App->player->speed_modifier.x * dt;
-					else if (App->player->walljumping && App->player->speed.x > 0)
-						App->player->position.x -= App->player->speed_modifier.x * dt;
-					else if (App->player->walljumping && App->player->speed.x < 0)
-						App->player->position.x += App->player->speed_modifier.x * dt;
-				}
-			}
-			else if (colliders[i]->type == COLLIDER_BONE || colliders[i]->type == COLLIDER_DEADLY)
-			{
-				if (App->player->collider->CheckCollision(colliders[i]->rect))
+				if (App->entities->player->collider->CheckCollision(colliders[i]->rect))
 				{
 
-					if (matrix[App->player->collider->type][colliders[i]->type])
+					if (matrix[App->entities->player->collider->type][colliders[i]->type])
 					{
-						if (App->player->collider->type != COLLIDER_SUPER_GOD && App->player->collider->type != COLLIDER_GOD && colliders[i]->type == COLLIDER_DEADLY)
+						if (App->entities->player->collider->type != COLLIDER_SUPER_GOD && App->entities->player->collider->type != COLLIDER_GOD && colliders[i]->type == COLLIDER_DEADLY)
 						{
-							App->player->dead = true;
+							App->entities->player->dead = true;
 						}
 						else if (colliders[i]->type == COLLIDER_BONE)
 						{
@@ -95,7 +81,7 @@ bool j1Collisions::Update(float dt)
 
 				}
 			}
-		}*/
+		}
 
 
 	DebugDraw();

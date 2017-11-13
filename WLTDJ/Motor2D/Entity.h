@@ -22,7 +22,7 @@ public:
 	//ENTITY_TYPES type;
 	bool flip = false;
 
-	
+	bool dead;//temporal
     fPoint contact;
 	fPoint speed_modifier;
 	float gravity;

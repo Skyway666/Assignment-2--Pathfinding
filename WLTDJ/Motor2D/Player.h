@@ -35,7 +35,7 @@ private:
 	bool jumping = false;
 	bool walljumping = false;
 	bool StickToWall = false;
-	bool dead = false;
+	//bool dead = false;
 	bool sliding = false;
 	bool win = false;
 	bool godmode = false;
