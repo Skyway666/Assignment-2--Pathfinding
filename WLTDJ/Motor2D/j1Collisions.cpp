@@ -208,14 +208,11 @@ void Collider::WillCollide(Entity* entity, float dt)
 bool j1Collisions::WillCollideAfterSlide(Entity* entity, float dt) const
 {
 	SDL_Rect r = entity->collider->rect;
-	float speed = entity->speed_modifier.y;
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		// skip empty and player colliders
 		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 			continue;
-
-		speed *= dt;
 
 		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD))
 			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + App->map->data.tile_height
