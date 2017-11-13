@@ -360,7 +360,7 @@ void Player::Slide()
 		}
 
 
-		else if (App->collision->WillCollideAfterSlide(rect_after_sliding, 1, player_dt) && contact.x == 0)
+		else if (App->collision->WillCollideAfterSlide(this, player_dt) && contact.x == 0)
 		{
 			time = frames;
 		}

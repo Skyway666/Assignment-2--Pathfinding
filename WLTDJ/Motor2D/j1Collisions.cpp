@@ -207,39 +207,39 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 	}
 }
 
-fPoint Collider::WillCollide(const SDL_Rect& r, fPoint speed, int gravity, float dt)
+void Collider::WillCollide(Entity* entity, float dt)
 {
-	fPoint contact;
-	contact.x = 0;
-	contact.y = 0;
+	SDL_Rect r = entity->collider->rect;
+	fPoint speed = entity->speed_modifier;
+	float gravity = entity->gravity;
 	speed.x *= dt;
 	speed.y *= dt;
 	gravity *= dt;
 
 	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + ceil(speed.x * 2) && r.x + r.w > rect.x) // Will collide left
-		contact.x = 1;
+		entity->contact.x = 1;
 	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - ceil(speed.x * 2) && r.x < rect.x + rect.w) // Will collide right
-		contact.x = 2;
+		entity->contact.x = 2;
 	if (r.y < rect.y + rect.h && r.y + r.h > rect.y - ceil(gravity * 2) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
-		contact.y = 1;
+		entity->contact.y = 1;
 	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + ceil(speed.y * 2) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
-		contact.y = 2;
-
-	return contact;
+		entity->contact.y = 2;
 }
 
-bool j1Collisions::WillCollideAfterSlide(const SDL_Rect& r, int distance, float dt) const
+bool j1Collisions::WillCollideAfterSlide(Entity* entity, float dt) const
 {
+	SDL_Rect r = entity->collider->rect;
+	float speed = entity->speed_modifier.y;
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		// skip empty and player colliders
 		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 			continue;
 
-		distance *= dt;
+		speed *= dt;
 
-		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && App->player->collider->type == COLLIDER_GOD))
-			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + ceil(distance * 2)
+		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD))
+			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + ceil(speed)
 			&& r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 			return true;
 	}
@@ -258,7 +258,7 @@ void j1Collisions::ManageGroundCollisions(Entity* entity, float dt)
 
 		if (entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD)))
 		{
-			entity->contact = colliders[i]->WillCollide(entity->collider->rect, entity->speed_modifier, entity->gravity, dt);
+			colliders[i]->WillCollide(entity, dt);
 
 			if (entity->collider->CheckCollision(colliders[i]->rect)) // In case the entity somehow passes thorugh a wall
 			{

@@ -7,10 +7,7 @@
 	<map />
 	<scene />
 	<:anonymous />
-	<player>
-		<player_position x="6867.7998" y="570" map="1" />
-	</player>
-	<:anonymous />
+	<player />
 	<:anonymous />
 	<renderer />
 </game_state>

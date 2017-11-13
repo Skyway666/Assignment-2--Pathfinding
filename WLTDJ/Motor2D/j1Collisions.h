@@ -50,7 +50,7 @@ struct Collider
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;
-	fPoint WillCollide(const SDL_Rect& r, fPoint speed, int gravity, float dt);
+	void WillCollide(Entity* entity, float dt);
 
 };
 
@@ -66,7 +66,7 @@ public:
 	bool CleanUp();
 	void Erase_Non_Player_Colliders();
 
-	bool WillCollideAfterSlide(const SDL_Rect& r, int distance, float dt) const; //checks if any rectangle would be colliding with the ceiling
+	bool WillCollideAfterSlide(Entity* entity, float dt) const; //checks if any rectangle would be colliding with the ceiling
 	void ManageGroundCollisions(Entity* entity, float dt);
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type);
 
