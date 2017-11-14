@@ -36,37 +36,63 @@ void Air_enemy::Update(float dt)
 
     animation = &idle;
 	if (is_idle)
-		Exec_idle(dt);
+		Exec_idle();
 	else
 		Exec_atack();
 
 
+    //DoLogic, basically
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
+	{ 
+		Find_path();
+		is_idle = false;
+	}
+	if (speed.x < 0)
+		flip = true;
+	else if(speed.x > 0)
+		flip = false;
 
-	Find_path();
+	position.x += speed.x * dt;
+	position.y += speed.y * dt;
 
-	App->pathfinding->DebugDraw();
 }
-void Air_enemy::Exec_idle(float dt)
+void Air_enemy::Exec_idle()
 {
 	if (side_fly_timer.IsOver())
 	{
-		flip = !flip;
+		idle_speed = -idle_speed;
 		side_fly_timer.Start(side_fly_time);
 	}
 
-	if (!flip)
-	{
-		position.x += speed.x * dt;
-	}
-	else
-	{
-		position.x -= speed.x * dt;
-	}
+	speed.x = idle_speed;
+
 	
 }
 
 void Air_enemy::Exec_atack()
 {
+	iPoint monster_map_pos(position.x, position.y);
+	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
+
+	if (path_to_follow->At(next_tile) != nullptr)
+	{ 
+		if (*path_to_follow->At(next_tile) == monster_map_pos)
+		{
+			next_tile++;
+		}
+		else
+		{
+			iPoint tile_to_reach = *path_to_follow->At(next_tile);
+
+			speed.y = (tile_to_reach.y - monster_map_pos.y)*2;
+			speed.x = (tile_to_reach.x - monster_map_pos.x)*2;
+		}
+	}
+	else
+	{
+		speed.x = 0;
+		speed.y = 0;
+	}
 
 }
 
@@ -81,6 +107,10 @@ void Air_enemy::Find_path()
 
 	App->pathfinding->CreatePath(monster_map_pos, player_map_pos);
 
+	path_to_follow = App->pathfinding->GetLastPath();
+	next_tile = 0;
+
+	App->pathfinding->DebugDraw();
 }
 
 void Air_enemy::OnCollision() 

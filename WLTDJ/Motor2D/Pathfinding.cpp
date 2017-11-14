@@ -32,12 +32,16 @@ void Pathfinding::CreatePath(iPoint origin, iPoint destination)
 				Path_BackTracking(curr);
 				break;
 			}
-				iPoint neighbors[4];
+				iPoint neighbors[8];
 				neighbors[0].create(curr.x + 1, curr.y + 0);
-				neighbors[1].create(curr.x + 0, curr.y + 1);
-				neighbors[2].create(curr.x - 1, curr.y + 0);
-				neighbors[3].create(curr.x + 0, curr.y - 1);
-				for (uint i = 0; i < 4; ++i)
+				neighbors[1].create(curr.x + 1, curr.y - 1);
+				neighbors[2].create(curr.x + 0, curr.y - 1);
+				neighbors[3].create(curr.x - 1, curr.y - 1);
+				neighbors[4].create(curr.x - 1, curr.y + 0);
+				neighbors[5].create(curr.x - 1, curr.y + 1);
+				neighbors[6].create(curr.x + 0, curr.y + 1);
+				neighbors[7].create(curr.x + 1, curr.y + 1);
+				for (uint i = 0; i < 8; ++i)
 				{
 					if (IsWalkable(neighbors[i]) && visited.find(neighbors[i]) == -1)
 					{
