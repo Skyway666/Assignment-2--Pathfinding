@@ -23,9 +23,10 @@ public:
 	
 	float player_x_displacement; //Used by parallax
 
-
-	bool walljumping = false; //Used by WillCollide
+	// Used by WillCollide
+	bool walljumping = false;
 	bool sliding = false;
+	bool StickToWall = false;
 
 private:
 
@@ -43,7 +44,6 @@ private:
 	float player_height_before_sliding;
 	bool jumping = false;
 	//bool walljumping = false;
-	bool StickToWall = false;
 	//bool dead = false;
 	//bool sliding = false;
 	bool dead = false;

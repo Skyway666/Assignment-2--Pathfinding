@@ -14,6 +14,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	walljump_speed.y = initial_inf.walljump_speed.y;
 	walljump_speed.x = initial_inf.walljump_speed.x;
 	gravity = initial_inf.gravity;
+	gravity2 = initial_inf.gravity;
 	
 	scale = 0.3;
 	type = ENTITY_TYPES::PLAYER;
@@ -138,8 +139,7 @@ void Player::Update(float dt)
 		// Jumping
 		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
 		{
-			if (!super_godmode)
-			{
+				gravity = gravity2;
 				if (contact.y == 1)
 				{
 					jumping = true;
@@ -148,7 +148,6 @@ void Player::Update(float dt)
 				{
 					walljumping = true;
 				}
-			}
 		}
 		else if (super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			speed.y = -speed_modifier.y;
@@ -196,7 +195,7 @@ void Player::Update(float dt)
 
 	if (super_godmode)
 	{
-		position.y += speed.y;
+		position.y += speed.y * dt;
 		speed.y = 0;
 	}
 

@@ -188,20 +188,15 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 
 void Collider::WillCollide(GroundEntity* entity, float dt)
 {
-	SDL_Rect r = entity->collider->rect;
-	fPoint speed = entity->speed_modifier;
-	float gravity = entity->gravity;
-	speed.x *= dt;
-	speed.y *= dt;
-	gravity *= dt;
+	const SDL_Rect r = entity->collider->rect;
 
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + ceil(speed.x * 2) && r.x + r.w > rect.x) // Will collide left
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + ceil(entity->speed_modifier.x * dt) && r.x + r.w > rect.x) // Will collide left
 		entity->contact.x = 1;
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - ceil(speed.x * 2) && r.x < rect.x + rect.w) // Will collide right
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - ceil(entity->speed_modifier.x * dt) && r.x < rect.x + rect.w) // Will collide right
 		entity->contact.x = 2;
-	if (r.y < rect.y + rect.h && r.y + r.h > rect.y - ceil(gravity * 2) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
+	if (r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
 		entity->contact.y = 1;
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + ceil(speed.y * 2) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + ceil(entity->speed_modifier.y * dt) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
 		entity->contact.y = 2;
 }
 
@@ -242,13 +237,13 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 				{
 					Player* player = (Player*)entity;
 
-					if (player->flip && !player->walljumping)
+					if (player->flip && !player->walljumping && !player->StickToWall)
 						player->position.x += player->speed_modifier.x * dt;
-					else if (!player->flip && !player->walljumping)
+					else if (!player->flip && !player->walljumping && !player->StickToWall)
 						player->position.x -= player->speed_modifier.x * dt;
-					else if (player->walljumping && player->speed.x > 0)
+					else if (player->walljumping && player->speed.x > 0 && !player->StickToWall)
 						player->position.x -= player->speed_modifier.x * dt;
-					else if (player->walljumping && player->speed.x < 0)
+					else if (player->walljumping && player->speed.x < 0 && !player->StickToWall)
 						player->position.x += player->speed_modifier.x * dt;
 				}
 				else
