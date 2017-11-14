@@ -9,7 +9,5 @@ public:
 	fPoint contact;
 	fPoint speed_modifier;
 	float gravity;
-	float gravity2;
-
 };
 
