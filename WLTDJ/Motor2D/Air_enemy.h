@@ -25,7 +25,7 @@ private:
 	
 	float side_fly_time;
 	int ideling_heigh;
-	bool is_idle;
+	bool is_idle = true;
 	Cronometer side_fly_timer;
 	
 };

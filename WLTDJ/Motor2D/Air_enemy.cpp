@@ -35,9 +35,10 @@ void Air_enemy::Update(float dt)
 {
 
     animation = &idle;
-	Exec_idle(dt);
-	
-
+	if (is_idle)
+		Exec_idle(dt);
+	else
+		Exec_atack();
 
 
 
