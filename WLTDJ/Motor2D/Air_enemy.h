@@ -8,6 +8,7 @@
 #include "j1Entities.h"
 #include "Animation.h"
 #include "Cronometer.h"
+#include "Player.h"
 
 class Air_enemy : public Entity
 {
