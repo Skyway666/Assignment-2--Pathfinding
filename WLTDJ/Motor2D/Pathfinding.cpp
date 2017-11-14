@@ -95,7 +95,10 @@ bool Pathfinding::IsWalkable(const iPoint& pos)const
 {
 
 	bool boundaries = (pos.x >= 0 && pos.x <= (int)width && pos.y >= 0 && pos.y <= (int)height);
+	if (!boundaries)
+		return false;
     
+<<<<<<< HEAD
 //	bool walkable = (walkability_values[(pos.y*width) + pos.x] != 11 && walkability_values[(pos.y*width) + pos.x] != 12);
 
 	//if (boundaries && walkable) //Check boundaries
@@ -103,6 +106,13 @@ bool Pathfinding::IsWalkable(const iPoint& pos)const
 	//	return true;
 	//}
 	return false;
+=======
+	bool walkable = (walkability_values[(pos.y*width) + pos.x] != 11 && walkability_values[(pos.y*width) + pos.x] != 12);
+	if (!walkable) //Check boundaries
+		return false;
+
+	return true;
+>>>>>>> origin/master
 }
 
 void Pathfinding::DebugDraw()

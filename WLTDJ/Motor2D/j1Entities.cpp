@@ -124,7 +124,7 @@ bool j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 
 		case ENTITY_TYPES::PLAYER:
 		{
-			Entity* new_ent = new Player(x, y,p_ini_inf);
+			Player* new_ent = new Player(x, y,p_ini_inf);
 			player = new_ent;
 			break;
 		}
@@ -169,4 +169,49 @@ void j1Entities::EraseEntities()
 			entities[i] = nullptr;
 		}
 	}
+}
+
+//Load and save functions
+bool j1Entities::Load(pugi::xml_node& data)
+{
+	if (App->map->map == data.child("player_position").attribute("map").as_int())
+	{
+		player->position.x = data.child("player_position").attribute("x").as_float();
+		player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
+	}
+	else
+	{
+		if (App->map->map == 0)
+		{
+			App->map->map = 1;
+			App->collision->Erase_Non_Player_Colliders();
+			App->map->CleanUp();
+			App->map->Load("Level 2 final.tmx");
+			player->position.x = data.child("player_position").attribute("x").as_float();
+			player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
+		}
+		else
+		{
+			App->map->map = 0;
+			App->collision->Erase_Non_Player_Colliders();
+			App->map->CleanUp();
+			App->map->Load("Level 1 final.tmx");
+			player->position.x = data.child("player_position").attribute("x").as_float();
+			player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
+		}
+	}
+
+	return true;
+}
+
+// Save Game State
+bool j1Entities::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node player_ = data.append_child("player_position");
+
+	player_.append_attribute("x") = player->position.x;
+	player_.append_attribute("y") = player->position.y;
+	player_.append_attribute("map") = App->map->map;
+
+	return true;
 }
