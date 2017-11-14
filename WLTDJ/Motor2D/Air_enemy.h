@@ -33,7 +33,7 @@ private:
 	int idle_speed = 2; //speed at which the enemy idles
 
 
-	iPoint center;
+	iPoint center;//Maybe should have a function to get the center
 	
 };
 

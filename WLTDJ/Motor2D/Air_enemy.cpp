@@ -35,6 +35,7 @@ Air_enemy::~Air_enemy()
 
 void Air_enemy::Update(float dt)
 {
+	//Maybe should be a function
 	center.x = position.x + (1135 * scale)/2;
 	center.y = position.y + (845 * scale)/2;
 
@@ -51,6 +52,7 @@ void Air_enemy::Update(float dt)
 		Find_path();
 		is_idle = false;
 	}
+
 	if (speed.x < 0)
 		flip = true;
 	else if(speed.x > 0)
