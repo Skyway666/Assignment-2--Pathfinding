@@ -136,6 +136,8 @@ void Player::Update(float dt)
 				animation = &idle;
 		}
 
+		WallSlide();
+
 		// Jumping
 		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
 		{
@@ -144,7 +146,7 @@ void Player::Update(float dt)
 				{
 					jumping = true;
 				}
-				else if (contact.x == 1 || contact.x == 2)
+				else if (StickToWall)
 				{
 					walljumping = true;
 				}
@@ -172,7 +174,6 @@ void Player::Update(float dt)
 		}
 	}
 
-	WallSlide();
 	Jump();
 	Slide();
 
@@ -243,13 +244,13 @@ void Player::Update(float dt)
 
 void Player::WallSlide()
 {
-	if (contact.x == 2 && contact.y != 1 && contact.y != 2)
+	if (contact.x == 2 && contact.y != 1 && contact.y != 2 && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		StickToWall = true;
 		animation = &wallslideright;
 		flip = false;
 	}
-	else if (contact.x == 1 && contact.y != 1 && contact.y != 2)
+	else if (contact.x == 1 && contact.y != 1 && contact.y != 2 && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		StickToWall = true;
 		animation = &wallslideleft;

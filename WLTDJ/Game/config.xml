@@ -12,7 +12,7 @@
   
   <entities>
     <jump_time value =" 15"/>
-    <slide_time value =" 15"/>
+    <slide_time value =" 20"/>
     <walljump_time value =" 20"/>
     <speed_modifier.y value =" 12"/>
     <speed_modifier.x value =" 10"/>
