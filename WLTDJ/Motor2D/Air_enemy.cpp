@@ -23,6 +23,8 @@ Air_enemy::Air_enemy(int x, int y): Entity(x,y)
 	speed.x = 2;
 	ideling_heigh = y;
 	side_fly_timer.Start(side_fly_time);
+
+
 }
 
 
@@ -33,6 +35,8 @@ Air_enemy::~Air_enemy()
 
 void Air_enemy::Update(float dt)
 {
+	center.x = position.x + (1135 * scale)/2;
+	center.y = position.y + (845 * scale)/2;
 
     animation = &idle;
 	if (is_idle)
@@ -71,7 +75,7 @@ void Air_enemy::Exec_idle()
 
 void Air_enemy::Exec_atack()
 {
-	iPoint monster_map_pos(position.x, position.y);
+	iPoint monster_map_pos(center.x, center.y);
 	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
 
 	if (path_to_follow->At(next_tile) != nullptr)
@@ -100,7 +104,7 @@ void Air_enemy::Find_path()
 {
 	//Pathfinding
 	iPoint player_map_pos(App->entities->player->position.x, App->entities->player->position.y);
-	iPoint monster_map_pos(position.x, position.y);
+	iPoint monster_map_pos(center.x, center.y);
 
 	App->map->WorldToMap(&player_map_pos.x, &player_map_pos.y);
 	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
