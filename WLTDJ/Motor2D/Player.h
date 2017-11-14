@@ -9,7 +9,9 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Scene.h"
-class Player : public Entity
+#include "GroundEntity.h"
+
+class Player : public GroundEntity
 {
 public:
 	Player(int x, int y, Player_Initial_Inf initial_inf);
@@ -20,6 +22,10 @@ public:
 	void OnCollision(Collider* collider);
 	
 	float player_x_displacement; //Used by parallax
+
+
+	bool walljumping = false; //Used by WillCollide
+	bool sliding = false;
 
 private:
 
@@ -54,8 +60,6 @@ private:
 	int jump_time;
 	int slide_time;
 	int walljump_time;
-
-	bool camera_following = true; //Bool to know if camera should be following player
 
 
 	Animation idle;

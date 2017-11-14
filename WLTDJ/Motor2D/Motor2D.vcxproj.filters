@@ -49,20 +49,23 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="GroundEnemy.cpp">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Air_enemy.cpp">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="j1PerfTimer.cpp">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClCompile>
     <ClCompile Include="j1Timer.cpp">
       <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Air_enemy.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundEnemy.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundEntity.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,15 +141,6 @@
     <ClInclude Include="Entity.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="GroundEnemy.h">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Air_enemy.h">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="j1PerfTimer.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
@@ -155,6 +149,18 @@
     </ClInclude>
     <ClInclude Include="Cronometer.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Air_enemy.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundEnemy.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundEntity.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,15 @@
     </Filter>
     <Filter Include="Modules, scenes and tools\Modules\EntitySystem\Entities">
       <UniqueIdentifier>{582c0144-da82-47f7-8799-3232d36e2297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities">
+      <UniqueIdentifier>{8db70416-8f45-4421-9d35-90a3dbb82085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities">
+      <UniqueIdentifier>{e33be7e0-4968-49e0-9f32-9752d209634e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities">
+      <UniqueIdentifier>{124a1e60-5ad3-4da0-b293-7ddacde8e457}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

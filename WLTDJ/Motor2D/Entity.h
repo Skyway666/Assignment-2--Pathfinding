@@ -24,12 +24,11 @@ public:
 	ENTITY_TYPES type;
 	bool flip = false;
 
-    fPoint contact;
-	fPoint speed_modifier;
 	// provisionally here:
-	float gravity;
-	bool walljumping = false;
-	bool sliding = false;
+
+
+	//Player variables
+
 	//
 	
 

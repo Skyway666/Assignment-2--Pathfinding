@@ -5,7 +5,7 @@
 
 #include "j1Module.h"
 #include "p2Log.h"
-#include "Entity.h"
+#include "GroundEntity.h"
 
 
 #include "SDL/include/SDL.h"
@@ -26,6 +26,7 @@ enum COLLIDER_TYPE
 	COLLIDER_ENEMY
 };
 
+class Player;
 
 struct Collider
 {
@@ -53,7 +54,7 @@ struct Collider
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;
-	void WillCollide(Entity* entity, float dt);
+	void WillCollide(GroundEntity* entity, float dt);
 
 };
 
@@ -69,8 +70,8 @@ public:
 	bool CleanUp();
 	void Erase_Non_Player_Colliders();
 
-	bool WillCollideAfterSlide(Entity* entity, float dt) const; //checks if any rectangle would be colliding with the ceiling
-	void ManageGroundCollisions(Entity* entity, float dt);
+	bool WillCollideAfterSlide(Player* entity, float dt) const; //checks if any rectangle would be colliding with the ceiling
+	void ManageGroundCollisions(GroundEntity* entity, float dt);
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
 
 	void DebugDraw();

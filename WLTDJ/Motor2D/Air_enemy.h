@@ -27,8 +27,6 @@ private:
 	int ideling_heigh;
 	bool is_idle;
 	Cronometer side_fly_timer;
-
-	iPoint speed;
 	
 };
 

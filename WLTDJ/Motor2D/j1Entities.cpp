@@ -56,7 +56,7 @@ bool j1Entities::Update(float dt)
 	// Manage entities' physics
 	for (uint i = 0; i < entities.count(); ++i)
 	{
-		if (entities[i] != nullptr)
+		if (entities[i] != nullptr && (entities[i]->type == ENTITY_TYPES::PLAYER || entities[i]->type == ENTITY_TYPES::GROUND_ENEMY))
 			entities[i]->ManagePhysics(dt);
 	}
 
@@ -98,11 +98,11 @@ bool j1Entities::CleanUp()
 		if (entities[i] != nullptr)
 		{
 			delete entities[i];
-			delete player;
 			entities[i] = nullptr;
-			player = nullptr;
 		}
-	}
+	}		
+    delete player;
+	player = nullptr;
 
 	return true;
 }

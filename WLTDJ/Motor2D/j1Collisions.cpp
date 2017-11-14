@@ -186,7 +186,7 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 	}
 }
 
-void Collider::WillCollide(Entity* entity, float dt)
+void Collider::WillCollide(GroundEntity* entity, float dt)
 {
 	SDL_Rect r = entity->collider->rect;
 	fPoint speed = entity->speed_modifier;
@@ -205,7 +205,7 @@ void Collider::WillCollide(Entity* entity, float dt)
 		entity->contact.y = 2;
 }
 
-bool j1Collisions::WillCollideAfterSlide(Entity* entity, float dt) const
+bool j1Collisions::WillCollideAfterSlide(Player* entity, float dt) const
 {
 	SDL_Rect r = entity->collider->rect;
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -223,7 +223,7 @@ bool j1Collisions::WillCollideAfterSlide(Entity* entity, float dt) const
 	return false;
 }
 
-void j1Collisions::ManageGroundCollisions(Entity* entity, float dt)
+void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -238,16 +238,18 @@ void j1Collisions::ManageGroundCollisions(Entity* entity, float dt)
 
 			if (entity->collider->CheckCollision(colliders[i]->rect)) // In case the entity somehow passes thorugh a wall
 			{
-				if (entity->collider->type == COLLIDER_PLAYER)
+				if (entity->type == ENTITY_TYPES::PLAYER)
 				{
-					if (entity->flip && !entity->walljumping)
-						entity->position.x += entity->speed_modifier.x * dt;
-					else if (!entity->flip && !entity->walljumping)
-						entity->position.x -= entity->speed_modifier.x * dt;
-					else if (entity->walljumping && entity->speed.x > 0)
-						entity->position.x -= entity->speed_modifier.x * dt;
-					else if (entity->walljumping && entity->speed.x < 0)
-						entity->position.x += entity->speed_modifier.x * dt;
+					Player* player = (Player*)entity;
+
+					if (player->flip && !player->walljumping)
+						player->position.x += player->speed_modifier.x * dt;
+					else if (!player->flip && !player->walljumping)
+						player->position.x -= player->speed_modifier.x * dt;
+					else if (player->walljumping && player->speed.x > 0)
+						player->position.x -= player->speed_modifier.x * dt;
+					else if (player->walljumping && player->speed.x < 0)
+						player->position.x += player->speed_modifier.x * dt;
 				}
 				else
 				{

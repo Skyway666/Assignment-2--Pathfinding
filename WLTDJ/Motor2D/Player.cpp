@@ -2,7 +2,7 @@
 
 
 
-Player::Player(int x, int y, Player_Initial_Inf initial_inf) : Entity(x, y)
+Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y)
 {
 	Animation_Loading();
 
@@ -438,7 +438,7 @@ void Player::Animation_Loading()
 
 void Player::ManagePhysics(float dt)
 {
-	App->collision->ManageGroundCollisions(this, dt);
+	App->collision->ManageGroundCollisions((GroundEntity*)this, dt);
 }
 
 void Player::OnCollision(Collider* collider)
