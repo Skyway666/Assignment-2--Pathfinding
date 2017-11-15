@@ -37,9 +37,6 @@
     <ClCompile Include="j1Collisions.cpp">
       <Filter>Modules, scenes and tools\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Player.cpp">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Pathfinding.cpp">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
       <Filter>Modules, scenes and tools\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Collisions.h">
-      <Filter>Modules, scenes and tools\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Player.h">
       <Filter>Modules, scenes and tools\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
