@@ -31,7 +31,9 @@ struct Flying_Enemy_Initial_Inf
 };
 struct Ground_Enemy_Initial_Inf
 {
-
+	fPoint speed_modifier;
+	float gravity;
+	int jump_time;
 };
 
 class Entity;

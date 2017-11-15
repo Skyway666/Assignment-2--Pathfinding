@@ -2,7 +2,7 @@
 
 
 
-GroundEnemy::GroundEnemy(int x, int y) : Entity(x, y)
+GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : GroundEntity(x, y)
 {
 	scale = 0.1;
 	type = ENTITY_TYPES::GROUND_ENEMY;
@@ -15,6 +15,11 @@ GroundEnemy::GroundEnemy(int x, int y) : Entity(x, y)
 	idle.PushBack({ 1135,845,1135,845 });
 	idle.PushBack({ 1135 * 2,845,1135,845 });
 	idle.PushBack({ 1135 * 3,845,1135,845 });
+
+	gravity = initial_inf.gravity;
+	jump_time = initial_inf.jump_time;
+	speed_modifier.y = initial_inf.speed_modifier.y;
+	speed_modifier.x = initial_inf.speed_modifier.x;
 
 
 	idle.loop = true;
@@ -62,6 +67,7 @@ void GroundEnemy::Update(float dt)
 	position.y += speed.y * dt;
 
 }
+
 void GroundEnemy::Exec_idle()
 {
 	if (walk_timer.IsOver())
@@ -71,8 +77,6 @@ void GroundEnemy::Exec_idle()
 	}
 
 	speed.x = idle_speed;
-
-
 }
 
 void GroundEnemy::Exec_atack()
@@ -122,4 +126,9 @@ void GroundEnemy::Find_path()
 void GroundEnemy::OnCollision()
 {
 
+}
+
+void GroundEnemy::ManagePhysics(float dt)
+{
+	App->collision->ManageGroundCollisions((GroundEntity*)this, dt);
 }

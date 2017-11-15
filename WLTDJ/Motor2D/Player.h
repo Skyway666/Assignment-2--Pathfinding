@@ -54,7 +54,6 @@ private:
 	fPoint walljump_speed;
 	float player_dt;
 	
-	int jump_time;
 	int slide_time;
 	int walljump_time;
 

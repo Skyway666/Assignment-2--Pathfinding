@@ -9,11 +9,12 @@
 #include "Animation.h"
 #include "Cronometer.h"
 #include "Player.h"
+#include "GroundEntity.h"
 
-class GroundEnemy : public Entity
+class GroundEnemy : public GroundEntity
 {
 public:
-	GroundEnemy(int x, int y);
+	GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf);
 	~GroundEnemy();
 	Animation idle;
 
@@ -22,6 +23,8 @@ public:
 	void Exec_idle();
 	void Exec_atack();
 	void Find_path();
+	void ManagePhysics(float dt);
+
 private:
 
 	float walk_time; // Time that the enemy spends walking from one side to the other

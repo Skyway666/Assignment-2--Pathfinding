@@ -7,5 +7,6 @@ public:
 	~GroundEntity();
 
 	float gravity;
+	int jump_time;
 };
 
