@@ -43,9 +43,6 @@ private:
 
 	float player_height_before_sliding;
 	bool jumping = false;
-	//bool walljumping = false;
-	//bool dead = false;
-	//bool sliding = false;
 	bool dead = false;
 	bool win = false;
 	bool godmode = false;

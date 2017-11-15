@@ -34,6 +34,10 @@ void Player::Update(float dt)
 {
 	player_dt = dt;
 
+	//Calculate center of the player
+	center.x = position.x + (481 * scale) / 2;
+	center.y = position.y + (547 * scale) / 2;
+
 	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
 	else if (!super_godmode)

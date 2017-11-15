@@ -17,14 +17,15 @@ protected:
 	Animation* animation;
 
 public:
-	fPoint position;
+	fPoint position; //Top left position
+	iPoint center; //Used for pathfinding
 	fPoint contact;
 	fPoint speed_modifier;
 	fPoint speed;
-	Collider* collider = nullptr;
-	float scale;
-	ENTITY_TYPES type;
-	bool flip = false;
+	Collider* collider = nullptr; //Collider
+	float scale; //Scale to blit
+	ENTITY_TYPES type; //Knowing which type of enemy
+	bool flip = false; //Flip to blit
 	
 
 public:
