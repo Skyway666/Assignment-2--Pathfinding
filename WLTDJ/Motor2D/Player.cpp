@@ -242,13 +242,13 @@ void Player::Update(float dt)
 
 void Player::WallSlide()
 {
-	if (contact.x == 2 && contact.y != 1 && contact.y != 2 && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (contact.x == 2 && contact.y != 1 && contact.y != 2 && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !jumping)
 	{
 		StickToWall = true;
 		animation = &wallslideright;
 		flip = false;
 	}
-	else if (contact.x == 1 && contact.y != 1 && contact.y != 2 && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	else if (contact.x == 1 && contact.y != 1 && contact.y != 2 && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !jumping)
 	{
 		StickToWall = true;
 		animation = &wallslideleft;

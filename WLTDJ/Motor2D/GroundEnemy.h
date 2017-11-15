@@ -35,7 +35,7 @@ private:
 	p2DynArray<iPoint>* path_to_follow; // Path that the enemy must follow
 	int next_tile; // Tile that the enemy has to reach
 	int idle_speed; // speed at which the enemy idles
-
+	bool debug = false; // Provisional
 
 	iPoint center; // Maybe should have a function to get the center
 

@@ -57,10 +57,18 @@ void GroundEnemy::Update(float dt)
 	// DoLogic
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
-		//Find_path();
+		if (debug)
+			debug = false;
+		else
+			debug = true;
+
+		Find_path();
 		//is_idle = false;
 		speed.x = speed_modifier.x * 2;
 	}
+
+	if (debug)
+		App->pathfinding->DebugDraw();
 
 	if (speed.x < 0)
 		flip = true;
@@ -68,6 +76,9 @@ void GroundEnemy::Update(float dt)
 		flip = false;
 
 	position.x += speed.x * dt;
+
+	if (contact.y == 1 && contact.x != 0)
+		jumping = true;
 
 	Jump(dt);
 
@@ -84,7 +95,7 @@ void GroundEnemy::Update(float dt)
 
 void GroundEnemy::Exec_idle()
 {
-	if (walk_timer.IsOver())
+	if (walk_timer.IsOver() || contact.x != 0)
 	{
 		idle_speed = -idle_speed;
 		walk_timer.Start(walk_time);
@@ -129,7 +140,7 @@ void GroundEnemy::Find_path()
 	App->map->WorldToMap(&player_map_pos.x, &player_map_pos.y);
 	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
 
-	App->pathfinding->CreatePath(monster_map_pos, player_map_pos);
+	App->pathfinding->CreateGroundPath(monster_map_pos, {player_map_pos.y + 1, monster_map_pos.x});
 
 	path_to_follow = App->pathfinding->GetLastPath();
 	next_tile = 0;
@@ -147,7 +158,6 @@ void GroundEnemy::Jump(float dt)
 			time = frames;
 			allowtime = false;
 			contact.y = 0;
-			//App->audio->PlayFx(1);
 			//fall.Reset();
 		}
 

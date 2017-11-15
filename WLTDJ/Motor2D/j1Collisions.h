@@ -56,6 +56,7 @@ struct Collider
 	bool CheckCollision(const SDL_Rect& r) const;
 	void WillCollide(GroundEntity* entity, float dt); // Detects if the entity is going to collide and returns the corresponding contact
 	void WillCollidePit(GroundEntity* entity, float dt); // Enemy jumps if not falling and is on top of a pit
+	void WillCollideWall(GroundEntity* entity, float dt); // Enemy jumps if about to collide with a wall
 };
 
 class j1Collisions : public j1Module

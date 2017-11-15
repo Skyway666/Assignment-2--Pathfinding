@@ -162,7 +162,8 @@ void j1Collisions::Erase_Non_Player_Colliders()
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		if (colliders[i] != nullptr && colliders[i]->type != COLLIDER_PLAYER)
+		if (colliders[i] != nullptr && colliders[i]->type != COLLIDER_PLAYER && colliders[i]->type != COLLIDER_SUPER_GOD
+			&& colliders[i]->type != COLLIDER_GOD)
 		{
 			delete colliders[i];
 			colliders[i] = nullptr;
@@ -202,8 +203,22 @@ void Collider::WillCollide(GroundEntity* entity, float dt)
 void Collider::WillCollidePit(GroundEntity* entity, float dt)
 {
 	const SDL_Rect r = entity->collider->rect;
-	if ((r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w)
-		&& entity->contact.y == 1) // Will collide ground
+
+	// Will collide ground && contact.y == 1
+	if ((r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w) && entity->contact.y == 1)
+	{
+		entity->jumping = true;
+	}
+}
+
+void Collider::WillCollideWall(GroundEntity* entity, float dt)
+{
+	const SDL_Rect r = entity->collider->rect;
+
+	// (Will collide left || Will collide right) && contact.y == 1
+	if (((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width * 2 && r.x + r.w > rect.x)
+		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width * 2 && r.x < rect.x + rect.w))
+		&& entity->contact.y == 1)
 	{
 		entity->jumping = true;
 	}
@@ -272,10 +287,12 @@ void j1Collisions::EnemyJump(GroundEntity* entity, float dt)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		// Skip empty and non-pit colliders
-		if (colliders[i] == nullptr || colliders[i]->type != COLLIDER_PIT)
+		// Skip empty, non-wall and non-pit colliders
+		if (colliders[i] == nullptr || !(colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_WALL))
 			continue;
-
-		colliders[i]->WillCollidePit(entity, dt);
+		if (colliders[i]->type == COLLIDER_PIT)
+			colliders[i]->WillCollidePit(entity, dt);
+		else if (colliders[i]->type == COLLIDER_WALL)
+			colliders[i]->WillCollideWall(entity, dt);
 	}
 }
