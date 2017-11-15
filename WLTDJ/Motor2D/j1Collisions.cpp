@@ -2,7 +2,6 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Collisions.h"
-#include "j1Player.h"
 #include "j1Map.h"
 #include "Pathfinding.h"
 #include "j1Entities.h"

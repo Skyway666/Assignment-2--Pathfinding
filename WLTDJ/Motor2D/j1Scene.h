@@ -2,7 +2,6 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
-#include "j1Player.h"
 #include "Pathfinding.h"
 #include "p2Defs.h"
 #include "p2Log.h"

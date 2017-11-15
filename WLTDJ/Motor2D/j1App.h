@@ -90,7 +90,6 @@ public:
 	j1Scene*			scene = nullptr;
 	j1Map*				map = nullptr;
 	j1Collisions*		collision = nullptr;
-	j1Player*			player = nullptr;
 	j1Entities*			entities = nullptr;
 	Pathfinding*        pathfinding = nullptr;
 

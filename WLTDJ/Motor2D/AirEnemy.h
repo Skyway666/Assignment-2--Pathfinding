@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity.h"
-#include "j1Player.h"
 #include "j1App.h"
 #include "j1Map.h"
 #include "j1Input.h"
@@ -42,7 +41,7 @@ private:
 	bool returning = false; //Bool to know if enemy should be returning to the starting point
 	bool home_path_found = false;//Bool to find path home just one time
 
-	Cronometer do_logic;
+	Cronometer do_logic; //Should be a boolean passed in the update
 
 	
 };

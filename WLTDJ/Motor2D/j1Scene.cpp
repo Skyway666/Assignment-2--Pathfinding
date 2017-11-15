@@ -25,15 +25,13 @@ bool j1Scene::Start()
 {	
 	App->map->Load("Level 1 final.tmx");
 	App->map->map = 0;
-
-
-
+	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 
 
 	//JUST A TEST
 	App->pathfinding->SetMap();	
 
-    App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
+
 	App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y - 250);
 	App->entities->AddEntity(ENTITY_TYPES::GROUND_ENEMY, 1000, 270);
 	return true;
