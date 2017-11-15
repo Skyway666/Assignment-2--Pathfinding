@@ -7,7 +7,7 @@
 #include "j1Map.h"
 #include "j1Audio.h"
 #include "p2Log.h"
-#include "Air_enemy.h"
+#include "AirEnemy.h"
 #include "Player.h"
 #define SPAWN_MARGIN 100
 
@@ -112,7 +112,7 @@ bool j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 	switch(type){
 		case ENTITY_TYPES::AIR_ENEMY: 
 		{
-			Entity* new_ent = new Air_enemy(x, y);
+			Entity* new_ent = new AirEnemy(x, y);
 			entities.add(new_ent);
 			break;
 		}

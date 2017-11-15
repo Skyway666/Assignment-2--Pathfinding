@@ -18,18 +18,13 @@ protected:
 
 public:
 	fPoint position;
+	fPoint contact;
+	fPoint speed_modifier;
 	fPoint speed;
 	Collider* collider = nullptr;
 	float scale;
 	ENTITY_TYPES type;
 	bool flip = false;
-
-	// provisionally here:
-
-
-	//Player variables
-
-	//
 	
 
 public:

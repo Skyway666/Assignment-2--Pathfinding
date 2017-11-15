@@ -76,7 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Air_enemy.cpp" />
+    <ClCompile Include="AirEnemy.cpp" />
     <ClCompile Include="GroundEnemy.cpp" />
     <ClCompile Include="GroundEntity.cpp" />
     <ClCompile Include="j1Collisions.cpp" />
@@ -100,7 +100,7 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Air_enemy.h" />
+    <ClInclude Include="AirEnemy.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Cronometer.h" />
     <ClInclude Include="GroundEnemy.h" />

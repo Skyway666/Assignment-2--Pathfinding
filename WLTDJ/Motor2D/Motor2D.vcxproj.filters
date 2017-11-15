@@ -55,9 +55,6 @@
     <ClCompile Include="j1Timer.cpp">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Air_enemy.cpp">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
-    </ClCompile>
     <ClCompile Include="GroundEnemy.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
     </ClCompile>
@@ -66,6 +63,9 @@
     </ClCompile>
     <ClCompile Include="GroundEntity.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="AirEnemy.cpp">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +150,6 @@
     <ClInclude Include="Cronometer.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Air_enemy.h">
-      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
-    </ClInclude>
     <ClInclude Include="GroundEnemy.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
     </ClInclude>
@@ -161,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="GroundEntity.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="AirEnemy.h">
+      <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

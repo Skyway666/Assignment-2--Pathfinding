@@ -6,8 +6,6 @@ public:
 	GroundEntity(int, int);
 	~GroundEntity();
 
-	fPoint contact;
-	fPoint speed_modifier;
 	float gravity;
 };
 

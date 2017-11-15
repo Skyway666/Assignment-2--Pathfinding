@@ -1,8 +1,8 @@
-#include "Air_enemy.h"
+#include "AirEnemy.h"
 
 
 
-Air_enemy::Air_enemy(int x, int y): Entity(x,y)
+AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 {
 	scale = 0.1;
 	type = ENTITY_TYPES::AIR_ENEMY;
@@ -20,7 +20,8 @@ Air_enemy::Air_enemy(int x, int y): Entity(x,y)
 	idle.loop = true;
 	idle.speed = 0.3;
 	side_fly_time = 2; //Could be initialized with an argument
-	speed.x = 2;
+	speed_modifier.x = 2;
+	speed.x = speed_modifier.x;
 	ideling_heigh = y;
 	side_fly_timer.Start(side_fly_time);
 
@@ -28,12 +29,12 @@ Air_enemy::Air_enemy(int x, int y): Entity(x,y)
 }
 
 
-Air_enemy::~Air_enemy()
+AirEnemy::~AirEnemy()
 {
 
 }
 
-void Air_enemy::Update(float dt)
+void AirEnemy::Update(float dt)
 {
 	//Maybe should be a function
 	center.x = position.x + (1135 * scale)/2;
@@ -47,10 +48,11 @@ void Air_enemy::Update(float dt)
 
 
     //DoLogic, basically
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{ 
 		Find_path();
 		is_idle = false;
+		speed.x = speed_modifier.x * 2;
 	}
 
 	if (speed.x < 0)
@@ -62,7 +64,7 @@ void Air_enemy::Update(float dt)
 	position.y += speed.y * dt;
 
 }
-void Air_enemy::Exec_idle()
+void AirEnemy::Exec_idle()
 {
 	if (side_fly_timer.IsOver())
 	{
@@ -75,7 +77,7 @@ void Air_enemy::Exec_idle()
 	
 }
 
-void Air_enemy::Exec_atack()
+void AirEnemy::Exec_atack()
 {
 	iPoint monster_map_pos(center.x, center.y);
 	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
@@ -102,7 +104,7 @@ void Air_enemy::Exec_atack()
 
 }
 
-void Air_enemy::Find_path()
+void AirEnemy::Find_path()
 {
 	//Pathfinding
 	iPoint player_map_pos(App->entities->player->position.x, App->entities->player->position.y);
@@ -119,7 +121,7 @@ void Air_enemy::Find_path()
 	App->pathfinding->DebugDraw();
 }
 
-void Air_enemy::OnCollision() 
+void AirEnemy::OnCollision() 
 {
 
 }
