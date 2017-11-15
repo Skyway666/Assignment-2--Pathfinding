@@ -33,7 +33,7 @@ bool j1Scene::Start()
 
 
 	//App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y - 250);
-	App->entities->AddEntity(ENTITY_TYPES::GROUND_ENEMY, App->map->data.player_starting_value.x + 1500, App->map->data.player_starting_value.y);
+	App->entities->AddEntity(ENTITY_TYPES::GROUND_ENEMY, 1760, 930);
 	return true;
 }
 

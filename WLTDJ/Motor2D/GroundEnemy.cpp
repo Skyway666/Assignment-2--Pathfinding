@@ -23,7 +23,7 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	speed_modifier.y = initial_inf.speed_modifier.y;
 	speed_modifier.x = initial_inf.speed_modifier.x;
 
-	walk_time = 5; //Could be initialized with an argument
+	walk_time = 30; //Could be initialized with an argument
 	speed.y = speed_modifier.y;
 	speed.x = speed_modifier.x;
 	walk_timer.Start(walk_time);
