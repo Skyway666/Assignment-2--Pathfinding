@@ -8,7 +8,7 @@
 	<scene />
 	<:anonymous />
 	<entities>
-		<player_position x="140" y="801" map="0" />
+		<player_position x="7075.7998" y="808" map="1" />
 	</entities>
 	<:anonymous />
 	<renderer />

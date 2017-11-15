@@ -163,6 +163,7 @@ void Player::Update(float dt)
 				App->collision->Erase_Non_Player_Colliders();
 				App->map->CleanUp();
 				App->map->Load("Level 1 final.tmx");
+				App->pathfinding->SetMap();
 
 			}
 			position.x = App->map->data.player_starting_value.x;
@@ -463,6 +464,7 @@ void Player::OnCollision(Collider* collider)
 			App->map->CleanUp();
 			App->map->Load("Level 1 final.tmx");
 			App->map->map = 0;
+			App->pathfinding->SetMap();
 			win = true;
 			
 			position.x = App->map->data.player_starting_value.x;

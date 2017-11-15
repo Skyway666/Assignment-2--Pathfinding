@@ -26,9 +26,9 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 	speed_modifier.y = 4; //Could be initialized with an argument
 	idle_speed = 2; //Could be initialized with an argument
 	ideling_heigh = y; 
-	agro_distance = 4;
-	tired_distance = 10;
-	initial_tile = iPoint(x, y);
+	agro_distance = 4; //Could be initialized with an argument
+	tired_distance = 10; //Could be initialized with an argument
+	initial_tile = iPoint(x, y); 
 	App->map->WorldToMap(&initial_tile.x, &initial_tile.y);
 
 
@@ -104,15 +104,6 @@ void AirEnemy::Update(float dt)
 
 	//Make collider follow enemy
 	collider->SetPos(position.x, position.y);   
-	
-	
-	
-	//DoLogic, basically
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{ 
-		Find_path_player();
-		is_idle = false;
-	}
 
 }
 void AirEnemy::Exec_idle()

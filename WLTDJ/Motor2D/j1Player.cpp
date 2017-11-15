@@ -253,6 +253,7 @@ bool j1Player::Update(float dt)
 			   App->collision->Erase_Non_Player_Colliders();
 			   App->map->CleanUp();
 			   App->map->Load("Level 1 final.tmx");
+			   App->pathfinding->SetMap();
 
 			}
 			position.x = App->map->data.player_starting_value.x;
@@ -486,6 +487,7 @@ bool j1Player::Load(pugi::xml_node& data)
 			App->map->Load("Level 2 final.tmx");
 			position.x = data.child("player_position").attribute("x").as_float();
 			position.y = data.child("player_position").attribute("y").as_float() - gravity * 2;
+			App->pathfinding->SetMap();
 		}
 		else
 		{
@@ -495,6 +497,7 @@ bool j1Player::Load(pugi::xml_node& data)
 			App->map->Load("Level 1 final.tmx");
 			position.x = data.child("player_position").attribute("x").as_float();
 			position.y = data.child("player_position").attribute("y").as_float() - gravity * 2;
+			App->pathfinding->SetMap();
 		}
 	}
 
