@@ -227,7 +227,8 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 			|| colliders[i]->type == COLLIDER_ENEMY || colliders[i]->type == COLLIDER_GOD || colliders[i]->type == COLLIDER_SUPER_GOD)
 			continue;
 
-		if (entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD)))
+		if (entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT
+			|| colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD)))
 		{
 			colliders[i]->WillCollide(entity, dt);
 

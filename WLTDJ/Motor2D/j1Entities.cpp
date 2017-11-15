@@ -9,6 +9,7 @@
 #include "p2Log.h"
 #include "AirEnemy.h"
 #include "Player.h"
+#include "GroundEnemy.h"
 #define SPAWN_MARGIN 100
 
 j1Entities::j1Entities()
@@ -26,12 +27,16 @@ bool j1Entities::Awake(pugi::xml_node& conf)
 	p_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
 	p_ini_inf.slide_time = conf.child("slide_time").attribute("value").as_int();
 	p_ini_inf.walljump_time = conf.child("walljump_time").attribute("value").as_int();
-	p_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
 	p_ini_inf.speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
+	p_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
 	p_ini_inf.walljump_speed.y = conf.child("walljump_speed.y").attribute("value").as_float();
 	p_ini_inf.walljump_speed.x = conf.child("walljump_speed.x").attribute("value").as_float();
 	p_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
 
+	ge_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
+	ge_ini_inf.speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
+	ge_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
+	ge_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
 
 	return true;
 }
@@ -119,12 +124,14 @@ bool j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 		
 		case ENTITY_TYPES::GROUND_ENEMY:
 		{
+			GroundEnemy* new_ent = new GroundEnemy(x, y, ge_ini_inf);
+			entities.add(new_ent);
 			break;
 		}
 
 		case ENTITY_TYPES::PLAYER:
 		{
-			Player* new_ent = new Player(x, y,p_ini_inf);
+			Player* new_ent = new Player(x, y, p_ini_inf);
 			player = new_ent;
 			break;
 		}

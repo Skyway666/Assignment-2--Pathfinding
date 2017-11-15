@@ -24,11 +24,12 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 
 	idle.loop = true;
 	idle.speed = 0.3;
-	walk_time = 2; //Could be initialized with an argument
+	walk_time = 1; //Could be initialized with an argument
 	speed.x = 2;
 	walk_timer.Start(walk_time);
 
-
+	iPoint scaledw_h(1135 * 0.1, 845 * 0.1);
+	collider = App->collision->AddCollider({ 0, 0, scaledw_h.x, scaledw_h.y }, COLLIDER_DEADLY, App->entities);
 }
 
 
@@ -66,6 +67,15 @@ void GroundEnemy::Update(float dt)
 	position.x += speed.x * dt;
 	position.y += speed.y * dt;
 
+	// Simulate gravity
+	if (contact.y != 1)
+		position.y += ceil(gravity * dt);
+
+	// Make collider follow enemy
+	collider->SetPos(position.x, position.y);
+
+	contact.x = 0;
+	contact.y = 0;
 }
 
 void GroundEnemy::Exec_idle()

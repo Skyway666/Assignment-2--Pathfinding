@@ -34,9 +34,6 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 
 
 	side_fly_timer.Start(side_fly_time);
-
-
-
 }
 
 
@@ -104,8 +101,6 @@ void AirEnemy::Update(float dt)
 
 	//Make collider follow enemy
 	collider->SetPos(position.x, position.y);   
-	
-	
 	
 	//DoLogic, basically
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)

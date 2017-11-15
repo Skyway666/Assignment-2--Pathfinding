@@ -21,7 +21,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	SDL_Rect collider_rect{ 0, 0, r.w * 0.2, r.h * 0.2 };
 	contact.x = 0;
 	contact.y = 0;
-	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER,App->entities);
+	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER, App->entities);
 }
 
 

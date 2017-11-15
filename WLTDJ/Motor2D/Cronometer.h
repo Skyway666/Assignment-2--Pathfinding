@@ -1,9 +1,10 @@
+#pragma once
 #include "j1Render.h"
 
 class Cronometer
 {
 public:
-	void Start(float amount_of_time) //Amount of time in seconds
+	void Start(float amount_of_time) // Amount of time in seconds
 	{
 		timer_duration = SDL_GetTicks() + amount_of_time * 1000;
 		timer_active = true;

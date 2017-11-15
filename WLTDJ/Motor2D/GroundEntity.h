@@ -7,6 +7,7 @@ public:
 	~GroundEntity();
 
 	float gravity;
+	fPoint contact;
 	int jump_time;
 };
 
