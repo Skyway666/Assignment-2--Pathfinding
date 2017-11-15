@@ -15,18 +15,19 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	idle.PushBack({ 1135,845,1135,845 });
 	idle.PushBack({ 1135 * 2,845,1135,845 });
 	idle.PushBack({ 1135 * 3,845,1135,845 });
+	idle.loop = true;
+	idle.speed = 0.3;
 
 	gravity = initial_inf.gravity;
 	jump_time = initial_inf.jump_time;
 	speed_modifier.y = initial_inf.speed_modifier.y;
 	speed_modifier.x = initial_inf.speed_modifier.x;
 
-
-	idle.loop = true;
-	idle.speed = 0.3;
-	walk_time = 1; //Could be initialized with an argument
-	speed.x = 2;
+	walk_time = 5; //Could be initialized with an argument
+	speed.y = speed_modifier.y;
+	speed.x = speed_modifier.x;
 	walk_timer.Start(walk_time);
+	idle_speed = speed_modifier.x;
 
 	iPoint scaledw_h(1135 * 0.1, 845 * 0.1);
 	collider = App->collision->AddCollider({ 0, 0, scaledw_h.x, scaledw_h.y }, COLLIDER_DEADLY, App->entities);
@@ -40,6 +41,8 @@ GroundEnemy::~GroundEnemy()
 
 void GroundEnemy::Update(float dt)
 {
+	frames++;
+
 	//Maybe should be a function
 	center.x = position.x + (1135 * scale) / 2;
 	center.y = position.y + (845 * scale) / 2;
@@ -54,8 +57,8 @@ void GroundEnemy::Update(float dt)
 	// DoLogic
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
-		Find_path();
-		is_idle = false;
+		//Find_path();
+		//is_idle = false;
 		speed.x = speed_modifier.x * 2;
 	}
 
@@ -65,7 +68,8 @@ void GroundEnemy::Update(float dt)
 		flip = false;
 
 	position.x += speed.x * dt;
-	position.y += speed.y * dt;
+
+	Jump(dt);
 
 	// Simulate gravity
 	if (contact.y != 1)
@@ -133,6 +137,41 @@ void GroundEnemy::Find_path()
 	App->pathfinding->DebugDraw();
 }
 
+void GroundEnemy::Jump(float dt)
+{
+	// jump
+	if (jumping)
+	{
+		if (allowtime)
+		{
+			time = frames;
+			allowtime = false;
+			contact.y = 0;
+			//App->audio->PlayFx(1);
+			//fall.Reset();
+		}
+
+		if (frames - time <= jump_time / (60 / App->framerate_cap) && contact.y == 0)
+		{
+			//animation = &jump;
+			position.y -= ceil(speed.y * dt);
+		}
+		else
+		{
+			jumping = false;
+			allowtime = true;
+			//jump.Reset();
+		}
+
+		if (contact.y == 1)
+		{
+			jumping = false;
+			allowtime = true;
+			//jump.Reset();
+		}
+	}
+}
+
 void GroundEnemy::OnCollision()
 {
 
@@ -141,4 +180,5 @@ void GroundEnemy::OnCollision()
 void GroundEnemy::ManagePhysics(float dt)
 {
 	App->collision->ManageGroundCollisions((GroundEntity*)this, dt);
+	App->collision->EnemyJump((GroundEntity*)this, dt);
 }

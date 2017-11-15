@@ -32,16 +32,12 @@ Player::~Player()
 
 void Player::Update(float dt)
 {
-	player_dt = dt;
-
 	//Calculate center of the player
 	center.x = position.x + (481 * scale) / 2;
 	center.y = position.y + (547 * scale) / 2;
 
 	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
-	else if (!super_godmode)
-		speed.y = speed_modifier.y * 1.5;
 
 	if (godmode)
 		collider->type = COLLIDER_GOD;
@@ -176,8 +172,8 @@ void Player::Update(float dt)
 		}
 	}
 
-	Jump();
-	Slide();
+	Jump(dt);
+	Slide(dt);
 
 	if (sliding && contact.x != 1 && flip)
 		speed.x = -1.5 * speed_modifier.x;
@@ -260,7 +256,7 @@ void Player::WallSlide()
 	}
 }
 
-void Player::Jump()
+void Player::Jump(float dt)
 {
 	// jump
 	if (jumping)
@@ -277,7 +273,7 @@ void Player::Jump()
 		if (frames - time <= jump_time / (60 / App->framerate_cap) && contact.y == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(speed.y * player_dt);
+			position.y -= ceil(speed.y * dt);
 		}
 		else
 		{
@@ -310,15 +306,15 @@ void Player::Jump()
 		if (frames - time <= walljump_time / (60 / App->framerate_cap) && contact.x == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(walljump_speed.y * player_dt);
+			position.y -= ceil(walljump_speed.y * dt);
 
 			if (jcontact == 1)
 			{
-				position.x += ceil(walljump_speed.x * player_dt);
+				position.x += ceil(walljump_speed.x * dt);
 				flip = true;
 			}
 			else if (jcontact == 2)
-				position.x -= ceil(walljump_speed.x * player_dt);
+				position.x -= ceil(walljump_speed.x * dt);
 		}
 		else
 		{
@@ -336,7 +332,7 @@ void Player::Jump()
 	}
 }
 
-void Player::Slide()
+void Player::Slide(float dt)
 {
 	if (sliding)
 	{
@@ -360,7 +356,7 @@ void Player::Slide()
 		}
 
 
-		else if (App->collision->WillCollideAfterSlide(this, player_dt) && contact.x == 0)
+		else if (App->collision->WillCollideAfterSlide(this, dt) && contact.x == 0)
 		{
 			time = frames;
 		}

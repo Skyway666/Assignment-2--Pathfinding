@@ -34,7 +34,7 @@ bool j1Entities::Awake(pugi::xml_node& conf)
 	p_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
 
 	ge_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
-	ge_ini_inf.speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
+	ge_ini_inf.speed_modifier.x = conf.child("Genemy_speed_modifier.x").attribute("value").as_float();
 	ge_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
 	ge_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
 

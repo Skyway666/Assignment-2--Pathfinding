@@ -31,18 +31,13 @@ public:
 private:
 
 	void WallSlide();
-	void Jump();
-	void Slide();
+	void Jump(float dt);
+	void Slide(float dt);
 
 	void Animation_Loading();
 	SDL_Rect rect_after_sliding;	
-	int frames = 0;
-	int time = 0;
-	bool allowtime = true;
-
 
 	float player_height_before_sliding;
-	bool jumping = false;
 	bool dead = false;
 	bool win = false;
 	bool godmode = false;
@@ -52,7 +47,6 @@ private:
 	//fPoint speed;
 	iPoint sprite_distance;
 	fPoint walljump_speed;
-	float player_dt;
 	
 	int slide_time;
 	int walljump_time;

@@ -14,11 +14,12 @@
     <jump_time value =" 15"/>
     <slide_time value =" 20"/>
     <walljump_time value =" 20"/>
-    <speed_modifier.y value =" 12"/>
+    <speed_modifier.y value =" 18"/>
     <speed_modifier.x value =" 10"/>
     <walljump_speed.y value =" 15"/>
     <walljump_speed.x value =" 10"/>
     <gravity value =" 6"/>
+    <Genemy_speed_modifier.x value =" 7"/>
   </entities>
   
   <window>

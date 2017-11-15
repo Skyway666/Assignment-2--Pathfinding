@@ -199,6 +199,16 @@ void Collider::WillCollide(GroundEntity* entity, float dt)
 		entity->contact.y = 2;
 }
 
+void Collider::WillCollidePit(GroundEntity* entity, float dt)
+{
+	const SDL_Rect r = entity->collider->rect;
+	if ((r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w)
+		&& entity->contact.y == 1) // Will collide ground
+	{
+		entity->jumping = true;
+	}
+}
+
 bool j1Collisions::WillCollideAfterSlide(Player* entity, float dt) const
 {
 	SDL_Rect r = entity->collider->rect;
@@ -255,5 +265,17 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 				}
 			}
 		}
+	}
+}
+
+void j1Collisions::EnemyJump(GroundEntity* entity, float dt)
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		// Skip empty and non-pit colliders
+		if (colliders[i] == nullptr || colliders[i]->type != COLLIDER_PIT)
+			continue;
+
+		colliders[i]->WillCollidePit(entity, dt);
 	}
 }
