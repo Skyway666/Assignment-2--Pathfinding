@@ -29,9 +29,11 @@ bool j1Entities::Awake(pugi::xml_node& conf)
 	p_ini_inf.walljump_time = conf.child("walljump_time").attribute("value").as_int();
 	p_ini_inf.speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
 	p_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
-	p_ini_inf.walljump_speed.y = conf.child("walljump_speed.y").attribute("value").as_float();
 	p_ini_inf.walljump_speed.x = conf.child("walljump_speed.x").attribute("value").as_float();
+	p_ini_inf.walljump_speed.y = conf.child("walljump_speed.y").attribute("value").as_float();
 	p_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
+	p_ini_inf.pathfinding_distance.x = conf.child("pathfinding_distance.x").attribute("value").as_float();
+	p_ini_inf.pathfinding_distance.y = conf.child("pathfinding_distance.y").attribute("value").as_float();
 
 	ge_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
 	ge_ini_inf.speed_modifier.x = conf.child("Genemy_speed_modifier.x").attribute("value").as_float();

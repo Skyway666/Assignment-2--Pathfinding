@@ -27,6 +27,7 @@ public:
 	bool walljumping = false;
 	bool sliding = false;
 	bool StickToWall = false;
+	iPoint pathfinding_distance;
 
 private:
 

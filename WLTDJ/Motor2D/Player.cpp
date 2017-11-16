@@ -14,6 +14,8 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	walljump_speed.y = initial_inf.walljump_speed.y;
 	walljump_speed.x = initial_inf.walljump_speed.x;
 	gravity = initial_inf.gravity;
+	pathfinding_distance.x = initial_inf.pathfinding_distance.x * App->map->data.tile_width;
+	pathfinding_distance.y = initial_inf.pathfinding_distance.y * App->map->data.tile_height;
 	
 	scale = 0.3;
 	type = ENTITY_TYPES::PLAYER;

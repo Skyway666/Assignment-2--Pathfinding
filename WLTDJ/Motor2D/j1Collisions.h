@@ -87,6 +87,8 @@ private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
+
+	void UpdateGroundPath(); // To swap between collider walkable and collider path
 };
 
 #endif // __j1COLLISIONS_H__

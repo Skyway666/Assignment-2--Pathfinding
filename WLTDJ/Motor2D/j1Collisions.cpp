@@ -75,6 +75,7 @@ bool j1Collisions::Update(float dt)
 		}
 	}
 
+	UpdateGroundPath();
 	DebugDraw();
 
 	return true;
@@ -231,7 +232,7 @@ void Collider::WillCollideWall(GroundEntity* entity, float dt)
 
 bool j1Collisions::WillCollideAfterSlide(Player* entity, float dt) const
 {
-	SDL_Rect r = entity->collider->rect;
+	const SDL_Rect r = entity->collider->rect;
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		// skip empty and player colliders
@@ -295,9 +296,29 @@ void j1Collisions::EnemyJump(GroundEntity* entity, float dt)
 		// Skip empty, non-wall and non-pit colliders
 		if (colliders[i] == nullptr || !(colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_WALL))
 			continue;
+
 		if (colliders[i]->type == COLLIDER_PIT)
 			colliders[i]->WillCollidePit(entity, dt);
 		else if (colliders[i]->type == COLLIDER_WALL)
 			colliders[i]->WillCollideWall(entity, dt);
+	}
+}
+
+void j1Collisions::UpdateGroundPath()
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		// Skip empty, non-walkable and non-path colliders
+		if (colliders[i] == nullptr || !(colliders[i]->type == COLLIDER_PATH || colliders[i]->type == COLLIDER_WALKABLE))
+			continue;
+
+		iPoint distance;
+		distance.x = abs(colliders[i]->rect.x - (App->entities->player->position.x + App->entities->player->collider->rect.w / 2));
+		distance.y = abs(colliders[i]->rect.y - (App->entities->player->position.y + App->entities->player->collider->rect.h / 2));
+
+		if (distance.x <= App->entities->player->pathfinding_distance.x && distance.y <= App->entities->player->pathfinding_distance.y)
+			colliders[i]->type = COLLIDER_PATH;
+		else
+			colliders[i]->type = COLLIDER_WALKABLE;
 	}
 }

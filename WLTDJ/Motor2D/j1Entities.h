@@ -25,6 +25,7 @@ struct Player_Initial_Inf
 	int jump_time;
 	int slide_time;
 	int walljump_time;
+	iPoint pathfinding_distance;
 };
 
 struct Flying_Enemy_Initial_Inf
