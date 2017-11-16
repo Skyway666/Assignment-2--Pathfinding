@@ -35,7 +35,7 @@ public:
 	
 	void Draw(SDL_Texture* sprites); // Draw and update collider position
 
-	virtual void Update(float dt) {}; // Update enemy logic
+	virtual void Update(float dt, bool do_logic) {}; // Update enemy logic
 	virtual void ManagePhysics(float dt) {}; // Manage Physics of grounded entities
 	virtual void OnCollision(Collider* collider) {}; // Every entity has its own "OnCollision"
 };

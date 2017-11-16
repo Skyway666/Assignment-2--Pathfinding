@@ -44,7 +44,7 @@ GroundEnemy::~GroundEnemy()
 
 }
 
-void GroundEnemy::Update(float dt)
+void GroundEnemy::Update(float dt, bool do_logic)
 {
 	frames++;
 

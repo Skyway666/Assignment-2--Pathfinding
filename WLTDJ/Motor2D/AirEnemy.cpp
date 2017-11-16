@@ -21,18 +21,20 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 	collider = App->collision->AddCollider({x, y, scaledw_h.x,scaledw_h.y}, COLLIDER_DEADLY, App->entities);
 	idle.loop = true;
 	idle.speed = 0.3; 
+
 	side_fly_time = 2; //Could be initialized with an argument
+	agro_distance = 4; //Could be initialized with an argument	
+	tired_distance = 10; //Could be initialized with an argument
+	idle_speed = 2; //Could be initialized with an argument	
 	speed_modifier.x = 4; //Could be initialized with an argument
 	speed_modifier.y = 4; //Could be initialized with an argument
-	idle_speed = 2; //Could be initialized with an argument
-	ideling_heigh = y; 
-	agro_distance = 4; //Could be initialized with an argument
-	tired_distance = 10; //Could be initialized with an argument
+
+	is_idle = true;
+	next_tile = 0;
 	initial_tile = iPoint(x, y); 
-	App->map->WorldToMap(&initial_tile.x, &initial_tile.y);
-
-
-
+	App->map->WorldToMap(&initial_tile.x, &initial_tile.y);	
+    returning = false;
+	home_path_found = false;
 	side_fly_timer.Start(side_fly_time);
 }
 
@@ -42,7 +44,7 @@ AirEnemy::~AirEnemy()
 
 }
 
-void AirEnemy::Update(float dt)
+void AirEnemy::Update(float dt, bool do_logic)
 {
 	//Maybe should be a function
 	center.x = position.x + (1135 * scale)/2;
@@ -63,16 +65,14 @@ void AirEnemy::Update(float dt)
      	returning = true;
 	}
 
-    if (do_logic.IsOver())
+    if (do_logic)
 	{ 
 		if (!returning && !is_idle)
 		{
 			Find_path_player();
-			do_logic.Start(0.5);
 		}
 		else if (returning)
 		{
-			do_logic.Start(0.5);
 			if(!home_path_found)
 			{ 
 				Find_path_home();

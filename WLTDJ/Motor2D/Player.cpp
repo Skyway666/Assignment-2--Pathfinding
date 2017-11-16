@@ -464,7 +464,7 @@ void Player::OnCollision(Collider* collider)
 			position.y = App->map->data.player_starting_value.y;
 		}
 	}
-	else if (collider->type == COLLIDER_DEADLY)
+	else if (collider->type == COLLIDER_DEADLY && !dead)
 	{
 		dead = true;
 		App->entities->EraseEntities();

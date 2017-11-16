@@ -19,7 +19,7 @@ public:
 	Animation run;
 	Animation jump;
 
-	void Update(float dt);
+	void Update(float dt, bool do_logic);
 	void OnCollision();
 	void Exec_idle();
 	void Exec_atack();

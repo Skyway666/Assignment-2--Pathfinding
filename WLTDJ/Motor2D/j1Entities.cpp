@@ -70,11 +70,13 @@ bool j1Entities::Update(float dt)
 		player->ManagePhysics(dt);
 
 	// Update all entities
-	for (uint i = 0; i < entities.count(); ++i)
-	{ 
-		if (entities[i] != nullptr)
-			entities[i]->Update(dt);
-	}
+		for (uint i = 0; i < entities.count(); ++i)
+		{ 
+			if (entities[i] != nullptr)
+				entities[i]->Update(dt, do_logic.IsOver());
+		}
+
+	
 
 	if (player != nullptr)
 		player->Update(dt);
@@ -88,6 +90,10 @@ bool j1Entities::Update(float dt)
 
 	if (player != nullptr)
 		player->Draw(player_sprites);
+
+	//Update enemies logic every 0.5 seconds
+	if (do_logic.IsOver())
+		do_logic.Start(0.5);
 
 	return true;
 }
