@@ -18,7 +18,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	scale = 0.3;
 	type = ENTITY_TYPES::PLAYER;
 	SDL_Rect r{ 0, 0, 481, 547 };
-	SDL_Rect collider_rect{ 0, 0, r.w * 0.2, r.h * 0.2 };
+	SDL_Rect collider_rect{ x, y, r.w * 0.2, r.h * 0.2 };
 	contact.x = 0;
 	contact.y = 0;
 	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER, App->entities);
@@ -470,5 +470,7 @@ void Player::OnCollision(Collider* collider)
 	else if (collider->type == COLLIDER_DEADLY)
 	{
 		dead = true;
+		App->entities->EraseEntities();
+		App->entities->Spawn_waiting_entities();
 	}
 }

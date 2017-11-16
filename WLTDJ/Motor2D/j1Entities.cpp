@@ -111,8 +111,33 @@ bool j1Entities::CleanUp()
 
 	return true;
 }
+void j1Entities::Add_waiting_entity(ENTITY_TYPES type, int x, int y)
+{
+	Entity_info enemy_info;
+	enemy_info.position.x = x;
+	enemy_info.position.y = y;
+	enemy_info.type = type;
+	waiting_queue.Push(enemy_info, 0);
+}
 
-bool j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
+void j1Entities::Spawn_waiting_entities()
+{
+	if(waiting_queue.Count() != 0)
+	{ 
+		for (int i = 0; i < waiting_queue.Count(); i++)
+		{
+			Entity_info enemy_info = *waiting_queue.Peek(i);
+			AddEntity(enemy_info.type, enemy_info.position.x, enemy_info.position.y);
+		}
+	}
+}
+
+void j1Entities::Clear_waiting_list()
+{
+	waiting_queue.Clear();
+}
+
+void j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 {
 	switch(type){
 		case ENTITY_TYPES::AIR_ENEMY: 
@@ -136,8 +161,6 @@ bool j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 			break;
 		}
 	}
-
-	return true;
 }
 
 void j1Entities::OnCollision(Collider* c1, Collider* c2) 
