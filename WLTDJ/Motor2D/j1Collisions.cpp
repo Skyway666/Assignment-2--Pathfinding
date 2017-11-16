@@ -15,7 +15,6 @@ j1Collisions::j1Collisions()
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_BONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_DEADLY] = true;
-
 }
 
 // Destructor
@@ -47,7 +46,7 @@ bool j1Collisions::Update(float dt)
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		// skip empty colliders
+		// skip empty and wall colliders
 		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_WALL)
 			continue;
 
@@ -56,8 +55,8 @@ bool j1Collisions::Update(float dt)
 		// avoid checking collisions already checked
 		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
 		{
-			// skip empty colliders
-			if (colliders[k] == nullptr)
+			// skip empty and wall colliders
+			if (colliders[k] == nullptr || colliders[k]->type == COLLIDER_WALL)
 				continue;
 
 			c2 = colliders[k];
@@ -142,7 +141,7 @@ bool j1Collisions::CleanUp()
 	return true;
 }
 
-Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback)
+Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback, uint lenght)
 {
 	Collider* ret = nullptr;
 
@@ -150,7 +149,7 @@ Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module*
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type,callback);
+			ret = colliders[i] = new Collider(rect, type, callback, lenght);
 			break;
 		}
 	}

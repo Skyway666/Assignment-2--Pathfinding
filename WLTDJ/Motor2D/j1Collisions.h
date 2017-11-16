@@ -31,14 +31,16 @@ class Player;
 struct Collider
 {
 	SDL_Rect rect;
+	uint lenght = 1; // For pits
 	bool to_delete = false;
 	COLLIDER_TYPE type;
 	j1Module* callback;
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback) :
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback, uint lenght) :
 		rect(rectangle),
 		type(type),
-		callback(callback)
+		callback(callback),
+		lenght(lenght)
 	{}
 
 	void SetPos(int x, int y)
@@ -74,7 +76,7 @@ public:
 	bool WillCollideAfterSlide(Player* entity, float dt) const; // Checks if any rectangle would be colliding with the ceiling
 	void ManageGroundCollisions(GroundEntity* entity, float dt); // Allows ground entities to react to environment's walls
 	void EnemyJump(GroundEntity* entity, float dt); // To detect if the enemy has to jump
-	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
+	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr, uint lenght = 1);
 
 	void DebugDraw();
 

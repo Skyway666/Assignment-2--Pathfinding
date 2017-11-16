@@ -53,6 +53,9 @@ void j1Map::CreateCollidersAndEnemies()
 			
 			MapToWorld(&x, &y);
 
+			// To calculate pit lenght:
+			uint lenght = 1;
+
 			//Now they are in pixels
 			if(id == 11)
 			{ 
@@ -64,7 +67,12 @@ void j1Map::CreateCollidersAndEnemies()
 			}
 			else if (id == 23)
 			{
-				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_PIT);
+				for (uint i = 1; data.layer_array.At(1)->data->data[counter - i] == 23; i++)
+					lenght++;
+				for (uint i = 1; data.layer_array.At(1)->data->data[counter + i] == 23; i++)
+					lenght++;
+				
+				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_PIT, (j1Module*)nullptr, lenght);
 			}
 			else if (id == 19)
 			{
