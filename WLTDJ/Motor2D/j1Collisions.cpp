@@ -117,8 +117,14 @@ void j1Collisions::DebugDraw()
 		case COLLIDER_DEADLY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha, true);
 			break;
-		case COLLIDER_BONE: 
+		case COLLIDER_BONE: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha, true);
+			break;
+		case COLLIDER_WALKABLE: // purple
+			App->render->DrawQuad(colliders[i]->rect, 101, 31, 180, alpha, true);
+			break;
+		case COLLIDER_PATH: // brown
+			App->render->DrawQuad(colliders[i]->rect, 15, 50, 85, alpha, true);
 			break;
 		}
 	}
