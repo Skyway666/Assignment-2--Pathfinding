@@ -6,7 +6,7 @@
   <property name="camera_y_limit" type="float" value="-700"/>
   <property name="parallax_speed" type="float" value="0.6"/>
   <property name="player_starting_valuex" type="float" value="140"/>
-  <property name="player_starting_valuey" type="float" value="820"/>
+  <property name="player_starting_valuey" type="float" value="830"/>
  </properties>
  <tileset firstgid="1" name="Tileset_little" tilewidth="68" tileheight="68" spacing="1" margin="1" tilecount="24" columns="6">
   <image source="Tileset_little.png" width="415" height="276"/>

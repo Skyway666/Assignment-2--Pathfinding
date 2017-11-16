@@ -216,8 +216,8 @@ void Collider::WillCollideWall(GroundEntity* entity, float dt)
 	const SDL_Rect r = entity->collider->rect;
 
 	// (Will collide left || Will collide right) && contact.y == 1
-	if (((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width * 2 && r.x + r.w > rect.x)
-		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width * 2 && r.x < rect.x + rect.w))
+	if (((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width && r.x + r.w > rect.x)
+		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width && r.x < rect.x + rect.w))
 		&& entity->contact.y == 1)
 	{
 		entity->jumping = true;
