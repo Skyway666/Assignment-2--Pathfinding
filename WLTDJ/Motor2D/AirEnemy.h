@@ -30,7 +30,7 @@ private:
 	int ideling_heigh; //Height at which the enemy has to retrun to idle
 	bool is_idle = true; //bool to know when the enemy should stop ideling and follow the player
 	Cronometer side_fly_timer; //Timer to mesure when enemy should be moving
-	p2DynArray<iPoint>* path_to_follow;//Path that the enemy must follow
+	p2DynArray<iPoint> path_to_follow;//Path that the enemy must follow
 	int next_tile; //Tile that the enemy has to reach
 	int idle_speed; //speed at which the enemy idles
 

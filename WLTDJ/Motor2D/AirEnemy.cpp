@@ -120,15 +120,15 @@ void AirEnemy::Exec_path()
 	iPoint monster_map_pos(center.x, center.y);
 	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
 
-	if (path_to_follow->At(next_tile) != nullptr)
+	if (path_to_follow.At(next_tile) != nullptr)
 	{ 
-		if (*path_to_follow->At(next_tile) == monster_map_pos)
+		if (*path_to_follow.At(next_tile) == monster_map_pos)
 		{
 			next_tile++;
 		}
 		else
 		{
-			iPoint tile_to_reach = *path_to_follow->At(next_tile);
+			iPoint tile_to_reach = *path_to_follow.At(next_tile);
 
 			speed.y = (tile_to_reach.y - monster_map_pos.y)*speed_modifier.y;
 			speed.x = (tile_to_reach.x - monster_map_pos.x)*speed_modifier.x;
@@ -153,10 +153,15 @@ void AirEnemy::Find_path_player()
 
 	App->pathfinding->CreatePath(monster_map_pos, player_map_pos);
 
-	path_to_follow = App->pathfinding->GetLastPath();
+	path_to_follow.Clear();
+	
+	for (int i = 0; i < App->pathfinding->GetLastPath()->Count(); i++)
+	{
+		path_to_follow.PushBack(*App->pathfinding->GetLastPath()->At(i));
+	}
 	next_tile = 0;
 
-	App->pathfinding->DebugDraw();
+	//App->pathfinding->DebugDraw();
 }
 
 void AirEnemy::Find_path_home()
@@ -168,10 +173,15 @@ void AirEnemy::Find_path_home()
 
 	App->pathfinding->CreatePath(monster_map_pos, initial_tile);
 
-	path_to_follow = App->pathfinding->GetLastPath();
+	path_to_follow.Clear();
+
+	for (int i = 0; i < App->pathfinding->GetLastPath()->Count(); i++)
+	{
+		path_to_follow.PushBack(*App->pathfinding->GetLastPath()->At(i));
+	}
 	next_tile = 0;
 
-	App->pathfinding->DebugDraw();
+	//App->pathfinding->DebugDraw();
 }
 
 
