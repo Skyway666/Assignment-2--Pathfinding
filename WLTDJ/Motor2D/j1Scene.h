@@ -17,14 +17,6 @@
 
 struct SDL_Texture;
 
-
-struct Test_monster
-{
-	SDL_Texture* graphics;
-	SDL_Texture* path_indicator;
-	iPoint pos;
-};
-
 class j1Scene : public j1Module
 {
 public:
@@ -57,12 +49,8 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-
-
-	//JUST A TEST
-    Test_monster flying_eye;
-	bool first_path = true;
-	p2DynArray<iPoint>* path;
+    
+	void Change_to_map(int);
 
 private:
 	

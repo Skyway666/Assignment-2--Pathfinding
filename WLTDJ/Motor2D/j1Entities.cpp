@@ -221,19 +221,13 @@ bool j1Entities::Load(pugi::xml_node& data)
 	{
 		if (App->map->map == 0)
 		{
-			App->map->map = 1;
-			App->collision->Erase_Non_Player_Colliders();
-			App->map->CleanUp();
-			App->map->Load("Level 2 final.tmx");
+			App->scene->Change_to_map(1);
 			player->position.x = data.child("player_position").attribute("x").as_float();
 			player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
 		}
 		else
 		{
-			App->map->map = 0;
-			App->collision->Erase_Non_Player_Colliders();
-			App->map->CleanUp();
-			App->map->Load("Level 1 final.tmx");
+			App->scene->Change_to_map(0);
 			player->position.x = data.child("player_position").attribute("x").as_float();
 			player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
 		}

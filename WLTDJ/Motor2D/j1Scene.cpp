@@ -102,7 +102,27 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(win_screen);
-	App->tex->UnLoad(flying_eye.graphics);
-	App->tex->UnLoad(flying_eye.path_indicator);
 	return true;
 }
+
+void j1Scene::Change_to_map(int _map)
+{
+
+	App->collision->Erase_Non_Player_Colliders();
+	App->entities->Clear_waiting_list();
+	App->map->CleanUp();
+	if (_map == 0)
+	{
+		App->map->Load("Level 1 final.tmx");
+		App->map->map = 0;
+	}
+	else if (_map == 1)
+	{
+		App->map->Load("Level 2 final.tmx");
+		App->map->map = 1;
+	}
+	App->pathfinding->SetMap();
+	App->entities->EraseEntities();
+	App->entities->Spawn_waiting_entities();
+}
+

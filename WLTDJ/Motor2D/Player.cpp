@@ -442,29 +442,19 @@ void Player::OnCollision(Collider* collider)
 	{
 		if (App->map->map == 0)
 		{
-			App->collision->Erase_Non_Player_Colliders();
-			App->map->CleanUp();
-			App->map->Load("Level 2 final.tmx");
-			App->map->map = 1;
-			App->pathfinding->SetMap();
-	
-			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y;
+			App->scene->Change_to_map(1);
+			App->entities->player->position.x = App->map->data.player_starting_value.x;
+			App->entities->player->position.y = App->map->data.player_starting_value.y;
 		}
 		else if (App->map->map == 1)
 		{
-			App->collision->Erase_Non_Player_Colliders();
-			App->map->CleanUp();
-			App->map->Load("Level 1 final.tmx");
-			App->map->map = 0;
-			App->pathfinding->SetMap();
+			App->scene->Change_to_map(0);
+			App->entities->player->position.x = App->map->data.player_starting_value.x;
+			App->entities->player->position.y = App->map->data.player_starting_value.y;
 			win = true;
-			
-			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y;
 		}
 	}
-	else if (collider->type == COLLIDER_DEADLY && !dead)
+	else if (collider->type == COLLIDER_DEADLY && !dead && this->collider->type != COLLIDER_GOD && this->collider->type != COLLIDER_SUPER_GOD)
 	{
 		dead = true;
 		App->entities->EraseEntities();
