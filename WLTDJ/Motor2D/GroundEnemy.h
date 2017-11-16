@@ -20,10 +20,9 @@ public:
 	Animation jump;
 
 	void Update(float dt, bool do_logic);
-	void OnCollision();
+	void OnCollision(Collider* collider);
 	void Exec_idle();
 	void Exec_atack();
-	void Find_path();
 	void ManagePhysics(float dt);
 
 private:
@@ -34,10 +33,6 @@ private:
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
 	Cronometer walk_timer; // Timer to mesure when enemy should be moving
 	p2DynArray<iPoint>* path_to_follow; // Path that the enemy must follow
-	int next_tile; // Tile that the enemy has to reach
 	int idle_speed; // speed at which the enemy idles
-	bool debug = false; // Provisional
-
-	iPoint center; // Maybe should have a function to get the center
-
+	bool moving = true; // Provisional
 };

@@ -31,11 +31,9 @@ public:
 	//Public methods
 	void SetMap(); //Has to be called whenever map is changed
 	void CreatePath(iPoint origin, iPoint destination); // This will fill "last path"
-	void CreateGroundPath(iPoint origin, iPoint destination); // This will fill "last path"
 	void Path_BackTracking(iPoint goal);
 	bool CleanUp();
 	bool IsWalkable(const iPoint& pos)const; //Returns 0 if walkable and -1 if not walkable
-	bool IsWalkableGround(const iPoint& pos)const; //Returns 0 if walkable and -1 if not walkable
 	void DebugDraw();
 	p2DynArray<iPoint>* GetLastPath();
 
