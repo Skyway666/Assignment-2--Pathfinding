@@ -161,7 +161,7 @@ void AirEnemy::Find_path_player()
 	}
 	next_tile = 0;
 
-	//App->pathfinding->DebugDraw();
+	App->pathfinding->DebugDraw();
 }
 
 void AirEnemy::Find_path_home()
@@ -181,7 +181,7 @@ void AirEnemy::Find_path_home()
 	}
 	next_tile = 0;
 
-	//App->pathfinding->DebugDraw();
+	App->pathfinding->DebugDraw();
 }
 
 
