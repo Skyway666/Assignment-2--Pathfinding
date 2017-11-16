@@ -29,6 +29,7 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 	speed_modifier.x = 4; //Could be initialized with an argument
 	speed_modifier.y = 4; //Could be initialized with an argument
 
+
 	is_idle = true;
 	next_tile = 0;
 	initial_tile = iPoint(x, y); 
@@ -36,6 +37,8 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
     returning = false;
 	home_path_found = false;
 	side_fly_timer.Start(side_fly_time);
+	speed.x = 0;
+	speed.y = 0;
 }
 
 
