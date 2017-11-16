@@ -18,7 +18,7 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 
 
 	iPoint scaledw_h(1135 * 0.1, 845 * 0.1);
-	collider = App->collision->AddCollider({ 0,0,scaledw_h.x,scaledw_h.y}, COLLIDER_DEADLY, App->entities);
+	collider = App->collision->AddCollider({x, y, scaledw_h.x,scaledw_h.y}, COLLIDER_DEADLY, App->entities);
 	idle.loop = true;
 	idle.speed = 0.3; 
 	side_fly_time = 2; //Could be initialized with an argument

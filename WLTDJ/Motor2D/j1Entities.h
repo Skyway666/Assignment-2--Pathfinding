@@ -5,6 +5,7 @@
 #include "j1Module.h"
 #include "j1Collisions.h"
 #include "p2List.h"
+#include "p2PQueue.h"
 
 
 
@@ -36,6 +37,12 @@ struct Ground_Enemy_Initial_Inf
 	int jump_time;
 };
 
+struct Entity_info
+{
+	iPoint position;
+	ENTITY_TYPES type;
+};
+
 class Entity;
 
 class j1Entities : public j1Module
@@ -51,7 +58,10 @@ public:
 	bool CleanUp(); //Called when app is closed
 	void EraseEntities(); //To erase all entities left on the map
 	void OnCollision(Collider* c1, Collider* c2); //Called by the callback of "j1Collisions", should iterate over all entities and call their OnCollision method if the collider is theirs
-	bool AddEntity(ENTITY_TYPES type, int x, int y); //Adds an enemy to the list with a certain type and position (should return a pointer to the enemy... or not)
+	void AddEntity(ENTITY_TYPES type, int x, int y); //Adds an enemy to the list with a certain type and position (should return a pointer to the enemy... or not)
+	void Add_waiting_entity(ENTITY_TYPES type, int x, int y); //Adds an entity that will be spawned when "spawn_waiting_entities" is called
+	void Spawn_waiting_entities(); //Spawn entities in the waiting queue
+	void Clear_waiting_list(); //Clears waiting_queue
 	// Load / Save
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
@@ -63,6 +73,7 @@ private:
 	p2List<Entity*> entities;
 	SDL_Texture* enemy_sprites = nullptr;
 	SDL_Texture* player_sprites = nullptr;
+	p2PQueue<Entity_info> waiting_queue;
 
 	Player_Initial_Inf p_ini_inf;
 	Flying_Enemy_Initial_Inf fe_ini_inf;

@@ -36,7 +36,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-void j1Map::CreateColliders()
+void j1Map::CreateCollidersAndEnemies()
 {
 	int counter = 0;
 	
@@ -65,6 +65,14 @@ void j1Map::CreateColliders()
 			else if (id == 23)
 			{
 				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_PIT);
+			}
+			else if (id == 19)
+			{
+				App->entities->Add_waiting_entity(ENTITY_TYPES::AIR_ENEMY, x, y);
+			}
+			else if (id == 21)
+			{
+				App->entities->Add_waiting_entity(ENTITY_TYPES::GROUND_ENEMY, x, y);
 			}
 			counter++;
 		}
@@ -260,7 +268,7 @@ bool j1Map::Load(const char* file_name)
 
 	if (ret = true)
 	{
-		CreateColliders();
+		CreateCollidersAndEnemies();
 	}
 
 	

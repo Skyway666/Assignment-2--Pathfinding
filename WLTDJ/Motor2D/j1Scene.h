@@ -13,6 +13,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Entities.h"
+#include "Player.h"
 
 struct SDL_Texture;
 

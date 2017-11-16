@@ -31,9 +31,8 @@ bool j1Scene::Start()
 	//JUST A TEST
 	App->pathfinding->SetMap();	
 
+	App->entities->Spawn_waiting_entities();
 
-	//App->entities->AddEntity(ENTITY_TYPES::AIR_ENEMY, App->map->data.player_starting_value.x + 500, App->map->data.player_starting_value.y - 250);
-	App->entities->AddEntity(ENTITY_TYPES::GROUND_ENEMY, 1750, 920);
 	return true;
 }
 
@@ -73,8 +72,8 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 50;
 	
 	// Set camera to follow the player (commented in order to debug better)
-	//App->render->camera.x = -App->entities->player->position.x + 400;
-	//App->render->camera.y = -App->entities->player->position.y + 400;
+	App->render->camera.x = -App->entities->player->position.x + 400;
+	App->render->camera.y = -App->entities->player->position.y + 400;
 
 	//Camera limit (don't let player see ugly stuff)
 	if (App->render->camera.y < App->map->data.camera_y_limit)
