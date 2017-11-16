@@ -456,7 +456,8 @@ void Player::OnCollision(Collider* collider)
 			win = true;
 		}
 	}
-	else if (collider->type == COLLIDER_DEADLY && !dead && this->collider->type != COLLIDER_GOD && this->collider->type != COLLIDER_SUPER_GOD)
+	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD
+		&& this->collider->type != COLLIDER_SUPER_GOD)
 	{
 		dead = true;
 		App->entities->EraseEntities();

@@ -35,7 +35,7 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	SDL_Rect r{ 0, 0, 579, 763 };
 	SDL_Rect collider_rect{ 0, 0, r.w * scale, r.h * scale };
 
-	collider = App->collision->AddCollider(collider_rect, COLLIDER_DEADLY, App->entities);
+	collider = App->collision->AddCollider(collider_rect, COLLIDER_ENEMY_GROUND, App->entities);
 }
 
 

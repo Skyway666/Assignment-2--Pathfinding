@@ -15,6 +15,9 @@ j1Collisions::j1Collisions()
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_BONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_DEADLY] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_GROUND] = true;
+	matrix[COLLIDER_ENEMY_GROUND][COLLIDER_PATH] = true;
+	matrix[COLLIDER_ENEMY_GROUND][COLLIDER_WALKABLE] = true;
 }
 
 // Destructor
@@ -117,6 +120,9 @@ void j1Collisions::DebugDraw()
 			break;
 		case COLLIDER_DEADLY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha, true);
+			break;
+		case COLLIDER_ENEMY_GROUND: // cian
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha, true);
 			break;
 		case COLLIDER_BONE: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha, true);
