@@ -114,6 +114,7 @@ void AirEnemy::Exec_idle()
 	}
 
 	speed.x = idle_speed;
+	speed.y = 0;
 
 	
 }
