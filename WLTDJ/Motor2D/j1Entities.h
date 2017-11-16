@@ -61,7 +61,7 @@ public:
 private:
 
 	p2List<Entity*> entities;
-	SDL_Texture* sprites = nullptr;
+	SDL_Texture* enemy_sprites = nullptr;
 	SDL_Texture* player_sprites = nullptr;
 
 	Player_Initial_Inf p_ini_inf;

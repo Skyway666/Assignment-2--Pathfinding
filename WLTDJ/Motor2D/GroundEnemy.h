@@ -16,7 +16,8 @@ class GroundEnemy : public GroundEntity
 public:
 	GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf);
 	~GroundEnemy();
-	Animation idle;
+	Animation run;
+	Animation jump;
 
 	void Update(float dt);
 	void OnCollision();

@@ -4,19 +4,22 @@
 
 GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : GroundEntity(x, y)
 {
-	scale = 0.1;
 	type = ENTITY_TYPES::GROUND_ENEMY;
+	scale = 0.19;
 
-	idle.PushBack({ 0,0,1135,845 });
-	idle.PushBack({ 1135,0,1135,845 });
-	idle.PushBack({ 1135 * 2,0,1135,845 });
-	idle.PushBack({ 1135 * 3,0,1135,845 });
-	idle.PushBack({ 0,845,1135,845 });
-	idle.PushBack({ 1135,845,1135,845 });
-	idle.PushBack({ 1135 * 2,845,1135,845 });
-	idle.PushBack({ 1135 * 3,845,1135,845 });
-	idle.loop = true;
-	idle.speed = 0.3;
+	int row = 0;
+
+	// running
+	for (int i = 0; i < 8; i++)
+		run.PushBack({ 579 * i, 1732 + 763 * row, 547, 763 });
+
+	row++;
+
+	// jumping
+	for (int i = 0; i < 10; i++)
+		jump.PushBack({ 579 * i, 1732 + 763 * row, 579, 763 });
+
+	jump.loop = false;
 
 	gravity = initial_inf.gravity;
 	jump_time = initial_inf.jump_time;
@@ -29,8 +32,10 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	walk_timer.Start(walk_time);
 	idle_speed = speed_modifier.x;
 
-	iPoint scaledw_h(1135 * 0.1, 845 * 0.1);
-	collider = App->collision->AddCollider({ 0, 0, scaledw_h.x, scaledw_h.y }, COLLIDER_DEADLY, App->entities);
+	SDL_Rect r{ 0, 0, 579, 763 };
+	SDL_Rect collider_rect{ 0, 0, r.w * scale, r.h * scale };
+
+	collider = App->collision->AddCollider(collider_rect, COLLIDER_DEADLY, App->entities);
 }
 
 
@@ -47,7 +52,7 @@ void GroundEnemy::Update(float dt)
 	center.x = position.x + (1135 * scale) / 2;
 	center.y = position.y + (845 * scale) / 2;
 
-	animation = &idle;
+	animation = &run;
 	if (is_idle)
 		Exec_idle();
 	else
@@ -158,26 +163,26 @@ void GroundEnemy::Jump(float dt)
 			time = frames;
 			allowtime = false;
 			contact.y = 0;
-			//fall.Reset();
+			jump.Reset();
 		}
 
 		if (frames - time <= jump_time / (60 / App->framerate_cap) && contact.y == 0)
 		{
-			//animation = &jump;
+			animation = &jump;
 			position.y -= ceil(speed.y * dt);
 		}
 		else
 		{
 			jumping = false;
 			allowtime = true;
-			//jump.Reset();
+			jump.Reset();
 		}
 
 		if (contact.y == 1)
 		{
 			jumping = false;
 			allowtime = true;
-			//jump.Reset();
+			jump.Reset();
 		}
 	}
 }

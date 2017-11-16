@@ -40,10 +40,11 @@ bool j1Entities::Awake(pugi::xml_node& conf)
 
 	return true;
 }
+
 bool j1Entities::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
-	sprites = App->tex->Load("textures/Flying_eye_sprites.png");
+	enemy_sprites = App->tex->Load("textures/Enemy_sprites.png");
 	player_sprites = App->tex->Load("textures/SpriteSheet.png");
 
 	//Shouldn't be loading here
@@ -82,7 +83,7 @@ bool j1Entities::Update(float dt)
 	for (uint i = 0; i < entities.count(); ++i)
 	{ 
 		if (entities[i] != nullptr)
-			entities[i]->Draw(sprites);
+			entities[i]->Draw(enemy_sprites);
 	}
 
 	if (player != nullptr)
@@ -96,7 +97,8 @@ bool j1Entities::CleanUp()
 {
 	LOG("Freeing all entities");
 
-	App->tex->UnLoad(sprites);
+	App->tex->UnLoad(player_sprites);
+	App->tex->UnLoad(enemy_sprites);
 
 	for (uint i = 0; i < entities.count(); ++i)
 	{

@@ -202,9 +202,6 @@ void Player::Update(float dt)
 	contact.x = 0;
 	contact.y = 0;
 
-	// Draw everything --------------------------------------
-
-
 
 	//Put collider next to player (Should be done in "draw")
 	if (collider != nullptr)
