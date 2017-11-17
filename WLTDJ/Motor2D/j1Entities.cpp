@@ -24,21 +24,38 @@ j1Entities::~j1Entities()
 
 bool j1Entities::Awake(pugi::xml_node& conf)
 {
-	p_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
-	p_ini_inf.slide_time = conf.child("slide_time").attribute("value").as_int();
-	p_ini_inf.walljump_time = conf.child("walljump_time").attribute("value").as_int();
-	p_ini_inf.speed_modifier.x = conf.child("speed_modifier.x").attribute("value").as_float();
-	p_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
-	p_ini_inf.walljump_speed.x = conf.child("walljump_speed.x").attribute("value").as_float();
-	p_ini_inf.walljump_speed.y = conf.child("walljump_speed.y").attribute("value").as_float();
-	p_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
-	p_ini_inf.pathfinding_distance.x = conf.child("pathfinding_distance.x").attribute("value").as_float();
-	p_ini_inf.pathfinding_distance.y = conf.child("pathfinding_distance.y").attribute("value").as_float();
 
-	ge_ini_inf.jump_time = conf.child("jump_time").attribute("value").as_int();
-	ge_ini_inf.speed_modifier.x = conf.child("Genemy_speed_modifier.x").attribute("value").as_float();
-	ge_ini_inf.speed_modifier.y = conf.child("speed_modifier.y").attribute("value").as_float();
-	ge_ini_inf.gravity = conf.child("gravity").attribute("value").as_float();
+	//Load player initial variables
+	pugi::xml_node player = conf.child("player");
+
+	p_ini_inf.jump_time = player.child("jump_time").attribute("value").as_int();
+	p_ini_inf.slide_time = player.child("slide_time").attribute("value").as_int();
+	p_ini_inf.walljump_time = player.child("walljump_time").attribute("value").as_int();
+	p_ini_inf.speed_modifier.x = player.child("speed_modifier.x").attribute("value").as_float();
+	p_ini_inf.speed_modifier.y = player.child("speed_modifier.y").attribute("value").as_float();
+	p_ini_inf.walljump_speed.x = player.child("walljump_speed.x").attribute("value").as_float();
+	p_ini_inf.walljump_speed.y = player.child("walljump_speed.y").attribute("value").as_float();
+	p_ini_inf.gravity = player.child("gravity").attribute("value").as_float();
+	p_ini_inf.pathfinding_distance.x = player.child("pathfinding_distance.x").attribute("value").as_float();
+	p_ini_inf.pathfinding_distance.y = player.child("pathfinding_distance.y").attribute("value").as_float();
+
+	//Load Ground enemies initial viariables
+	pugi::xml_node ground_enemy = conf.child("ground_enemy");
+
+	ge_ini_inf.jump_time = ground_enemy.child("jump_time").attribute("value").as_int();
+	ge_ini_inf.speed_modifier.x = ground_enemy.child("Genemy_speed_modifier.x").attribute("value").as_float();
+	ge_ini_inf.speed_modifier.y = ground_enemy.child("Genemy_speed_modifier.y").attribute("value").as_float();
+	ge_ini_inf.gravity = ground_enemy.child("gravity").attribute("value").as_float();
+
+	//Load Air enemies initial variables
+	pugi::xml_node air_enemy = conf.child("air_enemy");
+
+	fe_ini_inf.agro_distance = air_enemy.child("agro_distance").attribute("value").as_int();
+	fe_ini_inf.idle_speed = air_enemy.child("idle_speed").attribute("value").as_int();
+	fe_ini_inf.side_fly_time = air_enemy.child("side_fly_time").attribute("value").as_float();
+	fe_ini_inf.speed_modifier.x = air_enemy.child("speed_modifier.x").attribute("value").as_float();
+	fe_ini_inf.speed_modifier.y = air_enemy.child("speed_modifier.y").attribute("value").as_float();
+	fe_ini_inf.tired_distance = air_enemy.child("tired_distance").attribute("value").as_int();
 
 	return true;
 }
@@ -152,7 +169,7 @@ void j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 	switch(type){
 		case ENTITY_TYPES::AIR_ENEMY: 
 		{
-			Entity* new_ent = new AirEnemy(x, y);
+			Entity* new_ent = new AirEnemy(x, y, fe_ini_inf);
 			entities.add(new_ent);
 			break;
 		}

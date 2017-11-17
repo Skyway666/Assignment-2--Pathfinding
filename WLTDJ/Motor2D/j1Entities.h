@@ -30,7 +30,11 @@ struct Player_Initial_Inf
 
 struct Flying_Enemy_Initial_Inf
 {
-
+	float side_fly_time; //Could be initialized with an argument
+	int agro_distance; //Could be initialized with an argument	
+	int tired_distance; //Could be initialized with an argument
+	int idle_speed; //Could be initialized with an argument	
+	fPoint speed_modifier; //Could be initialized with an argument //Could be initialized with an argument
 };
 struct Ground_Enemy_Initial_Inf
 {

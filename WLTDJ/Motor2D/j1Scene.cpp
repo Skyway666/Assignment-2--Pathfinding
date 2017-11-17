@@ -72,8 +72,8 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 50;
 	
 	// Set camera to follow the player (commented in order to debug better)
-	App->render->camera.x = -App->entities->player->position.x + 400;
-	App->render->camera.y = -App->entities->player->position.y + 400;
+	//App->render->camera.x = -App->entities->player->position.x + 400;
+	//App->render->camera.y = -App->entities->player->position.y + 400;
 
 	//Camera limit (don't let player see ugly stuff)
 	if (App->render->camera.y < App->map->data.camera_y_limit)

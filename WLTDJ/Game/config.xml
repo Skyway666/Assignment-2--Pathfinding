@@ -11,17 +11,32 @@
   </renderer>
   
   <entities>
-    <jump_time value =" 15"/>
-    <slide_time value =" 20"/>
-    <walljump_time value =" 20"/>
-    <speed_modifier.y value =" 18"/>
-    <speed_modifier.x value =" 10"/>
-    <walljump_speed.y value =" 15"/>
-    <walljump_speed.x value =" 10"/>
-    <gravity value =" 6"/>
-    <pathfinding_distance.x value =" 7"/>
-    <pathfinding_distance.y value =" 4"/>
-    <Genemy_speed_modifier.x value =" 7"/>
+    <player>
+      <jump_time value =" 15"/>
+      <slide_time value =" 20"/>
+      <walljump_time value =" 20"/>
+      <speed_modifier.y value =" 18"/>
+      <speed_modifier.x value =" 10"/>
+      <walljump_speed.y value =" 15"/>
+      <walljump_speed.x value =" 10"/>
+      <gravity value =" 6"/>
+    </player>
+    <ground_enemy>
+      <gravity value ="6"/>
+      <jump_time value =" 15"/>
+      <pathfinding_distance.x value =" 7"/>
+      <pathfinding_distance.y value =" 4"/>
+      <Genemy_speed_modifier.x value =" 10"/>
+      <Genemy_speed_modifier.y value =" 15"/>
+    </ground_enemy>
+    <air_enemy>
+      <side_fly_time value ="2"/>
+      <agro_distance value ="4"/>
+      <tired_distance value ="10"/>
+      <idle_speed value ="2"/>
+      <speed_modifier.x value ="4"/>
+      <speed_modifier.y value ="4"/>
+    </air_enemy>
   </entities>
   
   <window>

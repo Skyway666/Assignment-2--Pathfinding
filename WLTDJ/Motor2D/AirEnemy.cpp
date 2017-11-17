@@ -2,7 +2,7 @@
 
 
 
-AirEnemy::AirEnemy(int x, int y): Entity(x,y)
+AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x,y)
 {
 	scale = 0.07;
 	type = ENTITY_TYPES::AIR_ENEMY;
@@ -22,12 +22,12 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 	idle.loop = true;
 	idle.speed = 0.3; 
 
-	side_fly_time = 2; //Could be initialized with an argument
-	agro_distance = 4; //Could be initialized with an argument	
-	tired_distance = 10; //Could be initialized with an argument
-	idle_speed = 2; //Could be initialized with an argument	
-	speed_modifier.x = 4; //Could be initialized with an argument
-	speed_modifier.y = 4; //Could be initialized with an argument
+	side_fly_time = initial_inf.side_fly_time; //Could be initialized with an argument
+	agro_distance = initial_inf.agro_distance; //Could be initialized with an argument	
+	tired_distance = initial_inf.tired_distance; //Could be initialized with an argument
+	idle_speed = initial_inf.idle_speed; //Could be initialized with an argument	
+	speed_modifier.x = initial_inf.speed_modifier.x; //Could be initialized with an argument
+	speed_modifier.y = initial_inf.speed_modifier.y; //Could be initialized with an argument
 
 
 	is_idle = true;

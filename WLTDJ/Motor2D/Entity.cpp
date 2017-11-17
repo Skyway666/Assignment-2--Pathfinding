@@ -21,8 +21,6 @@ const Collider* Entity::GetCollider() const
 
 void Entity::Draw(SDL_Texture* sprites)
 {
-	if(animation == nullptr)
-		App->render->Blit(sprites, position.x, position.y, scale);
-	else
+	  if(animation != nullptr)
 		App->render->Blit(sprites, position.x, position.y, scale, &(animation->GetCurrentFrame()), flip);
 }
