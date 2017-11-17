@@ -19,7 +19,7 @@
     <walljump_speed.y value =" 15"/>
     <walljump_speed.x value =" 10"/>
     <gravity value =" 6"/>
-    <pathfinding_distance.x value =" 7"/>
+    <pathfinding_distance.x value =" 10"/>
     <pathfinding_distance.y value =" 4"/>
     <Genemy_speed_modifier.x value =" 7"/>
   </entities>

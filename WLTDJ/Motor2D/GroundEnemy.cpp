@@ -172,7 +172,7 @@ void GroundEnemy::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_PATH)
 		is_idle = false;
-	else if (collider->type == COLLIDER_WALKABLE && contact.y == 1)
+	else if (collider->type == COLLIDER_WALKABLE)
 		is_idle = true;
 }
 

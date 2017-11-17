@@ -303,9 +303,9 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 				else
 				{
 					if (entity->flip)
-						entity->position.x += entity->speed_modifier.x * dt;
+						entity->position.x += App->map->data.tile_width / 2;
 					else if (!entity->flip)
-						entity->position.x -= entity->speed_modifier.x * dt;
+						entity->position.x -= App->map->data.tile_width / 2;
 				}
 			}
 		}
