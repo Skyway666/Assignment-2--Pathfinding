@@ -28,6 +28,7 @@ public:
 	float jumping_multiplier = 1;
 	bool front_of_pit = false;
 	bool turn = false;
+	uint height;
 
 private:
 

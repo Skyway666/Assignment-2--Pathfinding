@@ -42,6 +42,8 @@ void j1Map::CreateCollidersAndEnemies()
 	
 	    App->collision->AddCollider({data.bone_position.x, data.bone_position.y,bone_animation.GetCurrentFrame().w, bone_animation.GetCurrentFrame().h}, COLLIDER_BONE);
 
+		uint height = 0; // Used to calculate wall height
+
 		while (counter < data.layer_array.At(1)->data->height*data.layer_array.At(1)->data->width)
 		{
 			int id = data.layer_array.At(1)->data->data[counter];
@@ -53,13 +55,15 @@ void j1Map::CreateCollidersAndEnemies()
 			
 			MapToWorld(&x, &y);
 
-			// To calculate pit lenght:
-			uint lenght = 1;
+			uint lenght = 1; // Used to calculate pit lenght
+
+			if (counter % data.width == 0)
+				height++;
 
 			//Now they are in pixels
 			if (id == 11)
 			{ 
-				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL);
+				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL, (j1Module*)nullptr, 1, height);
 
 				if (data.layer_array.At(1)->data->data[counter - data.width] != 11) // Set Walkable areas
 					App->collision->AddCollider({ x, y - data.tilesets.At(0)->data->tile_height, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALKABLE);
