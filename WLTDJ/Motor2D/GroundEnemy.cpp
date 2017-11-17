@@ -49,62 +49,85 @@ GroundEnemy::~GroundEnemy()
 
 void GroundEnemy::Update(float dt, bool do_logic)
 {
-	if (moving)
+	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
-		{
-			position.x = App->entities->player->position.x;
-			position.y = App->entities->player->position.y;
-		}
-
-		frames++;
-		animation = &run;
-
-		if (is_idle)
-			Exec_idle();
-		else
-			Exec_atack();
-
-		if (speed.x < 0)
-			flip = true;
-		else if (speed.x > 0)
-			flip = false;
-
-		if (jumping)
-			position.x += speed.x * jumping_multiplier * dt;
-		else
-			position.x += speed.x * dt;
-
-		if (contact.y == 1 && contact.x != 0)
-			jumping = true;
-
-		Jump(dt);
-
-		// Simulate gravity
-		if (contact.y != 1)
-			position.y += ceil(gravity * dt);
-
-		// Make collider follow enemy
-		collider->SetPos(position.x, position.y);
-
-		contact.x = 0;
-		contact.y = 0;
+		position.x = App->entities->player->position.x;
+		position.y = App->entities->player->position.y;
 	}
+	speed.x = speed_modifier.x;
+	frames++;
+	animation = &run;
+
+	if (contact.y == 1 && contact.x != 0)
+	{
+		jumping = true;
+		turn = true;
+	}
+
+	if (is_idle)
+		Exec_idle();
+	else if (!is_idle)
+		Exec_attack();
+
+	if (front_of_pit && !is_idle)
+		speed.x = 0;
+
+	if (jumping && !is_idle)
+		position.x += speed.x * jumping_multiplier * dt;
+	else if (jumping && is_idle)
+		position.x += speed.x * jumping_multiplier * dt;
+	else if (!is_idle)
+		position.x += speed.x * dt * player_pos;
+	else
+		position.x += speed.x * dt;
+
+	turn = false;
+
+	Jump(dt);
+
+	// Simulate gravity
+	if (contact.y != 1)
+		position.y += ceil(gravity * dt);
+
+	// Make collider follow enemy
+	collider->SetPos(position.x, position.y);
+
+	contact.x = 0;
+	contact.y = 0;
 }
 
 void GroundEnemy::Exec_idle()
 {
-	if (walk_timer.IsOver() || contact.x != 0 || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	if (walk_timer.IsOver() || turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_pit)
 	{
 		idle_speed = -idle_speed;
 		walk_timer.Start(walk_time);
 	}
 
 	speed.x = idle_speed;
+
+	if (speed.x < 0)
+		flip = true;
+	else if (speed.x > 0)
+		flip = false;
+
+	front_of_pit = false;
 }
 
-void GroundEnemy::Exec_atack()
+void GroundEnemy::Exec_attack()
 {
+	if (App->entities->player->collider != nullptr)
+	{
+		if (position.x - App->entities->player->position.x >= 0)
+			player_pos = -1;
+		else
+			player_pos = 1;
+	}
+
+	if (player_pos == -1)
+		flip = true;
+	else if (player_pos == 1)
+		flip = false;
 
 }
 
@@ -144,10 +167,10 @@ void GroundEnemy::Jump(float dt)
 
 void GroundEnemy::OnCollision(Collider* collider)
 {
-	//if (collider->type == COLLIDER_PATH)
-	//	moving = false;
-	//else if (collider->type == COLLIDER_WALKABLE)
-	//	moving = true;
+	if (collider->type == COLLIDER_PATH)
+		is_idle = false;
+	else if (collider->type == COLLIDER_WALKABLE)
+		is_idle = true;
 }
 
 void GroundEnemy::ManagePhysics(float dt)

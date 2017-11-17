@@ -231,10 +231,7 @@ void Collider::WillCollidePit(GroundEntity* entity, float dt)
 		}
 		else if (lenght >= 4)
 		{
-			if (!entity->flip)
-				entity->contact.x = 1;
-			else if (!entity->flip)
-				entity->contact.x = 2;
+			entity->front_of_pit = true;
 		}
 	}
 }
