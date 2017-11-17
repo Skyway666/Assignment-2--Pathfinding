@@ -5,7 +5,7 @@
 GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : GroundEntity(x, y)
 {
 	type = ENTITY_TYPES::GROUND_ENEMY;
-	scale = 0.19;
+	scale = 0.15;
 
 	position.x = x;
 	position.y = y;
@@ -116,7 +116,7 @@ void GroundEnemy::Exec_idle()
 
 void GroundEnemy::Exec_attack()
 {
-	if (App->entities->player->collider != nullptr)
+	if (contact.y == 1)
 	{
 		if (position.x - App->entities->player->position.x >= 0)
 			player_pos = -1;
@@ -176,5 +176,5 @@ void GroundEnemy::OnCollision(Collider* collider)
 void GroundEnemy::ManagePhysics(float dt)
 {
 	App->collision->ManageGroundCollisions((GroundEntity*)this, dt);
-	App->collision->EnemyJump((GroundEntity*)this, dt);
+	App->collision->EnemyJump(this, dt);
 }

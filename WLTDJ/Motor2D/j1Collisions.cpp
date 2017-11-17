@@ -6,6 +6,7 @@
 #include "Pathfinding.h"
 #include "j1Entities.h"
 #include "Player.h"
+#include "GroundEnemy.h"
 
 j1Collisions::j1Collisions()
 {
@@ -212,7 +213,7 @@ void Collider::WillCollide(GroundEntity* entity, float dt)
 		entity->contact.y = 2;
 }
 
-void Collider::WillCollidePit(GroundEntity* entity, float dt)
+void Collider::WillCollidePit(GroundEnemy* entity, float dt)
 {
 	const SDL_Rect r = entity->collider->rect;
 
@@ -236,7 +237,7 @@ void Collider::WillCollidePit(GroundEntity* entity, float dt)
 	}
 }
 
-void Collider::WillCollideWall(GroundEntity* entity, float dt)
+void Collider::WillCollideWall(GroundEnemy* entity, float dt)
 {
 	const SDL_Rect r = entity->collider->rect;
 
@@ -308,7 +309,7 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 	}
 }
 
-void j1Collisions::EnemyJump(GroundEntity* entity, float dt)
+void j1Collisions::EnemyJump(GroundEnemy* entity, float dt)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{

@@ -30,6 +30,7 @@ enum COLLIDER_TYPE
 };
 
 class Player;
+class GroundEnemy;
 
 struct Collider
 {
@@ -60,8 +61,8 @@ struct Collider
 
 	bool CheckCollision(const SDL_Rect& r) const;
 	void WillCollide(GroundEntity* entity, float dt); // Detects if the entity is going to collide and returns the corresponding contact
-	void WillCollidePit(GroundEntity* entity, float dt); // Enemy jumps if not falling and is on top of a pit
-	void WillCollideWall(GroundEntity* entity, float dt); // Enemy jumps if about to collide with a wall
+	void WillCollidePit(GroundEnemy* entity, float dt); // Enemy jumps if not falling and is on top of a pit
+	void WillCollideWall(GroundEnemy* entity, float dt); // Enemy jumps if about to collide with a wall
 };
 
 class j1Collisions : public j1Module
@@ -78,7 +79,7 @@ public:
 
 	bool WillCollideAfterSlide(Player* entity, float dt) const; // Checks if any rectangle would be colliding with the ceiling
 	void ManageGroundCollisions(GroundEntity* entity, float dt); // Allows ground entities to react to environment's walls
-	void EnemyJump(GroundEntity* entity, float dt); // To detect if the enemy has to jump
+	void EnemyJump(GroundEnemy* entity, float dt); // To detect if the enemy has to jump
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr, uint lenght = 1);
 
 	void DebugDraw();

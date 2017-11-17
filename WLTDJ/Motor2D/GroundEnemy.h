@@ -25,6 +25,10 @@ public:
 	void Exec_attack();
 	void ManagePhysics(float dt);
 
+	float jumping_multiplier = 1;
+	bool front_of_pit = false;
+	bool turn = false;
+
 private:
 
 	void Jump(float dt);

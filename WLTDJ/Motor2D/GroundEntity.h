@@ -15,10 +15,5 @@ public:
 	int time = 0;
 	bool allowtime = true;
 
-	// should not be here:
-	float jumping_multiplier = 1;
-	bool front_of_pit = false;
-	bool turn = false;
-
 	virtual void Jump(float dt) {};
 };
