@@ -38,6 +38,15 @@ void Player::Update(float dt)
 	center.x = position.x + (481 * scale) / 2;
 	center.y = position.y + (547 * scale) / 2;
 
+	idle.speed = 0.8 * (60 / App->framerate_cap);
+	run.speed = 0.4 * (60 / App->framerate_cap);
+	jump.speed = 0.4 * (60 / App->framerate_cap);
+	fall.speed = 0.2 * (60 / App->framerate_cap);
+	death.speed = 0.8 * (60 / App->framerate_cap);
+	slide.speed = 0.4 * (60 / App->framerate_cap);
+	wallslideright.speed = 0.1 * (60 / App->framerate_cap);
+	wallslideleft.speed = 0.1 * (60 / App->framerate_cap);
+
 	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
 

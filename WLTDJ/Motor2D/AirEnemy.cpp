@@ -20,7 +20,6 @@ AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x
 	iPoint scaledw_h(1135 * scale, 845 * scale);
 	collider = App->collision->AddCollider({x, y, scaledw_h.x,scaledw_h.y}, COLLIDER_DEADLY, App->entities);
 	idle.loop = true;
-	idle.speed = 0.3; 
 
 	side_fly_time = initial_inf.side_fly_time; //Could be initialized with an argument
 	agro_distance = initial_inf.agro_distance; //Could be initialized with an argument	
@@ -52,6 +51,8 @@ void AirEnemy::Update(float dt, bool do_logic)
 	//Maybe should be a function
 	center.x = position.x + (1135 * scale)/2;
 	center.y = position.y + (845 * scale)/2;
+
+	idle.speed = 0.3 * (60 / App->framerate_cap);
 
     animation = &idle;
 	if (is_idle)

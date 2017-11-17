@@ -57,6 +57,9 @@ void GroundEnemy::Update(float dt, bool do_logic)
 	speed.x = speed_modifier.x;
 	frames++;
 	animation = &run;
+
+	jump.speed = 0.4 * (60 / App->framerate_cap);
+	run.speed = 0.4 * (60 / App->framerate_cap);
 	
 	if (contact.x != 0 && !is_idle)
 		front_of_unwalkable = true;
