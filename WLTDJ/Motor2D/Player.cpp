@@ -69,6 +69,10 @@ void Player::Update(float dt)
 		{
 			position.x = App->map->data.player_starting_value.x;
 			position.y = App->map->data.player_starting_value.y - 5;
+			center.x = position.x + (481 * scale) / 2;
+			center.y = position.y + (547 * scale) / 2;
+			App->entities->EraseEntities();
+			App->entities->Spawn_waiting_entities();
 			death.Reset();
 			dead = false;
 		}
@@ -157,12 +161,7 @@ void Player::Update(float dt)
 		{
 			if (App->map->map != 0)
 			{
-				App->map->map = 0;
-				App->collision->Erase_Non_Player_Colliders();
-				App->map->CleanUp();
-				App->map->Load("Level 1 final.tmx");
-				App->pathfinding->SetMap();
-
+				App->scene->Change_to_map(0);
 			}
 			position.x = App->map->data.player_starting_value.x;
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
@@ -458,9 +457,9 @@ void Player::OnCollision(Collider* collider)
 	}
 	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD
 		&& this->collider->type != COLLIDER_SUPER_GOD)
-	{
+	{		
+
 		dead = true;
-		App->entities->EraseEntities();
-		App->entities->Spawn_waiting_entities();
+
 	}
 }
