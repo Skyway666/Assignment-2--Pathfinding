@@ -15,5 +15,7 @@ public:
 	int time = 0;
 	bool allowtime = true;
 
+	float jumping_multiplier = 1; // should not be here
+
 	virtual void Jump(float dt) {};
 };

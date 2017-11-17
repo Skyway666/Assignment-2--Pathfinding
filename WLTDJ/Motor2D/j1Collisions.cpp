@@ -219,7 +219,23 @@ void Collider::WillCollidePit(GroundEntity* entity, float dt)
 	// Will collide ground && contact.y == 1
 	if ((r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w) && entity->contact.y == 1)
 	{
-		entity->jumping = true;
+		if (lenght < 4)
+		{
+			// Prevent jumps upon landing
+			if ((!entity->flip && entity->collider->rect.x + entity->collider->rect.w / 2 > rect.x) || (entity->flip
+				&& entity->collider->rect.x + entity->collider->rect.w / 2 < rect.x + rect.w))
+			{
+				entity->jumping = true;
+				entity->jumping_multiplier = lenght / 3;
+			}
+		}
+		else if (lenght >= 4)
+		{
+			if (!entity->flip)
+				entity->contact.x = 1;
+			else if (!entity->flip)
+				entity->contact.x = 2;
+		}
 	}
 }
 

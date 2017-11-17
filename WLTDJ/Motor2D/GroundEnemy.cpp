@@ -7,6 +7,9 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	type = ENTITY_TYPES::GROUND_ENEMY;
 	scale = 0.19;
 
+	position.x = x;
+	position.y = y;
+
 	int row = 0;
 
 	// running
@@ -33,7 +36,7 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	idle_speed = speed_modifier.x;
 
 	SDL_Rect r{ 0, 0, 579, 763 };
-	SDL_Rect collider_rect{ 0, 0, r.w * scale, r.h * scale };
+	SDL_Rect collider_rect{ 0, 0, (r.w - 100) * scale, (r.h - 40) * scale };
 
 	collider = App->collision->AddCollider(collider_rect, COLLIDER_ENEMY_GROUND, App->entities);
 }
@@ -48,6 +51,12 @@ void GroundEnemy::Update(float dt, bool do_logic)
 {
 	if (moving)
 	{
+		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+		{
+			position.x = App->entities->player->position.x;
+			position.y = App->entities->player->position.y;
+		}
+
 		frames++;
 		animation = &run;
 
@@ -61,7 +70,10 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		else if (speed.x > 0)
 			flip = false;
 
-		position.x += speed.x * dt;
+		if (jumping)
+			position.x += speed.x * jumping_multiplier * dt;
+		else
+			position.x += speed.x * dt;
 
 		if (contact.y == 1 && contact.x != 0)
 			jumping = true;
@@ -82,7 +94,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 void GroundEnemy::Exec_idle()
 {
-	if (walk_timer.IsOver() || contact.x != 0)
+	if (walk_timer.IsOver() || contact.x != 0 || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
 	{
 		idle_speed = -idle_speed;
 		walk_timer.Start(walk_time);
@@ -132,10 +144,10 @@ void GroundEnemy::Jump(float dt)
 
 void GroundEnemy::OnCollision(Collider* collider)
 {
-	if (collider->type == COLLIDER_PATH)
-		moving = false;
-	else if (collider->type == COLLIDER_WALKABLE)
-		moving = true;
+	//if (collider->type == COLLIDER_PATH)
+	//	moving = false;
+	//else if (collider->type == COLLIDER_WALKABLE)
+	//	moving = true;
 }
 
 void GroundEnemy::ManagePhysics(float dt)
