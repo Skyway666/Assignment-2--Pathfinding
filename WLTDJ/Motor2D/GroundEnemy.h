@@ -26,9 +26,9 @@ public:
 	void ManagePhysics(float dt);
 
 	float jumping_multiplier = 1;
-	bool front_of_pit = false;
+	bool front_of_unwalkable = false;
 	bool turn = false;
-	uint height;
+	uint height; // To determine wether if the enemy jumps upon reching a wall or not
 
 private:
 
@@ -40,5 +40,4 @@ private:
 	p2DynArray<iPoint>* path_to_follow; // Path that the enemy must follow
 	int idle_speed; // speed at which the enemy idles
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
-	//bool front_of_pit = false; // So it doesn't follow the player if the pit is too large
 };

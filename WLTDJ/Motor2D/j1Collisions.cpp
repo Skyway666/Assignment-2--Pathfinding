@@ -155,7 +155,7 @@ bool j1Collisions::CleanUp()
 	return true;
 }
 
-Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback, uint lenght, uint height)
+Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback, uint lenght, uint height, uint column_height)
 {
 	Collider* ret = nullptr;
 
@@ -163,7 +163,7 @@ Collider* j1Collisions::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module*
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type, callback, lenght, height);
+			ret = colliders[i] = new Collider(rect, type, callback, lenght, height, column_height);
 			break;
 		}
 	}
@@ -189,14 +189,9 @@ void j1Collisions::Erase_Non_Player_Colliders()
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
 	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x && r.x < rect.x + rect.w)
-	{
 		return true;
-	}
-
 	else
-	{
 		return false;
-	}
 }
 
 void Collider::WillCollide(GroundEntity* entity, float dt)
@@ -208,7 +203,15 @@ void Collider::WillCollide(GroundEntity* entity, float dt)
 	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - ceil(entity->speed_modifier.x * dt) && r.x < rect.x + rect.w) // Will collide right
 		entity->contact.x = 2;
 	if (r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
+	{
 		entity->contact.y = 1;
+
+		if (entity->type == GROUND_ENEMY)
+		{
+			GroundEnemy* enemy = (GroundEnemy*)entity;
+			enemy->height = height; // Set height to ground enemies
+		}
+	}
 	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + ceil(entity->speed_modifier.y * dt) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
 		entity->contact.y = 2;
 }
@@ -232,7 +235,7 @@ void Collider::WillCollidePit(GroundEnemy* entity, float dt)
 		}
 		else if (lenght >= 4)
 		{
-			entity->front_of_pit = true;
+			entity->front_of_unwalkable = true;
 		}
 	}
 }
@@ -241,12 +244,12 @@ void Collider::WillCollideWall(GroundEnemy* entity, float dt)
 {
 	const SDL_Rect r = entity->collider->rect;
 
-	// (Will collide left || Will collide right) && contact.y == 1
-	if (((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width && r.x + r.w > rect.x)
-		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width && r.x < rect.x + rect.w))
-		&& entity->contact.y == 1)
+	// Will collide left or Will collide right and contact.y == 1
+	if ((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width / 2 && r.x + r.w > rect.x)
+		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width / 2 && r.x < rect.x + rect.w))
 	{
-		entity->jumping = true;
+		if (column_height <= 2 && entity->height - height <= 2 && entity->height - height > 0 && entity->contact.y == 1) // Check if height is bigger than 0 just in case
+			entity->jumping = true;
 	}
 }
 
@@ -300,9 +303,9 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 				else
 				{
 					if (entity->flip)
-						entity->position.x += entity->speed_modifier.x * dt;
+						entity->position.x += App->map->data.tile_width / 2;
 					else if (!entity->flip)
-						entity->position.x -= entity->speed_modifier.x * dt;
+						entity->position.x -= App->map->data.tile_width / 2;
 				}
 			}
 		}

@@ -57,10 +57,12 @@ void GroundEnemy::Update(float dt, bool do_logic)
 	speed.x = speed_modifier.x;
 	frames++;
 	animation = &run;
+	
+	if (contact.x != 0 && !is_idle)
+		front_of_unwalkable = true;
 
 	if (contact.y == 1 && contact.x != 0)
 	{
-		jumping = true;
 		turn = true;
 	}
 
@@ -69,7 +71,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 	else if (!is_idle)
 		Exec_attack();
 
-	if (front_of_pit && !is_idle)
+	if (front_of_unwalkable && !is_idle)
 		speed.x = 0;
 
 	if (jumping && !is_idle)
@@ -94,11 +96,12 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 	contact.x = 0;
 	contact.y = 0;
+	front_of_unwalkable = false;
 }
 
 void GroundEnemy::Exec_idle()
 {
-	if (walk_timer.IsOver() || turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_pit)
+	if (walk_timer.IsOver() || turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_unwalkable)
 	{
 		idle_speed = -idle_speed;
 		walk_timer.Start(walk_time);
@@ -111,7 +114,7 @@ void GroundEnemy::Exec_idle()
 	else if (speed.x > 0)
 		flip = false;
 
-	front_of_pit = false;
+	front_of_unwalkable = false;
 }
 
 void GroundEnemy::Exec_attack()

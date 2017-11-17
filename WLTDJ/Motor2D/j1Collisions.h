@@ -37,16 +37,18 @@ struct Collider
 	SDL_Rect rect;
 	uint lenght = 1; // For pits
 	uint height = 1; // For walls
+	uint column_height; // For walls
 	bool to_delete = false;
 	COLLIDER_TYPE type;
 	j1Module* callback;
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback, uint lenght, uint height) :
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback, uint lenght, uint height, uint column_height) :
 		rect(rectangle),
 		type(type),
 		callback(callback),
 		lenght(lenght),
-		height(height)
+		height(height),
+		column_height(column_height)
 	{}
 
 	void SetPos(int x, int y)
@@ -82,7 +84,7 @@ public:
 	bool WillCollideAfterSlide(Player* entity, float dt) const; // Checks if any rectangle would be colliding with the ceiling
 	void ManageGroundCollisions(GroundEntity* entity, float dt); // Allows ground entities to react to environment's walls
 	void EnemyJump(GroundEnemy* entity, float dt); // To detect if the enemy has to jump
-	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr, uint lenght = 1, uint height = 1);
+	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr, uint lenght = 1, uint height = 1, uint column_height = 1);
 
 	void DebugDraw();
 
