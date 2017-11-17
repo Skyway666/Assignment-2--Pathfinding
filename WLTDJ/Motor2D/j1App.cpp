@@ -95,7 +95,6 @@ bool j1App::Awake()
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
 		config_framerate_cap = app_config.attribute("framerate_cap").as_uint();
-		framerate_cap = config_framerate_cap;
 	}
 
 	if(ret == true)
@@ -210,10 +209,9 @@ void j1App::FinishUpdate()
 	float seconds_since_startup = startup_time.ReadSec();
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
-
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	sprintf_s(title, 256, "Who let the dog jump? | FPS: %i | Av. FPS: %.2f | Last Frame Ms: %02u | cap to 30 FPS: %s | Vsync: %s ",
+		frames_on_last_update, avg_fps, last_frame_ms, cap, Vsync);
 	App->win->SetTitle(title);
 
 	timer.Start();

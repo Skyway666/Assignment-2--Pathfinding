@@ -48,9 +48,15 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
 		if (App->framerate_cap != 30)
+		{
 			App->framerate_cap = 30;
+			App->cap = "On";
+		}
 		else
+		{
 			App->framerate_cap = App->config_framerate_cap;
+			App->cap = "Off";
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
