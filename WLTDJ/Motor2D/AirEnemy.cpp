@@ -4,7 +4,7 @@
 
 AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 {
-	scale = 0.1;
+	scale = 0.07;
 	type = ENTITY_TYPES::AIR_ENEMY;
 
 	idle.PushBack({ 0,0,1135,845 });
@@ -17,7 +17,7 @@ AirEnemy::AirEnemy(int x, int y): Entity(x,y)
 	idle.PushBack({ 1135 * 3,845,1135,845 });
 
 
-	iPoint scaledw_h(1135 * 0.1, 845 * 0.1);
+	iPoint scaledw_h(1135 * scale, 845 * scale);
 	collider = App->collision->AddCollider({x, y, scaledw_h.x,scaledw_h.y}, COLLIDER_DEADLY, App->entities);
 	idle.loop = true;
 	idle.speed = 0.3; 
