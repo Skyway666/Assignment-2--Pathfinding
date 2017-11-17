@@ -26,7 +26,7 @@
     <ground_enemy>
       <gravity value ="6"/>
       <jump_time value =" 15"/>
-      <Genemy_speed_modifier.x value ="8"/>
+      <Genemy_speed_modifier.x value ="7"/>
       <Genemy_speed_modifier.y value =" 15"/>
     </ground_enemy>
     <air_enemy>
