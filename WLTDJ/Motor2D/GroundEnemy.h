@@ -21,8 +21,7 @@ public:
 
 	void Update(float dt, bool do_logic);
 	void OnCollision(Collider* collider);
-	void Exec_idle();
-	void Exec_attack();
+
 	void ManagePhysics(float dt);
 
 	float jumping_multiplier = 1;
@@ -33,11 +32,12 @@ public:
 private:
 
 	void Jump(float dt);
+	void Exec_idle();
+	void Exec_attack();
 
 	float walk_time; // Time that the enemy spends walking from one side to the other
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
 	Cronometer walk_timer; // Timer to mesure when enemy should be moving
-	p2DynArray<iPoint>* path_to_follow; // Path that the enemy must follow
 	int idle_speed; // speed at which the enemy idles
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
 };

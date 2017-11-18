@@ -27,7 +27,6 @@ private:
 	int idle_speed; //speed at which the enemy idles	
 	bool returning; //Bool to know if enemy should be returning to the starting point
 	bool home_path_found;//Bool to find path home just one time
-	Cronometer do_logic; //Should be a boolean passed in the update
 
     float side_fly_time; //Time that the enemy spends flying from one side to the other
 	int agro_distance; //Distance at which enemy starts following the player(IN TILES)
