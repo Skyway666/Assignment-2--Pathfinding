@@ -25,7 +25,6 @@ public:
 
 	void ManagePhysics(float dt);
 
-	float jumping_multiplier = 1;
 	bool front_of_unwalkable = false;
 	bool turn = false;
 	uint height; // To determine wether if the enemy jumps upon reching a wall or not
@@ -39,7 +38,6 @@ private:
 	void Exec_attack();
 
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
-	int idle_speed; // speed at which the enemy idles
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
 	int last_contact_y;
 };

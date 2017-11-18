@@ -23,7 +23,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	App->map->Load("Level 1.2 provisional.tmx");
+	App->map->Load("Test Level 2.tmx");
 	App->map->map = 0;
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 
@@ -78,8 +78,8 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 50 * dt;
 	
 	// Set camera to follow the player (commented in order to debug better)
-	//App->render->camera.x = -App->entities->player->position.x + 400;
-	//App->render->camera.y = -App->entities->player->position.y + 400;
+	App->render->camera.x = -App->entities->player->position.x + 400;
+	App->render->camera.y = -App->entities->player->position.y + 400;
 
 	//Camera limit (don't let player see ugly stuff)
 	if (App->render->camera.y < App->map->data.camera_y_limit)

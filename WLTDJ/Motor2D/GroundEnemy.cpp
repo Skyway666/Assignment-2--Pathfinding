@@ -31,7 +31,6 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 
 	speed.y = speed_modifier.y;
 	speed.x = speed_modifier.x;
-	idle_speed = speed_modifier.x;
 
 	SDL_Rect r{ 0, 0, 579, 763 };
 	SDL_Rect collider_rect{ 0, 0, (r.w - 100) * scale, (r.h - 40) * scale };
@@ -55,20 +54,27 @@ void GroundEnemy::Update(float dt, bool do_logic)
 	
 	frames++;
 	animation = &run;
-	speed.x = speed_modifier.x;
 	jump.speed = 0.4 * dt;
 	run.speed = 0.4 * dt;
+
+	if (contact.y == 1)
+	{
+		if (position.x - App->entities->player->position.x >= 0)
+			player_pos = -1;
+		else
+			player_pos = 1;
+	}
+
+	if (speed.x > 0)
+		speed.x = speed_modifier.x;
+	else if (speed.x < 0)
+		speed.x = -speed_modifier.x;
 
 	if (last_contact_y != 1 && contact.y == 1)
 		just_landed = true;
 
-	if (contact.x != 0 && !is_idle)
-		front_of_unwalkable = true;
-
 	if (contact.y == 1 && contact.x != 0)
-	{
 		turn = true;
-	}
 
 	if (is_idle)
 		Exec_idle();
@@ -77,18 +83,29 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 	if (front_of_unwalkable && !is_idle)
 		speed.x = 0;
-	if (front_of_unwalkable && !is_idle && (((contact.x == 1 && player_pos == -1) || (contact.x == 2 && player_pos == 1))))
-		speed.x = 0;
 
 	if (!jumping && contact.y == 1)
 		jump_x = 0;
+
 	if (jump_x != 0)
-		speed.x = jump_x;
+	{
+		if (speed.x > 0)
+			speed.x = jump_x;
+		else
+			speed.x = -jump_x;
+	}
+
+	if (!is_idle)
+	{
+		if (speed.x > 0 && player_pos == -1)
+			speed.x = -speed.x;
+		else if (speed.x < 0 && player_pos == 1)
+			speed.x = -speed.x;
+	}
+		
 
 	if (jumping)
-		position.x += speed.x * jumping_multiplier * dt * player_pos;
-	else if (!is_idle)
-		position.x += speed.x * dt * player_pos;
+		position.x += speed.x * dt;
 	else
 		position.x += speed.x * dt;
 
@@ -111,12 +128,16 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 void GroundEnemy::Exec_idle()
 {
-	player_pos = 1;
-
 	if (turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_unwalkable)
-		idle_speed = -idle_speed;
+		speed.x = -speed.x;
 
-	speed.x = idle_speed;
+	if (front_of_unwalkable && speed.x == 0)
+	{
+		if (player_pos == 1)
+			speed.x = -speed_modifier.x;
+		else
+			speed.x = speed_modifier.x;
+	}
 
 	if (speed.x < 0)
 		flip = true;
@@ -128,19 +149,10 @@ void GroundEnemy::Exec_idle()
 
 void GroundEnemy::Exec_attack()
 {
-	if (contact.y == 1)
-	{
-		if (position.x - App->entities->player->position.x >= 0)
-			player_pos = -1;
-		else
-			player_pos = 1;
-	}
-
 	if (player_pos == -1)
 		flip = true;
 	else if (player_pos == 1)
 		flip = false;
-
 }
 
 void GroundEnemy::Jump(float dt)
