@@ -12,13 +12,14 @@ Pathfinding::~Pathfinding()
 }
 
 void Pathfinding::CreatePath(iPoint origin, iPoint destination) 
-{
+{		
+	last_path.Clear();
+	frontier.Clear();
+	visited.clear();
+	breadcrumbs.clear();
 	if(IsWalkable(origin) && IsWalkable(destination))
 	{ 
-		last_path.Clear();
-		frontier.Clear();
-		visited.clear();
-		breadcrumbs.clear();
+
 		iPoint curr = origin;
 		frontier.Push(curr, curr.DistanceManhattan(destination));
     

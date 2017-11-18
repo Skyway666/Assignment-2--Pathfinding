@@ -165,7 +165,7 @@ void AirEnemy::Find_path_player()
 		path_to_follow.PushBack(*App->pathfinding->GetLastPath()->At(i));
 	}
 	next_tile = 0;
-
+	if(App->collision->debug == true)
 	App->pathfinding->DebugDraw();
 }
 
