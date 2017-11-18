@@ -224,4 +224,13 @@ void AirEnemy::Save(pugi::xml_node& data)
 	data.append_attribute("y") = position.y;
 	data.append_attribute("returning") = returning;
 	data.append_attribute("is_idle") = is_idle;
+	data.append_attribute("idle_speed") = idle_speed;
+}
+void AirEnemy::Load(pugi::xml_node& data)
+{
+	position.x = data.attribute("x").as_int();
+	position.y = data.attribute("y").as_int();
+	returning = data.attribute("returning").as_bool();
+	is_idle = data.attribute("is_idle").as_bool();
+	idle_speed = data.attribute("idle_speed").as_int();
 }

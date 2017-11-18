@@ -208,3 +208,7 @@ void GroundEnemy::Save(pugi::xml_node& data)
 {
 
 }
+void GroundEnemy::Load(pugi::xml_node& data)
+{
+
+}

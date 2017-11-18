@@ -21,6 +21,7 @@ public:
 	void ManagePhysics(float dt);
 	void OnCollision(Collider* collider);
 	void Save(pugi::xml_node& data);
+	void Load(pugi::xml_node& data);
 	
 	float player_x_displacement; //Used by parallax
 

@@ -9,9 +9,11 @@
 	<:anonymous />
 	<entities>
 		<player x="140" y="812" map="0" />
-		<air_enemy x="1580.44165" y="408" returning="false" is_idle="true" />
-		<air_enemy x="2328.44116" y="408" returning="false" is_idle="true" />
-		<air_enemy x="764.441833" y="544" returning="false" is_idle="true" />
+		<enemies>
+			<air_enemy x="1448.11206" y="408" returning="false" is_idle="true" idle_speed="-2" />
+			<air_enemy x="2196.11182" y="408" returning="false" is_idle="true" idle_speed="-2" />
+			<air_enemy x="632.111877" y="544" returning="false" is_idle="true" idle_speed="-2" />
+		</enemies>
 	</entities>
 	<:anonymous />
 	<renderer />

@@ -482,3 +482,9 @@ void Player::Save(pugi::xml_node& data)
 	data.append_attribute("y") = position.y;
 	data.append_attribute("map") = App->map->map;
 }
+
+void Player::Load(pugi::xml_node& data)
+{
+	position.x = data.attribute("x").as_float();
+	position.y = data.attribute("y").as_float() - gravity * 2;
+}

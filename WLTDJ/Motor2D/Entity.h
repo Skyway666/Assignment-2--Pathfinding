@@ -39,6 +39,8 @@ public:
 	virtual void ManagePhysics(float dt) {}; // Manage Physics of grounded entities
 	virtual void OnCollision(Collider* collider) {}; // Every entity has its own "OnCollision"
 	virtual void Save(pugi::xml_node& data) {}; //Every enemy saves his own data
+	virtual void Load(pugi::xml_node& data) {}; //Every enemy saves his own data
+
 };
 
 #endif // __ENEMY_H__
