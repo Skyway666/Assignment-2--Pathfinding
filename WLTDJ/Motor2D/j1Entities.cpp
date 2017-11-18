@@ -262,5 +262,23 @@ bool j1Entities::Save(pugi::xml_node& data) const
 
 	player->Save(player_);
 
+	for (uint i = 0; i < entities.count(); ++i)
+	{
+		if (entities[i] != nullptr)
+		{
+			if(entities[i]->type == AIR_ENEMY)
+			{ 
+				pugi::xml_node air_enemy = data.append_child("air_enemy");
+				entities[i]->Save(air_enemy);
+			}
+			else if (entities[i]->type == GROUND_ENEMY)
+			{
+				pugi::xml_node ground_enemy = data.append_child("ground_enemy");
+				entities[i]->Save(ground_enemy);
+			}
+			
+		}
+	}
+	
 	return true;
 }

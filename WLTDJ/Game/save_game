@@ -9,6 +9,9 @@
 	<:anonymous />
 	<entities>
 		<player x="140" y="812" map="0" />
+		<air_enemy x="1580.44165" y="408" returning="false" is_idle="true" />
+		<air_enemy x="2328.44116" y="408" returning="false" is_idle="true" />
+		<air_enemy x="764.441833" y="544" returning="false" is_idle="true" />
 	</entities>
 	<:anonymous />
 	<renderer />

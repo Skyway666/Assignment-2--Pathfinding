@@ -220,5 +220,8 @@ int AirEnemy::distance_to_start()
 }
 void AirEnemy::Save(pugi::xml_node& data)
 {
-
+	data.append_attribute("x") = position.x;
+	data.append_attribute("y") = position.y;
+	data.append_attribute("returning") = returning;
+	data.append_attribute("is_idle") = is_idle;
 }
