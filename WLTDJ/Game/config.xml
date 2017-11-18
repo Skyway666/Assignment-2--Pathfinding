@@ -20,8 +20,8 @@
       <walljump_speed.y value =" 15"/>
       <walljump_speed.x value =" 10"/>
       <gravity value =" 6"/>   
-      <pathfinding_distance.x value =" 8"/>
-      <pathfinding_distance.y value =" 8"/>
+      <pathfinding_distance.x value =" 6"/>
+      <pathfinding_distance.y value =" 4"/>
     </player>
     <ground_enemy>
       <gravity value ="6"/>
