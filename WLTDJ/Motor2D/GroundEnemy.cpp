@@ -5,7 +5,7 @@
 GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : GroundEntity(x, y)
 {
 	type = ENTITY_TYPES::GROUND_ENEMY;
-	scale = 0.15;
+	scale = 0.12;
 
 	position.x = x;
 	position.y = y;
@@ -33,7 +33,7 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	speed.x = speed_modifier.x;
 
 	SDL_Rect r{ 0, 0, 579, 763 };
-	SDL_Rect collider_rect{ 0, 0, (r.w - 100) * scale, (r.h - 40) * scale };
+	SDL_Rect collider_rect{ 0, 0, r.w * scale, r.h * scale };
 
 	collider = App->collision->AddCollider(collider_rect, COLLIDER_ENEMY_GROUND, App->entities);
 }

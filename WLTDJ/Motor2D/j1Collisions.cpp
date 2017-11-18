@@ -249,8 +249,8 @@ void Collider::WillCollideWall(GroundEnemy* entity, float dt)
 	const SDL_Rect r = entity->collider->rect;
 
 	// Will collide left or Will collide right and contact.y == 1
-	if ((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width * 2 && r.x + r.w > rect.x)
-		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width * 2 && r.x < rect.x + rect.w))
+	if ((r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + App->map->data.tile_width && r.x + r.w > rect.x)
+		|| (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - App->map->data.tile_width && r.x < rect.x + rect.w))
 	{
 		if (column_height <= 2 && entity->height - height <= 3 && entity->height - height > 0 && entity->contact.y == 1) // Check if height is bigger than 0 just in case
 		{
@@ -269,7 +269,7 @@ bool j1Collisions::WillCollideAfterSlide(Player* entity, float dt) const
 		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER)
 			continue;
 
-		if ((colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT || colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD))
+		if ((colliders[i]->type == COLLIDER_WALL || (colliders[i]->type == COLLIDER_PIT && entity->collider->type == COLLIDER_GOD))
 			&& r.y + r.h > colliders[i]->rect.y && r.y < colliders[i]->rect.y + colliders[i]->rect.h + App->map->data.tile_height
 			&& r.x + r.w > colliders[i]->rect.x && r.x < colliders[i]->rect.x + colliders[i]->rect.w)
 			return true;
@@ -287,8 +287,7 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 			|| colliders[i]->type == COLLIDER_ENEMY || colliders[i]->type == COLLIDER_GOD || colliders[i]->type == COLLIDER_SUPER_GOD)
 			continue;
 
-		if (entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || ((colliders[i]->type == COLLIDER_PIT
-			|| colliders[i]->type == COLLIDER_DEADLY) && entity->collider->type == COLLIDER_GOD)))
+		if (entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || (colliders[i]->type == COLLIDER_PIT && entity->collider->type == COLLIDER_GOD)))
 		{
 			colliders[i]->WillCollide(entity, dt);
 
