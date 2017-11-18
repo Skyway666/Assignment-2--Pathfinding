@@ -229,8 +229,12 @@ void Collider::WillCollidePit(GroundEnemy* entity, float dt)
 			if ((!entity->flip && entity->collider->rect.x + entity->collider->rect.w / 2 > rect.x) || (entity->flip
 				&& entity->collider->rect.x + entity->collider->rect.w / 2 < rect.x + rect.w))
 			{
-				entity->jumping = true;
-				entity->jumping_multiplier = lenght / 3; // 3 is the maximum number of tiles the enemy can jump
+				if (entity->just_landed)
+				{
+					entity->jumping = true;
+					entity->jump_x = (lenght * App->map->data.tile_width / entity->jump_time) / 2;
+				}
+				entity->just_landed = false;
 			}
 		}
 		else if (lenght >= 4)

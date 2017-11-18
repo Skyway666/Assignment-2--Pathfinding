@@ -7,7 +7,7 @@ public:
 	~GroundEntity();
 
 	float gravity;
-	fPoint contact;
+	iPoint contact;
 	bool jumping = false;
 	int jump_time;
 	// Will eventually replace them:

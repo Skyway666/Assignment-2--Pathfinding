@@ -52,13 +52,16 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		position.x = App->entities->player->position.x;
 		position.y = App->entities->player->position.y;
 	}
-	speed.x = speed_modifier.x;
+	
 	frames++;
 	animation = &run;
-
+	speed.x = speed_modifier.x;
 	jump.speed = 0.4 * dt;
 	run.speed = 0.4 * dt;
-	
+
+	if (last_contact_y != 1 && contact.y == 1)
+		just_landed = true;
+
 	if (contact.x != 0 && !is_idle)
 		front_of_unwalkable = true;
 
@@ -74,11 +77,16 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 	if (front_of_unwalkable && !is_idle)
 		speed.x = 0;
+	if (front_of_unwalkable && !is_idle && (((contact.x == 1 && player_pos == -1) || (contact.x == 2 && player_pos == 1))))
+		speed.x = 0;
 
-	if (jumping && !is_idle)
-		position.x += speed.x * jumping_multiplier * dt;
-	else if (jumping && is_idle)
-		position.x += speed.x * jumping_multiplier * dt;
+	if (!jumping && contact.y == 1)
+		jump_x = 0;
+	if (jump_x != 0)
+		speed.x = jump_x;
+
+	if (jumping)
+		position.x += speed.x * jumping_multiplier * dt * player_pos;
 	else if (!is_idle)
 		position.x += speed.x * dt * player_pos;
 	else
@@ -95,6 +103,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 	// Make collider follow enemy
 	collider->SetPos(position.x, position.y);
 
+	last_contact_y = contact.y;
 	contact.x = 0;
 	contact.y = 0;
 	front_of_unwalkable = false;
@@ -102,6 +111,8 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 void GroundEnemy::Exec_idle()
 {
+	player_pos = 1;
+
 	if (turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_unwalkable)
 		idle_speed = -idle_speed;
 
@@ -135,7 +146,7 @@ void GroundEnemy::Exec_attack()
 void GroundEnemy::Jump(float dt)
 {
 	// jump
-	if (jumping)
+	if (jumping && !just_landed)
 	{
 		if (allowtime)
 		{
@@ -164,6 +175,8 @@ void GroundEnemy::Jump(float dt)
 			jump.Reset();
 		}
 	}
+	else
+		jumping = false;
 }
 
 void GroundEnemy::OnCollision(Collider* collider)

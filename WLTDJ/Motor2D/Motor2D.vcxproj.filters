@@ -141,9 +141,6 @@
     <ClInclude Include="j1Timer.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Cronometer.h">
-      <Filter>Modules, scenes and tools\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="GroundEnemy.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Ground Entities\Entities</Filter>
     </ClInclude>
@@ -155,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="AirEnemy.h">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Chronometer.h">
+      <Filter>Modules, scenes and tools\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

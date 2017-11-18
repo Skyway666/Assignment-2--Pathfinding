@@ -6,7 +6,7 @@
 #include "j1Collisions.h"
 #include "p2List.h"
 #include "p2PQueue.h"
-#include "Cronometer.h"
+#include "Chronometer.h"
 
 
 
@@ -80,7 +80,7 @@ private:
 	SDL_Texture* enemy_sprites = nullptr;
 	SDL_Texture* player_sprites = nullptr;
 	p2PQueue<Entity_info> waiting_queue;
-	Cronometer do_logic;
+	Chronometer do_logic;
 
 	Player_Initial_Inf p_ini_inf;
 	Flying_Enemy_Initial_Inf fe_ini_inf;

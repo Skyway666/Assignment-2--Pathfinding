@@ -8,7 +8,7 @@
 #include "Animation.h"
 #include "Player.h"
 #include "GroundEntity.h"
-#include "Cronometer.h"
+#include "Chronometer.h"
 
 
 class GroundEnemy : public GroundEntity
@@ -28,6 +28,8 @@ public:
 	bool front_of_unwalkable = false;
 	bool turn = false;
 	uint height; // To determine wether if the enemy jumps upon reching a wall or not
+	float jump_x = 0; // X speed when jumping
+	bool just_landed = false;
 
 private:
 
@@ -38,4 +40,5 @@ private:
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
 	int idle_speed; // speed at which the enemy idles
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
+	int last_contact_y;
 };

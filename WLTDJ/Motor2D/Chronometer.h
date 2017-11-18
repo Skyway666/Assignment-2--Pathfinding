@@ -1,7 +1,7 @@
 #pragma once
 #include "j1Render.h"
 
-class Cronometer
+class Chronometer
 {
 public:
 	void Start(float amount_of_time) // Amount of time in seconds
