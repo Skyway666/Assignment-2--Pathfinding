@@ -110,6 +110,8 @@ private:
 	mutable p2SString	save_game;
 
 	// Framerate management
+
+	float				frame_ms;
 	double				expected_delay;
 	double				real_delay;
 	uint32				last_sec_frame_count = 0;

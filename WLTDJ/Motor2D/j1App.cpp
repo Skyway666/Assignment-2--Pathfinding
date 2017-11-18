@@ -178,7 +178,7 @@ void j1App::PrepareUpdate()
 {
 	frame_count++;
 	last_sec_frame_count++;
-	dt = (float)frame_time.ReadMs() / 1000 * 60;
+	dt = (float)frame_time.ReadMs() * 60.0f / 1000.0f;
 	frame_time.Start();
 }
 
@@ -216,7 +216,8 @@ void j1App::FinishUpdate()
 	if (framerate_cap > 0)
 		expected_delay = 1000 / (float)framerate_cap - (float)last_frame_ms;
 	else
-		expected_delay = (float)avg_fps - (float)last_frame_ms;
+		expected_delay = 0;
+
 
 	if (expected_delay > 0)
 	{

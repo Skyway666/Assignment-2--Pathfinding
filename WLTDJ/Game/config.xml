@@ -20,13 +20,13 @@
       <walljump_speed.y value =" 15"/>
       <walljump_speed.x value =" 10"/>
       <gravity value =" 6"/>   
-      <pathfinding_distance.x value =" 10"/>
+      <pathfinding_distance.x value =" 12"/>
       <pathfinding_distance.y value =" 4"/>
     </player>
     <ground_enemy>
       <gravity value ="6"/>
       <jump_time value =" 15"/>
-      <Genemy_speed_modifier.x value ="7"/>
+      <Genemy_speed_modifier.x value ="10"/>
       <Genemy_speed_modifier.y value =" 15"/>
     </ground_enemy>
     <air_enemy>
