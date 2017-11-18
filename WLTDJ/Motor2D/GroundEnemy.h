@@ -31,6 +31,7 @@ public:
 	uint height; // To determine wether if the enemy jumps upon reching a wall or not
 	float jump_x = 0; // X speed when jumping
 	bool just_landed = false;
+	bool jumping_wall = false;
 
 private:
 
@@ -41,4 +42,5 @@ private:
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
 	int last_contact_y;
+	bool spawned = false;
 };

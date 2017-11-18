@@ -23,7 +23,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	App->map->Load("Test Level 2.tmx");
+	App->map->Load("Level 1.2 provisional.tmx");
 	App->map->map = 0;
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 

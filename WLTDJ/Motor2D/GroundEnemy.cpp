@@ -51,7 +51,10 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		position.x = App->entities->player->position.x;
 		position.y = App->entities->player->position.y;
 	}
-	
+
+	if (contact.y == 1)
+		spawned = true;
+
 	frames++;
 	animation = &run;
 	jump.speed = 0.4 * dt;
@@ -102,11 +105,8 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		else if (speed.x < 0 && player_pos == 1)
 			speed.x = -speed.x;
 	}
-		
-
-	if (jumping)
-		position.x += speed.x * dt;
-	else
+	
+	if (spawned)
 		position.x += speed.x * dt;
 
 	turn = false;
@@ -158,7 +158,7 @@ void GroundEnemy::Exec_attack()
 void GroundEnemy::Jump(float dt)
 {
 	// jump
-	if (jumping && !just_landed)
+	if (jumping && (!just_landed || jumping_wall))
 	{
 		if (allowtime)
 		{
