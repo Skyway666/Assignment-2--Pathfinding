@@ -186,7 +186,8 @@ void AirEnemy::Find_path_home()
 	}
 	next_tile = 0;
 
-	App->pathfinding->DebugDraw();
+	if (App->collision->debug == true)
+		App->pathfinding->DebugDraw();
 }
 
 

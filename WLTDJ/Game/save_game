@@ -4,11 +4,11 @@
 	<window />
 	<textures />
 	<audio />
-	<map />
 	<scene />
+	<map />
 	<:anonymous />
 	<entities>
-		<player_position x="140" y="800" map="0" />
+		<player_position x="423" y="1009" map="0" />
 	</entities>
 	<:anonymous />
 	<renderer />

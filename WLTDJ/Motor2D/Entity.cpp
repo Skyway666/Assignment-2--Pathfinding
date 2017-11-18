@@ -3,9 +3,10 @@
 #include "j1Collisions.h"
 #include "j1Render.h"
 
-Entity::Entity(int x, int y) : position(x, y)
+Entity::Entity(int x, int y)
 {
-
+	position.x = x;
+	position.y = y;
 }
 
 Entity::~Entity()
