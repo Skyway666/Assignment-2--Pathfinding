@@ -1,13 +1,13 @@
 <!-- Config file for the game -->
 
 <config>
-  <app framerate_cap="60">
+  <app framerate_cap="0">
     <title>Who let the dog jump?</title>
     <organization>UPC</organization>
   </app>
 	
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
   </renderer>
   
   <entities>

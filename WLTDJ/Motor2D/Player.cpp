@@ -38,14 +38,14 @@ void Player::Update(float dt)
 	center.x = position.x + (481 * scale) / 2;
 	center.y = position.y + (547 * scale) / 2;
 
-	idle.speed = 0.8 * (60 / App->framerate_cap);
-	run.speed = 0.4 * (60 / App->framerate_cap);
-	jump.speed = 0.4 * (60 / App->framerate_cap);
-	fall.speed = 0.2 * (60 / App->framerate_cap);
-	death.speed = 0.8 * (60 / App->framerate_cap);
-	slide.speed = 0.4 * (60 / App->framerate_cap);
-	wallslideright.speed = 0.1 * (60 / App->framerate_cap);
-	wallslideleft.speed = 0.1 * (60 / App->framerate_cap);
+	idle.speed = 0.8 * dt;
+	run.speed = 0.4 * dt;
+	jump.speed = 0.4 * dt;
+	fall.speed = 0.2 * dt;
+	death.speed = 0.8 * dt;
+	slide.speed = 0.4 * dt;
+	wallslideright.speed = 0.1 * dt;
+	wallslideleft.speed = 0.1 * dt;
 
 	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
@@ -277,7 +277,7 @@ void Player::Jump(float dt)
 			fall.Reset();
 		}
 
-		if (frames - time <= jump_time / (60 / App->framerate_cap) && contact.y == 0)
+		if (frames - time <= jump_time / dt && contact.y == 0)
 		{
 			animation = &jump;
 			position.y -= ceil(speed.y * dt);
@@ -310,7 +310,7 @@ void Player::Jump(float dt)
 			App->audio->PlayFx(1);
 		}
 
-		if (frames - time <= walljump_time / (60 / App->framerate_cap) && contact.x == 0)
+		if (frames - time <= walljump_time / dt && contact.x == 0)
 		{
 			animation = &jump;
 			position.y -= ceil(walljump_speed.y * dt);
@@ -352,7 +352,7 @@ void Player::Slide(float dt)
 			player_height_before_sliding = position.y;
 			App->audio->PlayFx(2);
 		}
-		if (frames - time <= slide_time / (60 / App->framerate_cap))
+		if (frames - time <= slide_time / dt)
 		{
 			animation = &slide;
 			rect_after_sliding.x = position.x;

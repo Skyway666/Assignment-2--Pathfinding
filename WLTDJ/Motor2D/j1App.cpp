@@ -178,10 +178,7 @@ void j1App::PrepareUpdate()
 {
 	frame_count++;
 	last_sec_frame_count++;
-	if ((float)frame_time.Read() < 1000 / (float)framerate_cap)
-		dt = (1 / (float)framerate_cap) * 60;
-	else
-		dt = ((float)frame_time.Read()) / 1000 * 60;
+	dt = ((float)frame_time.Read()) / 1000 * 60;
 	frame_time.Start();
 }
 
@@ -215,7 +212,9 @@ void j1App::FinishUpdate()
 	App->win->SetTitle(title);
 
 	timer.Start();
-	expected_delay = 1000 / (float)framerate_cap - (float)last_frame_ms;
+
+	if (framerate_cap > 0)
+		expected_delay = 1000 / (float)framerate_cap - (float)last_frame_ms;
 
 	if (expected_delay > 0)
 	{

@@ -29,10 +29,8 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	speed_modifier.y = initial_inf.speed_modifier.y;
 	speed_modifier.x = initial_inf.speed_modifier.x;
 
-	walk_time = 30; // Could be initialized with an argument
 	speed.y = speed_modifier.y;
 	speed.x = speed_modifier.x;
-	walk_timer.Start(walk_time);
 	idle_speed = speed_modifier.x;
 
 	SDL_Rect r{ 0, 0, 579, 763 };
@@ -58,8 +56,8 @@ void GroundEnemy::Update(float dt, bool do_logic)
 	frames++;
 	animation = &run;
 
-	jump.speed = 0.4 * (60 / App->framerate_cap);
-	run.speed = 0.4 * (60 / App->framerate_cap);
+	jump.speed = 0.4 * dt;
+	run.speed = 0.4 * dt;
 	
 	if (contact.x != 0 && !is_idle)
 		front_of_unwalkable = true;
@@ -104,11 +102,8 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 void GroundEnemy::Exec_idle()
 {
-	if (walk_timer.IsOver() || turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_unwalkable)
-	{
+	if (turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_unwalkable)
 		idle_speed = -idle_speed;
-		walk_timer.Start(walk_time);
-	}
 
 	speed.x = idle_speed;
 
@@ -150,7 +145,7 @@ void GroundEnemy::Jump(float dt)
 			jump.Reset();
 		}
 
-		if (frames - time <= jump_time / (60 / App->framerate_cap) && contact.y == 0)
+		if (frames - time <= jump_time / dt && contact.y == 0)
 		{
 			animation = &jump;
 			position.y -= ceil(speed.y * dt);

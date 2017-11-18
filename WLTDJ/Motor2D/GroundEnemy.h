@@ -35,9 +35,7 @@ private:
 	void Exec_idle();
 	void Exec_attack();
 
-	float walk_time; // Time that the enemy spends walking from one side to the other
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
-	Cronometer walk_timer; // Timer to mesure when enemy should be moving
 	int idle_speed; // speed at which the enemy idles
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
 };

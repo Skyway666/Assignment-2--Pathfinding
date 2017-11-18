@@ -52,7 +52,7 @@ void AirEnemy::Update(float dt, bool do_logic)
 	center.x = position.x + (1135 * scale)/2;
 	center.y = position.y + (845 * scale)/2;
 
-	idle.speed = 0.3 * (60 / App->framerate_cap);
+	idle.speed = 0.3 * dt;
 
     animation = &idle;
 	if (is_idle)
