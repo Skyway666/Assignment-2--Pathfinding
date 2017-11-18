@@ -192,6 +192,7 @@ void GroundEnemy::ManagePhysics(float dt)
 	App->collision->ManageGroundCollisions((GroundEntity*)this, dt);
 	App->collision->EnemyJump(this, dt);
 }
+void GroundEnemy::Save(pugi::xml_node& data)
 {
 
 }

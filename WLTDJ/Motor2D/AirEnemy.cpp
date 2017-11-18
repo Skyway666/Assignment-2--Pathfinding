@@ -218,6 +218,7 @@ int AirEnemy::distance_to_start()
 	int ret = sqrt(pow(initial_tile.x - monster_map_pos.x, 2) + pow(initial_tile.y - monster_map_pos.y, 2));
 	return ret;
 }
+void AirEnemy::Save(pugi::xml_node& data)
 {
 
 }

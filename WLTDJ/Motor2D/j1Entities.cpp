@@ -231,24 +231,24 @@ void j1Entities::EraseEntities()
 //Load and save functions
 bool j1Entities::Load(pugi::xml_node& data)
 {
-	if (App->map->map == data.child("player_position").attribute("map").as_int())
+	if (App->map->map == data.child("player").attribute("map").as_int())
 	{
-		player->position.x = data.child("player_position").attribute("x").as_float();
-		player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
+		player->position.x = data.child("player").attribute("x").as_float();
+		player->position.y = data.child("player").attribute("y").as_float() - player->gravity * 2;
 	}
 	else
 	{
 		if (App->map->map == 0)
 		{
 			App->scene->Change_to_map(1);
-			player->position.x = data.child("player_position").attribute("x").as_float();
-			player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
+			player->position.x = data.child("player").attribute("x").as_float();
+			player->position.y = data.child("player").attribute("y").as_float() - player->gravity * 2;
 		}
 		else
 		{
 			App->scene->Change_to_map(0);
-			player->position.x = data.child("player_position").attribute("x").as_float();
-			player->position.y = data.child("player_position").attribute("y").as_float() - player->gravity * 2;
+			player->position.x = data.child("player").attribute("x").as_float();
+			player->position.y = data.child("player").attribute("y").as_float() - player->gravity * 2;
 		}
 	}
 
@@ -258,11 +258,9 @@ bool j1Entities::Load(pugi::xml_node& data)
 // Save Game State
 bool j1Entities::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node player_ = data.append_child("player_position");
+	pugi::xml_node player_ = data.append_child("player");
 
-	player_.append_attribute("x") = player->position.x;
-	player_.append_attribute("y") = player->position.y;
-	player_.append_attribute("map") = App->map->map;
+	player->Save(player_);
 
 	return true;
 }

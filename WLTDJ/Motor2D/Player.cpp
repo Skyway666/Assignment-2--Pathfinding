@@ -476,3 +476,9 @@ void Player::OnCollision(Collider* collider)
 
 	}
 }
+void Player::Save(pugi::xml_node& data)
+{
+	data.append_attribute("x") = position.x;
+	data.append_attribute("y") = position.y;
+	data.append_attribute("map") = App->map->map;
+}
