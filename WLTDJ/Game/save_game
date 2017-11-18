@@ -8,7 +8,6 @@
 	<map />
 	<:anonymous />
 	<entities>
-		<player_position x="423" y="1009" map="0" />
 	</entities>
 	<:anonymous />
 	<renderer />

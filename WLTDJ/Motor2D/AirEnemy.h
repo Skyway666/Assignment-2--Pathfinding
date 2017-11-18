@@ -18,6 +18,7 @@ public:
 
 	void Update(float dt, bool do_logic);
 	void OnCollision();
+	void Save(pugi::xml_node& data);
 
 private:
 	bool is_idle; //bool to know when the enemy should stop ideling and follow the player

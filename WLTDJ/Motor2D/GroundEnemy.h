@@ -21,6 +21,7 @@ public:
 
 	void Update(float dt, bool do_logic);
 	void OnCollision(Collider* collider);
+	void Save(pugi::xml_node& data);
 
 	void ManagePhysics(float dt);
 

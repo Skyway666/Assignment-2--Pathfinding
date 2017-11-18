@@ -4,13 +4,13 @@
 
 #include "p2Point.h"
 #include "Animation.h"
+#include "PugiXml\src\pugixml.hpp"
 
 //Parent class to all the entities
 
 struct SDL_Texture;
 struct Collider;
 enum ENTITY_TYPES;
-
 class Entity //: public Path
 {
 protected:
@@ -38,6 +38,7 @@ public:
 	virtual void Update(float dt, bool do_logic) {}; // Update enemy logic
 	virtual void ManagePhysics(float dt) {}; // Manage Physics of grounded entities
 	virtual void OnCollision(Collider* collider) {}; // Every entity has its own "OnCollision"
+	virtual void Save(pugi::xml_node& data) {}; //Every enemy saves his own data
 };
 
 #endif // __ENEMY_H__
