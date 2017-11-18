@@ -27,6 +27,6 @@ public:
 	}
 private:
 	int timer_duration = 0;
-	bool timer_active = 0;
+	bool timer_active = false;
 };
 

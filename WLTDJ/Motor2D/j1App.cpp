@@ -178,7 +178,10 @@ void j1App::PrepareUpdate()
 {
 	frame_count++;
 	last_sec_frame_count++;
-	dt = (float)frame_time.ReadMs() * 60.0f / 1000.0f;
+	if (frame_count > 2)
+		dt = frame_time.ReadMs() * 60.0f / 1000.0f;
+	else
+		dt = (1/(float)framerate_cap) * 60.0f;
 	frame_time.Start();
 }
 

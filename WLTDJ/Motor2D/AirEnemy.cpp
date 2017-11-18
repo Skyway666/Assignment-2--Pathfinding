@@ -24,7 +24,7 @@ AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x
 	side_fly_time = initial_inf.side_fly_time; //Could be initialized with an argument
 	agro_distance = initial_inf.agro_distance; //Could be initialized with an argument	
 	tired_distance = initial_inf.tired_distance; //Could be initialized with an argument
-	idle_speed = initial_inf.idle_speed; //Could be initialized with an argument	
+	idle_speed = -initial_inf.idle_speed; //Could be initialized with an argument	
 	speed_modifier.x = initial_inf.speed_modifier.x; //Could be initialized with an argument
 	speed_modifier.y = initial_inf.speed_modifier.y; //Could be initialized with an argument
 
@@ -35,7 +35,6 @@ AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x
 	App->map->WorldToMap(&initial_tile.x, &initial_tile.y);	
     returning = false;
 	home_path_found = false;
-	side_fly_timer.Start(side_fly_time);
 	speed.x = 0;
 	speed.y = 0;
 }
@@ -88,6 +87,10 @@ void AirEnemy::Update(float dt, bool do_logic)
 			{
 				returning = false;
 				is_idle = true;
+				if (idle_speed > 0)
+				{
+					idle_speed = -idle_speed;
+				}
 				home_path_found = false;
 			}
 		}
