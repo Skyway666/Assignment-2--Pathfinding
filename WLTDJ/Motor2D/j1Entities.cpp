@@ -95,10 +95,9 @@ bool j1Entities::Update(float dt)
 				entities[i]->Update(dt, do_logic.IsOver());
 		}
 
-	
-
 	if (player != nullptr)
 		player->Update(dt);
+	    
 
 	// Draw all entities
 	for (uint i = 0; i < entities.count(); ++i)
@@ -108,7 +107,10 @@ bool j1Entities::Update(float dt)
 	}
 
 	if (player != nullptr)
+	{ 
+		player->WinScreen(dt); //Provisional
 		player->Draw(player_sprites);
+	}
 
 	//Update enemies logic every 0.5 seconds
 	if (do_logic.IsOver())

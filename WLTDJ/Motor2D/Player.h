@@ -10,6 +10,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "GroundEntity.h"
+#include "Chronometer.h"
 
 class Player : public GroundEntity
 {
@@ -22,6 +23,7 @@ public:
 	void OnCollision(Collider* collider);
 	void Save(pugi::xml_node& data);
 	void Load(pugi::xml_node& data);
+	void WinScreen(float dt); //Provisional
 	
 	float player_x_displacement; //Used by parallax
 
@@ -47,13 +49,13 @@ private:
 	bool super_godmode = false;
 	int jcontact = 0; // for Jump() function
 
-	//fPoint speed;
 	iPoint sprite_distance;
 	fPoint walljump_speed;
 	
 	int slide_time;
 	int walljump_time;
 
+	Chronometer Win_timer;
 
 	Animation idle;
 	Animation run;
