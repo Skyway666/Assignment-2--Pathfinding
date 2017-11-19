@@ -8,15 +8,15 @@
 	<map />
 	<:anonymous />
 	<entities>
-		<player x="5298" y="1215" map="0" />
+		<player x="7073.20996" y="591.931519" map="0" />
 		<enemies>
-			<ground_enemy x="6953.40771" y="78" />
-			<air_enemy x="1478.67053" y="382" returning="false" is_idle="true" idle_speed="-2" />
-			<air_enemy x="2293.40601" y="392.265472" returning="false" is_idle="true" idle_speed="-2" />
-			<air_enemy x="886.329407" y="519" returning="false" is_idle="true" idle_speed="2" />
-			<ground_enemy x="6053.55371" y="1230" />
-			<ground_enemy x="4979.02246" y="1126" />
-			<ground_enemy x="5595.65723" y="1243" />
+			<ground_enemy x="6392.07275" y="1263" />
+			<air_enemy x="1520.38062" y="408" returning="false" is_idle="true" idle_speed="2" />
+			<air_enemy x="2268.37964" y="408" returning="false" is_idle="true" idle_speed="2" />
+			<air_enemy x="704.380127" y="544" returning="false" is_idle="true" idle_speed="2" />
+			<ground_enemy x="4956.44043" y="1131" />
+			<ground_enemy x="5687.21484" y="1254" />
+			<ground_enemy x="14729.5908" y="13028" />
 		</enemies>
 	</entities>
 	<:anonymous />

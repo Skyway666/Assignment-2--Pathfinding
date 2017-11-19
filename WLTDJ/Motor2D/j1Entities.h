@@ -68,6 +68,7 @@ public:
 	void Add_waiting_entity(ENTITY_TYPES type, int x, int y); //Adds an entity that will be spawned when "spawn_waiting_entities" is called
 	void Spawn_waiting_entities(); //Spawn entities in the waiting queue
 	void Clear_waiting_list(); //Clears waiting_queue
+	void Load_entities(pugi::xml_node& data);
 	// Load / Save
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;

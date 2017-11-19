@@ -234,40 +234,19 @@ bool j1Entities::Load(pugi::xml_node& data)
 {
 	if (App->map->map == data.child("player").attribute("map").as_int())
 	{
-		pugi::xml_node player_ = data.child("player");
-		player->Load(player_);
-
-		pugi::xml_node entity_iterator = data.child("enemies").first_child();
-		for (uint i = 0; i < entities.count(); ++i)
-		{
-			if (entities[i] != nullptr)
-			{
-				if (entities[i]->type == AIR_ENEMY)
-				{
-					entities[i]->Load(entity_iterator);
-				}
-				else if (entities[i]->type == GROUND_ENEMY)
-				{
-					entities[i]->Load(entity_iterator);
-				}
-				entity_iterator = entity_iterator.next_sibling();
-			}
-			
-		}
+		Load_entities(data);
 	}
 	else
 	{
 		if (App->map->map == 0)
 		{
 			App->scene->Change_to_map(1);
-			player->position.x = data.child("player").attribute("x").as_float();
-			player->position.y = data.child("player").attribute("y").as_float() - player->gravity * 2;
+			Load_entities(data);
 		}
 		else
 		{
 			App->scene->Change_to_map(0);
-			player->position.x = data.child("player").attribute("x").as_float();
-			player->position.y = data.child("player").attribute("y").as_float() - player->gravity * 2;
+			Load_entities(data);
 		}
 	}
 
@@ -300,4 +279,27 @@ bool j1Entities::Save(pugi::xml_node& data) const
 	}
 	
 	return true;
+}
+void j1Entities::Load_entities(pugi::xml_node& data)
+{
+	pugi::xml_node player_ = data.child("player");
+	player->Load(player_);
+
+	pugi::xml_node entity_iterator = data.child("enemies").first_child();
+	for (uint i = 0; i < entities.count(); ++i)
+	{
+		if (entities[i] != nullptr)
+		{
+			if (entities[i]->type == AIR_ENEMY)
+			{
+				entities[i]->Load(entity_iterator);
+			}
+			else if (entities[i]->type == GROUND_ENEMY)
+			{
+				entities[i]->Load(entity_iterator);
+			}
+			entity_iterator = entity_iterator.next_sibling();
+		}
+
+	}
 }

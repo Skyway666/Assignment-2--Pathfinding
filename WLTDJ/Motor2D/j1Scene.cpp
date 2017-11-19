@@ -23,7 +23,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	App->map->Load("Level 2.2 provisional.tmx");
+	App->map->Load("Level 1.2 provisional.tmx");
 	App->map->map = 0;
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 
@@ -119,12 +119,12 @@ void j1Scene::Change_to_map(int _map)
 	App->map->CleanUp();
 	if (_map == 0)
 	{
-		App->map->Load("Level 1 final.tmx");
+		App->map->Load("Level 1.2 provisional.tmx");
 		App->map->map = 0;
 	}
 	else if (_map == 1)
 	{
-		App->map->Load("Level 2 final.tmx");
+		App->map->Load("Level 2.2 provisional.tmx");
 		App->map->map = 1;
 	}
 	App->pathfinding->SetMap();
