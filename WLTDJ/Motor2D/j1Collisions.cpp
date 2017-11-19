@@ -198,11 +198,11 @@ void Collider::WillCollide(GroundEntity* entity, float dt)
 {
 	const SDL_Rect r = entity->collider->rect;
 
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + ceil(entity->speed_modifier.x * dt) && r.x + r.w > rect.x) // Will collide left
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x < rect.x + rect.w + entity->speed_modifier.x * dt && r.x + r.w > rect.x) // Will collide left
 		entity->contact.x = 1;
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - ceil(entity->speed_modifier.x * dt) && r.x < rect.x + rect.w) // Will collide right
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h && r.x + r.w > rect.x - entity->speed_modifier.x * dt && r.x < rect.x + rect.w) // Will collide right
 		entity->contact.x = 2;
-	if (r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
+	if (r.y < rect.y + rect.h && r.y + r.h >(rect.y - entity->gravity * dt) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide ground
 	{
 		entity->contact.y = 1;
 
@@ -212,7 +212,7 @@ void Collider::WillCollide(GroundEntity* entity, float dt)
 			enemy->height = height; // Set height to ground enemies
 		}
 	}
-	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + ceil(entity->speed_modifier.y * dt) && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
+	if (r.y + r.h > rect.y && r.y < rect.y + rect.h + entity->speed_modifier.y * dt && r.x + r.w > rect.x && r.x < rect.x + rect.w) // Will collide top
 		entity->contact.y = 2;
 }
 
@@ -221,7 +221,7 @@ void Collider::WillCollidePit(GroundEnemy* entity, float dt)
 	const SDL_Rect r = entity->collider->rect;
 
 	// Will collide ground && contact.y == 1
-	if ((r.y < rect.y + rect.h && r.y + r.h >(rect.y - ceil(entity->gravity * dt)) && r.x + r.w > rect.x && r.x < rect.x + rect.w) && entity->contact.y == 1)
+	if ((r.y < rect.y + rect.h && r.y + r.h > rect.y - entity->gravity * dt && r.x + r.w > rect.x && r.x < rect.x + rect.w) && entity->contact.y == 1)
 	{
 		if (lenght < 4)
 		{
@@ -232,7 +232,8 @@ void Collider::WillCollidePit(GroundEnemy* entity, float dt)
 				if (entity->just_landed)
 				{
 					entity->jumping = true;
-					entity->jump_x = (lenght * App->map->data.tile_width / entity->jump_time) / 2;
+					if (entity->jump_timer.Read() != 0)
+						entity->jump_x = lenght * App->map->data.tile_width / entity->jump_timer.Read();
 				}
 				entity->just_landed = false;
 			}

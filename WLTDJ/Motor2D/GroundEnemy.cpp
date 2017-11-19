@@ -25,7 +25,8 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	jump.loop = false;
 
 	gravity = initial_inf.gravity;
-	jump_time = initial_inf.jump_time;
+	initial_jump_time = initial_inf.jump_time / 100;
+	jump_time = initial_inf.jump_time / 100;
 	speed_modifier.y = initial_inf.speed_modifier.y;
 	speed_modifier.x = initial_inf.speed_modifier.x;
 
@@ -154,15 +155,14 @@ void GroundEnemy::Jump(float dt)
 	// jump
 	if (jumping && (!just_landed || jumping_wall))
 	{
-		if (allowtime)
+		if (jump_timer.IsOver() && contact.y == 1)
 		{
-			time = frames;
-			allowtime = false;
+			jump_timer.Start(jump_time);
 			contact.y = 0;
 			jump.Reset();
 		}
 
-		if (frames - time <= jump_time / dt && contact.y == 0)
+		if (!jump_timer.IsOver() && contact.y == 0)
 		{
 			animation = &jump;
 			position.y -= speed.y * dt;
@@ -170,14 +170,7 @@ void GroundEnemy::Jump(float dt)
 		else
 		{
 			jumping = false;
-			allowtime = true;
-			jump.Reset();
-		}
-
-		if (contact.y == 1)
-		{
-			jumping = false;
-			allowtime = true;
+			jump_timer.Reset();
 			jump.Reset();
 		}
 	}

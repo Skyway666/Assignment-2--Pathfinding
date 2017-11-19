@@ -32,6 +32,8 @@ public:
 	float jump_x = 0; // X speed when jumping
 	bool just_landed = false;
 	bool jumping_wall = false;
+	float initial_jump_time;
+	float last_jump;
 
 private:
 

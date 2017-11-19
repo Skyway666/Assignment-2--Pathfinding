@@ -25,9 +25,9 @@
     </player>
     <ground_enemy>
       <gravity value ="6"/>
-      <jump_time value =" 15"/>
+      <jump_time value =" 25"/>
       <Genemy_speed_modifier.x value ="5"/>
-      <Genemy_speed_modifier.y value =" 17"/>
+      <Genemy_speed_modifier.y value =" 20"/>
     </ground_enemy>
     <air_enemy>
       <side_fly_time value ="2"/>

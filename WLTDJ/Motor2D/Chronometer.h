@@ -32,6 +32,12 @@ public:
 		timer_duration = 0;
 		timer_active = true;
 	}
+
+	int Read()
+	{
+		return timer_duration;
+	}
+
 private:
 	int timer_duration = 0;
 	bool timer_active = false;

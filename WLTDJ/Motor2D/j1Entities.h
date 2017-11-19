@@ -40,7 +40,7 @@ struct Ground_Enemy_Initial_Inf
 {
 	fPoint speed_modifier;
 	float gravity;
-	int jump_time;
+	float jump_time;
 };
 
 struct Entity_info
