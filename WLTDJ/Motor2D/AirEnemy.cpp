@@ -1,4 +1,5 @@
 #include "AirEnemy.h"
+#include "Brofiler/Brofiler.h"
 
 
 
@@ -70,6 +71,7 @@ void AirEnemy::Update(float dt, bool do_logic)
 
     if (do_logic)
 	{ 
+		BROFILER_CATEGORY("Pathfinding", 0xFFDB7093);
 		if (!returning && !is_idle)
 		{
 			Find_path_player();
@@ -174,6 +176,7 @@ void AirEnemy::Find_path_player()
 
 void AirEnemy::Find_path_home()
 {
+	BROFILER_CATEGORY("Backtracking", 0xFFFFEFD5);
 	//Pathfinding
 	iPoint monster_map_pos(center.x, center.y);
 

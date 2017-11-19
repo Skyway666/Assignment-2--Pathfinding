@@ -4,6 +4,8 @@
 #include "j1Window.h"
 #include "j1Render.h"
 
+#include "Brofiler/Brofiler.h"
+
 #define VSYNC true
 
 j1Render::j1Render() : j1Module()
@@ -78,6 +80,7 @@ bool j1Render::Update(float dt)
 bool j1Render::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
+	BROFILER_CATEGORY("Swap buffers", 0xFFEEE8AA);
 	SDL_RenderPresent(renderer);
 	return true;
 }
@@ -140,7 +143,6 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, float size_scaling, cons
 		pivot.y = pivot_y;
 		p = &pivot;
 	}
-
 	if (!flip)
 	{
 		if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
