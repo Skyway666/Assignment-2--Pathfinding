@@ -104,6 +104,8 @@ public:
 	SDL_Texture* bone_graphics = nullptr;
 	SDL_Texture* path_indicator = nullptr;
 
+
+
 	Animation bone_animation;
 
 

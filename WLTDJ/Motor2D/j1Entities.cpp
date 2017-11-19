@@ -222,6 +222,7 @@ void j1Entities::EraseEntities()
 	{
 		if (entities[i] != nullptr)
 		{
+			entities[i]->collider->to_delete = true;
 			delete entities[i];
 			entities[i] = nullptr;
 		}

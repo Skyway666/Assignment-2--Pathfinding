@@ -40,7 +40,7 @@ void j1Map::CreateCollidersAndEnemies()
 {
 	int counter = 0;
 	
-	    App->collision->AddCollider({data.bone_position.x, data.bone_position.y,bone_animation.GetCurrentFrame().w, bone_animation.GetCurrentFrame().h}, COLLIDER_BONE);
+	
 
 		uint height = 0; // Used to calculate wall tile height
 
@@ -97,6 +97,8 @@ void j1Map::CreateCollidersAndEnemies()
 			}
 			counter++;
 		}
+
+		App->collision->AddCollider({ data.bone_position.x, data.bone_position.y,bone_animation.GetCurrentFrame().w, bone_animation.GetCurrentFrame().h }, COLLIDER_BONE);
 }
 
 void j1Map::Draw()
