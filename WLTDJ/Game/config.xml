@@ -1,7 +1,7 @@
 <!-- Config file for the game -->
 
 <config>
-  <app framerate_cap="60">
+  <app framerate_cap="30">
     <title>Who let the dog jump?</title>
     <organization>UPC</organization>
   </app>
@@ -12,9 +12,9 @@
   
   <entities>
     <player>
-      <jump_time value =" 15"/>
-      <slide_time value =" 20"/>
-      <walljump_time value =" 20"/>
+      <jump_time value =" 25"/>
+      <slide_time value =" 30"/>
+      <walljump_time value =" 30"/>
       <speed_modifier.y value =" 18"/>
       <speed_modifier.x value =" 10"/>
       <walljump_speed.y value =" 15"/>

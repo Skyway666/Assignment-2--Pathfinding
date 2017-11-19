@@ -9,6 +9,7 @@ public:
 		timer_duration = SDL_GetTicks() + amount_of_time * 1000;
 		timer_active = true;
 	}
+
 	bool IsOver()
 	{
 		if (timer_active)
@@ -24,6 +25,12 @@ public:
 			}
 		}
 		return true;
+	}
+
+	void Reset()
+	{
+		timer_duration = 0;
+		timer_active = true;
 	}
 private:
 	int timer_duration = 0;

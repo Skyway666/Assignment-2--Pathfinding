@@ -1,5 +1,7 @@
 #pragma once
 #include "Entity.h"
+#include "Chronometer.h"
+
 class GroundEntity : public Entity
 {
 public:
@@ -9,11 +11,8 @@ public:
 	float gravity;
 	iPoint contact;
 	bool jumping = false;
-	int jump_time;
-	// Will eventually replace them:
-	int frames = 0;
-	int time = 0;
+	float jump_time;
+	Chronometer jump_timer;
 	bool allowtime = true;
-
 	virtual void Jump(float dt) {};
 };

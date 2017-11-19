@@ -39,6 +39,8 @@ private:
 	void Exec_idle();
 	void Exec_attack();
 
+	int frames = 0;
+	int time = 0;
 	bool is_idle = true; // bool to know when the enemy should stop ideling and follow the player
 	int player_pos; // -1 if the player is on the left, 1 if the player is on the right
 	int last_contact_y;

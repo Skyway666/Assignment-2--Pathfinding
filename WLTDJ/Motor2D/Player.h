@@ -52,9 +52,11 @@ private:
 	iPoint sprite_distance;
 	fPoint walljump_speed;
 	
-	int slide_time;
-	int walljump_time;
+	float slide_time;
+	float walljump_time;
 
+	Chronometer slide_timer;
+	Chronometer walljump_timer;
 	Chronometer Win_timer;
 
 	Animation idle;

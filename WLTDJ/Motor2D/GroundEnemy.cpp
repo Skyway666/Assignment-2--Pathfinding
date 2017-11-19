@@ -109,7 +109,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 	// Simulate gravity
 	if (contact.y != 1)
-		position.y += ceil(gravity * dt);
+		position.y += gravity * dt;
 
 	// Make collider follow enemy
 	collider->SetPos(position.x, position.y);
@@ -165,7 +165,7 @@ void GroundEnemy::Jump(float dt)
 		if (frames - time <= jump_time / dt && contact.y == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(speed.y * dt);
+			position.y -= speed.y * dt;
 		}
 		else
 		{
@@ -236,9 +236,10 @@ void GroundEnemy::Load(pugi::xml_node& data)
 	if (contact.y == 1)
 		position.y -= gravity * 10;
 	if (contact.x == 1)
-		position.x += speed_modifier.x * 10;
+		position.x += speed_modifier.x * 2;
 	else if (contact.x == 2)
-		position.x -= speed_modifier.x * 10;
+		position.x -= speed_modifier.x * 2;
+
 	if (jumping)
 		spawned = true;
 	else

@@ -6,9 +6,9 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 {
 	Animation_Loading();
 
-	jump_time = initial_inf.jump_time;
-	slide_time = initial_inf.slide_time;
-	walljump_time = initial_inf.walljump_time;
+	jump_time = initial_inf.jump_time / 100;
+	slide_time = initial_inf.slide_time / 100;
+	walljump_time = initial_inf.walljump_time / 100;
 	speed_modifier.y = initial_inf.speed_modifier.y;
 	speed_modifier.x = initial_inf.speed_modifier.x;
 	walljump_speed.y = initial_inf.walljump_speed.y;
@@ -46,6 +46,7 @@ void Player::Update(float dt)
 	slide.speed = 0.4 * dt;
 	wallslideright.speed = 0.1 * dt;
 	wallslideleft.speed = 0.1 * dt;
+	App->map->bone_animation.speed = 0.2 * dt;
 
 	if (contact.x != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
@@ -227,8 +228,6 @@ void Player::Update(float dt)
 			collider->SetPos(position.x + 30, position.y + 547 * 0.2 - App->map->data.tile_height - 1 + 50);
 		}
 	}
-
-	frames++;
 }
 
 void Player::WallSlide()
@@ -252,16 +251,15 @@ void Player::Jump(float dt)
 	// jump
 	if (jumping)
 	{
-		if (allowtime)
+		if (jump_timer.IsOver() && contact.y == 1)
 		{
-			time = frames;
-			allowtime = false;
+			jump_timer.Start(jump_time);
 			contact.y = 0;
 			App->audio->PlayFx(1);
 			fall.Reset();
 		}
 
-		if (frames - time <= jump_time / dt && contact.y == 0)
+		if (!jump_timer.IsOver() && contact.y == 0)
 		{
 			animation = &jump;
 			position.y -= speed.y * dt;
@@ -269,14 +267,7 @@ void Player::Jump(float dt)
 		else
 		{
 			jumping = false;
-			allowtime = true;
-			jump.Reset();
-		}
-
-		if (contact.y == 1)
-		{
-			jumping = false;
-			allowtime = true;
+			jump_timer.Reset();
 			jump.Reset();
 		}
 	}
@@ -285,16 +276,15 @@ void Player::Jump(float dt)
 	{
 		fall.Reset();
 
-		if (allowtime)
+		if (walljump_timer.IsOver() && contact.x != 0)
 		{
-			time = frames;
-			allowtime = false;
+			walljump_timer.Start(walljump_time);
 			jcontact = contact.x;
 			contact.x = 0;
 			App->audio->PlayFx(1);
 		}
 
-		if (frames - time <= walljump_time / dt && contact.x == 0)
+		if (!walljump_timer.IsOver() && contact.x == 0)
 		{
 			animation = &jump;
 			position.y -= walljump_speed.y * dt;
@@ -309,15 +299,15 @@ void Player::Jump(float dt)
 		}
 		else
 		{
+			walljump_timer.Reset();
 			walljumping = false;
-			allowtime = true;
 			jump.Reset();
 		}
 
 		if (contact.y == 1)
 		{
+			walljump_timer.Reset();
 			walljumping = false;
-			allowtime = true;
 			jump.Reset();
 		}
 	}
@@ -327,35 +317,32 @@ void Player::Slide(float dt)
 {
 	if (sliding)
 	{
-		if (allowtime)
+		if (slide_timer.IsOver() && allowtime)
 		{
-			time = frames;
-			allowtime = false;
-
+			slide_timer.Start(slide_time);
 			collider->SetSize(collider->rect.w + 3, App->map->data.tile_height - 50);
+			allowtime = false;
 			player_height_before_sliding = position.y;
 			App->audio->PlayFx(2);
 		}
-		if (frames - time <= slide_time / dt)
+		if (!slide_timer.IsOver())
 		{
 			animation = &slide;
 			rect_after_sliding.x = position.x;
 			rect_after_sliding.y = player_height_before_sliding;
 			rect_after_sliding.h = 547 * 0.2;
 			rect_after_sliding.w = 481 * 0.2;
-
 		}
-
-
 		else if (App->collision->WillCollideAfterSlide(this, dt) && contact.x == 0)
 		{
-			time = frames;
+			slide_timer.Start(slide_time);
 		}
 		else
 		{
 			sliding = false;
-			allowtime = true;
+			slide_timer.Reset();
 			collider->SetSize(481 * 0.2, 547 * 0.2);
+			allowtime = true;
 			if (contact.y == 1)
 				position.y = player_height_before_sliding - 3;
 		}

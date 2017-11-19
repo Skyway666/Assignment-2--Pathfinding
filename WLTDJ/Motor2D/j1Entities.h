@@ -22,9 +22,9 @@ struct Player_Initial_Inf
 	fPoint speed_modifier;
 	fPoint walljump_speed;
 	float gravity;
-	int jump_time;
-	int slide_time;
-	int walljump_time;
+	float jump_time;
+	float slide_time;
+	float walljump_time;
 	iPoint pathfinding_distance;
 };
 
