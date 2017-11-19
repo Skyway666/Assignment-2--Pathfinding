@@ -206,9 +206,11 @@ void GroundEnemy::ManagePhysics(float dt)
 }
 void GroundEnemy::Save(pugi::xml_node& data)
 {
-
+	data.append_attribute("x") = position.x;
+	data.append_attribute("y") = position.y;
 }
 void GroundEnemy::Load(pugi::xml_node& data)
 {
-
+	position.x = data.attribute("x").as_int();
+	position.y = data.attribute("y").as_int();
 }
