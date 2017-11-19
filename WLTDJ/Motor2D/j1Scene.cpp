@@ -108,6 +108,7 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(win_screen);
+	App->tex->UnLoad(App->map->bone_graphics);
 	return true;
 }
 
