@@ -19,6 +19,7 @@ j1Collisions::j1Collisions()
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_GROUND] = true;
 	matrix[COLLIDER_ENEMY_GROUND][COLLIDER_PATH] = true;
 	matrix[COLLIDER_ENEMY_GROUND][COLLIDER_WALKABLE] = true;
+
 }
 
 // Destructor
