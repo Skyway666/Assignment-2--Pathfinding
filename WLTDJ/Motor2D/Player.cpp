@@ -196,14 +196,14 @@ void Player::Update(float dt)
 
 
 	if (!walljumping)
-		position.x += ceil(speed.x * dt);
+		position.x += speed.x * dt;
 
 	if (contact.y != 1 && !super_godmode)
 	{
 		if (StickToWall)
-			position.y += ceil(gravity / 2 * dt);
+			position.y += gravity / 2 * dt;
 		else if (contact.y != 1)
-			position.y += ceil(gravity * dt);
+			position.y += gravity * dt;
 	}
 
 	if (super_godmode)
@@ -238,7 +238,7 @@ void Player::Update(float dt)
 			time = frames;
 			allowtime = false;
 		}
-		if (frames - time < 360)
+		if (frames - time < 360*dt)
 		{
 			App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
 		}
@@ -284,7 +284,7 @@ void Player::Jump(float dt)
 		if (frames - time <= jump_time / dt && contact.y == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(speed.y * dt);
+			position.y -= speed.y * dt;
 		}
 		else
 		{
@@ -317,15 +317,15 @@ void Player::Jump(float dt)
 		if (frames - time <= walljump_time / dt && contact.x == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(walljump_speed.y * dt);
+			position.y -= walljump_speed.y * dt;
 
 			if (jcontact == 1)
 			{
-				position.x += ceil(walljump_speed.x * dt);
+				position.x += walljump_speed.x * dt;
 				flip = true;
 			}
 			else if (jcontact == 2)
-				position.x -= ceil(walljump_speed.x * dt);
+				position.x -= walljump_speed.x * dt;
 		}
 		else
 		{

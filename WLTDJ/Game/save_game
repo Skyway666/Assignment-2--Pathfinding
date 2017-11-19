@@ -8,15 +8,15 @@
 	<map />
 	<:anonymous />
 	<entities>
-		<player x="7307" y="493.384644" map="1" />
+		<player x="1936.49548" y="405.19931" map="1" />
 		<enemies>
-			<ground_enemy x="-2313.35986" y="8257" />
-			<air_enemy x="3955.35254" y="595.534912" returning="false" is_idle="true" idle_speed="2" />
-			<air_enemy x="6488.53418" y="528.716675" returning="false" is_idle="false" idle_speed="2" />
-			<air_enemy x="1017.5141" y="930" returning="false" is_idle="true" idle_speed="2" />
-			<ground_enemy x="4031.8916" y="1128" />
-			<air_enemy x="6293.6709" y="756.497314" returning="true" is_idle="false" idle_speed="-2" />
-			<air_enemy x="5115.82959" y="1131.42725" returning="true" is_idle="false" idle_speed="-2" />
+			<ground_enemy x="4410.96777" y="4261" />
+			<air_enemy x="3925.66479" y="612" returning="false" is_idle="true" idle_speed="2" />
+			<air_enemy x="6373.65918" y="884" returning="false" is_idle="true" idle_speed="2" />
+			<air_enemy x="1298.04761" y="583.593079" returning="true" is_idle="false" idle_speed="-2" />
+			<ground_enemy x="4107.43115" y="1132" />
+			<air_enemy x="5829.65918" y="1020" returning="false" is_idle="true" idle_speed="2" />
+			<air_enemy x="5285.65918" y="1156" returning="false" is_idle="true" idle_speed="2" />
 		</enemies>
 	</entities>
 	<:anonymous />
