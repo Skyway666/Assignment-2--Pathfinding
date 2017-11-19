@@ -46,12 +46,6 @@ GroundEnemy::~GroundEnemy()
 
 void GroundEnemy::Update(float dt, bool do_logic)
 {
-	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
-	{
-		position.x = App->entities->player->position.x;
-		position.y = App->entities->player->position.y;
-	}
-
 	if (contact.y == 1)
 		spawned = true;
 
@@ -128,7 +122,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 void GroundEnemy::Exec_idle()
 {
-	if (turn || App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || front_of_unwalkable)
+	if (turn || front_of_unwalkable)
 		speed.x = -speed.x;
 
 	if (front_of_unwalkable && speed.x == 0)
@@ -208,9 +202,45 @@ void GroundEnemy::Save(pugi::xml_node& data)
 {
 	data.append_attribute("x") = position.x;
 	data.append_attribute("y") = position.y;
+	data.append_attribute("contact_x") = contact.x;
+	data.append_attribute("contact_y") = contact.y;
+	data.append_attribute("player_pos") = player_pos;
+	data.append_attribute("spawned") = spawned;
+	data.append_attribute("is_idle") = is_idle;
+	data.append_attribute("front_of_unwalkable") = front_of_unwalkable;
+	data.append_attribute("frames") = frames;
+	data.append_attribute("time") = time;
+	data.append_attribute("just_landed") = just_landed;
+	data.append_attribute("jumping_wall") = jumping_wall;
+	data.append_attribute("jump_x") = jump_x;
+	data.append_attribute("allow_time") = allowtime;
+	data.append_attribute("jumping") = jumping;
 }
 void GroundEnemy::Load(pugi::xml_node& data)
 {
-	position.x = data.attribute("x").as_int();
-	position.y = data.attribute("y").as_int();
+	position.x = data.attribute("x").as_float();
+	position.y = data.attribute("y").as_float();
+	contact.x = data.attribute("contact_x").as_int();
+	contact.y = data.attribute("contact_y").as_int();
+	player_pos = data.attribute("player_pos").as_int();
+	is_idle = data.attribute("is_idle").as_bool();
+	front_of_unwalkable = data.attribute("front_of_unwalkable").as_bool();
+	frames = data.attribute("frames").as_int();
+	time = data.attribute("time").as_int();
+	just_landed = data.attribute("just_landed").as_bool();
+	jumping_wall = data.attribute("jumping_wall").as_bool();
+	jump_x = data.attribute("jump_x").as_float();
+	allowtime = data.attribute("allowtime").as_bool();
+	jumping = data.attribute("jumping").as_bool();
+
+	if (contact.y == 1)
+		position.y -= gravity * 10;
+	if (contact.x == 1)
+		position.x += speed_modifier.x * 10;
+	else if (contact.x == 2)
+		position.x -= speed_modifier.x * 10;
+	if (jumping)
+		spawned = true;
+	else
+		spawned = false;
 }
