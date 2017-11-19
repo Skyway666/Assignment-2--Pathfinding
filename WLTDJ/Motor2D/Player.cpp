@@ -196,14 +196,14 @@ void Player::Update(float dt)
 
 
 	if (!walljumping)
-		position.x += ceil(speed.x * dt);
+		position.x += speed.x * dt;
 
 	if (contact.y != 1 && !super_godmode)
 	{
 		if (StickToWall)
-			position.y += ceil(gravity / 2 * dt);
+			position.y += gravity / 2 * dt;
 		else if (contact.y != 1)
-			position.y += ceil(gravity * dt);
+			position.y += gravity * dt;
 	}
 
 	if (super_godmode)
@@ -229,26 +229,6 @@ void Player::Update(float dt)
 	}
 
 	frames++;
-
-	// Win condition timer (Should not be done here, and timer should be the good one
-	if (win == true)
-	{
-		if (allowtime)
-		{
-			time = frames;
-			allowtime = false;
-		}
-		if (frames - time < 360)
-		{
-			App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
-		}
-		else
-		{
-			allowtime = true;
-			win = false;
-		}
-	}
-
 }
 
 void Player::WallSlide()
@@ -284,7 +264,7 @@ void Player::Jump(float dt)
 		if (frames - time <= jump_time / dt && contact.y == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(speed.y * dt);
+			position.y -= speed.y * dt;
 		}
 		else
 		{
@@ -317,15 +297,15 @@ void Player::Jump(float dt)
 		if (frames - time <= walljump_time / dt && contact.x == 0)
 		{
 			animation = &jump;
-			position.y -= ceil(walljump_speed.y * dt);
+			position.y -= walljump_speed.y * dt;
 
 			if (jcontact == 1)
 			{
-				position.x += ceil(walljump_speed.x * dt);
+				position.x += walljump_speed.x * dt;
 				flip = true;
 			}
 			else if (jcontact == 2)
-				position.x -= ceil(walljump_speed.x * dt);
+				position.x -= walljump_speed.x * dt;
 		}
 		else
 		{
@@ -476,6 +456,17 @@ void Player::OnCollision(Collider* collider)
 
 	}
 }
+void Player::WinScreen(float dt)
+{
+	// Win condition timer (Should not be done here, and timer should be the good one
+	if (win == true)
+	{
+		Win_timer.Start(5);
+		win = false;
+	}
+	if(!Win_timer.IsOver())
+	App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
+}
 void Player::Save(pugi::xml_node& data)
 {
 	data.append_attribute("x") = position.x;
@@ -488,3 +479,5 @@ void Player::Load(pugi::xml_node& data)
 	position.x = data.attribute("x").as_float();
 	position.y = data.attribute("y").as_float() - gravity * 2;
 }
+
+
