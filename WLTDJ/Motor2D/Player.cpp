@@ -88,7 +88,7 @@ void Player::Update(float dt)
 		}
 	}
 
-	if (!win && !dead)
+	if (Win_timer.IsOver() && !dead)
 	{
 		// Godmode
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -424,14 +424,15 @@ void Player::OnCollision(Collider* collider)
 		if (App->map->map == 0)
 		{
 			App->scene->Change_to_map(1);
-			App->entities->player->position.x = App->map->data.player_starting_value.x;
-			App->entities->player->position.y = App->map->data.player_starting_value.y;
+			position.x = App->map->data.player_starting_value.x;
+			position.y = App->map->data.player_starting_value.y - gravity * 2;
 		}
 		else if (App->map->map == 1)
 		{
 			App->scene->Change_to_map(0);
-			App->entities->player->position.x = App->map->data.player_starting_value.x;
-			App->entities->player->position.y = App->map->data.player_starting_value.y;
+			position.x = App->map->data.player_starting_value.x;
+			position.y = App->map->data.player_starting_value.y - gravity * 2;
+			speed.y = speed.x = 0;
 			win = true;
 		}
 	}
