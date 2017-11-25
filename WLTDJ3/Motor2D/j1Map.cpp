@@ -132,7 +132,7 @@ void j1Map::Draw()
 
 				//Now they are in pixels
 		
-				App->render->Blit(data.tilesets.At(0)->data->texture, x, y, 1, &Tile_Rect(id));
+				App->render->Blit(data.tilesets.At(0)->data->texture, x, y, 1,true, &Tile_Rect(id));
 			}
 			counter++;
 		}

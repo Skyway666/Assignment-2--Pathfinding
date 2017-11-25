@@ -14,6 +14,8 @@
 #include "j1Collisions.h"
 #include "j1Entities.h"
 #include "Pathfinding.h"
+#include "j1Gui.h"
+#include "j1Fonts.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -35,11 +37,16 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collision = new j1Collisions();
 	entities = new j1Entities();
 	pathfinding = new Pathfinding();
+	gui = new j1Gui();
+	fonts = new j1Fonts();
+
 
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(gui);
+	AddModule(fonts);
 	AddModule(scene);
 	AddModule(map);
 	AddModule(collision);

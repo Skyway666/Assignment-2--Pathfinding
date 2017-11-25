@@ -19,6 +19,8 @@ class j1Collisions;
 class j1Player;
 class j1Entities;
 class Pathfinding;
+class j1Gui;
+class j1Fonts;
 
 class j1App
 {
@@ -53,7 +55,6 @@ public:
 
 	void LoadGame();
 	void SaveGame() const;
-	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
 private:
 
@@ -92,6 +93,9 @@ public:
 	j1Collisions*		collision = nullptr;
 	j1Entities*			entities = nullptr;
 	Pathfinding*        pathfinding = nullptr;
+	j1Gui*				gui = nullptr;
+	j1Fonts*			fonts = nullptr;
+
 
 private:
 

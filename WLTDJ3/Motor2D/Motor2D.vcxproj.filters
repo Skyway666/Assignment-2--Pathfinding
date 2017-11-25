@@ -64,6 +64,12 @@
     <ClCompile Include="AirEnemy.cpp">
       <Filter>Modules, scenes and tools\Modules\EntitySystem\Entities\Air Entities</Filter>
     </ClCompile>
+    <ClCompile Include="j1Fonts.cpp">
+      <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Gui.cpp">
+      <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -155,6 +161,12 @@
     </ClInclude>
     <ClInclude Include="Chronometer.h">
       <Filter>Modules, scenes and tools\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Fonts.h">
+      <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Gui.h">
+      <Filter>Modules, scenes and tools\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

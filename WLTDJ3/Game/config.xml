@@ -47,9 +47,9 @@
     <fullscreen_window value="false"/>
   </window>
 
-  <file_system>
-    <path>data.zip</path>
-  </file_system>
+  <gui>
+    <atlas file="gui/atlas.png"/>
+  </gui>
 
   <map>
     <folder>maps/</folder>
