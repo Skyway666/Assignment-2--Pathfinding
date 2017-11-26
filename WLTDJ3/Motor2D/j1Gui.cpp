@@ -24,6 +24,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	background_file_name = conf.child("menu_background").attribute("file").as_string("");
 
 	return ret;
 }
@@ -32,21 +33,28 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	menu_background = App->tex->Load(background_file_name.GetString());
 
 	return true;
 }
 
-// Update all guis (logic updates will be executed here)
+// Update of all ui_elements will be executed here
 bool j1Gui::PreUpdate()
 {
 	return true;
 }
 
-// Called after all Updates ("draws" will be executed here)
+// Draw of all ui_elements and background will be executed here
 bool j1Gui::PostUpdate()
 {
+	App->render->Blit(menu_background, 0, 0);
+	//TEST
 	SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 255,255,255,255 });
 	App->render->Blit(text, 0, 0,3,true);
+	//TEST
+
+	
+
 	return true;
 }
 

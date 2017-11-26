@@ -49,6 +49,7 @@
 
   <gui>
     <atlas file="gui/atlas.png"/>
+    <menu_background file ="gui/menu_background.png"/>
   </gui>
 
   <map>

@@ -24,10 +24,10 @@ public:
 	// Call before first frame
 	bool Start();
 
-	// Update of all icons will be executed here
+	// Update of all ui_elements will be executed here
 	bool PreUpdate();
 
-	// Draw of all icons will be executed here
+	// Draw of all ui_elements and background will be executed here
 	bool PostUpdate();
 
 	// Called before quitting
@@ -45,7 +45,12 @@ public:
 private:
 
 	SDL_Texture* atlas;
+	//Background image(could be more)
+	SDL_Texture* menu_background; 
+
 	p2SString atlas_file_name;
+	p2SString background_file_name;
+
 };
 
 #endif // __j1GUI_H__
