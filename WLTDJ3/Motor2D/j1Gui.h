@@ -2,12 +2,18 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
+#include "ClickManager.h"
+#include "Ui_element.h"
+#include "p2List.h"
 
 #define CURSOR_WIDTH 2
 
+enum UI_ELEMENT_TYPE
+{
+	ICON,
+	BUTTON,
+};
 
-
-struct ui_collider;
 // ---------------------------------------------------
 class j1Gui : public j1Module
 {
@@ -48,8 +54,15 @@ private:
 	//Background image(could be more)
 	SDL_Texture* menu_background; 
 
+	//Paths to load assets
 	p2SString atlas_file_name;
 	p2SString background_file_name;
+	
+	//Ui_element list, this module is to manage this list exclusively
+	p2List<Ui_element*> ui_elements;
+	ClickManager* click_manager;
+
+
 
 };
 

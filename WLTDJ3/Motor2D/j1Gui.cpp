@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "ClickManager.h"
+#include "Ui_element.h"
 
 j1Gui::j1Gui() : j1Module()
 {

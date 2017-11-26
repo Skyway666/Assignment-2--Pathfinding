@@ -5,6 +5,9 @@
 //of the one that has been clicked. Then, the appropiated code will be executed.
 
 //The exact same procedure will function with "OverClick", which will trigger the animation of the mouse being pressed, and probably nothing else.
+
+struct ui_collider;
+
 class ClickManager
 {
 public:
