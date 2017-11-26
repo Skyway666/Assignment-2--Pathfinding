@@ -5,8 +5,9 @@
 
 #define CURSOR_WIDTH 2
 
-// TODO 1: Create your structure of classes
 
+
+struct ui_collider;
 // ---------------------------------------------------
 class j1Gui : public j1Module
 {
@@ -23,17 +24,21 @@ public:
 	// Call before first frame
 	bool Start();
 
-	// Called before all Updates
+	// Update of all icons will be executed here
 	bool PreUpdate();
 
-	// Called after all Updates
+	// Draw of all icons will be executed here
 	bool PostUpdate();
 
 	// Called before quitting
 	bool CleanUp();
 
-	// TODO 2: Create the factory methods
-	// Gui creation functions
+	//This method will call iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
+	//function. Then it will call its "OnClick" method
+	void OnClick(ui_collider* c1);
+
+	//Same as "OnClick", but will call "OverClick" methods
+	void OverClick(ui_collider* c1);
 
 	const SDL_Texture* GetAtlas() const;
 

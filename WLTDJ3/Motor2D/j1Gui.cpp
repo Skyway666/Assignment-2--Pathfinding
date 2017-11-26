@@ -6,6 +6,7 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
+#include "ClickManager.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -35,20 +36,33 @@ bool j1Gui::Start()
 	return true;
 }
 
-// Update all guis
+// Update all guis (logic updates will be executed here)
 bool j1Gui::PreUpdate()
 {
 	return true;
 }
 
-// Called after all Updates
+// Called after all Updates ("draws" will be executed here)
 bool j1Gui::PostUpdate()
 {
-	SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 0,0,0,255 });
-	App->render->Blit(text, 0, 0,3,false);
+	SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 255,255,255,255 });
+	App->render->Blit(text, 0, 0,3,true);
 	return true;
 }
 
+
+//This method will call iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
+//function. Then it will call its "OnClick" method
+void j1Gui::OnClick(ui_collider* c1)
+{
+
+}
+
+//Same as "OnClick", but will call "OverClick" methods
+void j1Gui::OverClick(ui_collider* c1)
+{
+
+}
 // Called before quitting
 bool j1Gui::CleanUp()
 {

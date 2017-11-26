@@ -70,7 +70,7 @@ bool j1Entities::Start()
 	App->map->bone_graphics = App->tex->Load("textures/BONE.png");
 	App->scene->win_screen = App->tex->Load("textures/WinScreen.png");
 
-	AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+	
 
 	return true;
 }

@@ -23,15 +23,20 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	App->map->Load("Level 1.2 provisional.tmx");
-	App->map->map = 0;
+	//This are the conditions that make the game start. In order to end it, all entities should be erased and execute map's cleanup
+	//colliders should also be cleaned up
+
+	//App->map->Load("Level 1.2 provisional.tmx");
+	//App->map->map = 0;
+	//App->pathfinding->SetMap();	
+	//App->entities->Spawn_waiting_entities();
+	//App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+
+
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 
 
-	//JUST A TEST
-	App->pathfinding->SetMap();	
 
-	App->entities->Spawn_waiting_entities();
 
 	return true;
 }
@@ -78,8 +83,11 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 50 * dt;
 	
 	// Set camera to follow the player (commented in order to debug better)
-	App->render->camera.x = -App->entities->player->position.x + 400;
-	App->render->camera.y = -App->entities->player->position.y + 400;
+	if(App->entities->player != nullptr)
+	{ 
+		App->render->camera.x = -App->entities->player->position.x + 400;
+		App->render->camera.y = -App->entities->player->position.y + 400;
+	}
 
 	//Camera limit (don't let player see ugly stuff)
 	if (App->render->camera.y < App->map->data.camera_y_limit)

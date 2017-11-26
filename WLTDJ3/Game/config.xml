@@ -54,5 +54,9 @@
   <map>
     <folder>maps/</folder>
   </map>
+  
+  <fonts>
+    <default_font file ="fonts/open_sans/OpenSans-BoldItalic.ttf"/>
+  </fonts>
 
 </config>
