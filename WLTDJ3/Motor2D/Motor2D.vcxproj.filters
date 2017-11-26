@@ -76,6 +76,10 @@
     <ClCompile Include="Ui_element.cpp">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements</Filter>
     </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -180,6 +184,10 @@
     <ClInclude Include="Ui_element.h">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements</Filter>
     </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="p2 libraries">
@@ -226,6 +234,12 @@
     </Filter>
     <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements">
       <UniqueIdentifier>{4472fdb5-2d61-4841-8da5-6a749ff745de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements\Icon">
+      <UniqueIdentifier>{a7fc6ab6-6af1-4d4f-8b4f-164a42454120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements\Button">
+      <UniqueIdentifier>{126fffc1-4c30-47b0-90f8-504bc898cf8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

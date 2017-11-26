@@ -39,7 +39,10 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	//This method will call iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
+	//Add a ui element to "ui_elements" 
+	Ui_element* AddUi_element(int x, int y, UI_ELEMENT_TYPE type);
+
+	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
 	//function. Then it will call its "OnClick" method
 	void OnClick(ui_collider* c1);
 

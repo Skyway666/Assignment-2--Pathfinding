@@ -8,6 +8,8 @@
 #include "j1Gui.h"
 #include "ClickManager.h"
 #include "Ui_element.h"
+#include "Icon.h"
+#include "Button.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -36,6 +38,9 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 	menu_background = App->tex->Load(background_file_name.GetString());
 
+	//TEST
+	AddUi_element(0, 0, ICON);
+
 	return true;
 }
 
@@ -49,6 +54,12 @@ bool j1Gui::PreUpdate()
 bool j1Gui::PostUpdate()
 {
 	App->render->Blit(menu_background, 0, 0);
+	
+	for (uint i = 0; i < ui_elements.count(); ++i)
+	{
+		if (ui_elements[i] != nullptr)
+			ui_elements[i]->Draw(atlas);
+	}
 	//TEST
 	SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 255,255,255,255 });
 	App->render->Blit(text, 0, 0,3,true);
@@ -59,8 +70,30 @@ bool j1Gui::PostUpdate()
 	return true;
 }
 
+Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type)
+{
+	Ui_element* new_ui_element = nullptr;
 
-//This method will call iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
+	switch (type) {
+		case UI_ELEMENT_TYPE::ICON:
+		{
+			new_ui_element = new Icon(x, y);
+			ui_elements.add(new_ui_element);
+			break;
+		}
+
+		case UI_ELEMENT_TYPE::BUTTON:
+		{
+			new_ui_element = new Button(x, y);
+			ui_elements.add(new_ui_element);
+			break;
+		}
+	}
+	return new_ui_element;
+	
+}
+
+//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
 //function. Then it will call its "OnClick" method
 void j1Gui::OnClick(ui_collider* c1)
 {
