@@ -12,13 +12,12 @@
 
 class ClickManager;
 struct Ui_collider;
-enum UI_ELEMENT_TYPE
+enum UI_ELEMENT_TYPE //Type of ui elements avaliable
 {
 	ICON,
 	BUTTON,
-	TEXT
 };
-enum BUTTON_TYPE
+enum BUTTON_TYPE //Knowing what type of button we are creating
 {
 	NONE,
 	START,
@@ -66,7 +65,8 @@ public:
 	//Add a ui element to "ui_elements" 
 	Ui_element* AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text = nullptr, BUTTON_TYPE button_type = NONE);
 
-	Text* Add_text(int x, int y, const char* text);
+	//Ad text as UI
+	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
 
 	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
 	//function. Then it will call its "OnClick" method
@@ -78,8 +78,10 @@ public:
 	const SDL_Texture* GetAtlas() const;
 	
 	ClickManager* click_manager;
-
+	//TEST
 	bool active = true;
+	_TTF_Font* title;
+	//TEST
 
 private:
 

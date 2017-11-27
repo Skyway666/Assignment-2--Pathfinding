@@ -6,10 +6,14 @@
 #include "j1Gui.h"
 
 
-Text::Text(int x, int y, const char* _string) : Ui_element(x, y)
+Text::Text(int x, int y, const char* _string, _TTF_Font* font) : Ui_element(x, y)
 {
-	graphic = App->fonts->Print(_string);
-	type = TEXT;
+	if(font != nullptr)
+		graphic = App->fonts->Print(_string, { 255,255,255,255 }, font);
+	else
+	{
+		graphic = App->fonts->Print(_string);
+	}
 }
 
 

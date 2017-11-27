@@ -41,10 +41,15 @@ bool j1Gui::Start()
 	menu_background = App->tex->Load(background_file_name.GetString());
 
 	//TEST
+	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
+
 	Text* text_to_link = Add_text(0, 0, "START");
-	Add_text(500, 500, "It really works, man i'm a genious");
+	Add_text(100, 100, "WHO LET THE DOG JUMP", title);
 	Linked_text final_text(90, 22, text_to_link);
 	AddUi_element(300, 300, BUTTON, &final_text);
+
+	
+	//TEST
 
 	return true;
 }
@@ -75,10 +80,6 @@ bool j1Gui::PostUpdate()
 			if (texts[i] != nullptr)
 				texts[i]->Draw();
 		}
-		//TEST
-		SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 255,255,255,255 });
-		App->render->Blit(text, 0, 0,3,true);
-		//TEST
     }
 	
 
@@ -107,9 +108,9 @@ Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text
 	return new_ui_element;
 }
 
-Text* j1Gui::Add_text(int x, int y, const char* text)
+Text* j1Gui::Add_text(int x, int y, const char* text, _TTF_Font* font)
 {
-	Text* new_text = new Text(x, y, text);
+	Text* new_text = new Text(x, y, text, font);
 	texts.add(new_text);
 
 	return new_text;
