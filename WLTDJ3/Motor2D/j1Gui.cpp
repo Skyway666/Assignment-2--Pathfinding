@@ -7,9 +7,10 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "ClickManager.h"
-#include "Ui_element.h"
-#include "Icon.h"
-#include "Button.h"
+
+//This structure contains a pointer to a text and its offset. Its only use is to be passed to the icon or button constructor in order to have a text
+//linked to it
+
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -39,7 +40,10 @@ bool j1Gui::Start()
 	menu_background = App->tex->Load(background_file_name.GetString());
 
 	//TEST
-	AddUi_element(0, 0, ICON);
+	Text* text_to_link = Add_text(0, 0, "ITWORKS?");
+	Add_text(500, 500, "It really works, man i'm a genious");
+	Linked_text final_text(100, 100, text_to_link);
+	AddUi_element(300, 300, ICON, &final_text);
 
 	return true;
 }
@@ -70,27 +74,36 @@ bool j1Gui::PostUpdate()
 	return true;
 }
 
-Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type)
+Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text)
 {
 	Ui_element* new_ui_element = nullptr;
 
 	switch (type) {
 		case UI_ELEMENT_TYPE::ICON:
 		{
-			new_ui_element = new Icon(x, y);
+			new_ui_element = new Icon(x, y,text);
 			ui_elements.add(new_ui_element);
 			break;
 		}
 
 		case UI_ELEMENT_TYPE::BUTTON:
 		{
-			new_ui_element = new Button(x, y);
+
+			new_ui_element = new Button(x, y,text);
 			ui_elements.add(new_ui_element);
 			break;
 		}
 	}
 	return new_ui_element;
 	
+}
+
+Text* j1Gui::Add_text(int x, int y, const char* text)
+{
+	Ui_element* new_text = new Text(x, y, text);
+	ui_elements.add(new_text);
+
+	return (Text*)new_text;
 }
 
 //This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 

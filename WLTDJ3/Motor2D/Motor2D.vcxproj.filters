@@ -79,7 +79,12 @@
     <ClCompile Include="Icon.cpp">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Icon</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Button.cpp">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -187,7 +192,12 @@
     <ClInclude Include="Icon.h">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Icon</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Button.h">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="p2 libraries">
@@ -240,6 +250,9 @@
     </Filter>
     <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements\Button">
       <UniqueIdentifier>{126fffc1-4c30-47b0-90f8-504bc898cf8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements\Text">
+      <UniqueIdentifier>{cc946534-963e-4e48-b998-9de8ebe1bbb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

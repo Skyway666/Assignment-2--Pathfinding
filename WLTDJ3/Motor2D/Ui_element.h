@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "p2Point.h"
+
 //Base class for every UI_Element
 struct SDL_Texture;
 enum UI_ELEMENT_TYPE;
