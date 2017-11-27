@@ -6,7 +6,7 @@ class Text : public Ui_element
 public:
 	Text(int x, int y, const char* _string);
 	~Text();
-	void Draw(SDL_Texture*);
+	void Draw();
 private:
 
 	SDL_Texture* graphic;

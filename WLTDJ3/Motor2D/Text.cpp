@@ -18,7 +18,7 @@ Text::~Text()
 
 }
 
-void Text::Draw(SDL_Texture* useless_argument)
+void Text::Draw()
 {
 	App->render->Blit(graphic, position.x, position.y);
 }

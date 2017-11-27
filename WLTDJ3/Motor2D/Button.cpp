@@ -3,6 +3,10 @@
 #include "ClickManager.h"
 #include "j1App.h"
 #include "p2Log.h"
+#include "j1Map.h"
+#include "Pathfinding.h"
+#include "j1Entities.h"
+#include "Pathfinding.h"
 
 
 Button::Button(int x, int y, Linked_text* text, BUTTON_TYPE _button_type) : Ui_element(x, y)
@@ -32,5 +36,13 @@ Button::~Button()
 
 void Button::OnClick()
 {
-	LOG("CLICK!");
+	//TEST
+	App->map->Load("Level 1.2 provisional.tmx");
+	App->map->map = 0;
+	App->pathfinding->SetMap();	
+	App->entities->Spawn_waiting_entities();
+	App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+
+	App->gui->active = false;
+	//TEST
 }

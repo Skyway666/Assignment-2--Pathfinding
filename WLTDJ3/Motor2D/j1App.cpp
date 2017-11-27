@@ -233,8 +233,6 @@ void j1App::FinishUpdate()
 	{
 		SDL_Delay(expected_delay);
 		real_delay = timer.ReadMs();
-
-		LOG("We waited for %f milliseconds and got back in %f", expected_delay, real_delay);
 	}
 }
 

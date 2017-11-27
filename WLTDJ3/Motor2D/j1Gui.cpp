@@ -41,9 +41,9 @@ bool j1Gui::Start()
 	menu_background = App->tex->Load(background_file_name.GetString());
 
 	//TEST
-	Text* text_to_link = Add_text(0, 0, "ITWORKS?");
+	Text* text_to_link = Add_text(0, 0, "START");
 	Add_text(500, 500, "It really works, man i'm a genious");
-	Linked_text final_text(100, 30, text_to_link);
+	Linked_text final_text(90, 22, text_to_link);
 	AddUi_element(300, 300, BUTTON, &final_text);
 
 	return true;
@@ -59,18 +59,27 @@ bool j1Gui::PreUpdate()
 // Draw of all ui_elements and background will be executed here
 bool j1Gui::PostUpdate()
 {
-	App->render->Blit(menu_background, 0, 0);
+	if (active)//TEST
+	{ 
+		App->render->Blit(menu_background, 0, 0);
 	
-	for (uint i = 0; i < ui_elements.count(); ++i)
-	{
-		if (ui_elements[i] != nullptr)
-			ui_elements[i]->Draw(atlas);
-	}
-	//TEST
-	SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 255,255,255,255 });
-	App->render->Blit(text, 0, 0,3,true);
-	//TEST
-
+		//Blit all ui_elements
+		for (uint i = 0; i < ui_elements.count(); ++i)
+		{
+			if (ui_elements[i] != nullptr)
+				ui_elements[i]->Draw(atlas);
+		}
+		//Blit all texts
+		for (uint i = 0; i < texts.count(); ++i)
+		{
+			if (texts[i] != nullptr)
+				texts[i]->Draw();
+		}
+		//TEST
+		SDL_Texture* text = App->fonts->Print("DEBERIAS TRABAJAR LOS FINES DE SEMANA, WAIFU DRAWER", { 255,255,255,255 });
+		App->render->Blit(text, 0, 0,3,true);
+		//TEST
+    }
 	
 
 	return true;
@@ -100,10 +109,10 @@ Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text
 
 Text* j1Gui::Add_text(int x, int y, const char* text)
 {
-	Ui_element* new_text = new Text(x, y, text);
-	ui_elements.add(new_text);
+	Text* new_text = new Text(x, y, text);
+	texts.add(new_text);
 
-	return (Text*)new_text;
+	return new_text;
 }
 
 //This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 

@@ -112,7 +112,7 @@ void j1Map::Draw()
 
 
 	//Blit bone
-	 App->render->Blit(bone_graphics, data.bone_position.x, data.bone_position.y, 1 , &bone_animation.GetCurrentFrame());
+	 App->render->Blit(bone_graphics, data.bone_position.x, data.bone_position.y, 1 ,true, &bone_animation.GetCurrentFrame());
 
 
 	int counter = 0;

@@ -79,6 +79,8 @@ public:
 	
 	ClickManager* click_manager;
 
+	bool active = true;
+
 private:
 
 	SDL_Texture* atlas;
@@ -91,6 +93,8 @@ private:
 	
 	//Ui_element list, this module is to manage this list exclusively
 	p2List<Ui_element*> ui_elements;
+	//Text list. Separated from the ui elements list because they have to be drawn afterwards
+	p2List<Text*> texts;
 	
 
 
