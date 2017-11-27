@@ -2,7 +2,6 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
-#include "Ui_element.h"
 #include "Icon.h"
 #include "Button.h"
 #include "Text.h"
@@ -18,6 +17,13 @@ enum UI_ELEMENT_TYPE
 	ICON,
 	BUTTON,
 	TEXT
+};
+enum BUTTON_TYPE
+{
+	NONE,
+	START,
+	OPTIONS,
+	CREDITS
 };
 struct Linked_text
 {
@@ -58,7 +64,7 @@ public:
 	bool CleanUp();
 
 	//Add a ui element to "ui_elements" 
-	Ui_element* AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text = nullptr);
+	Ui_element* AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text = nullptr, BUTTON_TYPE button_type = NONE);
 
 	Text* Add_text(int x, int y, const char* text);
 
@@ -70,6 +76,8 @@ public:
 	void OverClick(Ui_collider* c1);
 
 	const SDL_Texture* GetAtlas() const;
+	
+	ClickManager* click_manager;
 
 private:
 
@@ -83,7 +91,7 @@ private:
 	
 	//Ui_element list, this module is to manage this list exclusively
 	p2List<Ui_element*> ui_elements;
-	ClickManager* click_manager;
+	
 
 
 

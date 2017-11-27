@@ -15,6 +15,7 @@
 j1Gui::j1Gui() : j1Module()
 {
 	name.create("gui");
+	click_manager = new ClickManager();
 }
 
 // Destructor
@@ -42,8 +43,8 @@ bool j1Gui::Start()
 	//TEST
 	Text* text_to_link = Add_text(0, 0, "ITWORKS?");
 	Add_text(500, 500, "It really works, man i'm a genious");
-	Linked_text final_text(100, 100, text_to_link);
-	AddUi_element(300, 300, ICON, &final_text);
+	Linked_text final_text(100, 30, text_to_link);
+	AddUi_element(300, 300, BUTTON, &final_text);
 
 	return true;
 }
@@ -51,6 +52,7 @@ bool j1Gui::Start()
 // Update of all ui_elements will be executed here
 bool j1Gui::PreUpdate()
 {
+	click_manager->Update();
 	return true;
 }
 
@@ -74,7 +76,7 @@ bool j1Gui::PostUpdate()
 	return true;
 }
 
-Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text)
+Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text, BUTTON_TYPE button_type)
 {
 	Ui_element* new_ui_element = nullptr;
 
@@ -88,14 +90,12 @@ Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text
 
 		case UI_ELEMENT_TYPE::BUTTON:
 		{
-
-			new_ui_element = new Button(x, y,text);
+			new_ui_element = new Button(x, y,text, button_type);
 			ui_elements.add(new_ui_element);
 			break;
 		}
 	}
 	return new_ui_element;
-	
 }
 
 Text* j1Gui::Add_text(int x, int y, const char* text)
@@ -110,7 +110,16 @@ Text* j1Gui::Add_text(int x, int y, const char* text)
 //function. Then it will call its "OnClick" method
 void j1Gui::OnClick(Ui_collider* c1)
 {
-
+	for (int i = 0; i < ui_elements.count(); i++)
+	{
+		if(ui_elements[i] != nullptr)
+		{
+			if (ui_elements[i]->collider == c1)
+			{
+				ui_elements[i]->OnClick();
+			}
+		}
+	}
 }
 
 //Same as "OnClick", but will call "OverClick" methods
@@ -122,7 +131,14 @@ void j1Gui::OverClick(Ui_collider* c1)
 bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-
+	for (int i = 0; i < ui_elements.count(); i++)
+	{
+		delete ui_elements[i];
+		ui_elements[i] = nullptr;
+	}
+	click_manager->Cleanup();//Free all ui_colliders
+	delete click_manager;
+	click_manager = nullptr;
 	return true;
 }
 
