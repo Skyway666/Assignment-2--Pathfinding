@@ -2,16 +2,17 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
-#include "ClickManager.h"
 #include "Ui_element.h"
 #include "Icon.h"
 #include "Button.h"
 #include "Text.h"
-
 #include "p2List.h"
+
 
 #define CURSOR_WIDTH 2
 
+class ClickManager;
+struct Ui_collider;
 enum UI_ELEMENT_TYPE
 {
 	ICON,
@@ -63,10 +64,10 @@ public:
 
 	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
 	//function. Then it will call its "OnClick" method
-	void OnClick(ui_collider* c1);
+	void OnClick(Ui_collider* c1);
 
 	//Same as "OnClick", but will call "OverClick" methods
-	void OverClick(ui_collider* c1);
+	void OverClick(Ui_collider* c1);
 
 	const SDL_Texture* GetAtlas() const;
 

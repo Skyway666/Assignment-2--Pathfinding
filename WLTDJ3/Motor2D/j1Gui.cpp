@@ -108,13 +108,13 @@ Text* j1Gui::Add_text(int x, int y, const char* text)
 
 //This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
 //function. Then it will call its "OnClick" method
-void j1Gui::OnClick(ui_collider* c1)
+void j1Gui::OnClick(Ui_collider* c1)
 {
 
 }
 
 //Same as "OnClick", but will call "OverClick" methods
-void j1Gui::OverClick(ui_collider* c1)
+void j1Gui::OverClick(Ui_collider* c1)
 {
 
 }
