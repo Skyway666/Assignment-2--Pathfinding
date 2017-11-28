@@ -10,27 +10,31 @@ public:
 	{
 		time = amount_of_time * 1000;
 		timer_duration = SDL_GetTicks() + time;
-		pause_timer = timer_duration;
 		timer_active = true;
 	}
 
 	void NewTime()
 	{
-		if (App->pause && !pause_timer_taken)
+		if (App->pause)
+			was_paused = true;
+		else if (was_paused)
 		{
-			pause_timer = ((SDL_GetTicks() + time) - SDL_GetTicks()) / 1000;
-			pause_timer_taken = true;
+			was_paused = false;
+			pause_time_taken = true;
 		}
-		else if (!App->pause && pause_timer_taken)
+
+		if (!was_paused && pause_time_taken)
 		{
-			Start(pause_timer);
-			pause_timer_taken = false;
+			Start((timer_duration - SDL_GetTicks()) / 1000);
+			pause_time_taken = false;
 		}
 	}
 
 	bool IsOver()
 	{
-		if (timer_active)
+		NewTime();
+
+		if (timer_active && !App->pause)
 		{
 			if (timer_duration > SDL_GetTicks())
 				return false;
@@ -60,7 +64,7 @@ private:
 	float time = 0;
 	int timer_duration = 0;
 	bool timer_active = false;
-	bool pause_timer_taken = false;
-	float pause_timer = 0;
+	bool was_paused = false;
+	bool pause_time_taken = false;
 };
 
