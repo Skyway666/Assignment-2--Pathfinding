@@ -1,7 +1,7 @@
 #include "ClickManager.h"
 #include "j1Input.h"
 #include "j1App.h"
-
+#include "p2Log.h"
 
 ClickManager::ClickManager()
 {
@@ -30,13 +30,22 @@ void ClickManager::Update()
 	{
 		if(colliders[i] != nullptr) //Skip empty colliders
 		{ 
-			if (colliders[i]->CheckCollision(mouse_position))
+			if (colliders[i]->CheckCollision(mouse_position) && !colliders[i]->mouse_over)
 			{
-				App->gui->OverClick(colliders[i]);
-				if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
-				{
-					App->gui->OnClick(colliders[i]);
-				}
+				colliders[i]->mouse_over = true;
+				App->gui->OnMouseEvent_caller(colliders[i], MOUSE_ENTER);
+				LOG("ENTER");
+			}
+			if (colliders[i]->mouse_over && !colliders[i]->CheckCollision(mouse_position))
+			{
+				colliders[i]->mouse_over = false;
+				App->gui->OnMouseEvent_caller(colliders[i], MOUSE_EXIT);
+				LOG("EXIT");
+			}
+			if (colliders[i]->mouse_over && App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			{
+				App->gui->OnMouseEvent_caller(colliders[i], MOUSE_CLICK);
+				LOG("CLICK");
 			}
 		}
 	}

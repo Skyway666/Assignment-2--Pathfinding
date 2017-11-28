@@ -162,21 +162,24 @@ void j1Scene::Change_to_map(int _map)
 
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
-	if (element == start)
-	{
-		//TEST
-		App->map->Load("Level 1.2 provisional.tmx");
-		App->map->map = 0;
-		App->pathfinding->SetMap();
-		App->entities->Spawn_waiting_entities();
-		App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+	if(event == MOUSE_CLICK)
+	{ 
+		if (element == start)
+		{
+			//TEST
+			App->map->Load("Level 1.2 provisional.tmx");
+			App->map->map = 0;
+			App->pathfinding->SetMap();
+			App->entities->Spawn_waiting_entities();
+			App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
 
-		App->gui->active = false;
-		//TEST
-	}
-	if (element == boom)
-	{
-		Ui_element* boom_baby = nullptr;
-		boom_baby->animation = false;
+			App->gui->active = false;
+			//TEST
+		}
+		if (element == boom)
+		{
+			Ui_element* boom_baby = nullptr;
+			boom_baby->animation = false;
+		}
 	}
 }

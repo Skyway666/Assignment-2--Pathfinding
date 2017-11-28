@@ -18,15 +18,6 @@ public:
 	//In charge of drawing current animation
 	virtual void Draw(SDL_Texture*);
 
-	//MAYBE THIS SHOULDN'T BE HERE
-	//Code to execute when button is clicked
-	virtual void OnClick() {};
-	//Code to execute when mouse is over button
-	virtual void OverClick() {};
-	//Collider
-	Ui_collider* collider;
-	//MAYBE THIS SHOULDN'T BE HERE
-
 	iPoint position; //Position where will be drawn
 	Animation* animation;//Animation which will be executed by "Draw"
 	UI_ELEMENT_TYPE type; //Type of UI element

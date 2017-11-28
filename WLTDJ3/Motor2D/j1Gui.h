@@ -78,10 +78,7 @@ public:
 
 	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the 
 	//one given to the function. Then it will call the global "OnClick" method and "OnClick" method of the UI element, which will change the label.
-	void OnClick(Ui_collider* c1);
-
-	//Same as "OnClick", but will call "OverClick" methods (of the UI elements)
-	void OverClick(Ui_collider* c1);
+	void OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event);
 
 	const SDL_Texture* GetAtlas() const;
 	
@@ -100,8 +97,10 @@ private:
 	p2SString atlas_file_name;
 	p2SString background_file_name;
 	
-	//Ui_element list, this module is to manage this list exclusively
-	p2List<Ui_element*> ui_elements;
+	//Icons list
+	p2List<Icon*> icons;
+	//Buttons list
+	p2List<Button*> buttons;
 	//Text list. Separated from the ui elements list because they have to be drawn afterwards
 	p2List<Text*> texts;
 	

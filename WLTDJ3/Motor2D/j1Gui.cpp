@@ -58,11 +58,17 @@ bool j1Gui::PostUpdate()
 	{ 
 		App->render->Blit(menu_background, 0, 0);
 	
-		//Blit all ui_elements
-		for (uint i = 0; i < ui_elements.count(); ++i)
+		//Blit all buttons
+		for (uint i = 0; i < buttons.count(); ++i)
 		{
-			if (ui_elements[i] != nullptr)
-				ui_elements[i]->Draw(atlas);
+			if (buttons[i] != nullptr)
+				buttons[i]->Draw(atlas);
+		}
+		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
+		for (uint i = 0; i < icons.count(); ++i)
+		{
+			if (icons[i] != nullptr)
+				icons[i]->Draw(atlas);
 		}
 		//Blit all texts
 		for (uint i = 0; i < texts.count(); ++i)
@@ -81,7 +87,7 @@ Icon* j1Gui::Add_icon(int x, int y,Linked_text* text)
 	Icon* new_ui_element = nullptr;
 
 	new_ui_element = new Icon(x, y,text);
-	ui_elements.add(new_ui_element);
+	icons.add(new_ui_element);
 
 	return new_ui_element;
 }
@@ -91,7 +97,7 @@ Button* j1Gui::Add_button(int x, int y, j1Module* _listener, Linked_text* text, 
 	Button* new_ui_element = nullptr;
 
 	new_ui_element = new Button(x, y,_listener,button_type, text);
-	ui_elements.add(new_ui_element);
+	buttons.add(new_ui_element);
 
 	return new_ui_element;
 }
@@ -104,36 +110,41 @@ Text* j1Gui::Add_text(int x, int y, const char* text, _TTF_Font* font)
 	return new_text;
 }
 
-//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
+//This method will iterate over all the colliders of the icons in the "buttons" list, looking for the one that has the same collider that the one given to the 
 //function. Then it will call its "OnClick" method
-void j1Gui::OnClick(Ui_collider* c1)
+void j1Gui::OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event)
 {
-	for (int i = 0; i < ui_elements.count(); i++)
+	for (int i = 0; i < buttons.count(); i++)
 	{
-		if(ui_elements[i] != nullptr)
+		if(buttons[i] != nullptr)
 		{
-			if (ui_elements[i]->collider == c1)
+			if (buttons[i]->collider == c1)
 			{
-				ui_elements[i]->listener->OnMouseEvent(MOUSE_CLICK, ui_elements[i]);
-				ui_elements[i]->OnClick();
+				buttons[i]->listener->OnMouseEvent(event, buttons[i]);
+				buttons[i]->OnMouseEvent(event);
 			}
 		}
 	}
 }
 
-//Same as "OnClick", but will call "OverClick" methods
-void j1Gui::OverClick(Ui_collider* c1)
-{
-
-}
 // Called before quitting
 bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-	for (int i = 0; i < ui_elements.count(); i++)
+	for (int i = 0; i < icons.count(); i++)
 	{
-		delete ui_elements[i];
-		ui_elements[i] = nullptr;
+		delete icons[i];
+		icons[i] = nullptr;
+	}
+	for (int i = 0; i < buttons.count(); i++)
+	{
+		delete buttons[i];
+		buttons[i] = nullptr;
+	}
+	for (int i = 0; i < texts.count(); i++)
+	{
+		delete texts[i];
+		texts[i] = nullptr;
 	}
 	click_manager->Cleanup();//Free all ui_colliders
 	delete click_manager;

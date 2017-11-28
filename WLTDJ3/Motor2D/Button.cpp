@@ -35,12 +35,7 @@ Button::~Button()
 
 }
 
-void Button::OnClick()
-{
-
-}
-
-void Button::OverClick()
+void Button::OnMouseEvent(UI_EVENT event)
 {
 
 }
