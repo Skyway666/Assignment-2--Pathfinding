@@ -16,6 +16,7 @@ Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type, Link
 	Idle.PushBack({ 2,112,226,67 });
 	Idle.loop = false;
 
+	listener = _listener;
 	collider = App->gui->click_manager->Add_ui_collider({x,y,226,67 });
 
 	if (text != nullptr)

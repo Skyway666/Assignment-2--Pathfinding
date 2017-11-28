@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "p2Point.h"
+#include "j1Module.h"
 
 //Base class for every UI_Element
 struct SDL_Texture;

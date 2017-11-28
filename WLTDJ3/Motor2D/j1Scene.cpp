@@ -1,6 +1,8 @@
 
 #include "j1Scene.h"
-
+#include "j1Gui.h"
+#include "Player.h"
+#include "j1Fonts.h"
 
 
 j1Scene::j1Scene() : j1Module()
@@ -46,7 +48,7 @@ bool j1Scene::Start()
 
 	Text* text_to_link2 = App->gui->Add_text(0, 0, "DON'T PRESS THIS BUTTON");
 	Linked_text final_text2(17, 22, text_to_link2);
-	boom = App->gui->Add_button(300, 500, (j1Module*)this, &final_text, START);
+	boom = App->gui->Add_button(300, 500, (j1Module*)this, &final_text2, START);
 
 	//TEST
 
