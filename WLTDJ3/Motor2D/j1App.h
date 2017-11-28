@@ -131,8 +131,9 @@ public:
 
 	uint	framerate_cap = 30;
 	uint	config_framerate_cap;
-	char* Vsync = "On";
-	char* cap = "On";
+	char*	Vsync = "On";
+	char*	cap = "On";
+	bool	pause = false;
 };
 
 extern j1App* App;

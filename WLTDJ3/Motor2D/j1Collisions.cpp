@@ -346,8 +346,12 @@ void j1Collisions::UpdateGroundPath()
 			continue;
 
 		iPoint distance;
-		distance.x = abs(colliders[i]->rect.x - (App->entities->player->position.x + App->entities->player->collider->rect.w / 2));
-		distance.y = abs(colliders[i]->rect.y - (App->entities->player->position.y + App->entities->player->collider->rect.h / 2));
+
+		if (App->entities->player->collider != nullptr)
+		{
+			distance.x = abs(colliders[i]->rect.x - (App->entities->player->position.x + App->entities->player->collider->rect.w / 2));
+			distance.y = abs(colliders[i]->rect.y - (App->entities->player->position.y + App->entities->player->collider->rect.h / 2));
+		}
 
 		if (distance.x <= App->entities->player->pathfinding_distance.x && distance.y <= App->entities->player->pathfinding_distance.y)
 			colliders[i]->type = COLLIDER_PATH;

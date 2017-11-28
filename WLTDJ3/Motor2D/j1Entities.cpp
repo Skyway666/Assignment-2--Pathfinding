@@ -78,43 +78,44 @@ bool j1Entities::Start()
 // Called before render is available
 bool j1Entities::Update(float dt)
 {
-	// Manage entities' physics
-	for (uint i = 0; i < entities.count(); ++i)
+	if (!App->pause)
 	{
-		if (entities[i] != nullptr && (entities[i]->type == ENTITY_TYPES::PLAYER || entities[i]->type == ENTITY_TYPES::GROUND_ENEMY))
-			entities[i]->ManagePhysics(dt);
-	}
-
-	if (player != nullptr)
-		player->ManagePhysics(dt);
-
-	// Update all entities
+		// Manage entities' physics
 		for (uint i = 0; i < entities.count(); ++i)
-		{ 
+		{
+			if (entities[i] != nullptr && (entities[i]->type == ENTITY_TYPES::PLAYER || entities[i]->type == ENTITY_TYPES::GROUND_ENEMY))
+				entities[i]->ManagePhysics(dt);
+		}
+
+		if (player != nullptr)
+			player->ManagePhysics(dt);
+
+		// Update all entities
+		for (uint i = 0; i < entities.count(); ++i)
+		{
 			if (entities[i] != nullptr)
 				entities[i]->Update(dt, do_logic.IsOver());
 		}
 
-	if (player != nullptr)
-		player->Update(dt);
-	    
+		if (player != nullptr)
+			player->Update(dt);
 
+		//Update enemies logic every 0.5 seconds
+		if (do_logic.IsOver())
+			do_logic.Start(0.5);
+	}
 	// Draw all entities
 	for (uint i = 0; i < entities.count(); ++i)
-	{ 
+	{
 		if (entities[i] != nullptr)
 			entities[i]->Draw(enemy_sprites);
 	}
 
 	if (player != nullptr)
-	{ 
+	{
 		player->WinScreen(dt); //Provisional
 		player->Draw(player_sprites);
 	}
-
-	//Update enemies logic every 0.5 seconds
-	if (do_logic.IsOver())
-		do_logic.Start(0.5);
 
 	return true;
 }

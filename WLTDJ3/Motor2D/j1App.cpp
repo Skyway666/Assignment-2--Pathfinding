@@ -149,6 +149,30 @@ bool j1App::Update()
 	bool ret = true;
 	PrepareUpdate();
 
+	if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !pause)
+		pause = true;
+	else if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && pause)
+		pause = false;
+
+	if (!pause)
+	{
+		tex->active = true;
+		entities->active = true;
+		//gui->active = true;
+		collision->active = true;
+		map->active = true;
+		scene->active = true;
+	}
+	else
+	{
+		tex->active = false;
+		entities->active = false;
+		gui->active = false;
+		collision->active = false;
+		map->active = false;
+		scene->active = false;
+	}
+
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
 
