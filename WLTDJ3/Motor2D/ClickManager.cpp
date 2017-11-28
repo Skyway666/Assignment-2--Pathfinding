@@ -39,7 +39,6 @@ void ClickManager::Update()
 				}
 			}
 		}
-		//Check for collisions and call apropiated methods
 	}
 }
 

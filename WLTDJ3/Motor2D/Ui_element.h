@@ -29,5 +29,6 @@ public:
 	iPoint position; //Position where will be drawn
 	Animation* animation;//Animation which will be executed by "Draw"
 	UI_ELEMENT_TYPE type; //Type of UI element
+	j1Module* listener;  //Module which has to execute their OnMouseEvent
 };
 

@@ -2,6 +2,7 @@
 #include "j1Scene.h"
 
 
+
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
@@ -32,6 +33,22 @@ bool j1Scene::Start()
 	//App->entities->Spawn_waiting_entities();
 	//App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
 
+
+	//TEST
+	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
+
+	App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
+
+
+	Text* text_to_link = App->gui->Add_text(0, 0, "START");
+	Linked_text final_text(90, 22, text_to_link);
+	start = App->gui->Add_button(300, 300, (j1Module*)this,  &final_text, START);
+
+	Text* text_to_link2 = App->gui->Add_text(0, 0, "DON'T PRESS THIS BUTTON");
+	Linked_text final_text2(17, 22, text_to_link2);
+	boom = App->gui->Add_button(300, 500, (j1Module*)this, &final_text, START);
+
+	//TEST
 
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 
@@ -141,3 +158,23 @@ void j1Scene::Change_to_map(int _map)
 	App->entities->Spawn_waiting_entities();
 }
 
+void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
+{
+	if (element == start)
+	{
+		//TEST
+		App->map->Load("Level 1.2 provisional.tmx");
+		App->map->map = 0;
+		App->pathfinding->SetMap();
+		App->entities->Spawn_waiting_entities();
+		App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+
+		App->gui->active = false;
+		//TEST
+	}
+	if (element == boom)
+	{
+		Ui_element* boom_baby = nullptr;
+		boom_baby->animation = false;
+	}
+}

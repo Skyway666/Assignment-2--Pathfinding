@@ -40,16 +40,6 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 	menu_background = App->tex->Load(background_file_name.GetString());
 
-	//TEST
-	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
-
-	Text* text_to_link = Add_text(0, 0, "START");
-	Add_text(100, 100, "WHO LET THE DOG JUMP", title);
-	Linked_text final_text(90, 22, text_to_link);
-	AddUi_element(300, 300, BUTTON, &final_text);
-
-	
-	//TEST
 
 	return true;
 }
@@ -86,25 +76,23 @@ bool j1Gui::PostUpdate()
 	return true;
 }
 
-Ui_element* j1Gui::AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text, BUTTON_TYPE button_type)
+Icon* j1Gui::Add_icon(int x, int y,Linked_text* text)
 {
-	Ui_element* new_ui_element = nullptr;
+	Icon* new_ui_element = nullptr;
 
-	switch (type) {
-		case UI_ELEMENT_TYPE::ICON:
-		{
-			new_ui_element = new Icon(x, y,text);
-			ui_elements.add(new_ui_element);
-			break;
-		}
+	new_ui_element = new Icon(x, y,text);
+	ui_elements.add(new_ui_element);
 
-		case UI_ELEMENT_TYPE::BUTTON:
-		{
-			new_ui_element = new Button(x, y,text, button_type);
-			ui_elements.add(new_ui_element);
-			break;
-		}
-	}
+	return new_ui_element;
+}
+
+Button* j1Gui::Add_button(int x, int y, j1Module* _listener, Linked_text* text, BUTTON_TYPE button_type)
+{
+	Button* new_ui_element = nullptr;
+
+	new_ui_element = new Button(x, y,_listener,button_type, text);
+	ui_elements.add(new_ui_element);
+
 	return new_ui_element;
 }
 
@@ -126,6 +114,7 @@ void j1Gui::OnClick(Ui_collider* c1)
 		{
 			if (ui_elements[i]->collider == c1)
 			{
+				ui_elements[i]->listener->OnMouseEvent(MOUSE_CLICK, ui_elements[i]);
 				ui_elements[i]->OnClick();
 			}
 		}

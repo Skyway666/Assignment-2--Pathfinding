@@ -17,12 +17,18 @@ enum UI_ELEMENT_TYPE //Type of ui elements avaliable
 	ICON,
 	BUTTON,
 };
-enum BUTTON_TYPE //Knowing what type of button we are creating
+enum BUTTON_TYPE //Knowing what type of button we are creating, just for animation purpuses
 {
 	NONE,
 	START,
 	OPTIONS,
 	CREDITS
+};
+enum UI_EVENT
+{
+	MOUSE_ENTER,
+	MOUSE_EXIT,
+	MOUSE_CLICK
 };
 struct Linked_text
 {
@@ -63,16 +69,18 @@ public:
 	bool CleanUp();
 
 	//Add a ui element to "ui_elements" 
-	Ui_element* AddUi_element(int x, int y, UI_ELEMENT_TYPE type, Linked_text* text = nullptr, BUTTON_TYPE button_type = NONE);
+	Icon* Add_icon(int x, int y, Linked_text* text = nullptr);
+
+	Button* Add_button(int x, int y, j1Module* _listener,  Linked_text* text = nullptr, BUTTON_TYPE button_type = NONE);
 
 	//Ad text as UI
 	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
 
-	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the one given to the 
-	//function. Then it will call its "OnClick" method
+	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the 
+	//one given to the function. Then it will call the global "OnClick" method and "OnClick" method of the UI element, which will change the label.
 	void OnClick(Ui_collider* c1);
 
-	//Same as "OnClick", but will call "OverClick" methods
+	//Same as "OnClick", but will call "OverClick" methods (of the UI elements)
 	void OverClick(Ui_collider* c1);
 
 	const SDL_Texture* GetAtlas() const;
@@ -80,7 +88,6 @@ public:
 	ClickManager* click_manager;
 	//TEST
 	bool active = true;
-	_TTF_Font* title;
 	//TEST
 
 private:

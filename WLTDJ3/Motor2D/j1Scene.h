@@ -15,6 +15,9 @@
 #include "j1Entities.h"
 #include "Player.h"
 
+
+
+
 struct SDL_Texture;
 
 class j1Scene : public j1Module
@@ -49,10 +52,17 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+	void OnMouseEvent(UI_EVENT event, Ui_element* element);
     
 	void Change_to_map(int);
 
+	_TTF_Font* title;
+
 private:
+	Button* start;
+	Button* boom;
+
 	
 };
 

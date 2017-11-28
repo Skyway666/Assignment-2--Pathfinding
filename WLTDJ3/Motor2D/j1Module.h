@@ -11,7 +11,8 @@
 
 class j1App;
 struct Collider;
-
+enum UI_EVENT;
+class Ui_element;
 class j1Module
 {
 public:
@@ -63,6 +64,11 @@ public:
 	virtual void OnCollision(Collider*, Collider*) 
 	{
 	
+	}
+
+	virtual void OnMouseEvent(UI_EVENT event, Ui_element* element)
+	{
+
 	}
 
 	virtual bool Load(pugi::xml_node&)

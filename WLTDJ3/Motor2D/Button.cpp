@@ -9,7 +9,7 @@
 #include "Pathfinding.h"
 
 
-Button::Button(int x, int y, Linked_text* text, BUTTON_TYPE _button_type) : Ui_element(x, y)
+Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type, Linked_text* text): Ui_element(x, y)
 {
 	type = BUTTON;
 	button_type = _button_type;
@@ -36,13 +36,10 @@ Button::~Button()
 
 void Button::OnClick()
 {
-	//TEST
-	App->map->Load("Level 1.2 provisional.tmx");
-	App->map->map = 0;
-	App->pathfinding->SetMap();	
-	App->entities->Spawn_waiting_entities();
-	App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
 
-	App->gui->active = false;
-	//TEST
+}
+
+void Button::OverClick()
+{
+
 }
