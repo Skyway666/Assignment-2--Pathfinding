@@ -17,6 +17,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	pathfinding_distance.x = initial_inf.pathfinding_distance.x * App->map->data.tile_width;
 	pathfinding_distance.y = initial_inf.pathfinding_distance.y * App->map->data.tile_height;
 	
+	App->chrono.add(jump_timer);
 	scale = 0.3;
 	type = ENTITY_TYPES::PLAYER;
 	SDL_Rect r{ 0, 0, 481, 547 };
@@ -253,6 +254,7 @@ void Player::Jump(float dt)
 	{
 		if (jump_timer.IsOver() && contact.y == 1)
 		{
+			App->idk = true;
 			jump_timer.Start(jump_time);
 			contact.y = 0;
 			App->audio->PlayFx(1);

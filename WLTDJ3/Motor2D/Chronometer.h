@@ -44,7 +44,6 @@ public:
 	{
 		if (been_paused)
 		{
-			timer_duration = pause_time;
 			timer_active = true;
 		}
 	}
