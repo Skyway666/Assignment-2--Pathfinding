@@ -6,6 +6,7 @@
 #include "PugiXml\src\pugixml.hpp"
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
+#include "Chronometer.h"
 
 // Modules
 class j1Window;
@@ -55,6 +56,7 @@ public:
 
 	void LoadGame();
 	void SaveGame() const;
+	void Pause();
 
 private:
 
@@ -129,11 +131,13 @@ private:
 
 public:
 
-	uint	framerate_cap = 30;
-	uint	config_framerate_cap;
-	char*	Vsync = "On";
-	char*	cap = "On";
-	bool	pause = false;
+	uint					framerate_cap = 30;
+	uint					config_framerate_cap;
+	char*					Vsync = "On";
+	char*					cap = "On";
+	bool					pause = false;
+	p2List<Chronometer>		chrono;
+	bool idk = false;
 };
 
 extern j1App* App;

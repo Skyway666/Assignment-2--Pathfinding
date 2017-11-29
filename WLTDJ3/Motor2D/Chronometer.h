@@ -1,6 +1,5 @@
 #pragma once
 #include "j1Render.h"
-#include "j1App.h"
 
 class Chronometer
 {
@@ -13,45 +12,46 @@ public:
 		timer_active = true;
 	}
 
-	void NewTime()
-	{
-		if (App->pause)
-			was_paused = true;
-		else if (was_paused)
-		{
-			was_paused = false;
-			pause_time_taken = true;
-		}
-
-		if (!was_paused && pause_time_taken)
-		{
-			Start((timer_duration - SDL_GetTicks()) / 1000);
-			pause_time_taken = false;
-		}
-	}
-
 	bool IsOver()
 	{
-		NewTime();
-
-		if (timer_active && !App->pause)
+		if (timer_duration > SDL_GetTicks())
+			return false;
+		else
 		{
-			if (timer_duration > SDL_GetTicks())
-				return false;
-			else
-			{
-				timer_active = false;
-				return true;
-			}
+			timer_active = false;
+			return true;
 		}
-
-		return true;
 	}
 
 	void Reset()
 	{
 		timer_duration = 0;
 		timer_active = true;
+	}
+
+	void Pause()
+	{
+		if (!been_paused)
+		{
+			pause_time = timer_duration - SDL_GetTicks();
+			Reset();
+		}
+
+		been_paused = true;
+	}
+
+	void StartAfterPause()
+	{
+		if (been_paused)
+		{
+			timer_duration = pause_time;
+			timer_active = true;
+		}
+	}
+
+	void ResetPause()
+	{
+		been_paused = false;
 	}
 
 	int Read()
@@ -61,10 +61,11 @@ public:
 
 private:
 
-	float time = 0;
-	int timer_duration = 0;
-	bool timer_active = false;
-	bool was_paused = false;
-	bool pause_time_taken = false;
+	float	time = 0;
+	float	pause_time = 0;
+	int		timer_duration = 0;
+	bool	timer_paused = false;
+	bool	timer_active = false;
+	bool	been_paused = false;
 };
 

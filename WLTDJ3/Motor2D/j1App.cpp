@@ -16,6 +16,7 @@
 #include "Pathfinding.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
+#include "Player.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -149,29 +150,8 @@ bool j1App::Update()
 	bool ret = true;
 	PrepareUpdate();
 
-	if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !pause)
-		pause = true;
-	else if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && pause)
-		pause = false;
-
-	if (!pause)
-	{
-		tex->active = true;
-		entities->active = true;
-		//gui->active = true;
-		collision->active = true;
-		map->active = true;
-		scene->active = true;
-	}
-	else
-	{
-		tex->active = false;
-		entities->active = false;
-		gui->active = false;
-		collision->active = false;
-		map->active = false;
-		scene->active = false;
-	}
+	if (idk)
+		Pause();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
@@ -455,4 +435,43 @@ bool j1App::SavegameNow() const
 	data.reset();
 	want_to_save = false;
 	return ret;
+}
+
+void j1App::Pause()
+{
+	if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !pause)
+		pause = true;
+	else if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && pause)
+		pause = false;
+
+	if (!pause)
+	{
+		tex->active = true;
+		entities->active = true;
+		//gui->active = true;
+		collision->active = true;
+		map->active = true;
+		scene->active = true;
+
+		//for (int i = 0; i != chrono.count(); i++)
+		//{
+		//	chrono[i].StartAfterPause();
+		//	chrono[i].ResetPause();
+		//}
+		App->entities->player->jump_timer.StartAfterPause();
+		App->entities->player->jump_timer.ResetPause();
+	}
+	else
+	{
+		tex->active = false;
+		entities->active = false;
+		gui->active = false;
+		collision->active = false;
+		map->active = false;
+		scene->active = false;
+
+		//for (int i = 0; i != chrono.count(); i++)
+		//	chrono[i].Pause();
+		App->entities->player->jump_timer.Pause();
+	}
 }
