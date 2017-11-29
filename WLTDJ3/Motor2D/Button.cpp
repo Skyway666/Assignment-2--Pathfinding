@@ -55,4 +55,8 @@ void Button::OnMouseEvent(UI_EVENT event)
 	{
 		animation = &Pressed;
 	}
+	if (event == MOUSE_STOP_CLICK)
+	{
+		animation = &Shiny;
+	}
 }

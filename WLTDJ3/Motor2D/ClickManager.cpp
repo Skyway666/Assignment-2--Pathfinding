@@ -47,6 +47,11 @@ void ClickManager::Update()
 				App->gui->OnMouseEvent_caller(colliders[i], MOUSE_CLICK);
 				LOG("CLICK");
 			}
+			if (colliders[i]->mouse_over && App->input->GetMouseButtonDown(1) == KEY_UP)
+			{
+				App->gui->OnMouseEvent_caller(colliders[i], MOUSE_STOP_CLICK);
+				LOG("UNCLICK");
+			}
 		}
 	}
 }

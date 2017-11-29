@@ -28,7 +28,8 @@ enum UI_EVENT
 {
 	MOUSE_ENTER,
 	MOUSE_EXIT,
-	MOUSE_CLICK
+	MOUSE_CLICK,
+	MOUSE_STOP_CLICK,
 };
 struct Linked_text
 {
