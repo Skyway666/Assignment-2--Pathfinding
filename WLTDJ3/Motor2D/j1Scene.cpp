@@ -46,8 +46,8 @@ bool j1Scene::Start()
 	Linked_text final_text(90, 22, text_to_link);
 	start = App->gui->Add_button(300, 300, (j1Module*)this,  &final_text, START);
 
-	Text* text_to_link2 = App->gui->Add_text(0, 0, "DON'T PRESS THIS BUTTON");
-	Linked_text final_text2(17, 22, text_to_link2);
+	Text* text_to_link2 = App->gui->Add_text(0, 0, "TEST BUTTON");
+	Linked_text final_text2(60, 22, text_to_link2);
 	boom = App->gui->Add_button(300, 500, (j1Module*)this, &final_text2, START);
 
 	//TEST
@@ -175,11 +175,6 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 
 			App->gui->active = false;
 			//TEST
-		}
-		if (element == boom)
-		{
-			Ui_element* boom_baby = nullptr;
-			boom_baby->animation = false;
 		}
 	}
 }

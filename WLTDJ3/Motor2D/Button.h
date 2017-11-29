@@ -12,13 +12,13 @@ public:
 	~Button();
 	BUTTON_TYPE button_type; //We should be able to create various types of buttons
 
-	//MAYBE THIS SHOULDN'T BE HERE
-	//Code to execute when button is clicked
+	//Change the button animation depending on the mouse state
 	void OnMouseEvent(UI_EVENT event);
 	//Collider
 	Ui_collider* collider;
-	//MAYBE THIS SHOULDN'T BE HERE
 private:
 	Animation Idle;
+	Animation Shiny;
+	Animation Pressed;
 };
 

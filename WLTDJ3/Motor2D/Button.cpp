@@ -16,6 +16,12 @@ Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type, Link
 	Idle.PushBack({ 2,112,226,67 });
 	Idle.loop = false;
 
+	Shiny.PushBack({ 414,169,224,63 });
+	Shiny.loop = false;
+
+	Pressed.PushBack({ 644,169,224,63 });
+	Pressed.loop = false;
+
 	listener = _listener;
 	collider = App->gui->click_manager->Add_ui_collider({x,y,226,67 });
 
@@ -37,5 +43,16 @@ Button::~Button()
 
 void Button::OnMouseEvent(UI_EVENT event)
 {
-
+	if (event == MOUSE_ENTER)
+	{
+		animation = &Shiny;
+	}
+	if (event == MOUSE_EXIT)
+	{
+		animation = &Idle;
+	}
+	if (event == MOUSE_CLICK)
+	{
+		animation = &Pressed;
+	}
 }
