@@ -229,6 +229,7 @@ void AirEnemy::Save(pugi::xml_node& data)
 	data.append_attribute("is_idle") = is_idle;
 	data.append_attribute("idle_speed") = idle_speed;
 }
+
 void AirEnemy::Load(pugi::xml_node& data)
 {
 	position.x = data.attribute("x").as_int();
@@ -236,4 +237,16 @@ void AirEnemy::Load(pugi::xml_node& data)
 	returning = data.attribute("returning").as_bool();
 	is_idle = data.attribute("is_idle").as_bool();
 	idle_speed = data.attribute("idle_speed").as_int();
+}
+
+void AirEnemy::Pause()
+{
+	animation->Reset();
+	side_fly_timer.Pause();
+}
+
+void AirEnemy::Resume()
+{
+	side_fly_timer.StartAfterPause();
+	side_fly_timer.ResetPause();
 }

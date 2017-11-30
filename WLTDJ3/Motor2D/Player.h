@@ -23,6 +23,8 @@ public:
 	void OnCollision(Collider* collider);
 	void Save(pugi::xml_node& data);
 	void Load(pugi::xml_node& data);
+	void Pause();
+	void Resume();
 	void WinScreen(float dt); //Provisional
 	
 	float player_x_displacement; //Used by parallax

@@ -18,6 +18,8 @@ public:
 
 	void Update(float dt, bool do_logic);
 	void OnCollision();
+	void Pause();
+	void Resume();
 	void Save(pugi::xml_node& data);
 	void Load(pugi::xml_node& data);
 

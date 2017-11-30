@@ -17,7 +17,6 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	pathfinding_distance.x = initial_inf.pathfinding_distance.x * App->map->data.tile_width;
 	pathfinding_distance.y = initial_inf.pathfinding_distance.y * App->map->data.tile_height;
 	
-	App->chrono.add(jump_timer);
 	scale = 0.3;
 	type = ENTITY_TYPES::PLAYER;
 	SDL_Rect r{ 0, 0, 481, 547 };
@@ -116,7 +115,8 @@ void Player::Update(float dt)
 		// Sliding
 		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
 		{
-				sliding = true;
+			slide_timer.Reset();
+			sliding = true;
 		}
 		else if (super_godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 			speed.y = speed_modifier.y;
@@ -158,10 +158,12 @@ void Player::Update(float dt)
 		{
 				if (contact.y == 1)
 				{
+					jump_timer.Reset();
 					jumping = true;
 				}
 				else if (StickToWall)
 				{
+					walljump_timer.Reset();
 					walljumping = true;
 				}
 		}
@@ -218,7 +220,6 @@ void Player::Update(float dt)
 	contact.x = 0;
 	contact.y = 0;
 
-
 	//Put collider next to player (Should be done in "draw")
 	if (collider != nullptr)
 	{
@@ -254,7 +255,6 @@ void Player::Jump(float dt)
 	{
 		if (jump_timer.IsOver() && contact.y == 1)
 		{
-			App->idk = true;
 			jump_timer.Start(jump_time);
 			contact.y = 0;
 			App->audio->PlayFx(1);
@@ -457,6 +457,7 @@ void Player::WinScreen(float dt)
 	if(!Win_timer.IsOver())
 	App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
 }
+
 void Player::Save(pugi::xml_node& data)
 {
 	data.append_attribute("x") = position.x;
@@ -470,4 +471,22 @@ void Player::Load(pugi::xml_node& data)
 	position.y = data.attribute("y").as_float() - gravity * 2;
 }
 
+void Player::Pause()
+{
+	if (animation != &fall && animation != &jump)
+		animation->Reset();
 
+	jump_timer.Pause();
+	walljump_timer.Pause();
+	slide_timer.Pause();
+}
+
+void Player::Resume()
+{
+	jump_timer.StartAfterPause();
+	jump_timer.ResetPause();
+	walljump_timer.StartAfterPause();
+	walljump_timer.ResetPause();
+	slide_timer.StartAfterPause();
+	slide_timer.ResetPause();
+}

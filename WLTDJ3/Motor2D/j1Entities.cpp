@@ -80,6 +80,16 @@ bool j1Entities::Update(float dt)
 {
 	if (!App->pause)
 	{
+		// Resume all entities if paused
+		for (uint i = 0; i < entities.count(); ++i)
+		{
+			if (entities[i] != nullptr)
+				entities[i]->Resume();
+		}
+
+		if (player != nullptr)
+			player->Resume();
+
 		// Manage entities' physics
 		for (uint i = 0; i < entities.count(); ++i)
 		{
@@ -104,6 +114,20 @@ bool j1Entities::Update(float dt)
 		if (do_logic.IsOver())
 			do_logic.Start(0.5);
 	}
+	else
+	{
+		// Pause all entities
+		for (uint i = 0; i < entities.count(); ++i)
+		{
+			if (entities[i] != nullptr)
+				entities[i]->Pause();
+		}
+
+		if (player != nullptr)
+			player->Pause();
+	}
+
+
 	// Draw all entities
 	for (uint i = 0; i < entities.count(); ++i)
 	{

@@ -236,9 +236,11 @@ void Collider::WillCollidePit(GroundEnemy* entity, float dt)
 				{
 					if (entity->just_landed)
 					{
-						entity->jumping = true;
 						if (entity->jump_timer.Read() != 0)
 							entity->jump_x = lenght * App->map->data.tile_width / entity->jump_timer.Read();
+
+						entity->jump_timer.Reset();
+						entity->jumping = true;
 					}
 					entity->just_landed = false;
 				}
@@ -264,6 +266,7 @@ void Collider::WillCollideWall(GroundEnemy* entity, float dt)
 			if (column_height <= 2 && entity->height - height <= 3 && entity->height - height > 0 && entity->contact.y == 1) // Check if height is bigger than 0 just in case
 			{
 				entity->jumping_wall = true;
+				entity->jump_timer.Reset();
 				entity->jumping = true;
 			}
 		}

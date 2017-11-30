@@ -32,10 +32,7 @@ public:
 	void Pause()
 	{
 		if (!been_paused)
-		{
 			pause_time = timer_duration - SDL_GetTicks();
-			Reset();
-		}
 
 		been_paused = true;
 	}
@@ -44,6 +41,7 @@ public:
 	{
 		if (been_paused)
 		{
+			timer_duration = SDL_GetTicks() + pause_time;
 			timer_active = true;
 		}
 	}

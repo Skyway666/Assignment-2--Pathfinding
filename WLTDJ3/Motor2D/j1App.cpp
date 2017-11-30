@@ -137,7 +137,7 @@ bool j1App::Start()
 		item = item->next;
 	}
 	startup_time.Start();
-
+	started = true;
 	PERF_PEEK(ptimer);
 
 	return ret;
@@ -150,7 +150,7 @@ bool j1App::Update()
 	bool ret = true;
 	PrepareUpdate();
 
-	if (idk)
+	if (started)
 		Pause();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
@@ -447,31 +447,13 @@ void j1App::Pause()
 	if (!pause)
 	{
 		tex->active = true;
-		entities->active = true;
 		//gui->active = true;
 		collision->active = true;
-		map->active = true;
-		scene->active = true;
-
-		//for (int i = 0; i != chrono.count(); i++)
-		//{
-		//	chrono[i].StartAfterPause();
-		//	chrono[i].ResetPause();
-		//}
-		App->entities->player->jump_timer.StartAfterPause();
-		App->entities->player->jump_timer.ResetPause();
 	}
 	else
 	{
 		tex->active = false;
-		entities->active = false;
 		gui->active = false;
 		collision->active = false;
-		map->active = false;
-		scene->active = false;
-
-		//for (int i = 0; i != chrono.count(); i++)
-		//	chrono[i].Pause();
-		App->entities->player->jump_timer.Pause();
 	}
 }

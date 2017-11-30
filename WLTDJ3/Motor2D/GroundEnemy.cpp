@@ -209,6 +209,7 @@ void GroundEnemy::Save(pugi::xml_node& data)
 	data.append_attribute("allow_time") = allowtime;
 	data.append_attribute("jumping") = jumping;
 }
+
 void GroundEnemy::Load(pugi::xml_node& data)
 {
 	position.x = data.attribute("x").as_float();
@@ -237,4 +238,16 @@ void GroundEnemy::Load(pugi::xml_node& data)
 		spawned = true;
 	else
 		spawned = false;
+}
+
+void GroundEnemy::Pause()
+{
+	animation->Reset();
+	jump_timer.Pause();
+}
+
+void GroundEnemy::Resume()
+{
+	jump_timer.StartAfterPause();
+	jump_timer.ResetPause();
 }
