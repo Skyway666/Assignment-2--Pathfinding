@@ -1,6 +1,7 @@
 #pragma once
 #include "Ui_element.h"
 
+//This will also be used to make windows
 struct Linked_text;
 class Icon : public Ui_element
 {

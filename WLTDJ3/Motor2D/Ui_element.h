@@ -5,6 +5,8 @@
 #include "p2List.h"
 
 //Base class for every UI_Element
+
+//Every Ui_element should be able to: Draw itself, be linked to other elements, recive mouse events(not done yet) and be dragged(not done yet).
 struct SDL_Texture;
 enum UI_ELEMENT_TYPE;
 struct Ui_collider;
@@ -14,8 +16,6 @@ public:
 	Ui_element(int x, int y);
 	~Ui_element();
 
-	// Logic update
-	virtual void Update() {};
 	// In charge of drawing current animation
 	virtual void Draw(SDL_Texture*);
 	// Links a Ui_element
