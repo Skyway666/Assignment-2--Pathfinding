@@ -18,7 +18,7 @@ public:
 
 private:
 
-	//Animations should be load from the xml
+	//Animations should be load from the xml or made public 
 	Animation Idle;
 	Animation Shiny;
 	Animation Pressed;

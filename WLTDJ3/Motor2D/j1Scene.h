@@ -15,10 +15,6 @@
 #include "j1Entities.h"
 #include "j1Gui.h"
 
-
-
-
-
 struct SDL_Texture;
 
 class j1Scene : public j1Module
@@ -63,8 +59,6 @@ public:
 private:
 	Button* start;
 	Button* boom;
-
-	
 };
 
 #endif // __j1SCENE_H__
