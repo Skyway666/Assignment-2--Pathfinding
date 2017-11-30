@@ -50,6 +50,7 @@ bool j1Scene::Start()
 	Linked_text final_text2(60, 22, text_to_link2);
 	boom = App->gui->Add_button(300, 500, (j1Module*)this, &final_text2, START);
 
+	start->Link_ui_element(boom, 200, 200);
 	//TEST
 
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");

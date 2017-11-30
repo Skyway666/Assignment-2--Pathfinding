@@ -23,6 +23,11 @@ struct Ui_collider
 		}
 		return false;
 	}
+	void SetPos(int x, int y)
+	{
+		rect.x = x;
+		rect.y = y;
+	}
 	SDL_Rect rect;
 	bool mouse_over;
 };

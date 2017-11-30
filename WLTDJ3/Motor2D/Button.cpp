@@ -13,7 +13,7 @@ Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type, Link
 {
 	type = BUTTON;
 	button_type = _button_type;
-	Idle.PushBack({ 2,112,226,67 });
+	Idle.PushBack({ 2,112,226,67 }); 
 	Idle.loop = false;
 
 	Shiny.PushBack({ 414,169,224,63 });
