@@ -9,7 +9,7 @@
 #include "Pathfinding.h"
 
 
-Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type, Linked_text* text): Ui_element(x, y)
+Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type): Ui_element(x, y)
 {
 	type = BUTTON;
 	button_type = _button_type;
@@ -24,13 +24,6 @@ Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type, Link
 
 	listener = _listener;
 	collider = App->gui->click_manager->Add_ui_collider({x,y,226,67 });
-
-	if (text != nullptr)
-	{
-		//Put the text in its place
-		text->text->position.x = x + text->offset.x;
-		text->text->position.y = y + text->offset.y;
-	}
 
 	animation = &Idle;
 }

@@ -82,21 +82,21 @@ bool j1Gui::PostUpdate()
 	return true;
 }
 
-Icon* j1Gui::Add_icon(int x, int y,Linked_text* text)
+Icon* j1Gui::Add_icon(int x, int y)
 {
 	Icon* new_ui_element = nullptr;
 
-	new_ui_element = new Icon(x, y,text);
+	new_ui_element = new Icon(x, y);
 	icons.add(new_ui_element);
 
 	return new_ui_element;
 }
 
-Button* j1Gui::Add_button(int x, int y, j1Module* _listener, Linked_text* text, BUTTON_TYPE button_type)
+Button* j1Gui::Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_type)
 {
 	Button* new_ui_element = nullptr;
 
-	new_ui_element = new Button(x, y,_listener,button_type, text);
+	new_ui_element = new Button(x, y,_listener,button_type);
 	buttons.add(new_ui_element);
 
 	return new_ui_element;

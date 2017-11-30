@@ -8,7 +8,7 @@ class j1Module;
 class Button : public Ui_element
 {
 public:
-	Button(int x, int y, j1Module* _listener,BUTTON_TYPE _button_type, Linked_text* text);
+	Button(int x, int y, j1Module* _listener,BUTTON_TYPE _button_type);
 	~Button();
 	BUTTON_TYPE button_type; //We should be able to create various types of buttons
 

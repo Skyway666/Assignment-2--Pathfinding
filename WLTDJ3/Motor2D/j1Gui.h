@@ -31,19 +31,6 @@ enum UI_EVENT
 	MOUSE_CLICK,
 	MOUSE_STOP_CLICK,
 };
-struct Linked_text
-{
-	Linked_text(int _offset_x, int _offset_y, Text* _text)
-	{
-		offset.x = _offset_x;
-		offset.y = _offset_y;
-		text = _text;
-	}
-public:
-	iPoint offset;
-	Text* text;
-
-};
 // ---------------------------------------------------
 class j1Gui : public j1Module
 {
@@ -70,9 +57,9 @@ public:
 	bool CleanUp();
 
 	//Add a ui element to "ui_elements" 
-	Icon* Add_icon(int x, int y, Linked_text* text = nullptr);
+	Icon* Add_icon(int x, int y);
 
-	Button* Add_button(int x, int y, j1Module* _listener,  Linked_text* text = nullptr, BUTTON_TYPE button_type = NONE);
+	Button* Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_type = NONE);
 
 	//Ad text as UI
 	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
