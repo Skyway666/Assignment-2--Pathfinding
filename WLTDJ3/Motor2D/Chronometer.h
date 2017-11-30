@@ -31,7 +31,7 @@ public:
 
 	void Pause()
 	{
-		if (!been_paused)
+		if (!been_paused && timer_duration - SDL_GetTicks() > 0)
 			pause_time = timer_duration - SDL_GetTicks();
 
 		been_paused = true;
