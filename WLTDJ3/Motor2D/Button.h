@@ -12,9 +12,10 @@ public:
 	~Button();
 	BUTTON_TYPE button_type; //We should be able to create various types of buttons
 
-	//Change the button animation depending on the mouse state
+	//Detect mouse events on ui element internally
 	void OnMouseEvent(UI_EVENT event);
-	//Collider
+	//Move object
+	void Update();
 
 private:
 
@@ -22,5 +23,6 @@ private:
 	Animation Idle;
 	Animation Shiny;
 	Animation Pressed;
+
 };
 

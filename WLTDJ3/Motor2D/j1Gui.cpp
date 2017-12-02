@@ -44,9 +44,27 @@ bool j1Gui::Start()
 	return true;
 }
 
-// Update of all ui_elements will be executed here
+// Update of all ui_elements and click_manager will be executed here
 bool j1Gui::PreUpdate()
 {
+	//Update all buttons
+	for (uint i = 0; i < buttons.count(); ++i)
+	{
+		if (buttons[i] != nullptr)
+			buttons[i]->Update();
+	}
+	//Update all icons (Maybe they should be able to blit from their own texture like texts)
+	for (uint i = 0; i < icons.count(); ++i)
+	{
+		if (icons[i] != nullptr)
+			icons[i]->Update();
+	}
+	//Update all texts
+	for (uint i = 0; i < texts.count(); ++i)
+	{
+		if (texts[i] != nullptr)
+			texts[i]->Update();
+	}
 	click_manager->Update();
 	return true;
 }

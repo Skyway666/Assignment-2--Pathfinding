@@ -20,6 +20,10 @@ public:
 	virtual void Draw(SDL_Texture*);
 	// Links a Ui_element
 	virtual void Link_ui_element(Ui_element* element, int offset_x, int offset_y); 
+	//For the moment it will be used to be able to drag ui_elements
+	virtual void Update() {};
+	//Detect mouse events on ui element internally
+	virtual void OnMouseEvent(UI_EVENT event) {};
 
 	iPoint position; // Position where will be drawn
 	Animation* animation;// Animation which will be executed by "Draw"
@@ -27,5 +31,12 @@ public:
 	j1Module* listener;  // Module which has to execute their OnMouseEvent
 	Ui_collider* collider;
 	p2List<Ui_element*> linked_elements; // Linked elements that with move along with the Ui_element which they are linked to 
+
+
+    //Variables to be able to move UI elements
+	bool gripped = false; //Knowing if the variable is gripped
+	bool mouse_pos_gotten = false; //Bool to know if the mouse position has been taken
+	iPoint mouse_pos_when_grip; //Knowing the initial position of the mouse when the ui element has been gripped
+	iPoint pos_when_grip;
 };
 

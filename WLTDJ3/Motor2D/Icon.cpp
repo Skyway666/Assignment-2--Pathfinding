@@ -18,3 +18,15 @@ Icon::~Icon()
 {
 
 }
+
+void Icon::OnMouseEvent(UI_EVENT event)
+{
+	if (event == MOUSE_CLICK)
+	{
+		gripped = true;
+	}
+	if (event == MOUSE_STOP_CLICK)
+	{
+		gripped = false;
+	}
+}
