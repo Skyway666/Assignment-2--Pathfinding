@@ -21,15 +21,15 @@ public:
 	// Links a Ui_element
 	virtual void Link_ui_element(Ui_element* element, int offset_x, int offset_y); 
 	//For the moment it will be used to be able to drag ui_elements
-	virtual void Update() {};
+	virtual void Update();
 	//Detect mouse events on ui element internally
 	virtual void OnMouseEvent(UI_EVENT event) {};
 
 	iPoint position; // Position where will be drawn
 	Animation* animation;// Animation which will be executed by "Draw"
 	UI_ELEMENT_TYPE type; // Type of UI element
-	j1Module* listener;  // Module which has to execute their OnMouseEvent
-	Ui_collider* collider;
+	j1Module* listener = nullptr;  // Module which has to execute their OnMouseEvent
+	Ui_collider* collider = nullptr;
 	p2List<Ui_element*> linked_elements; // Linked elements that with move along with the Ui_element which they are linked to 
 
 

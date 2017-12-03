@@ -59,6 +59,7 @@ public:
 private:
 	Button* start;
 	Button* boom;
+	
 };
 
 #endif // __j1SCENE_H__

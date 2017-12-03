@@ -24,5 +24,5 @@ Text::~Text()
 
 void Text::Draw()
 {
-	App->render->Blit(graphic, position.x, position.y);
+	App->render->Blit(graphic, position.x, position.y,1,false);
 }

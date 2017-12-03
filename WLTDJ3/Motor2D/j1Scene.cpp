@@ -38,21 +38,21 @@ bool j1Scene::Start()
 
 	//TEST
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
-
 	App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
 
+	Icon* Window = App->gui->Add_icon(100, 100);
 
-	Text* text_to_link = App->gui->Add_text(0, 0, "START");
-	//Linked_text final_text(90, 22, text_to_link);
 	start = App->gui->Add_button(300, 300, (j1Module*)this,START);
-
+	Text* text_to_link = App->gui->Add_text(0, 0, "START");
 	start->Link_ui_element(text_to_link, 90, 22);
 
-	Text* text_to_link2 = App->gui->Add_text(0, 0, "TEST BUTTON");
-	//Linked_text final_text2(60, 22, text_to_link2);
 	boom = App->gui->Add_button(300, 500, (j1Module*)this, START);
-
+	Text* text_to_link2 = App->gui->Add_text(0, 0, "TEST BUTTON");
 	boom->Link_ui_element(text_to_link2, 60, 22);
+
+	Window->Link_ui_element(start, 120, 100);
+	Window->Link_ui_element(boom, 120, 300);
+
 	//TEST
 
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");

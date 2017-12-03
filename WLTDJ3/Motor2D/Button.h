@@ -14,8 +14,7 @@ public:
 
 	//Detect mouse events on ui element internally
 	void OnMouseEvent(UI_EVENT event);
-	//Move object
-	void Update();
+
 
 private:
 

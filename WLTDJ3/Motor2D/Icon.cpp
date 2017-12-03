@@ -1,15 +1,18 @@
 #include "Icon.h"
 #include "j1Gui.h"
 #include "Text.h"
+#include "ClickManager.h"
+#include "j1App.h"
 
 
 
 Icon::Icon(int x, int y): Ui_element(x,y)
 {
 	type = ICON;
-	Idle.PushBack({ 2,112,226,67 });
+	Idle.PushBack({ 16,528,457,485});
 	Idle.loop = false;
 
+	collider = App->gui->click_manager->Add_ui_collider({ x,y,457,485 });
 	animation = &Idle;
 }
 

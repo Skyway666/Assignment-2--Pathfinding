@@ -47,17 +47,17 @@ bool j1Gui::Start()
 // Update of all ui_elements and click_manager will be executed here
 bool j1Gui::PreUpdate()
 {
-	//Update all buttons
-	for (uint i = 0; i < buttons.count(); ++i)
-	{
-		if (buttons[i] != nullptr)
-			buttons[i]->Update();
-	}
 	//Update all icons (Maybe they should be able to blit from their own texture like texts)
 	for (uint i = 0; i < icons.count(); ++i)
 	{
 		if (icons[i] != nullptr)
 			icons[i]->Update();
+	}
+	//Update all buttons
+	for (uint i = 0; i < buttons.count(); ++i)
+	{
+		if (buttons[i] != nullptr)
+			buttons[i]->Update();
 	}
 	//Update all texts
 	for (uint i = 0; i < texts.count(); ++i)
@@ -74,19 +74,19 @@ bool j1Gui::PostUpdate()
 {
 	if (active)//TEST
 	{ 
-		App->render->Blit(menu_background, 0, 0);
+		App->render->Blit(menu_background, 0, 0,1,false);
 	
-		//Blit all buttons
-		for (uint i = 0; i < buttons.count(); ++i)
-		{
-			if (buttons[i] != nullptr)
-				buttons[i]->Draw(atlas);
-		}
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
 		for (uint i = 0; i < icons.count(); ++i)
 		{
 			if (icons[i] != nullptr)
 				icons[i]->Draw(atlas);
+		}
+		//Blit all buttons
+		for (uint i = 0; i < buttons.count(); ++i)
+		{
+			if (buttons[i] != nullptr)
+				buttons[i]->Draw(atlas);
 		}
 		//Blit all texts
 		for (uint i = 0; i < texts.count(); ++i)
@@ -128,7 +128,7 @@ Text* j1Gui::Add_text(int x, int y, const char* text, _TTF_Font* font)
 	return new_text;
 }
 
-//This method will iterate over all the colliders of the icons in the "buttons" list, looking for the one that has the same collider that the one given to the 
+//This method will iterate over all the colliders of the buttons in the "buttons" list, looking for the one that has the same collider that the one given to the 
 //function. Then it will call its "OnClick" method
 void j1Gui::OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event)
 {
@@ -140,6 +140,18 @@ void j1Gui::OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event)
 			{
 				buttons[i]->listener->OnMouseEvent(event, buttons[i]);
 				buttons[i]->OnMouseEvent(event);
+			}
+		}
+	}
+	for (int i = 0; i < icons.count(); i++)
+	{
+		if (icons[i] != nullptr)
+		{
+			if (icons[i]->collider == c1)
+			{
+				if(icons[i]->listener != nullptr)
+				icons[i]->listener->OnMouseEvent(event, buttons[i]);
+				icons[i]->OnMouseEvent(event);
 			}
 		}
 	}
