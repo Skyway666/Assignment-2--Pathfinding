@@ -51,17 +51,18 @@ void Ui_element::Update()
 	{
 		mouse_pos_when_grip = mouse_position;
 		pos_when_grip = position;
+		offset_when_grip = offset;
 		mouse_pos_gotten = true;
 	}
 	mouse_displacement = mouse_position - mouse_pos_when_grip;
 	if (gripped)
 	{
 		position = pos_when_grip + mouse_displacement;
+		offset = offset_when_grip + mouse_displacement;
 	}
 	if (!gripped && mouse_pos_gotten)
 	{
 		mouse_pos_gotten = false;
-		offset += mouse_displacement;
 	}
 
 	//Update position of all linked objects to match parent
