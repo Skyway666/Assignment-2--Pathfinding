@@ -144,7 +144,7 @@ bool j1Scene::CleanUp()
 
 void j1Scene::Change_to_map(int _map)
 {
-
+	App->entities->EraseEntities();
 	App->collision->Erase_Non_Player_Colliders();
 	App->entities->Clear_waiting_list();
 	App->map->CleanUp();
@@ -159,7 +159,6 @@ void j1Scene::Change_to_map(int _map)
 		App->map->map = 1;
 	}
 	App->pathfinding->SetMap();
-	App->entities->EraseEntities();
 	App->entities->Spawn_waiting_entities();
 }
 

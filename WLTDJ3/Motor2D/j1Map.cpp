@@ -209,7 +209,6 @@ bool j1Map::CleanUp()
 		item_ = item_->next;
 	}
 	App->tex->UnLoad(data.background_image);
-	data.tilesets.clear();
 	data.layer_array.clear();
 	map_file.reset();
 
