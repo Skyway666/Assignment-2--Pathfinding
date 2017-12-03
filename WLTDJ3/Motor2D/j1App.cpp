@@ -447,13 +447,11 @@ void j1App::Pause()
 	if (!pause)
 	{
 		tex->active = true;
-		//gui->active = true;
 		collision->active = true;
 	}
 	else
 	{
 		tex->active = false;
-		gui->active = false;
 		collision->active = false;
 	}
 }
