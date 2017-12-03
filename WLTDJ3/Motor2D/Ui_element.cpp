@@ -33,6 +33,8 @@ void Ui_element::Link_ui_element(Ui_element* element, int offset_x, int offset_y
 {
 	element->position.x = position.x + offset_x;
 	element->position.y = position.y + offset_y;
+	element->offset.x = offset_x;
+	element->offset.y = offset_y;
 
 	linked_elements.add(element);
 }

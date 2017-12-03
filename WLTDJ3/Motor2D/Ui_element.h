@@ -38,5 +38,8 @@ public:
 	bool mouse_pos_gotten = false; //Bool to know if the mouse position has been taken
 	iPoint mouse_pos_when_grip; //Knowing the initial position of the mouse when the ui element has been gripped
 	iPoint pos_when_grip;
+
+	//This will be used just for linked elements
+	iPoint offset;
 };
 
