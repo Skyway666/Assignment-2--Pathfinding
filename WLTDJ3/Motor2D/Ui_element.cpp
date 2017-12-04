@@ -71,3 +71,32 @@ void Ui_element::Update()
 		linked_elements[i]->position = position + linked_elements[i]->offset;
 	}
 }
+
+void Ui_element::SetActive(bool activate)
+{
+	if (activate)
+	{
+		active = true;
+		if (collider != nullptr)
+		collider->active = true;
+		for (int i = 0; i < linked_elements.count(); i++)
+		{
+			linked_elements[i]->active = true;
+			if(linked_elements[i]->collider != nullptr)
+			linked_elements[i]->collider->active = true;
+		}
+
+	}
+	else
+	{
+		active = false;
+		if (collider != nullptr)
+		collider->active = false;
+		for (int i = 0; i < linked_elements.count(); i++)
+		{
+			linked_elements[i]->active = false;
+			if (linked_elements[i]->collider != nullptr)
+			linked_elements[i]->collider->active = false;
+		}
+	}
+}

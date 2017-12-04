@@ -104,7 +104,17 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 50 * dt;
-	
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{ 
+		start->SetActive(false);
+		boom->SetActive(false);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		start->SetActive(true);
+		boom->SetActive(true);
+	}
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)
 	{ 

@@ -50,19 +50,19 @@ bool j1Gui::PreUpdate()
 	//Update all icons (Maybe they should be able to blit from their own texture like texts)
 	for (uint i = 0; i < icons.count(); ++i)
 	{
-		if (icons[i] != nullptr)
+		if (icons[i] != nullptr && icons[i]->active)
 			icons[i]->Update();
 	}
 	//Update all buttons
 	for (uint i = 0; i < buttons.count(); ++i)
 	{
-		if (buttons[i] != nullptr)
+		if (buttons[i] != nullptr && buttons[i]->active)
 			buttons[i]->Update();
 	}
 	//Update all texts
 	for (uint i = 0; i < texts.count(); ++i)
 	{
-		if (texts[i] != nullptr)
+		if (texts[i] != nullptr && texts[i]->active)
 			texts[i]->Update();
 	}
 	click_manager->Update();
@@ -79,19 +79,19 @@ bool j1Gui::PostUpdate()
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
 		for (uint i = 0; i < icons.count(); ++i)
 		{
-			if (icons[i] != nullptr)
+			if (icons[i] != nullptr && icons[i]->active)
 				icons[i]->Draw(atlas);
 		}
 		//Blit all buttons
 		for (uint i = 0; i < buttons.count(); ++i)
 		{
-			if (buttons[i] != nullptr)
+			if (buttons[i] != nullptr && buttons[i]->active)
 				buttons[i]->Draw(atlas);
 		}
 		//Blit all texts
 		for (uint i = 0; i < texts.count(); ++i)
 		{
-			if (texts[i] != nullptr)
+			if (texts[i] != nullptr && texts[i]->active)
 				texts[i]->Draw();
 		}
     }

@@ -14,6 +14,7 @@ struct Ui_collider
 	{
 		rect = _rect;
 		mouse_over = false;
+		active = true;
 	}
 	bool CheckCollision(iPoint point)
 	{
@@ -30,6 +31,7 @@ struct Ui_collider
 	}
 	SDL_Rect rect;
 	bool mouse_over;
+	bool active;
 };
 
 class ClickManager

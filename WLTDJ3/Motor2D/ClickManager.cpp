@@ -28,7 +28,7 @@ void ClickManager::Update()
 	App->input->GetMousePosition(mouse_position.x, mouse_position.y);
 	for (int i = 0; i < colliders.count(); i++)
 	{
-		if(colliders[i] != nullptr) //Skip empty colliders
+		if(colliders[i] != nullptr && colliders[i]->active) //Skip empty colliders
 		{ 
 			if (colliders[i]->CheckCollision(mouse_position) && !colliders[i]->mouse_over)
 			{
