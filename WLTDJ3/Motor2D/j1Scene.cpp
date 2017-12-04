@@ -40,7 +40,7 @@ bool j1Scene::Start()
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
 	Text* titola = App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
 
-	Icon* Window = App->gui->Add_icon(300, 100);
+	Window = App->gui->Add_icon(300, 100);
 
 	start = App->gui->Add_button(300, 300, (j1Module*)this,START);
 	Text* text_to_link = App->gui->Add_text(0, 0, "START");
@@ -107,13 +107,11 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{ 
-		start->SetActive(false);
-		boom->SetActive(false);
+		Window->SetActive(false);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		start->SetActive(true);
-		boom->SetActive(true);
+		Window->SetActive(true);
 	}
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)

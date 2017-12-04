@@ -59,6 +59,7 @@ public:
 private:
 	Button* start;
 	Button* boom;
+	Icon* Window;
 	
 };
 

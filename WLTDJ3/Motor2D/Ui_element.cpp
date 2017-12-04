@@ -81,9 +81,8 @@ void Ui_element::SetActive(bool activate)
 		collider->active = true;
 		for (int i = 0; i < linked_elements.count(); i++)
 		{
-			linked_elements[i]->active = true;
-			if(linked_elements[i]->collider != nullptr)
-			linked_elements[i]->collider->active = true;
+			linked_elements[i]->SetActive(true);
+
 		}
 
 	}
@@ -94,9 +93,7 @@ void Ui_element::SetActive(bool activate)
 		collider->active = false;
 		for (int i = 0; i < linked_elements.count(); i++)
 		{
-			linked_elements[i]->active = false;
-			if (linked_elements[i]->collider != nullptr)
-			linked_elements[i]->collider->active = false;
+			linked_elements[i]->SetActive(false);
 		}
 	}
 }
