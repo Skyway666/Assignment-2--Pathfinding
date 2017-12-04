@@ -57,9 +57,17 @@ public:
 	_TTF_Font* title;
 
 private:
+	//TEST
+	Icon* Window;
 	Button* start;
 	Button* boom;
-	Icon* Window;
+	
+	Icon* Pause_Window;
+	Button* continuee;
+	Button* exit;
+	//TEST
+
+
 	
 };
 

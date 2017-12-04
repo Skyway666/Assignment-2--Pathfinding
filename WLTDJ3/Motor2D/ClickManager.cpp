@@ -65,3 +65,14 @@ void ClickManager::Cleanup()
 	}
 }
 
+void ClickManager::DebugDraw()
+{
+	for (int i = 0; i < colliders.count(); i++)
+	{
+		if (colliders[i] != nullptr && colliders[i]->active) //Skip empty colliders
+		{
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, 255,false, false);
+		}
+	}
+}
+

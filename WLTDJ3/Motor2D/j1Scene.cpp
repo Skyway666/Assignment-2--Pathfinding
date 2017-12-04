@@ -37,6 +37,8 @@ bool j1Scene::Start()
 
 
 	//TEST
+
+	//Menu window
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
 	Text* titola = App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
 
@@ -47,26 +49,53 @@ bool j1Scene::Start()
 	start->Link_ui_element(text_to_link, 90, 22);
 
 	boom = App->gui->Add_button(300, 500, (j1Module*)this, START);
-	Text* text_to_link2 = App->gui->Add_text(0, 0, "TEST BUTTON");
-	boom->Link_ui_element(text_to_link2, 60, 22);
+	text_to_link = App->gui->Add_text(0, 0, "TEST BUTTON");
+	boom->Link_ui_element(text_to_link, 60, 22);
 
 	Window->Link_ui_element(start, 120, 100);
 	Window->Link_ui_element(boom, 120, 300);
 	Window->Link_ui_element(titola, 45, 30);
 
+	titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
+
+	//Pause window
+	Pause_Window = App->gui->Add_icon(300, 100);
+
+	continuee = App->gui->Add_button(300, 300, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "CONTINUE");
+	continuee->Link_ui_element(text_to_link, 75, 22);
+
+	exit = App->gui->Add_button(300, 500, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "EXIT");
+	exit->Link_ui_element(text_to_link, 100, 22);
+
+	Pause_Window->Link_ui_element(continuee, 120, 100);
+	Pause_Window->Link_ui_element(exit, 120, 300);
+	Pause_Window->Link_ui_element(titola, 120, 30);
+
+	Pause_Window->SetActive(false);
+
+
+
 	//TEST
 
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
-
-
-
-
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	//TEST
+	if (App->pause)
+	{
+		Pause_Window->SetActive(true);
+	}
+	else
+	{
+		Pause_Window->SetActive(false);
+	}
+	//TEST
 	return true;
 }
 
@@ -105,14 +134,7 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 50 * dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{ 
-		Window->SetActive(false);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		Window->SetActive(true);
-	}
+
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)
 	{ 
@@ -173,19 +195,34 @@ void j1Scene::Change_to_map(int _map)
 
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
+	//TEST
 	if(event == MOUSE_CLICK)
 	{ 
 		if (element == start)
 		{
-			//TEST
+			
 			App->map->Load("Level 1.2 provisional.tmx");
 			App->map->map = 0;
 			App->pathfinding->SetMap();
 			App->entities->Spawn_waiting_entities();
 			App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
 
-			App->gui->active = false;
-			//TEST
+			Window->SetActive(false);
+			App->gui->blit_background = false;
+			
 		}
+		if (element == continuee)
+		{
+			App->pause = false;
+		}
+		if (element == exit)
+		{
+			App->pause = true;
+			Window->SetActive(true);
+			Pause_Window->SetActive(false);
+			App->gui->blit_background = true;
+		}
+
 	}
+	//TEST
 }

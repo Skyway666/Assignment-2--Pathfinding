@@ -7,7 +7,7 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "ClickManager.h"
-
+#include "j1Collisions.h"
 //This structure contains a pointer to a text and its offset. Its only use is to be passed to the icon or button constructor in order to have a text
 //linked to it
 
@@ -66,14 +66,14 @@ bool j1Gui::PreUpdate()
 			texts[i]->Update();
 	}
 	click_manager->Update();
+	
 	return true;
 }
 
 // Draw of all ui_elements and background will be executed here
 bool j1Gui::PostUpdate()
 {
-	if (active)//TEST
-	{ 
+		if(blit_background)
 		App->render->Blit(menu_background, 0, 0,1,false);
 	
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
@@ -94,8 +94,9 @@ bool j1Gui::PostUpdate()
 			if (texts[i] != nullptr && texts[i]->active)
 				texts[i]->Draw();
 		}
-    }
-	
+
+	if(App->collision->debug)
+	click_manager->DebugDraw();
 
 	return true;
 }

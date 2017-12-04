@@ -71,9 +71,9 @@ public:
 	const SDL_Texture* GetAtlas() const;
 	
 	ClickManager* click_manager;
-	//TEST
-	bool active = true;
-	//TEST
+	//Bool to know if backround should be drawn
+	bool blit_background = true;
+	
 
 private:
 

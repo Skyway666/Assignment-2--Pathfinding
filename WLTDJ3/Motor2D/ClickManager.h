@@ -44,7 +44,8 @@ public:
 	//Will check all colliders compare it to the mouse position and click. Then if needed, will call the "OnClick" or "MouseOver" method of "j1Gui", passing
 	//the indicated collider as an argument
 	void Update();
-
+	//Debug the colliders
+	void DebugDraw();
 	//Will empty the colliders list
 	void Cleanup();
 
