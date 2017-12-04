@@ -38,9 +38,9 @@ bool j1Scene::Start()
 
 	//TEST
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
-	App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
+	Text* titola = App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
 
-	Icon* Window = App->gui->Add_icon(100, 100);
+	Icon* Window = App->gui->Add_icon(300, 100);
 
 	start = App->gui->Add_button(300, 300, (j1Module*)this,START);
 	Text* text_to_link = App->gui->Add_text(0, 0, "START");
@@ -52,6 +52,7 @@ bool j1Scene::Start()
 
 	Window->Link_ui_element(start, 120, 100);
 	Window->Link_ui_element(boom, 120, 300);
+	Window->Link_ui_element(titola, 45, 30);
 
 	//TEST
 
