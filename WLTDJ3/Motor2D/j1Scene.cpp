@@ -87,13 +87,15 @@ bool j1Scene::Start()
 bool j1Scene::PreUpdate()
 {
 	//TEST
-	if (App->pause)
+	if (App->pause && pause_once)
 	{
 		Pause_Window->SetActive(true);
+		pause_once = false;
 	}
-	else
+	else if(!App->pause && !pause_once)
 	{
 		Pause_Window->SetActive(false);
+		pause_once = true;
 	}
 	//TEST
 	return true;
@@ -217,9 +219,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		}
 		if (element == exit)
 		{
-			App->pause = true;
+			App->pause = false;
 			Window->SetActive(true);
-			Pause_Window->SetActive(false);
 			App->gui->blit_background = true;
 		}
 

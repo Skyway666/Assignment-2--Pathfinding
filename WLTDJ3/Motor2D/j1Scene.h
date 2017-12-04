@@ -56,15 +56,18 @@ public:
 
 	_TTF_Font* title;
 
+	Icon* Pause_Window;
 private:
 	//TEST
 	Icon* Window;
 	Button* start;
 	Button* boom;
 	
-	Icon* Pause_Window;
+	
 	Button* continuee;
 	Button* exit;
+
+	bool pause_once = true;
 	//TEST
 
 

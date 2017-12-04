@@ -77,6 +77,7 @@ void Ui_element::SetActive(bool activate)
 	if (activate)
 	{
 		active = true;
+		gripped = false; //PROVISIONAL
 		if (collider != nullptr)
 		collider->active = true;
 		for (int i = 0; i < linked_elements.count(); i++)
@@ -95,6 +96,6 @@ void Ui_element::SetActive(bool activate)
 		for (int i = 0; i < linked_elements.count(); i++)
 		{
 			linked_elements[i]->SetActive(false);
-		}
+ 		}
 	}
 }
