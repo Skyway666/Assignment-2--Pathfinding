@@ -24,6 +24,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	contact.x = 0;
 	contact.y = 0;
 	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER, App->entities);
+	animation = &idle;
 }
 
 

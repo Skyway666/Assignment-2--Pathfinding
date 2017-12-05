@@ -14,7 +14,7 @@ enum ENTITY_TYPES;
 class Entity //: public Path
 {
 protected:
-	Animation* animation;
+	Animation* animation = nullptr;
 
 public:
 	fPoint position; // Top left position

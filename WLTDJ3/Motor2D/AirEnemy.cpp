@@ -38,6 +38,7 @@ AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x
 	home_path_found = false;
 	speed.x = 0;
 	speed.y = 0;
+	animation = &idle;
 }
 
 
@@ -53,8 +54,6 @@ void AirEnemy::Update(float dt, bool do_logic)
 	center.y = position.y + (845 * scale)/2;
 
 	idle.speed = 0.3 * dt;
-
-    animation = &idle;
 	if (is_idle)
 		Exec_idle();
 	else

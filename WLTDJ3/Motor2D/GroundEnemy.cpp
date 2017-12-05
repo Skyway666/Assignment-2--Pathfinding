@@ -37,6 +37,7 @@ GroundEnemy::GroundEnemy(int x, int y, Ground_Enemy_Initial_Inf initial_inf) : G
 	SDL_Rect collider_rect{ 0, 0, r.w * scale, r.h * scale };
 
 	collider = App->collision->AddCollider(collider_rect, COLLIDER_ENEMY_GROUND, App->entities);
+	animation = &run;
 }
 
 
@@ -51,7 +52,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		spawned = true;
 
 	frames++;
-	animation = &run;
+	
 	jump.speed = 0.4 * dt;
 	run.speed = 0.4 * dt;
 
