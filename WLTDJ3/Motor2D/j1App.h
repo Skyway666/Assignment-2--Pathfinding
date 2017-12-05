@@ -122,7 +122,7 @@ private:
 	double				real_delay;
 	uint32				last_sec_frame_count = 0;
 	uint32				prev_last_sec_frame_count = 0;
-	uint64				frame_count = 0;
+	uint32				frame_count;
 	j1PerfTimer			timer;
 	j1PerfTimer			ptimer;
 	j1PerfTimer			frame_time;
@@ -137,6 +137,7 @@ public:
 	char*	cap = "On";
 	bool	pause = false;
 	bool	started = false;
+	bool    loading_frame; //If 
 };
 
 extern j1App* App;

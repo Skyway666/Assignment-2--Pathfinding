@@ -85,7 +85,9 @@
     <ClCompile Include="Text.cpp">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Window.cpp">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -199,7 +201,9 @@
     <ClInclude Include="Text.h">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Window.h">
+      <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="p2 libraries">

@@ -193,6 +193,7 @@ void j1Scene::Change_to_map(int _map)
 	}
 	App->pathfinding->SetMap();
 	App->entities->Spawn_waiting_entities();
+	App->loading_frame = true;
 }
 
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
@@ -211,6 +212,7 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 
 			Menu_Window->SetActive(false);
 			App->gui->blit_background = false;
+			App->loading_frame = true;
 			
 		}
 		if (element == continuee)
