@@ -198,7 +198,7 @@ void j1Scene::Change_to_map(int _map)
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
 	//TEST
-	if(event == MOUSE_CLICK)
+	if(event == MOUSE_STOP_CLICK)
 	{ 
 		if (element == start)
 		{
