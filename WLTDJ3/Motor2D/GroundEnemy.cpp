@@ -53,6 +53,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 
 	frames++;
 	
+	animation = &run;
 	jump.speed = 0.4 * dt;
 	run.speed = 0.4 * dt;
 

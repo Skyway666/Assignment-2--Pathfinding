@@ -39,6 +39,7 @@ void Player::Update(float dt)
 	center.x = position.x + (481 * scale) / 2;
 	center.y = position.y + (547 * scale) / 2;
 
+
 	idle.speed = 0.8 * dt;
 	run.speed = 0.4 * dt;
 	jump.speed = 0.4 * dt;
