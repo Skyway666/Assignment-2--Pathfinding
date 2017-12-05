@@ -212,6 +212,7 @@ bool j1Map::CleanUp()
 	data.layer_array.clear();
 	map_file.reset();
 
+	map_loaded = false;
 	return true;
 }
 

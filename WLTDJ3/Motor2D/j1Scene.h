@@ -67,7 +67,7 @@ private:
 	Button* continuee;
 	Button* exit;
 
-	bool pause_once = true; //Really provisional, not a good idea at all
+	bool pause_menu_spawned = true;
 	//TEST
 
 

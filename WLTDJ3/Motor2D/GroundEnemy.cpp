@@ -115,6 +115,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		position.y += gravity * dt;
 
 	// Make collider follow enemy
+	if(collider != nullptr)
 	collider->SetPos(position.x, position.y);
 
 	last_contact_y = contact.y;

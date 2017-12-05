@@ -210,8 +210,16 @@ void j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 
 		case ENTITY_TYPES::PLAYER:
 		{
+			
 			Player* new_ent = new Player(x, y, p_ini_inf);
+			if(player == nullptr)
 			player = new_ent;
+			else
+			{
+				player->collider->to_delete = true;
+				delete player;
+				player = new_ent;
+			}
 			break;
 		}
 	}

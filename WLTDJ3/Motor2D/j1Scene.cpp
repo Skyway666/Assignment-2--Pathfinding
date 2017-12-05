@@ -87,15 +87,15 @@ bool j1Scene::Start()
 bool j1Scene::PreUpdate()
 {
 	//TEST
-	if (App->pause && pause_once)
+	if (App->pause && pause_menu_spawned)
 	{
 		Pause_Window->SetActive(true);
-		pause_once = false;
+		pause_menu_spawned = false;
 	}
-	else if(!App->pause && !pause_once)
+	else if(!App->pause && !pause_menu_spawned)
 	{
 		Pause_Window->SetActive(false);
-		pause_once = true;
+		pause_menu_spawned = true;
 	}
 	//TEST
 	return true;
@@ -220,7 +220,12 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			App->pause = false;
 		}
 		if (element == exit)
-		{
+		{	
+			App->entities->EraseEntities();
+			App->collision->Erase_Non_Player_Colliders();
+			App->entities->Clear_waiting_list();
+			App->map->CleanUp();
+
 			App->pause = false;
 			Menu_Window->SetActive(true);
 			App->gui->blit_background = true;
