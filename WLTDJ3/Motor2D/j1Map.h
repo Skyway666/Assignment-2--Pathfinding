@@ -99,7 +99,7 @@ public:
 
 	SDL_Rect Tile_Rect(int tileid);
   
-	int map = 0; //Starting map
+	int map = -1; //Starting map (-1 for no map, 0 for first, 1 for second)
 
 	SDL_Texture* bone_graphics = nullptr;
 	SDL_Texture* path_indicator = nullptr;
@@ -121,12 +121,13 @@ private:
 public:
 
 	MapData data;
+	bool map_loaded;
 
 private:
 
 	pugi::xml_document	map_file;
 	p2SString			folder;
-	bool				map_loaded;
+
 };
 
 #endif // __j1MAP_H__

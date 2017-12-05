@@ -274,7 +274,7 @@ bool j1Entities::Load(pugi::xml_node& data)
 	}
 	else
 	{
-		if (App->map->map == 0)
+		if (data.child("player").attribute("map").as_int() == 1)
 		{
 			App->scene->Change_to_map(1);
 			Load_entities(data);

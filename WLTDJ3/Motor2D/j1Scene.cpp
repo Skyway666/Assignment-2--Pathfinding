@@ -177,10 +177,13 @@ bool j1Scene::CleanUp()
 
 void j1Scene::Change_to_map(int _map)
 {
-	App->entities->EraseEntities();
-	App->collision->Erase_Non_Player_Colliders();
-	App->entities->Clear_waiting_list();
-	App->map->CleanUp();
+	if(App->map->map_loaded)
+	{ 
+		App->entities->EraseEntities();
+		App->collision->Erase_Non_Player_Colliders();
+		App->entities->Clear_waiting_list();
+		App->map->CleanUp();
+	}
 	if (_map == 0)
 	{
 		App->map->Load("Level 1.2 provisional.tmx");
@@ -203,13 +206,14 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 	{ 
 		if (element == start)
 		{
-			
+			//Game loading
 			App->map->Load("Level 1.2 provisional.tmx");
 			App->map->map = 0;
 			App->pathfinding->SetMap();
 			App->entities->Spawn_waiting_entities();
 			App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
 
+			//Hide menu
 			Menu_Window->SetActive(false);
 			App->gui->blit_background = false;
 			App->loading_frame = true;
@@ -219,13 +223,33 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		{
 			App->pause = false;
 		}
+		if (element == boom)
+		{
+			//Game loading
+			//App->map->Load("Level 1.2 provisional.tmx");
+			//App->map->map = 0;
+			//App->pathfinding->SetMap();
+			//App->entities->Spawn_waiting_entities();
+			//App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+
+			//Load saved game
+			App->LoadGame();
+
+			//Hide menu
+			Menu_Window->SetActive(false);
+			App->gui->blit_background = false;
+			App->loading_frame = true;
+		}
 		if (element == exit)
 		{	
+			//Game unloading
 			App->entities->EraseEntities();
 			App->collision->Erase_Non_Player_Colliders();
 			App->entities->Clear_waiting_list();
 			App->map->CleanUp();
+			App->map->map = -1;
 
+			//Show menu
 			App->pause = false;
 			Menu_Window->SetActive(true);
 			App->gui->blit_background = true;
