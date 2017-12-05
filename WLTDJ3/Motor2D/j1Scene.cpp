@@ -225,13 +225,6 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		}
 		if (element == boom)
 		{
-			//Game loading
-			//App->map->Load("Level 1.2 provisional.tmx");
-			//App->map->map = 0;
-			//App->pathfinding->SetMap();
-			//App->entities->Spawn_waiting_entities();
-			//App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
-
 			//Load saved game
 			App->LoadGame();
 
