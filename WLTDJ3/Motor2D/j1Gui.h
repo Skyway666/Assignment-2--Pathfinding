@@ -5,6 +5,7 @@
 #include "Icon.h"
 #include "Button.h"
 #include "Text.h"
+#include "Window.h"
 #include "p2List.h"
 
 
@@ -56,13 +57,14 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	//Add a ui element to "ui_elements" 
+	//Add icon
 	Icon* Add_icon(int x, int y);
-
+	//Add button
 	Button* Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_type = NONE);
-
-	//Ad text as UI
+	//Add text as UI
 	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
+	//Add window
+	Window* Add_window(int x, int y);
 
 	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the 
 	//one given to the function. Then it will call the global "OnClick" method and "OnClick" method of the UI element, which will change the label.
@@ -89,8 +91,10 @@ private:
 	p2List<Icon*> icons;
 	//Buttons list
 	p2List<Button*> buttons;
-	//Text list. Separated from the ui elements list because they have to be drawn afterwards
+	//Text list
 	p2List<Text*> texts;
+	//Windows list
+	p2List<Window*> windows;
 	
 
 

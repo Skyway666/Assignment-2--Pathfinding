@@ -47,6 +47,12 @@ bool j1Gui::Start()
 // Update of all ui_elements and click_manager will be executed here
 bool j1Gui::PreUpdate()
 {
+	//Update all windows
+	for (uint i = 0; i < windows.count(); ++i)
+	{
+		if (windows[i] != nullptr && windows[i]->active)
+			windows[i]->Update();
+	}
 	//Update all icons (Maybe they should be able to blit from their own texture like texts)
 	for (uint i = 0; i < icons.count(); ++i)
 	{
@@ -76,6 +82,12 @@ bool j1Gui::PostUpdate()
 		if(blit_background)
 		App->render->Blit(menu_background, 0, 0,1,false);
 	
+		//Blit all windows
+		for (uint i = 0; i < windows.count(); ++i)
+		{
+			if (windows[i] != nullptr && windows[i]->active)
+				windows[i]->Draw(atlas);
+		}
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
 		for (uint i = 0; i < icons.count(); ++i)
 		{
@@ -94,6 +106,7 @@ bool j1Gui::PostUpdate()
 			if (texts[i] != nullptr && texts[i]->active)
 				texts[i]->Draw();
 		}
+
 
 	if(App->collision->debug)
 	click_manager->DebugDraw();
@@ -128,6 +141,13 @@ Text* j1Gui::Add_text(int x, int y, const char* text, _TTF_Font* font)
 
 	return new_text;
 }
+Window* j1Gui::Add_window(int x, int y)
+{
+	Window* new_window = new Window(x, y);
+	windows.add(new_window);
+
+	return new_window;
+}
 
 //This method will iterate over all the colliders of the buttons in the "buttons" list, looking for the one that has the same collider that the one given to the 
 //function. Then it will call its "OnClick" method
@@ -144,15 +164,13 @@ void j1Gui::OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event)
 			}
 		}
 	}
-	for (int i = 0; i < icons.count(); i++)
+	for (int i = 0; i < windows.count(); i++)
 	{
-		if (icons[i] != nullptr)
+		if (windows[i] != nullptr)
 		{
-			if (icons[i]->collider == c1)
+			if (windows[i]->collider == c1)
 			{
-				if(icons[i]->listener != nullptr)
-				icons[i]->listener->OnMouseEvent(event, buttons[i]);
-				icons[i]->OnMouseEvent(event);
+				windows[i]->OnMouseEvent(event);
 			}
 		}
 	}

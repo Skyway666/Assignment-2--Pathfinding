@@ -56,14 +56,14 @@ public:
 
 	_TTF_Font* title;
 
-	Icon* Pause_Window;
+	
 private:
 	//TEST
-	Icon* Window;
+	Window* Menu_Window;
 	Button* start;
 	Button* boom;
 	
-	
+	Window* Pause_Window;
 	Button* continuee;
 	Button* exit;
 

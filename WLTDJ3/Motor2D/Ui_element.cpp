@@ -43,28 +43,6 @@ void Ui_element::Link_ui_element(Ui_element* element, int offset_x, int offset_y
 
 void Ui_element::Update()
 {
-	//Move object if gripped
-	iPoint mouse_position;
-	App->input->GetMousePosition(mouse_position.x, mouse_position.y);
-	iPoint mouse_displacement;
-	if (gripped && !mouse_pos_gotten)
-	{
-		mouse_pos_when_grip = mouse_position;
-		pos_when_grip = position;
-		offset_when_grip = offset;
-		mouse_pos_gotten = true;
-	}
-	mouse_displacement = mouse_position - mouse_pos_when_grip;
-	if (gripped)
-	{
-		position = pos_when_grip + mouse_displacement;
-		offset = offset_when_grip + mouse_displacement;
-	}
-	if (!gripped && mouse_pos_gotten)
-	{
-		mouse_pos_gotten = false;
-	}
-
 	//Update position of all linked objects to match parent
 	for (int i = 0; i < linked_elements.count(); i++)
 	{
@@ -77,7 +55,6 @@ void Ui_element::SetActive(bool activate)
 	if (activate)
 	{
 		active = true;
-		gripped = false; //PROVISIONAL
 		if (collider != nullptr)
 		collider->active = true;
 		for (int i = 0; i < linked_elements.count(); i++)
@@ -90,7 +67,6 @@ void Ui_element::SetActive(bool activate)
 	else
 	{
 		active = false;
-		gripped = false; //PROVISIONAL
 		if (collider != nullptr)
 		collider->active = false;
 		for (int i = 0; i < linked_elements.count(); i++)

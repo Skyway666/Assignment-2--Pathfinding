@@ -49,11 +49,9 @@ void Button::OnMouseEvent(UI_EVENT event)
 	if (event == MOUSE_CLICK)
 	{
 		animation = &Pressed;
-		gripped = true;
 	}
 	if (event == MOUSE_STOP_CLICK)
 	{
 		animation = &Shiny;
-		gripped = false;
 	}
 }

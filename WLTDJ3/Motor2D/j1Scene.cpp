@@ -42,7 +42,7 @@ bool j1Scene::Start()
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
 	Text* titola = App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
 
-	Window = App->gui->Add_icon(300, 100);
+	Menu_Window = App->gui->Add_window(300, 100);
 
 	start = App->gui->Add_button(300, 300, (j1Module*)this,START);
 	Text* text_to_link = App->gui->Add_text(0, 0, "START");
@@ -52,14 +52,14 @@ bool j1Scene::Start()
 	text_to_link = App->gui->Add_text(0, 0, "TEST BUTTON");
 	boom->Link_ui_element(text_to_link, 60, 22);
 
-	Window->Link_ui_element(start, 120, 100);
-	Window->Link_ui_element(boom, 120, 300);
-	Window->Link_ui_element(titola, 45, 30);
+	Menu_Window->Link_ui_element(start, 120, 100);
+	Menu_Window->Link_ui_element(boom, 120, 300);
+	Menu_Window->Link_ui_element(titola, 45, 30);
 
 	titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
 
 	//Pause window
-	Pause_Window = App->gui->Add_icon(300, 100);
+	Pause_Window = App->gui->Add_window(300, 100);
 
 	continuee = App->gui->Add_button(300, 300, (j1Module*)this, START);
 	text_to_link = App->gui->Add_text(0, 0, "CONTINUE");
@@ -209,7 +209,7 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			App->entities->Spawn_waiting_entities();
 			App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
 
-			Window->SetActive(false);
+			Menu_Window->SetActive(false);
 			App->gui->blit_background = false;
 			
 		}
@@ -220,7 +220,7 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		if (element == exit)
 		{
 			App->pause = false;
-			Window->SetActive(true);
+			Menu_Window->SetActive(true);
 			App->gui->blit_background = true;
 		}
 

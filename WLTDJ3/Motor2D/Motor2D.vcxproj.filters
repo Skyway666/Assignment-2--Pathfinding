@@ -85,6 +85,7 @@
     <ClCompile Include="Text.cpp">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Text</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -198,6 +199,7 @@
     <ClInclude Include="Text.h">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\Text</Filter>
     </ClInclude>
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="p2 libraries">
@@ -253,6 +255,9 @@
     </Filter>
     <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements\Text">
       <UniqueIdentifier>{cc946534-963e-4e48-b998-9de8ebe1bbb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules, scenes and tools\Modules\GUI\Ui elements\Window">
+      <UniqueIdentifier>{81b5787b-fd33-4887-b34e-d47cd422cc8f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
