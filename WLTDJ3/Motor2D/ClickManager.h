@@ -39,8 +39,10 @@ class ClickManager
 public:
 	ClickManager();
 	~ClickManager();
+	//Adds a collider to the collider list
 	Ui_collider* Add_ui_collider(SDL_Rect _rect);
-
+	//Erases a collider from the list, returns true if it was successfully removed and false if not
+	bool Erase_ui_collider(Ui_collider* collider);
 	//Will check all colliders compare it to the mouse position and click. Then if needed, will call the "OnClick" or "MouseOver" method of "j1Gui", passing
 	//the indicated collider as an argument
 	void Update();

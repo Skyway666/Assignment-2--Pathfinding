@@ -208,10 +208,17 @@ bool j1Gui::CleanUp()
 
 bool j1Gui::Erase_Ui_element(Ui_element* element)
 {
+	if (element == nullptr)
+		return false;
+
 	switch (element->type) {
 		case ICON:
 		{
 			int index = icons.find((Icon*)element);
+
+			if (index == -1)
+				return false;
+
 			p2List_item<Icon*>* node_to_delete = icons.At(index);
 
 			for (int i = 0; i < icons[index]->linked_elements.count(); i++)
@@ -226,12 +233,19 @@ bool j1Gui::Erase_Ui_element(Ui_element* element)
 		case BUTTON:
 		{
 			int index = buttons.find((Button*)element);
+
+			if (index == -1)
+				return false;
+
 			p2List_item<Button*>* node_to_delete = buttons.At(index);
 
 			for (int i = 0; i < buttons[index]->linked_elements.count(); i++)
 			{
 				Erase_Ui_element(buttons[index]->linked_elements[i]);
 			}
+
+
+			click_manager->Erase_ui_collider(buttons[index]->collider);
 
 			delete buttons[index];
 			buttons.del(node_to_delete);
@@ -240,6 +254,10 @@ bool j1Gui::Erase_Ui_element(Ui_element* element)
 		case TEXT:
 		{
 			int index = texts.find((Text*)element);
+
+			if (index == -1)
+				return false;
+
 			p2List_item<Text*>* node_to_delete = texts.At(index);
 
 			for (int i = 0; i < texts[index]->linked_elements.count(); i++)
@@ -254,12 +272,18 @@ bool j1Gui::Erase_Ui_element(Ui_element* element)
 		case WINDOW:
 		{
 			int index = windows.find((Window*)element);
+
+			if (index == -1)
+				return false;
+
 			p2List_item<Window*>* node_to_delete = windows.At(index);
 
 			for (int i = 0; i < windows[index]->linked_elements.count(); i++)
 			{
 				Erase_Ui_element(windows[index]->linked_elements[i]);
 			}
+
+			click_manager->Erase_ui_collider(windows[index]->collider);
 
 			delete windows[index];
 			windows.del(node_to_delete);
