@@ -102,7 +102,7 @@ void GroundEnemy::Update(float dt, bool do_logic)
 		else if (speed.x < 0 && player_pos == 1)
 			speed.x = -speed.x;
 	}
-	
+
 	if (spawned)
 		position.x += speed.x * dt;
 
@@ -197,7 +197,8 @@ void GroundEnemy::ManagePhysics(float dt)
 void GroundEnemy::Save(pugi::xml_node& data)
 {
 	data.append_attribute("x") = position.x;
-	data.append_attribute("y") = position.y;
+	data.append_attribute("y") = position.y - gravity * 3;
+	data.append_attribute("speed_x") = speed.x;
 	data.append_attribute("contact_x") = contact.x;
 	data.append_attribute("contact_y") = contact.y;
 	data.append_attribute("player_pos") = player_pos;
@@ -211,12 +212,15 @@ void GroundEnemy::Save(pugi::xml_node& data)
 	data.append_attribute("jump_x") = jump_x;
 	data.append_attribute("allow_time") = allowtime;
 	data.append_attribute("jumping") = jumping;
+
+	jump_timer.Save();
 }
 
 void GroundEnemy::Load(pugi::xml_node& data)
 {
 	position.x = data.attribute("x").as_float();
 	position.y = data.attribute("y").as_float();
+	speed.x = data.attribute("speed_x").as_float();
 	contact.x = data.attribute("contact_x").as_int();
 	contact.y = data.attribute("contact_y").as_int();
 	player_pos = data.attribute("player_pos").as_int();
@@ -230,17 +234,12 @@ void GroundEnemy::Load(pugi::xml_node& data)
 	allowtime = data.attribute("allowtime").as_bool();
 	jumping = data.attribute("jumping").as_bool();
 
-	if (contact.y == 1)
-		position.y -= gravity * 10;
-	if (contact.x == 1)
-		position.x += speed_modifier.x * 2;
-	else if (contact.x == 2)
-		position.x -= speed_modifier.x * 2;
-
 	if (jumping)
 		spawned = true;
 	else
 		spawned = false;
+
+	jump_timer.Resume();
 }
 
 void GroundEnemy::Pause()

@@ -51,6 +51,18 @@ public:
 		been_paused = false;
 	}
 
+	void Save()
+	{
+		if (timer_duration - SDL_GetTicks() > 0)
+			saved_time = timer_duration - SDL_GetTicks();
+	}
+
+	void Resume()
+	{
+			timer_duration = SDL_GetTicks() + saved_time;
+			timer_active = true;
+	}
+
 	int Read()
 	{
 		return timer_duration;
@@ -60,6 +72,7 @@ private:
 
 	float	time = 0;
 	float	pause_time = 0;
+	float	saved_time = 0;
 	int		timer_duration = 0;
 	bool	timer_paused = false;
 	bool	timer_active = false;
