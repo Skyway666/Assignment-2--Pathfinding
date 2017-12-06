@@ -76,23 +76,20 @@ public:
 	//one given to the function. Then it will call the global "OnClick" method and "OnClick" method of the UI element, which will change the label.
 	void OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event);
 
+	//Sets a background out of the passed texture
+	void Set_backgrond(SDL_Texture* texture);
+
 	const SDL_Texture* GetAtlas() const;
 	
 	ClickManager* click_manager;
-
-	//Bool to know if backround should be drawn
-	bool blit_background = true;
-	
-
 private:
 
 	SDL_Texture* atlas;
-	//Background image(could be more)
-	SDL_Texture* menu_background; 
+	//Background image
+	SDL_Texture* current_background; 
 
 	//Paths to load assets
 	p2SString atlas_file_name;
-	p2SString background_file_name;
 	
 	//Icons list
 	p2List<Icon*> icons;

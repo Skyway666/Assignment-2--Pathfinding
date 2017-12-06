@@ -33,7 +33,7 @@ public:
 	virtual ~j1Scene();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 
 	// Called before the first frame
 	bool Start();
@@ -59,22 +59,30 @@ public:
 	//Functions to load and unload Ui setups and bools to execute them safely
 	void Load_main_menu(); bool want_load_main_menu = false;
 	void UnLoad_main_menu(); bool want_unload_main_menu = false;
+	void Load_credits(); bool want_to_load_credits = false;
+	void UnLoad_credits(); bool want_to_unload_credits = false;
 
 	bool exit_app = false;
 private:
-	//TEST
-	Window* Menu_Window;
-	Button* start;
-	Button* continuee;
-	Button* exit;
+	//Main menu setup
+	Window* Menu_Window = nullptr;
+	Button* start = nullptr;
+	Button* continuee = nullptr;
+	Button* exit = nullptr;
+	SDL_Texture* main_menu_background;
 	
-	Window* Pause_Window;
-	Button* resume;
-	Button* exit_main_menu;
-
+	//Pause menu setup
+	Window* Pause_Window = nullptr;
+	Button* resume = nullptr;
+	Button* exit_main_menu = nullptr;
 	bool pause_menu_spawned = true;
-	//TEST
 	
+	//Credits setup
+
+	
+	//Paths to load assets from config
+	p2SString main_menu_background_file_name;
+
 	_TTF_Font* title;
 
 

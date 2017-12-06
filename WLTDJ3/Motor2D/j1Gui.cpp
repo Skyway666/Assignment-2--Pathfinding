@@ -29,7 +29,6 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
-	background_file_name = conf.child("menu_background").attribute("file").as_string("");
 
 	return ret;
 }
@@ -38,8 +37,6 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
-	menu_background = App->tex->Load(background_file_name.GetString());
-
 
 	return true;
 }
@@ -79,8 +76,8 @@ bool j1Gui::PreUpdate()
 // Draw of all ui_elements and background will be executed here
 bool j1Gui::PostUpdate()
 {
-		if(blit_background)
-		App->render->Blit(menu_background, 0, 0,1,false);
+		if(current_background != nullptr)
+		App->render->Blit(current_background, 0, 0,1,false);
 	
 		//Blit all windows
 		for (uint i = 0; i < windows.count(); ++i)
@@ -147,6 +144,11 @@ Window* j1Gui::Add_window(int x, int y)
 	windows.add(new_window);
 
 	return new_window;
+}
+
+void j1Gui::Set_backgrond(SDL_Texture* new_background)
+{
+	current_background = new_background;
 }
 
 //This method will iterate over all the colliders of the buttons in the "buttons" list, looking for the one that has the same collider that the one given to the 

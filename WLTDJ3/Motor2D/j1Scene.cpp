@@ -15,9 +15,10 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& conf)
 {
 	LOG("Loading Scene");
+	main_menu_background_file_name = conf.child("menu_background").attribute("file").as_string("");
 	bool ret = true;
 
 	return ret;
@@ -25,7 +26,12 @@ bool j1Scene::Awake()
 
 // Called before the first frame
 bool j1Scene::Start()
-{	
+{
+
+	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
+	main_menu_background = App->tex->Load(main_menu_background_file_name.GetString());
+
+
 	//Menu setup
 	Load_main_menu();
 	//Pause window
@@ -46,7 +52,7 @@ bool j1Scene::Start()
 
 		Pause_Window->SetActive(false);
 
-	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
+
 	return true;
 }
 
@@ -208,7 +214,7 @@ void j1Scene::Load_main_menu()
 	Menu_Window->Link_ui_element(exit, 120, 210);
 	Menu_Window->Link_ui_element(titola, 45, 30);
 
-	App->gui->blit_background = true;
+	App->gui->Set_backgrond(main_menu_background);
 }
 
 void j1Scene::UnLoad_main_menu()
@@ -219,7 +225,16 @@ void j1Scene::UnLoad_main_menu()
 	continuee = nullptr;
 	exit = nullptr;
 
-	App->gui->blit_background = false;
+	App->gui->Set_backgrond(nullptr);
+}
+
+void j1Scene::Load_credits()
+{
+
+}
+void j1Scene::UnLoad_credits()
+{
+
 }
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {

@@ -49,7 +49,6 @@
 
   <gui>
     <atlas file="gui/atlas.png"/>
-    <menu_background file ="gui/menu_background.png"/>
   </gui>
 
   <map>
@@ -59,5 +58,9 @@
   <fonts>
     <default_font file ="fonts/open_sans/OpenSans-BoldItalic.ttf"/>
   </fonts>
+
+  <scene>
+    <menu_background file ="gui/menu_background.png"/>
+  </scene>
 
 </config>
