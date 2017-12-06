@@ -14,7 +14,7 @@ public:
 
 	bool IsOver()
 	{
-		if (timer_duration > SDL_GetTicks())
+		if (timer_duration > SDL_GetTicks() && timer_duration > 0)
 			return false;
 		else
 		{
