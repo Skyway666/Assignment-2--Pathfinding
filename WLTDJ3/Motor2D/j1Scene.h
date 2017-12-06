@@ -55,12 +55,15 @@ public:
     
 	//Unloads current map and loads the map indicated in the argument. If there is no map loaded, it just loads the indicated map
 	void Change_to_map(int);
+	//Unloads current map
+	void Unload_map();
+
 
 	//Functions to load and unload Ui setups and bools to execute them safely
 	void Load_main_menu(); bool want_load_main_menu = false;
 	void UnLoad_main_menu(); bool want_unload_main_menu = false;
-	void Load_credits(); bool want_to_load_credits = false;
-	void UnLoad_credits(); bool want_to_unload_credits = false;
+	void Load_credits(); bool want_load_credits = false;
+	void UnLoad_credits(); bool want_unload_credits = false;
 
 	bool exit_app = false;
 private:
@@ -69,16 +72,18 @@ private:
 	Button* start = nullptr;
 	Button* continuee = nullptr;
 	Button* exit = nullptr;
+	Button* credits = nullptr;
 	SDL_Texture* main_menu_background;
 	
 	//Pause menu setup
 	Window* Pause_Window = nullptr;
 	Button* resume = nullptr;
-	Button* exit_main_menu = nullptr;
+	Button* exit_main_menu_fg = nullptr;
 	bool pause_menu_spawned = true;
 	
 	//Credits setup
-
+	//SDL_Texture* win_screen;
+	Button* exit_main_menu_fc;
 	
 	//Paths to load assets from config
 	p2SString main_menu_background_file_name;

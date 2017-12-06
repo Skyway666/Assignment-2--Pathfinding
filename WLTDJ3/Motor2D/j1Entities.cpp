@@ -68,10 +68,6 @@ bool j1Entities::Start()
 
 	//Shouldn't be loading here
 	App->map->bone_graphics = App->tex->Load("textures/BONE.png");
-	App->scene->win_screen = App->tex->Load("textures/WinScreen.png");
-
-	
-
 	return true;
 }
 

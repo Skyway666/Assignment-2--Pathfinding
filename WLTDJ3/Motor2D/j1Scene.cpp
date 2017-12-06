@@ -30,7 +30,7 @@ bool j1Scene::Start()
 
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 	main_menu_background = App->tex->Load(main_menu_background_file_name.GetString());
-
+	win_screen = App->tex->Load("textures/WinScreen.png"); //Could be loaded from xml
 
 	//Menu setup
 	Load_main_menu();
@@ -42,12 +42,12 @@ bool j1Scene::Start()
 		Text* text_to_link = App->gui->Add_text(0, 0, "RESUME");
 		resume->Link_ui_element(text_to_link, 80, 22);
 
-		exit_main_menu = App->gui->Add_button(300, 500, (j1Module*)this, START);
+		exit_main_menu_fg = App->gui->Add_button(300, 500, (j1Module*)this, START);
 		text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
-		exit_main_menu->Link_ui_element(text_to_link, 70, 22);
+		exit_main_menu_fg->Link_ui_element(text_to_link, 70, 22);
 
 		Pause_Window->Link_ui_element(resume, 120, 100);
-		Pause_Window->Link_ui_element(exit_main_menu, 120, 300);
+		Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
 		Pause_Window->Link_ui_element(titola, 120, 30);
 
 		Pause_Window->SetActive(false);
@@ -73,16 +73,29 @@ bool j1Scene::PreUpdate()
 	//TEST
 
 	//Execute load and unload functions safelly
-	if (want_load_main_menu)
-	{
-		Load_main_menu();
-		want_load_main_menu = false;
-	}
-	if (want_unload_main_menu)
-	{
-		UnLoad_main_menu();
-		want_unload_main_menu = false;
-	}
+	//First all unloads
+		if (want_unload_main_menu)
+		{
+			UnLoad_main_menu();
+			want_unload_main_menu = false;
+		}
+		if (want_unload_credits)
+		{
+			UnLoad_credits();
+			want_unload_credits = false;
+		}
+	//Then all loads
+		if (want_load_main_menu)
+		{
+			Load_main_menu();
+			want_load_main_menu = false;
+		}
+		if (want_load_credits)
+		{
+			Load_credits();
+			want_load_credits = false;
+		}
+
 	return true;
 }
 
@@ -188,6 +201,15 @@ void j1Scene::Change_to_map(int _map)
 	App->loading_frame = true;
 }
 
+void j1Scene::Unload_map()
+{
+	App->entities->EraseEntities();
+	App->collision->Erase_Non_Player_Colliders();
+	App->entities->Clear_waiting_list();
+	App->map->CleanUp();
+	App->map->map = -1;
+	App->pause = false;
+}
 void j1Scene::Load_main_menu()
 {
 	//Title
@@ -207,11 +229,16 @@ void j1Scene::Load_main_menu()
 	exit = App->gui->Add_button(0, 0, (j1Module*)this, START);
 	text_to_link = App->gui->Add_text(0, 0, "EXIT");
 	exit->Link_ui_element(text_to_link, 100, 22);
+	//Credits button
+	credits = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "CREDITS");
+	credits->Link_ui_element(text_to_link, 90, 22);
 	//
 	//Link all elements to window
 	Menu_Window->Link_ui_element(start, 120, 100);
 	Menu_Window->Link_ui_element(continuee, 120, 155);
 	Menu_Window->Link_ui_element(exit, 120, 210);
+	Menu_Window->Link_ui_element(credits, 120, 265);
 	Menu_Window->Link_ui_element(titola, 45, 30);
 
 	App->gui->Set_backgrond(main_menu_background);
@@ -224,17 +251,25 @@ void j1Scene::UnLoad_main_menu()
 	start = nullptr;
 	continuee = nullptr;
 	exit = nullptr;
+	credits = nullptr;
 
 	App->gui->Set_backgrond(nullptr);
 }
 
 void j1Scene::Load_credits()
 {
+	Text* text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
+	exit_main_menu_fc = App->gui->Add_button(500, 500, (j1Module*)this, START);
+	exit_main_menu_fc->Link_ui_element(text_to_link, 70, 22);
 
+	App->gui->Set_backgrond(win_screen);
 }
 void j1Scene::UnLoad_credits()
 {
+	App->gui->Erase_Ui_element(exit_main_menu_fc);
+	exit_main_menu_fc = nullptr;
 
+	App->gui->Set_backgrond(nullptr);
 }
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
@@ -246,16 +281,13 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			//Game loading
 			Change_to_map(0);
 			App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
-
 			//Unload main menu
 			want_unload_main_menu = true;
-			
 		}
 		if (element == continuee)
 		{
 			//Load saved game
 			App->LoadGame();
-
 			//Unload main menu
 			want_unload_main_menu = true;
 		}
@@ -267,18 +299,26 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		{
 			App->pause = false;
 		}
-		if (element == exit_main_menu)
+		if (element == exit_main_menu_fg)
 		{	
 			//Game unloading
-			App->entities->EraseEntities();
-			App->collision->Erase_Non_Player_Colliders();
-			App->entities->Clear_waiting_list();
-			App->map->CleanUp();
-			App->map->map = -1;
-			App->pause = false;
-
+			Unload_map();
 			//Load main menu
 			want_load_main_menu = true;
+		}
+		if (element == exit_main_menu_fc)
+		{
+			//Unload credits
+			want_unload_credits = true;
+			//Load main menu
+			want_load_main_menu = true;
+		}
+		if (element == credits)
+		{
+			//Unload main menu
+			want_unload_main_menu = true;
+			//Load credits
+			want_load_credits = true;
 		}
 
 	}
