@@ -196,7 +196,12 @@ void j1App::PrepareUpdate()
 	else
 	{ 
 		dt = 0.0001;
+		security_frames++;
+		if(security_frames == 3)
+		{ 
 		loading_frame = false;
+		security_frames = 0;
+		}
 	}
 	frame_time.Start();
 }

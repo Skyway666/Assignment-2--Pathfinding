@@ -137,7 +137,8 @@ public:
 	char*	cap = "On";
 	bool	pause = false;
 	bool	started = false;
-	bool    loading_frame; //If 
+	bool    loading_frame; //If it is a loading frame, tell the player
+	int		security_frames = 0; //Let 3 frames pass after a loading frame
 };
 
 extern j1App* App;

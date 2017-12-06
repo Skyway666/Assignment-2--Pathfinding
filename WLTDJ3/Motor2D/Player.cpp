@@ -429,13 +429,14 @@ void Player::OnCollision(Collider* collider)
 		{
 			App->scene->Change_to_map(1);
 			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y - gravity * 2;
+			position.y = App->map->data.player_starting_value.y - gravity * 4;
+			speed.y = speed.x = 0;
 		}
 		else if (App->map->map == 1)
 		{
 			App->scene->Change_to_map(0);
 			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y - gravity * 2;
+			position.y = App->map->data.player_starting_value.y - gravity * 4;
 			speed.y = speed.x = 0;
 			win = true;
 		}

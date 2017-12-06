@@ -50,9 +50,15 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//Executes code depending on the event and the ui element affected
 	void OnMouseEvent(UI_EVENT event, Ui_element* element);
     
+	//Unloads current map and loads the map indicated in the argument. If there is no map loaded, it just loads the indicated map
 	void Change_to_map(int);
+
+	//Functions to load and unload Ui setups and bools to execute them safely
+	void Load_main_menu(); bool want_load_main_menu = false;
+	void UnLoad_main_menu(); bool want_unload_main_menu = false;
 
 	bool exit_app = false;
 private:
