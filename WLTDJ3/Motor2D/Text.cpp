@@ -14,6 +14,7 @@ Text::Text(int x, int y, const char* _string, _TTF_Font* font) : Ui_element(x, y
 	{
 		graphic = App->fonts->Print(_string);
 	}
+	type = TEXT;
 }
 
 

@@ -444,9 +444,9 @@ bool j1App::SavegameNow() const
 
 void j1App::Pause()
 {
-	if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !pause)
+	if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !pause && App->map->map_loaded)
 		pause = true;
-	else if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && pause)
+	else if (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && pause && App->map->map_loaded)
 		pause = false;
 
 	if (!pause)

@@ -54,21 +54,22 @@ public:
     
 	void Change_to_map(int);
 
-	_TTF_Font* title;
-
-	
+	bool exit_app = false;
 private:
 	//TEST
 	Window* Menu_Window;
 	Button* start;
-	Button* boom;
-	
-	Window* Pause_Window;
 	Button* continuee;
 	Button* exit;
+	
+	Window* Pause_Window;
+	Button* resume;
+	Button* exit_main_menu;
 
 	bool pause_menu_spawned = true;
 	//TEST
+	
+	_TTF_Font* title;
 
 
 	

@@ -12,6 +12,7 @@ Window::Window(int x, int y): Ui_element(x, y)
 
 	collider = App->gui->click_manager->Add_ui_collider({ x,y,457,100 });
 	animation = &Idle;
+	type = WINDOW;
 }
 
 

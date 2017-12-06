@@ -195,10 +195,79 @@ bool j1Gui::CleanUp()
 		delete texts[i];
 		texts[i] = nullptr;
 	}
+	for (int i = 0; i < windows.count(); i++)
+	{
+		delete windows[i];
+		windows[i] = nullptr;
+	}
 	click_manager->Cleanup();//Free all ui_colliders
 	delete click_manager;
 	click_manager = nullptr;
 	return true;
+}
+
+bool j1Gui::Erase_Ui_element(Ui_element* element)
+{
+	switch (element->type) {
+		case ICON:
+		{
+			int index = icons.find((Icon*)element);
+			p2List_item<Icon*>* node_to_delete = icons.At(index);
+
+			for (int i = 0; i < icons[index]->linked_elements.count(); i++)
+			{
+				Erase_Ui_element(icons[index]->linked_elements[i]);
+			}
+			
+			delete icons[index];
+			icons.del(node_to_delete);
+			return true;
+		}
+		case BUTTON:
+		{
+			int index = buttons.find((Button*)element);
+			p2List_item<Button*>* node_to_delete = buttons.At(index);
+
+			for (int i = 0; i < buttons[index]->linked_elements.count(); i++)
+			{
+				Erase_Ui_element(buttons[index]->linked_elements[i]);
+			}
+
+			delete buttons[index];
+			buttons.del(node_to_delete);
+			return true;
+		}
+		case TEXT:
+		{
+			int index = texts.find((Text*)element);
+			p2List_item<Text*>* node_to_delete = texts.At(index);
+
+			for (int i = 0; i < texts[index]->linked_elements.count(); i++)
+			{
+				Erase_Ui_element(texts[index]->linked_elements[i]);
+			}
+
+			delete texts[index];
+			texts.del(node_to_delete);
+			return true;
+		}
+		case WINDOW:
+		{
+			int index = windows.find((Window*)element);
+			p2List_item<Window*>* node_to_delete = windows.At(index);
+
+			for (int i = 0; i < windows[index]->linked_elements.count(); i++)
+			{
+				Erase_Ui_element(windows[index]->linked_elements[i]);
+			}
+
+			delete windows[index];
+			windows.del(node_to_delete);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 // const getter for atlas

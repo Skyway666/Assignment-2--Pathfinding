@@ -26,58 +26,48 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	//This are the conditions that make the game start. In order to end it, all entities should be erased and execute map's cleanup
-	//colliders should also be cleaned up
-
-	//App->map->Load("Level 1.2 provisional.tmx");
-	//App->map->map = 0;
-	//App->pathfinding->SetMap();	
-	//App->entities->Spawn_waiting_entities();
-	//App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
-
-
-	//TEST
-
 	//Menu window
-	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
-	Text* titola = App->gui->Add_text(100, 100, "WHO LET THE DOG JUMP", title);
-
-	Menu_Window = App->gui->Add_window(300, 100);
-
-	start = App->gui->Add_button(300, 300, (j1Module*)this,START);
-	Text* text_to_link = App->gui->Add_text(0, 0, "START");
-	start->Link_ui_element(text_to_link, 90, 22);
-
-	boom = App->gui->Add_button(300, 500, (j1Module*)this, START);
-	text_to_link = App->gui->Add_text(0, 0, "TEST BUTTON");
-	boom->Link_ui_element(text_to_link, 60, 22);
-
-	Menu_Window->Link_ui_element(start, 120, 100);
-	Menu_Window->Link_ui_element(boom, 120, 300);
-	Menu_Window->Link_ui_element(titola, 45, 30);
-
-	titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
+		//Title
+		title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
+		Text* titola = App->gui->Add_text(0, 0, "WHO LET THE DOG JUMP", title);
+		//Window
+		Menu_Window = App->gui->Add_window(300, 100);
+		//Start button
+		start = App->gui->Add_button(0, 0, (j1Module*)this,START);
+		Text* text_to_link = App->gui->Add_text(0, 0, "START");
+		start->Link_ui_element(text_to_link, 90, 22);
+		//Continue button
+		continuee = App->gui->Add_button(0, 0, (j1Module*)this, START);
+		text_to_link = App->gui->Add_text(0, 0, "CONTINUE");
+		continuee->Link_ui_element(text_to_link, 75, 22);
+		//Exit button
+		exit = App->gui->Add_button(0, 0, (j1Module*)this, START);
+		text_to_link = App->gui->Add_text(0, 0, "EXIT");
+		exit->Link_ui_element(text_to_link, 100, 22);
+		//
+		//Link all elements to window
+		Menu_Window->Link_ui_element(start, 120, 100);
+		Menu_Window->Link_ui_element(continuee, 120, 155);
+		Menu_Window->Link_ui_element(exit, 120, 210);
+		Menu_Window->Link_ui_element(titola, 45, 30);
 
 	//Pause window
-	Pause_Window = App->gui->Add_window(300, 100);
+		titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
+		Pause_Window = App->gui->Add_window(300, 100);
 
-	continuee = App->gui->Add_button(300, 300, (j1Module*)this, START);
-	text_to_link = App->gui->Add_text(0, 0, "CONTINUE");
-	continuee->Link_ui_element(text_to_link, 75, 22);
+		resume = App->gui->Add_button(300, 300, (j1Module*)this, START);
+		text_to_link = App->gui->Add_text(0, 0, "RESUME");
+		resume->Link_ui_element(text_to_link, 80, 22);
 
-	exit = App->gui->Add_button(300, 500, (j1Module*)this, START);
-	text_to_link = App->gui->Add_text(0, 0, "EXIT");
-	exit->Link_ui_element(text_to_link, 100, 22);
+		exit_main_menu = App->gui->Add_button(300, 500, (j1Module*)this, START);
+		text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
+		exit_main_menu->Link_ui_element(text_to_link, 70, 22);
 
-	Pause_Window->Link_ui_element(continuee, 120, 100);
-	Pause_Window->Link_ui_element(exit, 120, 300);
-	Pause_Window->Link_ui_element(titola, 120, 30);
+		Pause_Window->Link_ui_element(resume, 120, 100);
+		Pause_Window->Link_ui_element(exit_main_menu, 120, 300);
+		Pause_Window->Link_ui_element(titola, 120, 30);
 
-	Pause_Window->SetActive(false);
-
-
-
-	//TEST
+		Pause_Window->SetActive(false);
 
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 	return true;
@@ -135,7 +125,14 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 50 * dt;
-
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		App->gui->Erase_Ui_element(Menu_Window);
+		Menu_Window = nullptr;
+		start = nullptr;
+		continuee = nullptr;
+		exit = nullptr;
+	}
 
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)
@@ -159,7 +156,7 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || exit_app)
 		ret = false;
 
 	return ret;
@@ -221,10 +218,6 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		}
 		if (element == continuee)
 		{
-			App->pause = false;
-		}
-		if (element == boom)
-		{
 			//Load saved game
 			App->LoadGame();
 
@@ -234,6 +227,14 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			App->loading_frame = true;
 		}
 		if (element == exit)
+		{
+			exit_app = true;
+		}
+		if (element == resume)
+		{
+			App->pause = false;
+		}
+		if (element == exit_main_menu)
 		{	
 			//Game unloading
 			App->entities->EraseEntities();

@@ -17,6 +17,8 @@ enum UI_ELEMENT_TYPE //Type of ui elements avaliable
 {
 	ICON,
 	BUTTON,
+	TEXT,
+	WINDOW
 };
 enum BUTTON_TYPE //Knowing what type of button we are creating, just for animation purpuses
 {
@@ -66,6 +68,10 @@ public:
 	//Add window
 	Window* Add_window(int x, int y);
 
+	//This function will look for the Ui_element that has to be deleted among all the lists and delete it. It will return "false" if not found it, and true if found.
+	//It will also erase all childs
+	bool Erase_Ui_element(Ui_element* element);
+
 	//This method will iterate over all the colliders of the icons in the "ui_elements" list, looking for the one that has the same collider that the 
 	//one given to the function. Then it will call the global "OnClick" method and "OnClick" method of the UI element, which will change the label.
 	void OnMouseEvent_caller(Ui_collider* c1, UI_EVENT event);
@@ -73,6 +79,7 @@ public:
 	const SDL_Texture* GetAtlas() const;
 	
 	ClickManager* click_manager;
+
 	//Bool to know if backround should be drawn
 	bool blit_background = true;
 	
