@@ -21,7 +21,12 @@ j1Collisions::j1Collisions()
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_GROUND] = true;
 	matrix[COLLIDER_ENEMY_GROUND][COLLIDER_PATH] = true;
 	matrix[COLLIDER_ENEMY_GROUND][COLLIDER_WALKABLE] = true;
-
+	matrix[COLLIDER_COIN][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = true;
+	matrix[COLLIDER_COIN][COLLIDER_GOD] = true;
+	matrix[COLLIDER_GOD][COLLIDER_COIN] = true;
+	matrix[COLLIDER_COIN][COLLIDER_SUPER_GOD] = true;
+	matrix[COLLIDER_SUPER_GOD][COLLIDER_COIN] = true;
 }
 
 // Destructor
@@ -136,6 +141,9 @@ void j1Collisions::DebugDraw()
 			break;
 		case COLLIDER_PATH: // brown
 			App->render->DrawQuad(colliders[i]->rect, 15, 50, 85, alpha, true);
+			break;
+		case COLLIDER_COIN: // orange
+			App->render->DrawQuad(colliders[i]->rect, 255, 128, 0, alpha, true);
 			break;
 		}
 	}

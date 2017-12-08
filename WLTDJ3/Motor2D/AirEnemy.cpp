@@ -3,7 +3,7 @@
 
 
 
-AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x,y)
+AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x, y)
 {
 	scale = 0.07;
 	type = ENTITY_TYPES::AIR_ENEMY;

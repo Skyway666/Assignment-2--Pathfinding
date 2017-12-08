@@ -85,7 +85,7 @@ void j1Map::CreateCollidersAndEnemies()
 				for (uint i = 1; data.layer_array.At(1)->data->data[counter + i] == 23; i++)
 					lenght++;
 				
-				App->collision->AddCollider({ x,y,data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_PIT, (j1Module*)nullptr, lenght);
+				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_PIT, (j1Module*)nullptr, lenght);
 			}
 			else if (id == 19)
 			{
@@ -94,6 +94,10 @@ void j1Map::CreateCollidersAndEnemies()
 			else if (id == 21)
 			{
 				App->entities->Add_waiting_entity(ENTITY_TYPES::GROUND_ENEMY, x, y);
+			}
+			else if (id == 20)
+			{
+				App->entities->Add_waiting_entity(ENTITY_TYPES::COIN, x, y);
 			}
 			counter++;
 		}

@@ -14,7 +14,8 @@ enum ENTITY_TYPES
 {
 	PLAYER,
 	GROUND_ENEMY,
-	AIR_ENEMY
+	AIR_ENEMY,
+	COIN
 };
 
 struct Player_Initial_Inf
@@ -80,6 +81,7 @@ private:
 	p2List<Entity*> entities;
 	SDL_Texture* enemy_sprites = nullptr;
 	SDL_Texture* player_sprites = nullptr;
+	SDL_Texture* coin_sprites = nullptr;
 	p2PQueue<Entity_info> waiting_queue;
 	Chronometer do_logic;
 

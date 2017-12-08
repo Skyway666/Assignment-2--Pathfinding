@@ -88,6 +88,7 @@
     <ClCompile Include="AirEnemy.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ClickManager.cpp" />
+    <ClCompile Include="Coins.cpp" />
     <ClCompile Include="GroundEnemy.cpp" />
     <ClCompile Include="GroundEntity.cpp" />
     <ClCompile Include="Icon.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Chronometer.h" />
     <ClInclude Include="ClickManager.h" />
+    <ClInclude Include="Coins.h" />
     <ClInclude Include="GroundEnemy.h" />
     <ClInclude Include="GroundEntity.h" />
     <ClInclude Include="Icon.h" />

@@ -10,6 +10,7 @@
 #include "AirEnemy.h"
 #include "Player.h"
 #include "GroundEnemy.h"
+#include "Coins.h"
 #define SPAWN_MARGIN 100
 
 j1Entities::j1Entities()
@@ -65,6 +66,7 @@ bool j1Entities::Start()
 	// Create a prototype for each enemy available so we can copy them around
 	enemy_sprites = App->tex->Load("textures/Enemy_sprites.png");
 	player_sprites = App->tex->Load("textures/SpriteSheet.png");
+	coin_sprites = App->tex->Load("textures/BONE.png");
 
 	//Shouldn't be loading here
 	App->map->bone_graphics = App->tex->Load("textures/BONE.png");
@@ -86,10 +88,10 @@ bool j1Entities::Update(float dt)
 		if (player != nullptr)
 			player->Resume();
 
-		// Manage entities' physics
+		// Manage ground entities' physics
 		for (uint i = 0; i < entities.count(); ++i)
 		{
-			if (entities[i] != nullptr && (entities[i]->type == ENTITY_TYPES::PLAYER || entities[i]->type == ENTITY_TYPES::GROUND_ENEMY))
+			if (entities[i] != nullptr && entities[i]->type == ENTITY_TYPES::GROUND_ENEMY)
 				entities[i]->ManagePhysics(dt);
 		}
 
@@ -127,8 +129,10 @@ bool j1Entities::Update(float dt)
 	// Draw all entities
 	for (uint i = 0; i < entities.count(); ++i)
 	{
-		if (entities[i] != nullptr)
+		if (entities[i] != nullptr && (entities[i]->type == ENTITY_TYPES::GROUND_ENEMY || entities[i]->type == ENTITY_TYPES::AIR_ENEMY))
 			entities[i]->Draw(enemy_sprites);
+		else if (entities[i] != nullptr && entities[i]->type == ENTITY_TYPES::COIN)
+			entities[i]->Draw(coin_sprites);
 	}
 
 	if (player != nullptr)
@@ -147,6 +151,7 @@ bool j1Entities::CleanUp()
 
 	App->tex->UnLoad(player_sprites);
 	App->tex->UnLoad(enemy_sprites);
+	App->tex->UnLoad(coin_sprites);
 
 	for (uint i = 0; i < entities.count(); ++i)
 	{
@@ -200,6 +205,13 @@ void j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 		case ENTITY_TYPES::GROUND_ENEMY:
 		{
 			GroundEnemy* new_ent = new GroundEnemy(x, y, ge_ini_inf);
+			entities.add(new_ent);
+			break;
+		}
+
+		case ENTITY_TYPES::COIN:
+		{
+			Entity* new_ent = new Coins(x, y);
 			entities.add(new_ent);
 			break;
 		}
