@@ -85,6 +85,11 @@ private:
 	//SDL_Texture* win_screen;
 	Button* exit_main_menu_fc;
 	
+
+	//JUST FOR TESTING
+	float dummy_variable = 100;
+	//JUST FOR TESTING
+
 	//Paths to load assets from config
 	p2SString main_menu_background_file_name;
 

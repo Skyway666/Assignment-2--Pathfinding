@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "Text.h"
 #include "Window.h"
+#include "StatBar.h"
 #include "p2List.h"
 
 
@@ -18,7 +19,8 @@ enum UI_ELEMENT_TYPE //Type of ui elements avaliable
 	ICON,
 	BUTTON,
 	TEXT,
-	WINDOW
+	WINDOW,
+	STATBAR
 };
 enum BUTTON_TYPE //Knowing what type of button we are creating, just for animation purpuses
 {
@@ -67,7 +69,8 @@ public:
 	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
 	//Add window
 	Window* Add_window(int x, int y);
-
+	//Add StatBar
+	StatBar* Add_StatBar(int x, int y, int w, int h, float* _variable);
 	//This function will look for the Ui_element that has to be deleted among all the lists and delete it. It will return "false" if not found it, and true if found.
 	//It will also erase all childs
 	bool Erase_Ui_element(Ui_element* element);
@@ -99,6 +102,8 @@ private:
 	p2List<Text*> texts;
 	//Windows list
 	p2List<Window*> windows;
+	//Statbars list
+	p2List<StatBar*> statbars;
 	
 
 

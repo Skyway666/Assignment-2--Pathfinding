@@ -52,14 +52,15 @@ bool j1Scene::Start()
 
 		Pause_Window->SetActive(false);
 
-
+	//JUST FOR TESTING
+		App->gui->Add_StatBar(0, 0, 500, 100, &dummy_variable);
+	//JUST FOR TESTING
 	return true;
 }
 
 // Used to load and unload stuff safelly
 bool j1Scene::PreUpdate()
 {
-	//TEST
 	if (App->pause && pause_menu_spawned)
 	{
 		Pause_Window->SetActive(true);
@@ -70,7 +71,6 @@ bool j1Scene::PreUpdate()
 		Pause_Window->SetActive(false);
 		pause_menu_spawned = true;
 	}
-	//TEST
 
 	//Execute load and unload functions safelly
 	//First all unloads
@@ -134,10 +134,16 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 50 * dt;
 
+	//JUST FOR TESTING
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		want_unload_main_menu = true;
+		dummy_variable -= 10;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		dummy_variable += 10;
+	}
+	//JUST FOR TESTING
 
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)

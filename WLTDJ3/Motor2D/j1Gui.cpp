@@ -50,7 +50,7 @@ bool j1Gui::PreUpdate()
 		if (windows[i] != nullptr && windows[i]->active)
 			windows[i]->Update();
 	}
-	//Update all icons (Maybe they should be able to blit from their own texture like texts)
+	//Update all icons 
 	for (uint i = 0; i < icons.count(); ++i)
 	{
 		if (icons[i] != nullptr && icons[i]->active)
@@ -62,12 +62,19 @@ bool j1Gui::PreUpdate()
 		if (buttons[i] != nullptr && buttons[i]->active)
 			buttons[i]->Update();
 	}
+	//Update all statbars
+	for (uint i = 0; i < statbars.count(); ++i)
+	{
+		if (statbars[i] != nullptr && statbars[i]->active)
+			statbars[i]->Update();
+	}
 	//Update all texts
 	for (uint i = 0; i < texts.count(); ++i)
 	{
 		if (texts[i] != nullptr && texts[i]->active)
 			texts[i]->Update();
 	}
+
 	click_manager->Update();
 	
 	return true;
@@ -96,6 +103,12 @@ bool j1Gui::PostUpdate()
 		{
 			if (buttons[i] != nullptr && buttons[i]->active)
 				buttons[i]->Draw(atlas);
+		}
+		//Blit all statbars
+		for (uint i = 0; i < statbars.count(); ++i)
+		{
+			if (statbars[i] != nullptr && statbars[i]->active)
+				statbars[i]->Draw();
 		}
 		//Blit all texts
 		for (uint i = 0; i < texts.count(); ++i)
@@ -144,6 +157,14 @@ Window* j1Gui::Add_window(int x, int y)
 	windows.add(new_window);
 
 	return new_window;
+}
+
+StatBar* j1Gui::Add_StatBar(int x, int y, int w, int h, float* _variable)
+{
+	StatBar* new_statbar = new StatBar(x, y, w, h, _variable);
+	statbars.add(new_statbar);
+
+	return new_statbar;
 }
 
 void j1Gui::Set_backgrond(SDL_Texture* new_background)
@@ -201,6 +222,11 @@ bool j1Gui::CleanUp()
 	{
 		delete windows[i];
 		windows[i] = nullptr;
+	}
+	for (int i = 0; i < statbars.count(); ++i)
+	{
+		delete statbars[i];
+		statbars[i] = nullptr;
 	}
 	click_manager->Cleanup();//Free all ui_colliders
 	delete click_manager;
@@ -289,6 +315,26 @@ bool j1Gui::Erase_Ui_element(Ui_element* element)
 
 			delete windows[index];
 			windows.del(node_to_delete);
+			return true;
+		}
+		case STATBAR:
+		{
+			int index = statbars.find((StatBar*)element);
+
+			if (index == -1)
+				return false;
+
+			p2List_item<StatBar*>* node_to_delete = statbars.At(index);
+
+			for (int i = 0; i < statbars[index]->linked_elements.count(); i++)
+			{
+				Erase_Ui_element(statbars[index]->linked_elements[i]);
+			}
+
+			click_manager->Erase_ui_collider(statbars[index]->collider);
+
+			delete statbars[index];
+			statbars.del(node_to_delete);
 			return true;
 		}
 	}
