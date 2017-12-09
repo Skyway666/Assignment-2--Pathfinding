@@ -89,31 +89,31 @@ bool j1Gui::PostUpdate()
 		//Blit all windows
 		for (uint i = 0; i < windows.count(); ++i)
 		{
-			if (windows[i] != nullptr && windows[i]->active)
+			if (windows[i] != nullptr)
 				windows[i]->Draw(atlas);
 		}
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
 		for (uint i = 0; i < icons.count(); ++i)
 		{
-			if (icons[i] != nullptr && icons[i]->active)
+			if (icons[i] != nullptr)
 				icons[i]->Draw(atlas);
 		}
 		//Blit all buttons
 		for (uint i = 0; i < buttons.count(); ++i)
 		{
-			if (buttons[i] != nullptr && buttons[i]->active)
+			if (buttons[i] != nullptr)
 				buttons[i]->Draw(atlas);
 		}
 		//Blit all statbars
 		for (uint i = 0; i < statbars.count(); ++i)
 		{
-			if (statbars[i] != nullptr && statbars[i]->active)
+			if (statbars[i] != nullptr)
 				statbars[i]->Draw();
 		}
 		//Blit all texts
 		for (uint i = 0; i < texts.count(); ++i)
 		{
-			if (texts[i] != nullptr && texts[i]->active)
+			if (texts[i] != nullptr)
 				texts[i]->Draw();
 		}
 
@@ -159,9 +159,9 @@ Window* j1Gui::Add_window(int x, int y)
 	return new_window;
 }
 
-StatBar* j1Gui::Add_StatBar(int x, int y, int w, int h, float* _variable)
+StatBar* j1Gui::Add_StatBar(int x, int y, int w, int h, float* variable,float variable_starting_value)
 {
-	StatBar* new_statbar = new StatBar(x, y, w, h, _variable);
+	StatBar* new_statbar = new StatBar(x, y, w, h, variable, variable_starting_value);
 	statbars.add(new_statbar);
 
 	return new_statbar;

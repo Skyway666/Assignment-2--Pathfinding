@@ -34,8 +34,7 @@ bool j1Scene::Start()
 
 	//Menu setup
 	Load_main_menu();
-	//Pause window
-	Load_pause();
+
 	return true;
 }
 
@@ -44,12 +43,12 @@ bool j1Scene::PreUpdate()
 {
 	if (App->pause && pause_menu_spawned)
 	{
-		Pause_Window->SetActive(true);
+		Load_pause();
 		pause_menu_spawned = false;
 	}
 	else if(!App->pause && !pause_menu_spawned)
 	{
-		Pause_Window->SetActive(false);
+		UnLoad_pause();
 		pause_menu_spawned = true;
 	}
 
@@ -283,13 +282,14 @@ void j1Scene::Load_pause()
 	Pause_Window->Link_ui_element(resume, 120, 100);
 	Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
 	Pause_Window->Link_ui_element(titola, 120, 30);
-
-	Pause_Window->SetActive(false);
 }
 
 void j1Scene::UnLoad_pause()
 {
-
+	App->gui->Erase_Ui_element(Pause_Window);
+	Pause_Window = nullptr;
+	resume = nullptr;
+	exit_main_menu_fg = nullptr;
 }
 
 void j1Scene::Load_options()
@@ -308,8 +308,8 @@ void j1Scene::Load_options()
 	Text* text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
 	exit_main_menu_fo->Link_ui_element(text_to_link, 70, 22);
 
-	StatBar* music_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->music_volume);
-	StatBar* fx_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->fx_volume);
+	StatBar* music_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->music_volume, MIX_MAX_VOLUME);
+	StatBar* fx_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->fx_volume, MIX_MAX_VOLUME);
 
 	//Link elements
 	Options_Window->Link_ui_element(upper_music_volume, 400, 100);

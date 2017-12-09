@@ -70,7 +70,7 @@ public:
 	//Add window
 	Window* Add_window(int x, int y);
 	//Add StatBar
-	StatBar* Add_StatBar(int x, int y, int w, int h, float* _variable);
+	StatBar* Add_StatBar(int x, int y, int w, int h, float* variable, float variable_starting_value);
 	//This function will look for the Ui_element that has to be deleted among all the lists and delete it. It will return "false" if not found it, and true if found.
 	//It will also erase all childs
 	bool Erase_Ui_element(Ui_element* element);

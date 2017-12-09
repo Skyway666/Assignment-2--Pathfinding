@@ -27,6 +27,14 @@ void Ui_element::Draw(SDL_Texture* sprite)
 
 	if (animation != nullptr)
 	{
+		if(!active)
+		{ 
+			SDL_Rect rect_to_blit;
+			rect_to_blit.x = position.x; rect_to_blit.y = position.y; rect_to_blit.w = animation->GetCurrentFrame().w; rect_to_blit.h = animation->GetCurrentFrame().h;
+			App->render->Blit(sprite, position.x, position.y, 1, false, &(animation->GetCurrentFrame()));
+			App->render->DrawQuad(rect_to_blit, 0, 0, 0, 100, true, false);
+		}
+		else
 		App->render->Blit(sprite, position.x, position.y, 1, false, &(animation->GetCurrentFrame()));
 	}
 }

@@ -5,11 +5,11 @@
 
 
 
-StatBar::StatBar(int x, int y, int w, int h, float* _variable) : Ui_element(x, y)
+StatBar::StatBar(int x, int y, int w, int h, float* _variable, float _variable_starting_value) : Ui_element(x, y)
 {
 	bar = { x, y, w, h };
 	variable = _variable;
-	variable_starting_value = *_variable;
+	variable_starting_value = _variable_starting_value;
 	bar_width_starting_value = w;
 
 	type = STATBAR;

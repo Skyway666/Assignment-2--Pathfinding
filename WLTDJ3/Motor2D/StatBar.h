@@ -3,7 +3,7 @@
 class StatBar : public Ui_element
 {
 public:
-	StatBar(int x, int y, int w, int h, float* _variable);
+	StatBar(int x, int y, int w, int h, float* _variable, float _variable_starting_value);
 	~StatBar();
 	void Update(); //Update the bar depending on the value of the variable
 	void Draw(); //Draw the bar
