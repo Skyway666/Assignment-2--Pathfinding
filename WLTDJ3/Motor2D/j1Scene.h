@@ -20,13 +20,6 @@ struct SDL_Texture;
 class j1Scene : public j1Module
 {
 public:
-
-	SDL_Texture* win_screen;
-
-	int time;
-
-	bool time_gotten;
-
 	j1Scene();
 
 	// Destructor
@@ -64,7 +57,12 @@ public:
 	void UnLoad_main_menu(); bool want_unload_main_menu = false;
 	void Load_credits(); bool want_load_credits = false;
 	void UnLoad_credits(); bool want_unload_credits = false;
+	void Load_pause(); bool want_load_pause = false;
+	void UnLoad_pause(); bool want_unload_pause = false;
+	void Load_options(); bool want_load_options = false;
+	void UnLoad_options(); bool want_unload_options = false;
 
+	SDL_Texture* win_screen;
 	bool exit_app = false;
 private:
 	//Main menu setup
@@ -85,15 +83,17 @@ private:
 	//SDL_Texture* win_screen;
 	Button* exit_main_menu_fc;
 	
-
-	//JUST FOR TESTING
-	float dummy_variable = 100;
-	//JUST FOR TESTING
+	//Options setup
+	Window* Options_Window = nullptr;
+	Button* upper_music_volume = nullptr;
+	Button* lower_music_volume = nullptr;
+	Button* upper_fx_volume = nullptr;
+	Button* lower_fx_volume = nullptr;
 
 	//Paths to load assets from config
 	p2SString main_menu_background_file_name;
 
-	_TTF_Font* title;
+	_TTF_Font* title = nullptr;
 
 
 	

@@ -35,26 +35,7 @@ bool j1Scene::Start()
 	//Menu setup
 	Load_main_menu();
 	//Pause window
-		Text* titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
-		Pause_Window = App->gui->Add_window(300, 100);
-
-		resume = App->gui->Add_button(300, 300, (j1Module*)this, START);
-		Text* text_to_link = App->gui->Add_text(0, 0, "RESUME");
-		resume->Link_ui_element(text_to_link, 80, 22);
-
-		exit_main_menu_fg = App->gui->Add_button(300, 500, (j1Module*)this, START);
-		text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
-		exit_main_menu_fg->Link_ui_element(text_to_link, 70, 22);
-
-		Pause_Window->Link_ui_element(resume, 120, 100);
-		Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
-		Pause_Window->Link_ui_element(titola, 120, 30);
-
-		Pause_Window->SetActive(false);
-
-	//JUST FOR TESTING
-		App->gui->Add_StatBar(0, 0, 500, 100, &dummy_variable);
-	//JUST FOR TESTING
+	Load_pause();
 	return true;
 }
 
@@ -134,16 +115,8 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 50 * dt;
 
-	//JUST FOR TESTING
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		dummy_variable -= 10;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		dummy_variable += 10;
-	}
-	//JUST FOR TESTING
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
+		Load_options();
 
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)
@@ -222,7 +195,7 @@ void j1Scene::Load_main_menu()
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
 	Text* titola = App->gui->Add_text(0, 0, "WHO LET THE DOG JUMP", title);
 	//Window
-	Menu_Window = App->gui->Add_window(300, 100);
+	Menu_Window = App->gui->Add_window(0, 100);
 	//Start button
 	start = App->gui->Add_button(0, 0, (j1Module*)this, START);
 	Text* text_to_link = App->gui->Add_text(0, 0, "START");
@@ -277,55 +250,135 @@ void j1Scene::UnLoad_credits()
 
 	App->gui->Set_backgrond(nullptr);
 }
+
+void j1Scene::Load_pause()
+{
+	Text* titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
+	Pause_Window = App->gui->Add_window(300, 100);
+
+	resume = App->gui->Add_button(300, 300, (j1Module*)this, START);
+	Text* text_to_link = App->gui->Add_text(0, 0, "RESUME");
+	resume->Link_ui_element(text_to_link, 80, 22);
+
+	exit_main_menu_fg = App->gui->Add_button(300, 500, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
+	exit_main_menu_fg->Link_ui_element(text_to_link, 70, 22);
+
+	Pause_Window->Link_ui_element(resume, 120, 100);
+	Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
+	Pause_Window->Link_ui_element(titola, 120, 30);
+
+	Pause_Window->SetActive(false);
+}
+
+void j1Scene::UnLoad_pause()
+{
+
+}
+
+void j1Scene::Load_options()
+{
+	//Create window
+	Options_Window = App->gui->Add_window(500, 100);
+
+	//Create window elements
+	upper_music_volume = App->gui->Add_button(0, 0, (j1Module*)this);
+	lower_music_volume = App->gui->Add_button(0, 0, (j1Module*)this);
+
+	upper_fx_volume = App->gui->Add_button(0, 0, (j1Module*)this);
+	lower_fx_volume = App->gui->Add_button(0, 0, (j1Module*)this);
+
+	StatBar* music_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->music_volume);
+	StatBar* fx_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->fx_volume);
+
+	//Link elements
+	Options_Window->Link_ui_element(upper_music_volume, 400, 100);
+	Options_Window->Link_ui_element(upper_fx_volume, 400, 300);
+
+	Options_Window->Link_ui_element(lower_music_volume, -100, 100);
+	Options_Window->Link_ui_element(lower_fx_volume, -100, 300);
+
+	Options_Window->Link_ui_element(music_volume, 60, 100);
+	Options_Window->Link_ui_element(fx_volume, 60, 300);
+
+}
+
+void j1Scene::UnLoad_options()
+{
+
+}
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
 	//TEST
 	if(event == MOUSE_STOP_CLICK)
 	{ 
-		if (element == start)
-		{
-			//Game loading
-			Change_to_map(0);
-			App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
-			//Unload main menu
-			want_unload_main_menu = true;
-		}
-		if (element == continuee)
-		{
-			//Load saved game
-			App->LoadGame();
-			//Unload main menu
-			want_unload_main_menu = true;
-		}
-		if (element == exit)
-		{
-			exit_app = true;
-		}
-		if (element == resume)
-		{
-			App->pause = false;
-		}
-		if (element == exit_main_menu_fg)
-		{	
-			//Game unloading
-			Unload_map();
-			//Load main menu
-			want_load_main_menu = true;
-		}
-		if (element == exit_main_menu_fc)
-		{
-			//Unload credits
-			want_unload_credits = true;
-			//Load main menu
-			want_load_main_menu = true;
-		}
-		if (element == credits)
-		{
-			//Unload main menu
-			want_unload_main_menu = true;
-			//Load credits
-			want_load_credits = true;
-		}
+		//Main menu
+			if (element == start)
+			{
+				//Game loading
+				Change_to_map(0);
+				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+				//Unload main menu
+				want_unload_main_menu = true;
+			}
+			if (element == continuee)
+			{
+				//Load saved game
+				App->LoadGame();
+				//Unload main menu
+				want_unload_main_menu = true;
+			}
+			if (element == exit)
+			{
+				exit_app = true;
+			}
+			if (element == credits)
+			{
+				//Unload main menu
+				want_unload_main_menu = true;
+				//Load credits
+				want_load_credits = true;
+			}
+		//Pause menu
+			if (element == resume)
+			{
+				App->pause = false;
+			}
+			if (element == exit_main_menu_fg)
+			{	
+				//Game unloading
+				Unload_map();
+				//Load main menu
+				want_load_main_menu = true;
+			}
+
+		//Credits menu
+			if (element == exit_main_menu_fc)
+			{
+				//Unload credits
+				want_unload_credits = true;
+				//Load main menu
+				want_load_main_menu = true;
+			}
+		//Options menu
+			if (element == upper_music_volume)
+			{
+				App->audio->Modify_music_volume(10); // "10" could be a value loaded from xml
+			}
+			if (element == lower_music_volume)
+			{
+				App->audio->Modify_music_volume(-10);
+			}
+			if (element == upper_fx_volume)
+			{
+				App->audio->Modify_fx_volume(10);
+			}
+			if (element == lower_fx_volume)
+			{
+				App->audio->Modify_fx_volume(-10);
+			}
+
+
 
 	}
 	//TEST

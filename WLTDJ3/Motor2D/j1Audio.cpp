@@ -54,6 +54,10 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	LoadFx("audio/fx/hai.wav");
 	LoadFx("audio/fx/nye2.wav");
 	PlayMusic("audio/music/Song.ogg");
+
+
+	music_volume = MIX_MAX_VOLUME;
+	fx_volume = MIX_MAX_VOLUME;
 	return ret;
 }
 
@@ -174,4 +178,28 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	}
 
 	return ret;
+}
+
+void j1Audio::Modify_music_volume(int value)
+{
+	music_volume += value;
+
+	if (music_volume < 0)
+		music_volume = 0;
+	if (music_volume > MIX_MAX_VOLUME)
+		music_volume = MIX_MAX_VOLUME;
+
+	Mix_VolumeMusic(music_volume);
+}
+
+void j1Audio::Modify_fx_volume(int value)
+{
+	fx_volume += value;
+
+	if (fx_volume < 0)
+		fx_volume = 0;
+	if (fx_volume > MIX_MAX_VOLUME)
+		fx_volume = MIX_MAX_VOLUME;
+
+	Mix_VolumeMusic(fx_volume); //Should be the function to modify fx volume
 }

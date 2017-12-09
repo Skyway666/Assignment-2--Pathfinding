@@ -34,10 +34,20 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
+	//The music volume is modified by the value passed as an argument
+	void Modify_music_volume(int);
+
+	//The fx volume is modified by the value passed as an argument
+	void Modify_fx_volume(int);
+
+	float music_volume;
+	float fx_volume;
+
 private:
 
 	_Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;
+	
 };
 
 #endif // __j1AUDIO_H__
