@@ -230,8 +230,8 @@ void j1Scene::Load_main_menu()
 	Menu_Window->Link_ui_element(start, 120, 100);
 	Menu_Window->Link_ui_element(continuee, 120, 155);
 	Menu_Window->Link_ui_element(options, 120, 210);
-	Menu_Window->Link_ui_element(exit, 120, 265);
-	Menu_Window->Link_ui_element(credits, 120, 320);
+	Menu_Window->Link_ui_element(credits, 120, 265);
+	Menu_Window->Link_ui_element(exit, 120, 320);
 	Menu_Window->Link_ui_element(titola, 45, 30);
 	
 
@@ -268,14 +268,14 @@ void j1Scene::UnLoad_credits()
 
 void j1Scene::Load_pause()
 {
-	Text* titola = App->gui->Add_text(100, 100, "PAUSE MENU", title);
+	Text* titola = App->gui->Add_text(0, 0, "PAUSE MENU", title);
 	Pause_Window = App->gui->Add_window(300, 100);
 
-	resume = App->gui->Add_button(300, 300, (j1Module*)this, START);
+	resume = App->gui->Add_button(0, 0, (j1Module*)this, START);
 	Text* text_to_link = App->gui->Add_text(0, 0, "RESUME");
 	resume->Link_ui_element(text_to_link, 80, 22);
 
-	exit_main_menu_fg = App->gui->Add_button(300, 500, (j1Module*)this, START);
+	exit_main_menu_fg = App->gui->Add_button(0, 0, (j1Module*)this, START);
 	text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
 	exit_main_menu_fg->Link_ui_element(text_to_link, 70, 22);
 
@@ -352,6 +352,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == continuee)
 			{
+				//Create new player when continuing from menu
+				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
 				//Load saved game
 				App->LoadGame();
 				//Unload main menu
