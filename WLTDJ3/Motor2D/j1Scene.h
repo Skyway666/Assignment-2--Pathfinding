@@ -66,6 +66,7 @@ public:
 
 	SDL_Texture* win_screen;
 	bool exit_app = false;
+
 private:
 	//Main menu setup
 	Window* Menu_Window = nullptr;
@@ -95,9 +96,17 @@ private:
 	Button* lower_fx_volume = nullptr;
 
 	// Hud setup
-	Window* HUD = nullptr;
 	Icon* hourglass = nullptr;
 	Icon* coins = nullptr;
+	char time[8];
+	j1Timer playtime;
+	int s = 0;
+	int s2 = 0;
+	int m = 0;
+	int m2 = 0;
+	int h = 0;
+	int h2 = 0;
+	void UpdateTime();
 
 	//Paths to load assets from config
 	p2SString main_menu_background_file_name;

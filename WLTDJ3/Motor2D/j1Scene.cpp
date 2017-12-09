@@ -102,6 +102,7 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	UpdateTime();
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
 		if (App->framerate_cap != 0)
@@ -467,11 +468,52 @@ void j1Scene::Load_HUD()
 
 	Text* hourglass_time = App->gui->Add_text( 0, 0, "TIME Y TAL");
 	hourglass->Link_ui_element(hourglass_time, -100, 100);
+	playtime.Start();
 }
 
 void j1Scene::UnLoad_HUD()
 {
-	App->gui->Erase_Ui_element(HUD);
-	HUD = nullptr;
+	App->gui->Erase_Ui_element(hourglass);
 	hourglass = nullptr;
+}
+
+void j1Scene::UpdateTime()
+{
+	s = playtime.ReadSec();
+
+	if (s >= 10)
+	{
+		s = 0;
+		s2++;
+		playtime.Start();
+	}
+	if (s2 >= 6)
+	{
+		s2 = 0;
+		m++;
+	}
+	if (m >= 10)
+	{
+		m = 0;
+		m2++;
+	}
+	if (m2 >= 6)
+	{
+		m2 = 0;
+		h++;
+	}
+	if (h >= 10)
+	{
+		h = 0;
+		h2++;
+	}
+	if (h2 >= 10)
+	{
+		s = 0;
+		s2 = 0;
+		m = 0;
+		m2 = 0;
+		h = 0;
+		h2 = 0;
+	}
 }
