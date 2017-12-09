@@ -29,6 +29,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	HUD_file_name = conf.child("HUD").attribute("file").as_string("");
 
 	return ret;
 }
@@ -37,6 +38,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	HUD = App->tex->Load(HUD_file_name.GetString());
 
 	return true;
 }
@@ -80,6 +82,18 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
+bool j1Gui::Update(float dt)
+{
+	// Update all icon animations' speed
+	for (uint i = 0; i < icons.count(); ++i)
+	{
+		if (icons[i] != nullptr && icons[i]->animation != nullptr)
+			icons[i]->animation->speed = icons[i]->animation_speed * dt;
+	}
+
+	return true;
+}
+
 // Draw of all ui_elements and background will be executed here
 bool j1Gui::PostUpdate()
 {
@@ -96,7 +110,7 @@ bool j1Gui::PostUpdate()
 		for (uint i = 0; i < icons.count(); ++i)
 		{
 			if (icons[i] != nullptr)
-				icons[i]->Draw(atlas);
+				icons[i]->Draw(HUD, icons[i]->scale);
 		}
 		//Blit all buttons
 		for (uint i = 0; i < buttons.count(); ++i)
@@ -346,6 +360,12 @@ bool j1Gui::Erase_Ui_element(Ui_element* element)
 const SDL_Texture* j1Gui::GetAtlas() const
 {
 	return atlas;
+}
+
+// const getter for HUD
+const SDL_Texture* j1Gui::GetHUD() const
+{
+	return HUD;
 }
 
 // class Gui ---------------------------------------------------

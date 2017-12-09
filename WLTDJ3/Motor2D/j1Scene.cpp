@@ -70,6 +70,11 @@ bool j1Scene::PreUpdate()
 			UnLoad_options();
 			want_unload_options = false;
 		}
+		if (want_unload_HUD)
+		{
+			UnLoad_HUD();
+			want_unload_HUD = false;
+		}
 	//Then all loads
 		if (want_load_main_menu)
 		{
@@ -86,7 +91,11 @@ bool j1Scene::PreUpdate()
 			Load_options();
 			want_load_options = false;
 		}
-
+		if (want_load_HUD)
+		{
+			Load_HUD();
+			want_load_HUD = false;
+		}
 	return true;
 }
 
@@ -351,7 +360,7 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				Change_to_map(0);
 				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
 				//Unload main menu
-				App->transition->Make_transition(&want_unload_main_menu, nullptr);
+				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
 			}
 			if (element == continuee)
 			{
@@ -391,6 +400,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				Unload_map();
 				//Load main menu
 				want_load_main_menu = true;
+				// Unload HUD
+				want_unload_HUD = true;
 			}
 
 		//Credits menu
@@ -400,6 +411,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				want_unload_credits = true;
 				//Load main menu
 				want_load_main_menu = true;
+				// Unload HUD
+				want_unload_HUD = true;
 			}
 		//Options menu
 			if (element == upper_music_volume)
@@ -429,4 +442,35 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 
 	}
 	//TEST
+}
+
+void j1Scene::Load_HUD()
+{
+	hourglass = App->gui->Add_icon(920, 580);
+	
+	int row = 0;
+	for (int i = 0; i < 16; i++)
+		hourglass->anim.PushBack({ 229 * i, 345 * row, 229, 345 });
+	row++;
+	for (int i = 0; i < 16; i++)
+		hourglass->anim.PushBack({ 229 * i, 345 * row, 229, 345 });
+	row++;
+	for (int i = 0; i < 14; i++)
+		hourglass->anim.PushBack({ 229 * i, 345 * row, 229, 345 });
+
+	hourglass->animation_speed = 0.2;
+	hourglass->anim.speed = 0.2;
+	hourglass->anim.loop = true;
+	hourglass->animation = &hourglass->anim;
+	hourglass->scale = 0.5;
+
+	Text* hourglass_time = App->gui->Add_text( 0, 0, "TIME Y TAL");
+	hourglass->Link_ui_element(hourglass_time, -100, 100);
+}
+
+void j1Scene::UnLoad_HUD()
+{
+	App->gui->Erase_Ui_element(HUD);
+	HUD = nullptr;
+	hourglass = nullptr;
 }
