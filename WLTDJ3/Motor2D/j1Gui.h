@@ -58,6 +58,9 @@ public:
 	// Draw of all ui_elements and background will be executed here
 	bool PostUpdate();
 
+	// Update icon animations' speed
+	bool Update(float dt);
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -83,16 +86,19 @@ public:
 	void Set_backgrond(SDL_Texture* texture);
 
 	const SDL_Texture* GetAtlas() const;
+	const SDL_Texture* GetHUD() const;
 	
 	ClickManager* click_manager;
 private:
 
 	SDL_Texture* atlas;
+	SDL_Texture* HUD;
 	//Background image
 	SDL_Texture* current_background; 
 
 	//Paths to load assets
 	p2SString atlas_file_name;
+	p2SString HUD_file_name;
 	
 	//Icons list
 	p2List<Icon*> icons;

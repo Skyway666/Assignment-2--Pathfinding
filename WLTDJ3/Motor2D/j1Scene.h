@@ -61,6 +61,8 @@ public:
 	void UnLoad_pause(); bool want_unload_pause = false;
 	void Load_options(); bool want_load_options = false;
 	void UnLoad_options(); bool want_unload_options = false;
+	void Load_HUD(); bool want_load_HUD = false;
+	void UnLoad_HUD(); bool want_unload_HUD = false;
 
 	SDL_Texture* win_screen;
 	bool exit_app = false;
@@ -91,6 +93,11 @@ private:
 	Button* lower_music_volume = nullptr;
 	Button* upper_fx_volume = nullptr;
 	Button* lower_fx_volume = nullptr;
+
+	// Hud setup
+	Window* HUD = nullptr;
+	Icon* hourglass = nullptr;
+	Icon* coins = nullptr;
 
 	//Paths to load assets from config
 	p2SString main_menu_background_file_name;

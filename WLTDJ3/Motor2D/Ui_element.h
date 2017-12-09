@@ -17,7 +17,7 @@ public:
 	~Ui_element();
 
 	// In charge of drawing current animation
-	virtual void Draw(SDL_Texture*);
+	virtual void Draw(SDL_Texture*, float scale = 1);
 	// Links a Ui_element
 	virtual void Link_ui_element(Ui_element* element, int offset_x, int offset_y); 
 	//For the moment it will be used to be able to drag ui_elements
