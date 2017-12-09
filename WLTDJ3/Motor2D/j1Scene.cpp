@@ -258,6 +258,7 @@ void j1Scene::UnLoad_main_menu()
 	continuee = nullptr;
 	exit = nullptr;
 	credits = nullptr;
+	options = nullptr;
 
 	App->gui->Set_backgrond(nullptr);
 }
