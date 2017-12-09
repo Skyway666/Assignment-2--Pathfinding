@@ -65,6 +65,11 @@ bool j1Scene::PreUpdate()
 			UnLoad_credits();
 			want_unload_credits = false;
 		}
+		if (want_unload_options)
+		{
+			UnLoad_options();
+			want_unload_options = false;
+		}
 	//Then all loads
 		if (want_load_main_menu)
 		{
@@ -75,6 +80,11 @@ bool j1Scene::PreUpdate()
 		{
 			Load_credits();
 			want_load_credits = false;
+		}
+		if (want_load_options)
+		{
+			Load_options();
+			want_load_options = false;
 		}
 
 	return true;
@@ -212,13 +222,19 @@ void j1Scene::Load_main_menu()
 	credits = App->gui->Add_button(0, 0, (j1Module*)this, START);
 	text_to_link = App->gui->Add_text(0, 0, "CREDITS");
 	credits->Link_ui_element(text_to_link, 90, 22);
-	//
+	//Options button
+	options = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "OPTIONS");
+	options->Link_ui_element(text_to_link, 90, 22);
+	
 	//Link all elements to window
 	Menu_Window->Link_ui_element(start, 120, 100);
 	Menu_Window->Link_ui_element(continuee, 120, 155);
-	Menu_Window->Link_ui_element(exit, 120, 210);
-	Menu_Window->Link_ui_element(credits, 120, 265);
+	Menu_Window->Link_ui_element(options, 120, 210);
+	Menu_Window->Link_ui_element(exit, 120, 265);
+	Menu_Window->Link_ui_element(credits, 120, 320);
 	Menu_Window->Link_ui_element(titola, 45, 30);
+	
 
 	App->gui->Set_backgrond(main_menu_background);
 }
@@ -288,6 +304,10 @@ void j1Scene::Load_options()
 	upper_fx_volume = App->gui->Add_button(0, 0, (j1Module*)this);
 	lower_fx_volume = App->gui->Add_button(0, 0, (j1Module*)this);
 
+	exit_main_menu_fo = App->gui->Add_button(0, 0, (j1Module*)this);
+	Text* text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
+	exit_main_menu_fo->Link_ui_element(text_to_link, 70, 22);
+
 	StatBar* music_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->music_volume);
 	StatBar* fx_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->fx_volume);
 
@@ -301,10 +321,19 @@ void j1Scene::Load_options()
 	Options_Window->Link_ui_element(music_volume, 60, 100);
 	Options_Window->Link_ui_element(fx_volume, 60, 300);
 
+	Options_Window->Link_ui_element(exit_main_menu_fo, 120, 350);
+
 }
 
 void j1Scene::UnLoad_options()
 {
+	App->gui->Erase_Ui_element(Options_Window);
+	Options_Window = nullptr;
+	upper_music_volume = nullptr;
+	lower_music_volume = nullptr;
+	upper_fx_volume = nullptr;
+	lower_fx_volume = nullptr;
+	exit_main_menu_fo = nullptr;
 
 }
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
@@ -338,6 +367,13 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				want_unload_main_menu = true;
 				//Load credits
 				want_load_credits = true;
+			}
+			if (element == options)
+			{
+				//Load options
+				want_load_options = true;
+				//Hide main menu
+				Menu_Window->SetActive(false);
 			}
 		//Pause menu
 			if (element == resume)
@@ -377,7 +413,13 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			{
 				App->audio->Modify_fx_volume(-10);
 			}
-
+			if (element == exit_main_menu_fo) 
+			{
+				//Load options
+				want_unload_options = true;
+				//Hide main menu
+				Menu_Window->SetActive(true);
+			}
 
 
 	}

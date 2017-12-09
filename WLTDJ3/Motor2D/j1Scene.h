@@ -69,6 +69,7 @@ private:
 	Window* Menu_Window = nullptr;
 	Button* start = nullptr;
 	Button* continuee = nullptr;
+	Button* options = nullptr;
 	Button* exit = nullptr;
 	Button* credits = nullptr;
 	SDL_Texture* main_menu_background;
@@ -85,6 +86,7 @@ private:
 	
 	//Options setup
 	Window* Options_Window = nullptr;
+	Button* exit_main_menu_fo = nullptr;
 	Button* upper_music_volume = nullptr;
 	Button* lower_music_volume = nullptr;
 	Button* upper_fx_volume = nullptr;

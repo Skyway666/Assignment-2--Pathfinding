@@ -201,5 +201,5 @@ void j1Audio::Modify_fx_volume(int value)
 	if (fx_volume > MIX_MAX_VOLUME)
 		fx_volume = MIX_MAX_VOLUME;
 
-	Mix_VolumeMusic(fx_volume); //Should be the function to modify fx volume
+	Mix_Volume(-1, fx_volume); 
 }

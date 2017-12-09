@@ -1,6 +1,7 @@
 #include "StatBar.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "j1Gui.h"
 
 
 
@@ -10,6 +11,8 @@ StatBar::StatBar(int x, int y, int w, int h, float* _variable) : Ui_element(x, y
 	variable = _variable;
 	variable_starting_value = *_variable;
 	bar_width_starting_value = w;
+
+	type = STATBAR;
 }
 
 
