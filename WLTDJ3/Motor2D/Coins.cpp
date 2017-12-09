@@ -38,6 +38,8 @@ void Coins::Update(float dt, bool dologic)
 		position.x -= 24;
 		collider->SetPos(position.x, position.y);
 	}
+
+	animation->speed = 0.2 * dt;
 }
 
 void Coins::OnCollision(Collider* collider)
