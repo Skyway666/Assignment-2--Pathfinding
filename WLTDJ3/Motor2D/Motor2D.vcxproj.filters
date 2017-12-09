@@ -94,6 +94,9 @@
     <ClCompile Include="StatBar.cpp">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\StatsBar</Filter>
     </ClCompile>
+    <ClCompile Include="j1Transition.cpp">
+      <Filter>Modules, scenes and tools\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="StatBar.h">
       <Filter>Modules, scenes and tools\Modules\GUI\Ui elements\StatsBar</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Transition.h">
+      <Filter>Modules, scenes and tools\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

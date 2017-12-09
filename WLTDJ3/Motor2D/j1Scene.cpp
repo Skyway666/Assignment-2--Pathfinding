@@ -3,6 +3,7 @@
 #include "j1Gui.h"
 #include "Player.h"
 #include "j1Fonts.h"
+#include "j1Transition.h"
 
 
 j1Scene::j1Scene() : j1Module()
@@ -125,7 +126,9 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 50 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
-		Load_options();
+	{
+		//tests here
+	}
 
 	// Set camera to follow the player (commented in order to debug better)
 	if(App->entities->player != nullptr)
@@ -344,11 +347,11 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		//Main menu
 			if (element == start)
 			{
-				//Game loading
+				//Game loading (JUST FOR TESTING)
 				Change_to_map(0);
-				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
 				//Unload main menu
-				want_unload_main_menu = true;
+				App->transition->Make_transition(&want_unload_main_menu, nullptr);
 			}
 			if (element == continuee)
 			{

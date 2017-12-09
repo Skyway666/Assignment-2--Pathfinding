@@ -22,6 +22,7 @@ class j1Entities;
 class Pathfinding;
 class j1Gui;
 class j1Fonts;
+class j1Transition;
 
 class j1App
 {
@@ -97,6 +98,7 @@ public:
 	Pathfinding*        pathfinding = nullptr;
 	j1Gui*				gui = nullptr;
 	j1Fonts*			fonts = nullptr;
+	j1Transition*       transition = nullptr;
 
 
 private:

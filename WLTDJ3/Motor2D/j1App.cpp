@@ -17,6 +17,7 @@
 #include "j1Gui.h"
 #include "j1Fonts.h"
 #include "Player.h"
+#include "j1Transition.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -40,6 +41,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new Pathfinding();
 	gui = new j1Gui();
 	fonts = new j1Fonts();
+	transition = new j1Transition();
 
 
 	AddModule(input);
@@ -53,6 +55,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(collision);
 	AddModule(entities);
 	AddModule(pathfinding);
+	AddModule(transition);
 
 	//Render allways last
 	AddModule(render);
