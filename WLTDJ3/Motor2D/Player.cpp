@@ -50,7 +50,7 @@ void Player::Update(float dt)
 	wallslideleft.speed = 0.1 * dt;
 	App->map->bone_animation.speed = 0.2 * dt;
 
-	if (contact.x != 0 && !super_godmode)
+	if (contact.y != 0 && !super_godmode)
 		speed.y = speed_modifier.y;
 
 	if (godmode)

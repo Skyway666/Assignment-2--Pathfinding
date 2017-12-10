@@ -361,28 +361,27 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				//Game loading (JUST FOR TESTING)
 				Change_to_map(0);
 				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
-				//Unload main menu
+				//Unload main menu adn load hud
 				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
 			}
 			if (element == continuee)
-			{
-				//Create new player when continuing from menu
-				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
+			{		
 				//Load saved game
 				App->LoadGame();
-				//Unload main menu
-				want_unload_main_menu = true;
+				//Create new player when continuing from menu
+				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
+				//Unload main menu adn load hud
+				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
 			}
 			if (element == exit)
 			{
-				exit_app = true;
+				//Exit app
+				App->transition->Make_transition(&exit_app, nullptr);
 			}
 			if (element == credits)
 			{
-				//Unload main menu
-				want_unload_main_menu = true;
-				//Load credits
-				want_load_credits = true;
+				//Unload main menu and Load credits
+				App->transition->Make_transition(&want_unload_main_menu, &want_load_credits);
 			}
 			if (element == options)
 			{
@@ -398,23 +397,17 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == exit_main_menu_fg)
 			{	
-				//Game unloading
+				//Game unloading (should be also done with a bool)
 				Unload_map();
-				//Load main menu
-				want_load_main_menu = true;
-				// Unload HUD
-				want_unload_HUD = true;
+				//Load main menu and Unload HUD
+				App->transition->Make_transition(&want_load_main_menu, &want_unload_HUD);
 			}
 
 		//Credits menu
 			if (element == exit_main_menu_fc)
 			{
-				//Unload credits
-				want_unload_credits = true;
-				//Load main menu
-				want_load_main_menu = true;
-				// Unload HUD
-				want_unload_HUD = true;
+				//Unload credits and Load main menu
+				App->transition->Make_transition(&want_unload_credits, &want_load_main_menu);
 			}
 		//Options menu
 			if (element == upper_music_volume)

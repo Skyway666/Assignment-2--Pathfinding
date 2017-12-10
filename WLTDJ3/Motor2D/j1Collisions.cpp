@@ -312,29 +312,29 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 		{
 			colliders[i]->WillCollide(entity, dt);
 
-			if (entity->collider->CheckCollision(colliders[i]->rect)) // In case the entity somehow passes thorugh a wall
-			{
-				if (entity->type == ENTITY_TYPES::PLAYER)
-				{
-					Player* player = (Player*)entity;
+			//if (entity->collider->CheckCollision(colliders[i]->rect)) // In case the entity somehow passes thorugh a wall
+			//{
+			//	if (entity->type == ENTITY_TYPES::PLAYER)
+			//	{
+			//		Player* player = (Player*)entity;
 
-					if (player->flip && !player->walljumping && !player->StickToWall)
-						player->position.x += player->speed_modifier.x * dt;
-					else if (!player->flip && !player->walljumping && !player->StickToWall)
-						player->position.x -= player->speed_modifier.x * dt;
-					else if (player->walljumping && player->speed.x > 0 && !player->StickToWall)
-						player->position.x -= player->speed_modifier.x * dt;
-					else if (player->walljumping && player->speed.x < 0 && !player->StickToWall)
-						player->position.x += player->speed_modifier.x * dt;
-				}
-				else
-				{
-					if (entity->flip)
-						entity->position.x += App->map->data.tile_width / 2;
-					else if (!entity->flip)
-						entity->position.x -= App->map->data.tile_width / 2;
-				}
-			}
+			//		if (player->flip && !player->walljumping && !player->StickToWall)
+			//			player->position.x += player->speed_modifier.x * dt;
+			//		else if (!player->flip && !player->walljumping && !player->StickToWall)
+			//			player->position.x -= player->speed_modifier.x * dt;
+			//		else if (player->walljumping && player->speed.x > 0 && !player->StickToWall)
+			//			player->position.x -= player->speed_modifier.x * dt;
+			//		else if (player->walljumping && player->speed.x < 0 && !player->StickToWall)
+			//			player->position.x += player->speed_modifier.x * dt;
+			//	}
+			//	else
+			//	{
+			//		if (entity->flip)
+			//			entity->position.x += App->map->data.tile_width / 2;
+			//		else if (!entity->flip)
+			//			entity->position.x -= App->map->data.tile_width / 2;
+			//	}
+			//}
 		}
 	}
 }
