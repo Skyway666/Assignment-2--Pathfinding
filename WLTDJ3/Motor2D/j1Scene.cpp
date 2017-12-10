@@ -103,13 +103,12 @@ bool j1Scene::PreUpdate()
 bool j1Scene::Update(float dt)
 {
 	// Playtime counter:
-	//if (hourglass != nullptr)
-	//{
-	//	UpdateTime();
-	//	hourglass->Erase_linked_elements();
-	//	hourglass_time = App->gui->Add_text(0, 0, time);
-	//	hourglass->Link_ui_element(hourglass_time, -50, 120);
-	//}
+	if (hourglass != nullptr)
+	{
+		UpdateTime();
+		hourglass_time->SetText(time);
+		hourglass->Link_ui_element(hourglass_time, -50, 120);
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{

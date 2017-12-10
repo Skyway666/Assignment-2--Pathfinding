@@ -83,16 +83,3 @@ void Ui_element::SetActive(bool activate)
  		}
 	}
 }
-
-bool Ui_element::Erase_linked_elements()
-{
-	if (type != ICON)
-		return false;
-
-	for (int i = 0; i < linked_elements.count(); i++)
-	{
-		App->gui->Erase_Ui_element(linked_elements[i]);
-	}
-
-	return true;
-}
