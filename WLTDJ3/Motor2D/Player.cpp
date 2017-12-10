@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "j1Transition.h"
 
 
 Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y)
@@ -79,15 +79,21 @@ void Player::Update(float dt)
 
 		if (animation->Finished())
 		{
-			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y - 5;
-			center.x = position.x + (481 * scale) / 2;
-			center.y = position.y + (547 * scale) / 2;
-			App->entities->EraseEntities();
-			App->entities->Spawn_waiting_entities();
-			death.Reset();
-			dead = false;
+			App->transition->Make_transition(&player_reset_current_map, nullptr);
 		}
+	}
+
+	if (player_reset_current_map)
+	{
+		position.x = App->map->data.player_starting_value.x;
+		position.y = App->map->data.player_starting_value.y - 5;
+		center.x = position.x + (481 * scale) / 2;
+		center.y = position.y + (547 * scale) / 2;
+		App->entities->EraseEntities();
+		App->entities->Spawn_waiting_entities();
+		death.Reset();
+		dead = false;
+		player_reset_current_map = false;
 	}
 
 	if (Win_timer.IsOver() && !dead)

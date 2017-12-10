@@ -52,6 +52,8 @@ private:
 	bool super_godmode = false;
 	int jcontact = 0; // for Jump() function
 
+	bool player_reset_current_map; // If this bool is true, the player will reset its position in the current map
+
 	iPoint sprite_distance;
 	fPoint walljump_speed;
 	
