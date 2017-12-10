@@ -8,7 +8,7 @@ public:
 	Text(int x, int y, const char* _string, _TTF_Font* font);
 	~Text();
 	void Draw();
-	void SetText(char* text);
+	void UpdateText(char* text);
 private:
 
 	SDL_Texture* graphic;

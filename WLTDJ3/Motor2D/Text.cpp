@@ -28,7 +28,7 @@ void Text::Draw()
 	App->render->Blit(graphic, position.x, position.y,1,false);
 }
 
-void Text::SetText(char* text)
+void Text::UpdateText(char* text)
 {
 	graphic = App->fonts->Print(text);
 }

@@ -106,7 +106,7 @@ bool j1Scene::Update(float dt)
 	if (hourglass != nullptr)
 	{
 		UpdateTime();
-		hourglass_time->SetText(time);
+		hourglass_time->UpdateText(time);
 		hourglass->Link_ui_element(hourglass_time, -50, 120);
 	}
 
