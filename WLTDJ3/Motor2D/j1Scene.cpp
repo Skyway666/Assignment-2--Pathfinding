@@ -102,7 +102,15 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	UpdateTime();
+	// Playtime counter:
+	//if (hourglass != nullptr)
+	//{
+	//	UpdateTime();
+	//	hourglass->Erase_linked_elements();
+	//	hourglass_time = App->gui->Add_text(0, 0, time);
+	//	hourglass->Link_ui_element(hourglass_time, -50, 120);
+	//}
+
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
 		if (App->framerate_cap != 0)
@@ -459,8 +467,8 @@ void j1Scene::Load_HUD()
 	hourglass->animation = &hourglass->anim;
 	hourglass->scale = 0.5;
 
-	Text* hourglass_time = App->gui->Add_text( 0, 0, "TIME Y TAL");
-	hourglass->Link_ui_element(hourglass_time, -100, 100);
+	hourglass_time = App->gui->Add_text(0, 0, "00:00:00");
+	hourglass->Link_ui_element(hourglass_time, -50, 120);
 	playtime.Start();
 }
 
@@ -509,4 +517,21 @@ void j1Scene::UpdateTime()
 		h = 0;
 		h2 = 0;
 	}
+
+	int i = 0;
+	time[i] = h2 + 48;
+	i++;
+	time[i] = h + 48;
+	i++;
+	time[i] = 58;
+	i++;
+	time[i] = m2 + 48;
+	i++;
+	time[i] = m + 48;
+	i++;
+	time[i] = 58;
+	i++;
+	time[i] = s2 + 48;
+	i++;
+	time[i] = s + 48;
 }
