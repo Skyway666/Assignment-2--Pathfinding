@@ -98,8 +98,10 @@ private:
 	// Hud setup
 	Icon* hourglass = nullptr;
 	Icon* coins = nullptr;
-	char time[8];
+	char time[20];
 	j1Timer playtime;
+	Text* hourglass_time;
+	// Seconds, minutes and hours
 	int s = 0;
 	int s2 = 0;
 	int m = 0;

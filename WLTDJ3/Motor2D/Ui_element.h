@@ -24,6 +24,8 @@ public:
 	virtual void Update();
 	//If the argument passed is true, it activates the element, if false it deactivates it. It also does it with linked elements
 	virtual void SetActive(bool active);
+	// Erase linked elements
+	bool Erase_linked_elements();
 
 	iPoint position; // Position where will be drawn
 	Animation* animation = nullptr;// Animation which will be executed by "Draw"
