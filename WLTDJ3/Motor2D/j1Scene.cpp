@@ -512,58 +512,91 @@ void j1Scene::UnLoad_HUD()
 
 void j1Scene::UpdateTime()
 {
-	s = playtime.ReadSec();
+	if (!App->pause)
+	{
+		s = playtime.ReadSec();
 
-	if (s >= 10)
-	{
-		s = 0;
-		s2++;
-		playtime.Start();
-	}
-	if (s2 >= 6)
-	{
-		s2 = 0;
-		m++;
-	}
-	if (m >= 10)
-	{
-		m = 0;
-		m2++;
-	}
-	if (m2 >= 6)
-	{
-		m2 = 0;
-		h++;
-	}
-	if (h >= 10)
-	{
-		h = 0;
-		h2++;
-	}
-	if (h2 >= 10)
-	{
-		s = 0;
-		s2 = 0;
-		m = 0;
-		m2 = 0;
-		h = 0;
-		h2 = 0;
-	}
+		if (s >= 10)
+		{
+			s = 0;
+			s2++;
+			playtime.Start();
+		}
+		if (s2 >= 6)
+		{
+			s2 = 0;
+			m++;
+		}
+		if (m >= 10)
+		{
+			m = 0;
+			m2++;
+		}
+		if (m2 >= 6)
+		{
+			m2 = 0;
+			h++;
+		}
+		if (h >= 10)
+		{
+			h = 0;
+			h2++;
+		}
+		if (h2 >= 10)
+		{
+			s = 0;
+			s2 = 0;
+			m = 0;
+			m2 = 0;
+			h = 0;
+			h2 = 0;
+		}
 
-	int i = 0;
-	time[i] = h2 + 48;
-	i++;
-	time[i] = h + 48;
-	i++;
-	time[i] = 58;
-	i++;
-	time[i] = m2 + 48;
-	i++;
-	time[i] = m + 48;
-	i++;
-	time[i] = 58;
-	i++;
-	time[i] = s2 + 48;
-	i++;
-	time[i] = s + 48;
+		int i = 0;
+		time[i] = h2 + 48;
+		i++;
+		time[i] = h + 48;
+		i++;
+		time[i] = 58;
+		i++;
+		time[i] = m2 + 48;
+		i++;
+		time[i] = m + 48;
+		i++;
+		time[i] = 58;
+		i++;
+		time[i] = s2 + 48;
+		i++;
+		time[i] = s + 48;
+	}
+	else
+	{
+		playtime.ResumeFromSec(s);
+	}
+}
+
+bool j1Scene::Save(pugi::xml_node& data) const
+{
+	data.append_attribute("s") = s;
+	data.append_attribute("s2") = s2;
+	data.append_attribute("m") = m;
+	data.append_attribute("m2") = m2;
+	data.append_attribute("h") = h;
+	data.append_attribute("h2") = h2;
+
+	return true;
+}
+
+bool j1Scene::Load(pugi::xml_node& data)
+{
+	s = data.attribute("s").as_int();
+	s2 = data.attribute("s2").as_int();
+	m = data.attribute("m").as_int();
+	m2 = data.attribute("m2").as_int();
+	h = data.attribute("h").as_int();
+	h2 = data.attribute("h2").as_int();
+
+	playtime.ResumeFromSec(s);
+
+	return true;
 }

@@ -51,6 +51,10 @@ public:
 	//Unloads current map
 	void Unload_map();
 
+	// Load / Save
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
+
 	//Functions to load and unload Ui setups and bools to execute them safely
 	void Load_main_menu(); bool want_load_main_menu = false;
 	void UnLoad_main_menu(); bool want_unload_main_menu = false;

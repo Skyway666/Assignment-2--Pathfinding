@@ -18,6 +18,11 @@ void j1Timer::Start()
 	started_at = SDL_GetTicks();
 }
 
+void j1Timer::ResumeFromSec(float seconds)
+{
+	started_at = SDL_GetTicks() - (1000.0f * seconds);
+}
+
 // ---------------------------------------------
 uint32 j1Timer::Read() const
 {

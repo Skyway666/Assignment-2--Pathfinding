@@ -476,14 +476,6 @@ void Player::Save(pugi::xml_node& data)
 	data.append_attribute("y") = position.y;
 	data.append_attribute("map") = App->map->map;
 	data.append_attribute("points") = points;
-
-	// Playtime timer (should not be done here)
-	data.append_attribute("s") = App->scene->s;
-	data.append_attribute("s2") = App->scene->s2;
-	data.append_attribute("m") = App->scene->m;
-	data.append_attribute("m2") = App->scene->m2;
-	data.append_attribute("h") = App->scene->h;
-	data.append_attribute("h2") = App->scene->h2;
 }
 
 void Player::Load(pugi::xml_node& data)
@@ -491,14 +483,6 @@ void Player::Load(pugi::xml_node& data)
 	position.x = data.attribute("x").as_float();
 	position.y = data.attribute("y").as_float() - gravity * 2;
 	points = data.attribute("points").as_int();
-
-	// Playtime timer (should not be done here)
-	App->scene->s = data.attribute("s").as_int();
-	App->scene->s2 = data.attribute("s2").as_int();
-	App->scene->m = data.attribute("m").as_int();
-	App->scene->m2 = data.attribute("m2").as_int();
-	App->scene->h = data.attribute("h").as_int();
-	App->scene->h2 = data.attribute("h2").as_int();
 }
 
 void Player::Pause()
