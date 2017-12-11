@@ -66,4 +66,5 @@ https://www.youtube.com/watch?v=jgETNzUqDP0
 
 Animations and map textures from:
 
-gameart2d.com
+https://www.gameart2d.com
+https://www.spriters-resource.com/fullview/98810/
