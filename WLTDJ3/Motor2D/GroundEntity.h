@@ -10,9 +10,9 @@ public:
 
 	float gravity;
 	iPoint contact;
+	bool allowtime = true;
 	bool jumping = false;
 	float jump_time;
 	Chronometer jump_timer;
-	bool allowtime = true;
 	virtual void Jump(float dt) {};
 };

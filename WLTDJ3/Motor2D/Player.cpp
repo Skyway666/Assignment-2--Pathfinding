@@ -189,6 +189,7 @@ void Player::Update(float dt)
 			App->entities->Spawn_waiting_entities();
 			position.x = App->map->data.player_starting_value.x;
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
+			points = 0;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		{
@@ -196,6 +197,7 @@ void Player::Update(float dt)
 			App->entities->Spawn_waiting_entities();
 			position.x = App->map->data.player_starting_value.x;
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
+			points = 0;
 		}
 	}
 
