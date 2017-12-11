@@ -275,14 +275,13 @@ void j1Entities::EraseEntities()
 
 void j1Entities::EraseEntity(Entity* entity)
 {
-	int index = entities.find(entity);
+	//int index = entities.find(entity);
 
-	p2List_item<Entity*>* node_to_delete = entities.At(index);
+	//p2List_item<Entity*>* node_to_delete = entities.At(index);
 
-	entities[index]->collider->to_delete = true;
-	delete entities[index];
-	entities[index] = nullptr;
-	entities.del(node_to_delete);
+	//entities[index]->collider->to_delete = true;
+	//delete entities[index];
+	//entities.del(node_to_delete);
 }
 
 //Load game state
