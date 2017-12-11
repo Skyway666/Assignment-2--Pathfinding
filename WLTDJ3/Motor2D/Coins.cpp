@@ -48,6 +48,7 @@ void Coins::Update(float dt, bool dologic)
 		{
 			App->scene->coin_animation = true;
 			animation_played = true;
+			App->entities->EraseEntity(this);
 		}
 	}
 

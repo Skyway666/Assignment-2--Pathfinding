@@ -64,6 +64,7 @@ public:
 	bool Update(float dt); //Update all entities in "entities"
 	bool CleanUp(); //Called when app is closed
 	void EraseEntities(); // To erase all entities left on the map
+	void EraseEntity(Entity* entity); // To erase a single entity
 	void OnCollision(Collider* c1, Collider* c2); //Called by the callback of "j1Collisions", should iterate over all entities and call their OnCollision method if the collider is theirs
 	void AddEntity(ENTITY_TYPES type, int x, int y); //Adds an enemy to the list with a certain type and position (should return a pointer to the enemy... or not)
 	void Add_waiting_entity(ENTITY_TYPES type, int x, int y); //Adds an entity that will be spawned when "spawn_waiting_entities" is called
