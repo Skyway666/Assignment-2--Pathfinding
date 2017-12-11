@@ -236,39 +236,28 @@ void j1Scene::Unload_map()
 }
 void j1Scene::Load_main_menu()
 {
-	//Title
-	title = App->fonts->Load("fonts/open_sans/OpenSans-Regular.ttf", 30);
-	Text* titola = App->gui->Add_text(0, 0, "WHO LET THE DOG JUMP", title);
-	//Window
-	Menu_Window = App->gui->Add_window(0, 100);
-	//Start button
-	start = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	//Start button (All of it could be the child of start to simplify code)
+	start = App->gui->Add_button(370, 250, (j1Module*)this, START);
 	Text* text_to_link = App->gui->Add_text(0, 0, "START");
-	start->Link_ui_element(text_to_link, 90, 22);
+	start->Link_ui_element(text_to_link, 100, 30);
 	//Continue button
-	continuee = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	continuee = App->gui->Add_button(370, 350, (j1Module*)this, START);
 	text_to_link = App->gui->Add_text(0, 0, "CONTINUE");
-	continuee->Link_ui_element(text_to_link, 75, 22);
-	//Exit button
-	exit = App->gui->Add_button(0, 0, (j1Module*)this, START);
-	text_to_link = App->gui->Add_text(0, 0, "EXIT");
-	exit->Link_ui_element(text_to_link, 100, 22);
-	//Credits button
-	credits = App->gui->Add_button(0, 0, (j1Module*)this, START);
-	text_to_link = App->gui->Add_text(0, 0, "CREDITS");
-	credits->Link_ui_element(text_to_link, 90, 22);
+	continuee->Link_ui_element(text_to_link, 75, 30);	
 	//Options button
-	options = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	options = App->gui->Add_button(370, 450, (j1Module*)this, START);
 	text_to_link = App->gui->Add_text(0, 0, "OPTIONS");
-	options->Link_ui_element(text_to_link, 90, 22);
-	
-	//Link all elements to window
-	Menu_Window->Link_ui_element(start, 120, 100);
-	Menu_Window->Link_ui_element(continuee, 120, 155);
-	Menu_Window->Link_ui_element(options, 120, 210);
-	Menu_Window->Link_ui_element(credits, 120, 265);
-	Menu_Window->Link_ui_element(exit, 120, 320);
-	Menu_Window->Link_ui_element(titola, 45, 30);
+	options->Link_ui_element(text_to_link, 85, 30);	
+	//Credits button
+	credits = App->gui->Add_button(370, 550, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "CREDITS");
+	credits->Link_ui_element(text_to_link, 85, 30);
+	//Exit button
+	exit = App->gui->Add_button(370, 650, (j1Module*)this, START);
+	text_to_link = App->gui->Add_text(0, 0, "EXIT");
+	exit->Link_ui_element(text_to_link, 105, 30);
+
+
 	
 
 	App->gui->Set_backgrond(main_menu_background);
@@ -276,12 +265,15 @@ void j1Scene::Load_main_menu()
 
 void j1Scene::UnLoad_main_menu()
 {
-	App->gui->Erase_Ui_element(Menu_Window);
-	Menu_Window = nullptr;
+	App->gui->Erase_Ui_element(start);
 	start = nullptr;
+	App->gui->Erase_Ui_element(continuee);
 	continuee = nullptr;
+	App->gui->Erase_Ui_element(exit);
 	exit = nullptr;
+	App->gui->Erase_Ui_element(credits);
 	credits = nullptr;
+	App->gui->Erase_Ui_element(options);
 	options = nullptr;
 
 	App->gui->Set_backgrond(nullptr);
@@ -410,8 +402,6 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			{
 				//Load options
 				want_load_options = true;
-				//Hide main menu
-				Menu_Window->SetActive(false);
 			}
 		//Pause menu
 			if (element == resume)
@@ -453,8 +443,6 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			{
 				//Load options
 				want_unload_options = true;
-				//Hide main menu
-				Menu_Window->SetActive(true);
 			}
 
 

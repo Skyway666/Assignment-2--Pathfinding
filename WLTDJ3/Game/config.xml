@@ -49,6 +49,7 @@
 
   <gui>
     <atlas file="gui/atlas.png"/>
+    <atlas2 file="gui/atlas2.png"/>
     <HUD file="gui/HUD.png"/>
   </gui>
 

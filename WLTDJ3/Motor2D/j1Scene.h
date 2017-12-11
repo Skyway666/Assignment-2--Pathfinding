@@ -69,7 +69,7 @@ public:
 
 private:
 	//Main menu setup
-	Window* Menu_Window = nullptr;
+
 	Button* start = nullptr;
 	Button* continuee = nullptr;
 	Button* options = nullptr;

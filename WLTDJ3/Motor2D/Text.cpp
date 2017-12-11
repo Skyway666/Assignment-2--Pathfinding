@@ -9,10 +9,10 @@
 Text::Text(int x, int y, const char* _string, _TTF_Font* font) : Ui_element(x, y)
 {
 	if(font != nullptr)
-		graphic = App->fonts->Print(_string, { 255,255,255,255 }, font);
+		graphic = App->fonts->Print(_string, { 0,0,0,255 }, font);
 	else
 	{
-		graphic = App->fonts->Print(_string);
+		graphic = App->fonts->Print(_string, { 0,0,0,255 });
 	}
 	type = TEXT;
 }

@@ -15,17 +15,17 @@ Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type): Ui_
 {
 	type = BUTTON;
 	button_type = _button_type;
-	Idle.PushBack({ 2,112,226,67 }); 
+	Idle.PushBack({ 5,237,277,103 }); 
 	Idle.loop = false;
 
-	Shiny.PushBack({ 414,169,224,63 });
+	Shiny.PushBack({ 5,120,277,103 });
 	Shiny.loop = false;
 
-	Pressed.PushBack({ 644,169,224,63 });
+	Pressed.PushBack({ 5,6,277,103 });
 	Pressed.loop = false;
 
 	listener = _listener;
-	collider = App->gui->click_manager->Add_ui_collider({x,y,226,67 });
+	collider = App->gui->click_manager->Add_ui_collider({x,y,277,95 });
 
 	animation = &Idle;
 }

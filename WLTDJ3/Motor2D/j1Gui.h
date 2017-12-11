@@ -92,13 +92,16 @@ public:
 private:
 
 	SDL_Texture* atlas;
+	SDL_Texture* atlas2;
 	SDL_Texture* HUD;
 	//Background image
 	SDL_Texture* current_background; 
 
 	//Paths to load assets
 	p2SString atlas_file_name;
+	p2SString atlas2_file_name;
 	p2SString HUD_file_name;
+
 	
 	//Icons list
 	p2List<Icon*> icons;

@@ -29,6 +29,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	atlas2_file_name = conf.child("atlas2").attribute("file").as_string("");
 	HUD_file_name = conf.child("HUD").attribute("file").as_string("");
 
 	return ret;
@@ -38,7 +39,9 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	atlas2 = App->tex->Load(atlas2_file_name.GetString());
 	HUD = App->tex->Load(HUD_file_name.GetString());
+	
 
 	return true;
 }
@@ -116,7 +119,7 @@ bool j1Gui::PostUpdate()
 		for (uint i = 0; i < buttons.count(); ++i)
 		{
 			if (buttons[i] != nullptr)
-				buttons[i]->Draw(atlas);
+				buttons[i]->Draw(atlas2);
 		}
 		//Blit all statbars
 		for (uint i = 0; i < statbars.count(); ++i)
