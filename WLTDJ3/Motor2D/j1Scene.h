@@ -51,7 +51,6 @@ public:
 	//Unloads current map
 	void Unload_map();
 
-
 	//Functions to load and unload Ui setups and bools to execute them safely
 	void Load_main_menu(); bool want_load_main_menu = false;
 	void UnLoad_main_menu(); bool want_unload_main_menu = false;
@@ -66,6 +65,7 @@ public:
 
 	SDL_Texture* win_screen;
 	bool exit_app = false;
+	bool coin_animation = false;
 
 private:
 	//Main menu setup
@@ -95,19 +95,13 @@ private:
 	Button* upper_fx_volume = nullptr;
 	Button* lower_fx_volume = nullptr;
 
-	// Hud setup
+	// HUD setup
 	Icon* hourglass = nullptr;
 	Icon* coins = nullptr;
+	char currentcoins[500];
 	char time[20];
-	j1Timer playtime;
 	Text* hourglass_time;
-	// Seconds, minutes and hours
-	int s = 0;
-	int s2 = 0;
-	int m = 0;
-	int m2 = 0;
-	int h = 0;
-	int h2 = 0;
+	Text* current_coins;
 	void UpdateTime();
 
 	//Paths to load assets from config
@@ -115,8 +109,16 @@ private:
 
 	_TTF_Font* title = nullptr;
 
+public:
+	// Seconds, minutes and hours (should not be public, but their load and save is currently being managed in player)
+	int s = 0;
+	int s2 = 0;
+	int m = 0;
+	int m2 = 0;
+	int h = 0;
+	int h2 = 0;
+	j1Timer playtime;
 
-	
 };
 
 #endif // __j1SCENE_H__

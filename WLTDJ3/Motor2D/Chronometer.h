@@ -57,7 +57,7 @@ public:
 			saved_time = timer_duration - SDL_GetTicks();
 	}
 
-	void Resume()
+	void Load()
 	{
 			timer_duration = SDL_GetTicks() + saved_time;
 			timer_active = true;

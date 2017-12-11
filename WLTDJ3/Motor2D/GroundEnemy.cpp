@@ -239,7 +239,7 @@ void GroundEnemy::Load(pugi::xml_node& data)
 	else
 		spawned = false;
 
-	jump_timer.Resume();
+	jump_timer.Load();
 }
 
 void GroundEnemy::Pause()

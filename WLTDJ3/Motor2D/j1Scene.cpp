@@ -102,12 +102,28 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	// Playtime counter:
+	// Playtime counter
 	if (hourglass != nullptr)
 	{
 		UpdateTime();
 		hourglass_time->UpdateText(time);
-		hourglass->Link_ui_element(hourglass_time, -50, 120);
+		if (App->pause)
+			hourglass->animation->Reset();
+	}
+
+	// Update points
+	if (coins != nullptr)
+	{
+		sprintf_s(currentcoins, 500, "x%i", App->entities->player->points);
+		current_coins->UpdateText(currentcoins);
+		
+		if (coin_animation)
+		{
+			coins->animation->Reset();
+			coin_animation = false;
+		}
+		if (App->pause)
+			coins->animation->Reset();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
@@ -449,7 +465,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 void j1Scene::Load_HUD()
 {
 	hourglass = App->gui->Add_icon(920, 580);
-	
+	coins = App->gui->Add_icon(-20, -20);
+
 	int row = 0;
 	for (int i = 0; i < 16; i++)
 		hourglass->anim.PushBack({ 229 * i, 345 * row, 229, 345 });
@@ -466,9 +483,25 @@ void j1Scene::Load_HUD()
 	hourglass->animation = &hourglass->anim;
 	hourglass->scale = 0.5;
 
+	row++;
+	for (int i = 0; i < 4; i++)
+		coins->anim.PushBack({ 229 * i, 345 * row, 229, 345 });
+	for (int i = 3; i >= 0; i--)
+		coins->anim.PushBack({ 229 * i, 345 * row, 229, 345 });
+
+	coins->animation_speed = 0.3;
+	coins->anim.speed = 0.3;
+	coins->anim.loop = false;
+	coins->animation = &coins->anim;
+	coins->scale = 0.5;
+
+
 	hourglass_time = App->gui->Add_text(0, 0, "00:00:00");
 	hourglass->Link_ui_element(hourglass_time, -50, 120);
 	playtime.Start();
+
+	current_coins = App->gui->Add_text(0, 0, "x0");
+	coins->Link_ui_element(current_coins, 65, 85);
 }
 
 void j1Scene::UnLoad_HUD()

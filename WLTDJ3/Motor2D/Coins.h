@@ -27,6 +27,8 @@ private:
 	Animation anim;
 	bool collected = false;
 	bool given_points = false;
-	int count = 0;
+	bool pa_started = false; // pa = play animation
+	bool animation_played = false;
+	Chronometer play_animation;
 };
 
