@@ -76,6 +76,7 @@ void Player::Update(float dt)
 	{
 
 		animation = &death;
+		points = 0;
 
 		if (animation->Finished())
 		{
