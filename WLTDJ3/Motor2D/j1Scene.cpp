@@ -363,7 +363,6 @@ void j1Scene::UnLoad_options()
 	upper_fx_volume = nullptr;
 	lower_fx_volume = nullptr;
 	exit_main_menu_fo = nullptr;
-
 }
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
@@ -496,6 +495,8 @@ void j1Scene::UnLoad_HUD()
 {
 	App->gui->Erase_Ui_element(hourglass);
 	hourglass = nullptr;
+	App->gui->Erase_Ui_element(coins);
+	coins = nullptr;
 }
 
 void j1Scene::UpdateTime()

@@ -35,6 +35,7 @@ public:
 	bool StickToWall = false;
 	iPoint pathfinding_distance;
 	int points = 0;
+	int lives = 3;
 
 private:
 

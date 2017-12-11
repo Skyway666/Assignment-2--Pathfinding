@@ -74,7 +74,6 @@ void Player::Update(float dt)
 
 	if (dead)
 	{
-
 		animation = &death;
 		points = 0;
 
@@ -453,9 +452,15 @@ void Player::OnCollision(Collider* collider)
 	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD
 		&& this->collider->type != COLLIDER_SUPER_GOD)
 	{		
-
+		lives--;
 		dead = true;
 
+		if (lives <= 0)
+		{
+			lives = 3;
+			App->scene->want_load_main_menu = true;
+			App->scene->want_unload_HUD = true;
+		}
 	}
 }
 void Player::WinScreen(float dt)
@@ -476,6 +481,7 @@ void Player::Save(pugi::xml_node& data)
 	data.append_attribute("y") = position.y;
 	data.append_attribute("map") = App->map->map;
 	data.append_attribute("points") = points;
+	data.append_attribute("lives") = lives;
 }
 
 void Player::Load(pugi::xml_node& data)
@@ -483,6 +489,7 @@ void Player::Load(pugi::xml_node& data)
 	position.x = data.attribute("x").as_float();
 	position.y = data.attribute("y").as_float() - gravity * 2;
 	points = data.attribute("points").as_int();
+	lives = data.attribute("lives").as_int();
 }
 
 void Player::Pause()
