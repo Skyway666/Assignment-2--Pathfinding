@@ -41,14 +41,14 @@ void Coins::Update(float dt, bool dologic)
 		
 		if (!pa_started)
 		{
-			play_animation.Start(0.5);
+			play_animation.Start(0.6);
 			pa_started = true;
 		}
 		if (play_animation.IsOver() && !animation_played)
 		{
 			App->scene->coin_animation = true;
 			animation_played = true;
-			App->entities->EraseEntity(this);
+			to_delete = true;
 		}
 	}
 

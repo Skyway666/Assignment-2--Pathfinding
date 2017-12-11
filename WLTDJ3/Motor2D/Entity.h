@@ -25,7 +25,7 @@ public:
 	float scale; // Scale to blit
 	ENTITY_TYPES type; // Knowing which type of enemy
 	bool flip = false; // Flip to blit
-
+	bool to_delete = false;
 
 public:
 

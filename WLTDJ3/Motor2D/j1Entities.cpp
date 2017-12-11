@@ -111,6 +111,13 @@ bool j1Entities::Update(float dt)
 		//Update enemies logic every 0.5 seconds
 		if (do_logic.IsOver())
 			do_logic.Start(0.5);
+
+		// Delete requested entities
+		for (uint i = 0; i < entities.count(); ++i)
+		{
+			if (entities[i] != nullptr && entities[i]->to_delete)
+				EraseEntity(entities[i]);
+		}
 	}
 	else
 	{
@@ -275,13 +282,13 @@ void j1Entities::EraseEntities()
 
 void j1Entities::EraseEntity(Entity* entity)
 {
-	//int index = entities.find(entity);
+	int index = entities.find(entity);
 
-	//p2List_item<Entity*>* node_to_delete = entities.At(index);
+	p2List_item<Entity*>* node_to_delete = entities.At(index);
 
-	//entities[index]->collider->to_delete = true;
-	//delete entities[index];
-	//entities.del(node_to_delete);
+	entities[index]->collider->to_delete = true;
+	delete entities[index];
+	entities.del(node_to_delete);
 }
 
 //Load game state
