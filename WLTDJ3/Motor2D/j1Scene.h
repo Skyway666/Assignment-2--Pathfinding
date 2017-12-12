@@ -56,7 +56,7 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	//Functions to load and unload Ui setups and bools to execute them safely
-	void Load_main_menu(); bool want_load_main_menu = false;
+	void Load_main_menu(); bool want_load_main_menu = false; //Also plays menu music
 	void UnLoad_main_menu(); bool want_unload_main_menu = false;
 	void Load_credits(); bool want_load_credits = false;
 	void UnLoad_credits(); bool want_unload_credits = false;

@@ -92,7 +92,6 @@ void Player::Update(float dt)
 			{
 				if(!App->transition->transitioning)
 				{ 
-					App->audio->Play_Menu_Music();
 					App->transition->Make_transition(&App->scene->want_load_main_menu, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
 				}
 			}

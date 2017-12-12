@@ -85,6 +85,7 @@ bool j1Scene::PreUpdate()
 		if (want_load_main_menu)
 		{
 			Load_main_menu();
+			App->audio->Play_Menu_Music();
 			want_load_main_menu = false;
 		}
 		if (want_load_credits)
