@@ -73,6 +73,8 @@ bool j1Transition::PostUpdate()
 				if (bool_to_unload != nullptr)
 				*bool_to_unload = true;
 				transition2.Reset();
+
+				transitioning = true;
 			}
 			break;
 		}
@@ -82,6 +84,7 @@ bool j1Transition::PostUpdate()
 			if (transition2.Finished())
 			{
 				current_state = NOTHING;
+				transitioning = false;
 			}
 			break;
 		}

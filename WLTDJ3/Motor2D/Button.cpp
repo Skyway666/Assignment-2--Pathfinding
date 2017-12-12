@@ -14,18 +14,40 @@
 Button::Button(int x, int y, j1Module* _listener, BUTTON_TYPE _button_type): Ui_element(x, y)
 {
 	type = BUTTON;
-	button_type = _button_type;
-	Idle.PushBack({ 5,237,277,103 }); 
-	Idle.loop = false;
 
-	Shiny.PushBack({ 5,120,277,103 });
-	Shiny.loop = false;
+	switch (_button_type) {
+		case STATE_CHANGE:
+		{
+			Idle.PushBack({ 5,237,277,103 });
+			Shiny.PushBack({ 5,120,277,103 });
+			Pressed.PushBack({ 5,6,277,103 });
+			collider = App->gui->click_manager->Add_ui_collider({ x,y,277,95 });
+			break;
+		}
+		case UPPER:
+		{
+			Idle.PushBack({320,19,121,75});
+			Shiny.PushBack({ 320,101,121,75});
+			Pressed.PushBack({320,19,121,75});
+			collider = App->gui->click_manager->Add_ui_collider({ x,y,121,75 });
+			break;
+		}
+		case LOWER:
+		{
+			Idle.PushBack({ 320,279,121,75 });
+			Shiny.PushBack({ 320,201,121,75 });
+			Pressed.PushBack({ 320,279,121,75 });
+			collider = App->gui->click_manager->Add_ui_collider({ x,y,121,75 });
+			break;
+		}
+	}
 
-	Pressed.PushBack({ 5,6,277,103 });
+
 	Pressed.loop = false;
-
+	Shiny.loop = false;
+	Idle.loop = false;
 	listener = _listener;
-	collider = App->gui->click_manager->Add_ui_collider({x,y,277,95 });
+	
 
 	animation = &Idle;
 }

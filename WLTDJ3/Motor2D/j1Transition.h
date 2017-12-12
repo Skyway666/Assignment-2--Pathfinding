@@ -24,11 +24,13 @@ public:
 	//Make a giant animation over all the stuff blited in the screen (maybe make some sound)
 	void Make_transition(bool* bool_to_unload, bool* bool_to_load);
 
+	bool transitioning = false;
+
 private:
 
-	bool* bool_to_load;
-	bool* bool_to_unload;
-	SDL_Texture* graphics;
+	bool* bool_to_load = nullptr;
+	bool* bool_to_unload = nullptr;
+	SDL_Texture* graphics = nullptr;
 	Animation transition1;
 	Animation transition2;
 	FADE_STATE current_state;

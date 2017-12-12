@@ -25,9 +25,9 @@ enum UI_ELEMENT_TYPE //Type of ui elements avaliable
 enum BUTTON_TYPE //Knowing what type of button we are creating, just for animation purpuses
 {
 	NONE,
-	START,
-	OPTIONS,
-	CREDITS
+	STATE_CHANGE,
+	UPPER,
+	LOWER
 };
 enum UI_EVENT
 {
@@ -67,7 +67,7 @@ public:
 	//Add icon
 	Icon* Add_icon(int x, int y);
 	//Add button
-	Button* Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_type = NONE);
+	Button* Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_type = STATE_CHANGE);
 	//Add text as UI
 	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
 	//Add window

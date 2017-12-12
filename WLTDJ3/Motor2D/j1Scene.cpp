@@ -237,23 +237,23 @@ void j1Scene::Unload_map()
 void j1Scene::Load_main_menu()
 {
 	//Start button (All of it could be the child of start to simplify code)
-	start = App->gui->Add_button(370, 250, (j1Module*)this, START);
+	start = App->gui->Add_button(370, 250, (j1Module*)this);
 	Text* text_to_link = App->gui->Add_text(0, 0, "START");
 	start->Link_ui_element(text_to_link, 100, 30);
 	//Continue button
-	continuee = App->gui->Add_button(370, 350, (j1Module*)this, START);
+	continuee = App->gui->Add_button(370, 350, (j1Module*)this);
 	text_to_link = App->gui->Add_text(0, 0, "CONTINUE");
 	continuee->Link_ui_element(text_to_link, 75, 30);	
 	//Options button
-	options = App->gui->Add_button(370, 450, (j1Module*)this, START);
+	options = App->gui->Add_button(370, 450, (j1Module*)this);
 	text_to_link = App->gui->Add_text(0, 0, "OPTIONS");
 	options->Link_ui_element(text_to_link, 85, 30);	
 	//Credits button
-	credits = App->gui->Add_button(370, 550, (j1Module*)this, START);
+	credits = App->gui->Add_button(370, 550, (j1Module*)this);
 	text_to_link = App->gui->Add_text(0, 0, "CREDITS");
 	credits->Link_ui_element(text_to_link, 85, 30);
 	//Exit button
-	exit = App->gui->Add_button(370, 650, (j1Module*)this, START);
+	exit = App->gui->Add_button(370, 650, (j1Module*)this);
 	text_to_link = App->gui->Add_text(0, 0, "EXIT");
 	exit->Link_ui_element(text_to_link, 105, 30);
 
@@ -282,8 +282,8 @@ void j1Scene::UnLoad_main_menu()
 void j1Scene::Load_credits()
 {
 	Text* text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
-	exit_main_menu_fc = App->gui->Add_button(500, 500, (j1Module*)this, START);
-	exit_main_menu_fc->Link_ui_element(text_to_link, 70, 22);
+	exit_main_menu_fc = App->gui->Add_button(500, 500, (j1Module*)this);
+	exit_main_menu_fc->Link_ui_element(text_to_link, 70, 30);
 
 	App->gui->Set_backgrond(win_screen);
 }
@@ -300,13 +300,13 @@ void j1Scene::Load_pause()
 	Text* titola = App->gui->Add_text(0, 0, "PAUSE MENU", title);
 	Pause_Window = App->gui->Add_window(300, 100);
 
-	resume = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	resume = App->gui->Add_button(0, 0, (j1Module*)this);
 	Text* text_to_link = App->gui->Add_text(0, 0, "RESUME");
 	resume->Link_ui_element(text_to_link, 80, 22);
 
-	exit_main_menu_fg = App->gui->Add_button(0, 0, (j1Module*)this, START);
+	exit_main_menu_fg = App->gui->Add_button(0, 0, (j1Module*)this);
 	text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
-	exit_main_menu_fg->Link_ui_element(text_to_link, 70, 22);
+	exit_main_menu_fg->Link_ui_element(text_to_link, 70, 30);
 
 	Pause_Window->Link_ui_element(resume, 120, 100);
 	Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
@@ -323,51 +323,68 @@ void j1Scene::UnLoad_pause()
 
 void j1Scene::Load_options()
 {
-	//Create window
-	Options_Window = App->gui->Add_window(500, 100);
-
 	//Create window elements
-	upper_music_volume = App->gui->Add_button(0, 0, (j1Module*)this);
-	lower_music_volume = App->gui->Add_button(0, 0, (j1Module*)this);
+	upper_music_volume = App->gui->Add_button(900, 400, (j1Module*)this, UPPER);
+	lower_music_volume = App->gui->Add_button(400, 400, (j1Module*)this, LOWER);
 
-	upper_fx_volume = App->gui->Add_button(0, 0, (j1Module*)this);
-	lower_fx_volume = App->gui->Add_button(0, 0, (j1Module*)this);
+	upper_fx_volume = App->gui->Add_button(900, 600, (j1Module*)this, UPPER);
+	lower_fx_volume = App->gui->Add_button(400, 600, (j1Module*)this, LOWER);
 
-	exit_main_menu_fo = App->gui->Add_button(0, 0, (j1Module*)this);
+	exit_main_menu_fo = App->gui->Add_button(0, 600, (j1Module*)this);
 	Text* text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
-	exit_main_menu_fo->Link_ui_element(text_to_link, 70, 22);
+	exit_main_menu_fo->Link_ui_element(text_to_link, 70, 30);
 
-	StatBar* music_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->music_volume, MIX_MAX_VOLUME);
-	StatBar* fx_volume = App->gui->Add_StatBar(0, 0, 300, 20, &App->audio->fx_volume, MIX_MAX_VOLUME);
+	music_volume = App->gui->Add_StatBar(565, 410, 300, 50, &App->audio->music_volume, MIX_MAX_VOLUME);
+	text_to_link = App->gui->Add_text(0, 0, "MUSIC VOLUME");
+	//Create label for text
+	Icon* pretty_label = App->gui->Add_icon(0, 0);
+	pretty_label->anim.PushBack({ 939, 1139, 362, 141 });
+	pretty_label->anim.loop = false;
+	pretty_label->animation = &pretty_label->anim;
+	pretty_label->scale = 0.7;
+	//Link label to text
+	text_to_link->Link_ui_element(pretty_label, -35, -30);
 
-	//Link elements
-	Options_Window->Link_ui_element(upper_music_volume, 400, 100);
-	Options_Window->Link_ui_element(upper_fx_volume, 400, 300);
+	music_volume->Link_ui_element(text_to_link, 0, -80);
 
-	Options_Window->Link_ui_element(lower_music_volume, -100, 100);
-	Options_Window->Link_ui_element(lower_fx_volume, -100, 300);
+	fx_volume = App->gui->Add_StatBar(565, 610, 300, 50, &App->audio->fx_volume, MIX_MAX_VOLUME);
+	text_to_link = App->gui->Add_text(0, 0, "FX VOLUME");
+	//Create label for text
+	pretty_label = App->gui->Add_icon(0, 0);
+	pretty_label->anim.PushBack({ 939, 1139, 362, 141 });
+	pretty_label->anim.loop = false;
+	pretty_label->animation = &pretty_label->anim;
+	pretty_label->scale = 0.7;
+	//Link label to text
+	text_to_link->Link_ui_element(pretty_label, -60, -30);
 
-	Options_Window->Link_ui_element(music_volume, 60, 100);
-	Options_Window->Link_ui_element(fx_volume, 60, 300);
+	fx_volume->Link_ui_element(text_to_link, 20, -80);
 
-	Options_Window->Link_ui_element(exit_main_menu_fo, 120, 350);
+	App->gui->Set_backgrond(main_menu_background);
 
 }
 
 void j1Scene::UnLoad_options()
 {
-	App->gui->Erase_Ui_element(Options_Window);
-	Options_Window = nullptr;
+	App->gui->Erase_Ui_element(upper_music_volume);
 	upper_music_volume = nullptr;
+	App->gui->Erase_Ui_element(lower_music_volume);
 	lower_music_volume = nullptr;
+	App->gui->Erase_Ui_element(upper_fx_volume);
 	upper_fx_volume = nullptr;
+	App->gui->Erase_Ui_element(lower_fx_volume);
 	lower_fx_volume = nullptr;
+	App->gui->Erase_Ui_element(exit_main_menu_fo);
 	exit_main_menu_fo = nullptr;
+	App->gui->Erase_Ui_element(music_volume);
+	music_volume = nullptr;
+	App->gui->Erase_Ui_element(fx_volume);
+	fx_volume = nullptr;
 }
 void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 {
 	//TEST
-	if(event == MOUSE_STOP_CLICK)
+	if(event == MOUSE_STOP_CLICK && !App->transition->transitioning)
 	{ 
 		//Main menu
 			if (element == start)
@@ -399,8 +416,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == options)
 			{
-				//Load options
-				want_load_options = true;
+				//Unload main menu and load options
+				App->transition->Make_transition(&want_unload_main_menu, &want_load_options);
 			}
 		//Pause menu
 			if (element == resume)
@@ -433,15 +450,17 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			if (element == upper_fx_volume)
 			{
 				App->audio->Modify_fx_volume(10);
+				App->audio->PlayFx(1);
 			}
 			if (element == lower_fx_volume)
 			{
 				App->audio->Modify_fx_volume(-10);
+				App->audio->PlayFx(1);
 			}
 			if (element == exit_main_menu_fo) 
 			{
-				//Load options
-				want_unload_options = true;
+				//Unload main menu and load options
+				App->transition->Make_transition(&want_load_main_menu, &want_unload_options);
 			}
 
 

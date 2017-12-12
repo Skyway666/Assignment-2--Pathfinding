@@ -92,12 +92,13 @@ private:
 	Button* exit_main_menu_fc;
 	
 	//Options setup
-	Window* Options_Window = nullptr;
 	Button* exit_main_menu_fo = nullptr;
 	Button* upper_music_volume = nullptr;
 	Button* lower_music_volume = nullptr;
 	Button* upper_fx_volume = nullptr;
 	Button* lower_fx_volume = nullptr;
+	StatBar* music_volume = nullptr;
+	StatBar* fx_volume = nullptr;
 
 	// HUD setup
 	Icon* hourglass = nullptr;
