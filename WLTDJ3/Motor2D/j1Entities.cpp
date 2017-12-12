@@ -349,20 +349,17 @@ void j1Entities::Load_entities(pugi::xml_node& data)
 
 	pugi::xml_node entity_iterator = data.child("enemies").first_child();
 	for (uint i = 0; i < entities.count(); ++i)
-	{
-		if (entities[i] != nullptr)
+{
+		if (entities[i]->type == AIR_ENEMY)
 		{
-			if (entities[i]->type == AIR_ENEMY)
-			{
-				entities[i]->Load(entity_iterator);
-			}
-			else if (entities[i]->type == GROUND_ENEMY)
-			{
-				entities[i]->Load(entity_iterator);
-			}
-			entity_iterator = entity_iterator.next_sibling();
+			entities[i]->Load(entity_iterator);
 		}
-
+		else if (entities[i]->type == GROUND_ENEMY)
+		{
+			entities[i]->Load(entity_iterator);
+		}
+		if(entities[i]->type != COIN)
+		entity_iterator = entity_iterator.next_sibling();
 	}
 }
 
