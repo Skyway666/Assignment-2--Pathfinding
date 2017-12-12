@@ -51,6 +51,7 @@ private:
 	bool win = false;
 	bool godmode = false;
 	bool super_godmode = false;
+	bool making_transition = false; //Bool so code that has to be executed when player dies is executed just once
 	int jcontact = 0; // for Jump() function
 
 	bool player_reset_current_map; // If this bool is true, the player will reset its position in the current map

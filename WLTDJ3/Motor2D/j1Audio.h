@@ -28,6 +28,10 @@ public:
 	// Play a music file
 	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME);
 
+	// Play menu music
+	void Play_Menu_Music();
+	// Play game music
+	void Play_Game_Music();
 	// Load a WAV in memory
 	unsigned int LoadFx(const char* path);
 
@@ -47,6 +51,11 @@ private:
 
 	_Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;
+	p2SString menu_music_file_name;
+	p2SString game_music_file_name;
+
+
+
 	
 };
 

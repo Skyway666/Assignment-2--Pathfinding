@@ -365,3 +365,10 @@ void j1Entities::Load_entities(pugi::xml_node& data)
 
 	}
 }
+
+void j1Entities::ErasePlayer()
+{
+	player->collider->to_delete = true;
+	delete player;
+	player = nullptr;
+}

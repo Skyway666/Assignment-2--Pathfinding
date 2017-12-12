@@ -68,13 +68,14 @@ bool j1Transition::PostUpdate()
 			if (transition1.Finished())
 			{
 				current_state = UNFADING;
-				if(bool_to_load != nullptr)
-				*bool_to_load = true;
-				if (bool_to_unload != nullptr)
-				*bool_to_unload = true;
-				transition2.Reset();
+				if(bool1 != nullptr)
+				*bool1= true;
+				if (bool2 != nullptr)
+				*bool2 = true;
+				if (bool3 != nullptr)
+				*bool3 = true;
 
-				transitioning = true;
+				transition2.Reset();
 			}
 			break;
 		}
@@ -94,9 +95,11 @@ bool j1Transition::PostUpdate()
 	return true;
 }
 
-void j1Transition::Make_transition(bool* _bool_to_unload, bool* _bool_to_load)
+void j1Transition::Make_transition(bool* bool_1, bool* bool_2, bool* bool_3)
 {
+	bool1 = bool_1;
+	bool2= bool_2;
+	bool3 = bool_3;
 	current_state = FADING;
-	bool_to_unload = _bool_to_unload;
-	bool_to_load = _bool_to_load;
+	transitioning = true;
 }

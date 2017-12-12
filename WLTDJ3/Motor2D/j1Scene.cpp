@@ -73,7 +73,13 @@ bool j1Scene::PreUpdate()
 		if (want_unload_HUD)
 		{
 			UnLoad_HUD();
+			App->entities->ErasePlayer();
 			want_unload_HUD = false;
+		}
+		if (want_unload_map)
+		{
+			Unload_map();
+			want_unload_map = false;
 		}
 	//Then all loads
 		if (want_load_main_menu)
@@ -394,6 +400,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
 				//Unload main menu adn load hud
 				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
+				//Play game music
+				App->audio->Play_Game_Music();
 			}
 			if (element == continuee)
 			{		
@@ -403,11 +411,13 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
 				//Unload main menu adn load hud
 				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
+				//Play game music
+				App->audio->Play_Game_Music();
 			}
 			if (element == exit)
 			{
 				//Exit app
-				App->transition->Make_transition(&exit_app, nullptr);
+				App->transition->Make_transition(&exit_app);
 			}
 			if (element == credits)
 			{
@@ -426,10 +436,10 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == exit_main_menu_fg)
 			{	
-				//Game unloading (should be also done with a bool)
-				Unload_map();
-				//Load main menu and Unload HUD
-				App->transition->Make_transition(&want_load_main_menu, &want_unload_HUD);
+				//Load main menu and Unload HUD and Game Unloading
+				App->transition->Make_transition(&want_load_main_menu, &want_unload_HUD, &want_unload_map);
+				//Play menu music
+				App->audio->Play_Menu_Music();
 			}
 
 		//Credits menu

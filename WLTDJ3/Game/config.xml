@@ -65,4 +65,9 @@
     <menu_background file ="gui/menu_background.png"/>
   </scene>
 
+  <audio>
+    <menu_music file="audio/music/Song.ogg"/>
+    <game_music file="audio/music/Menu_Music.ogg"/>
+  </audio>
+
 </config>

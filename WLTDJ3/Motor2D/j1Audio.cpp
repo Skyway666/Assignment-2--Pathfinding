@@ -53,7 +53,11 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	LoadFx("audio/fx/hai.wav");
 	LoadFx("audio/fx/nye2.wav");
-	PlayMusic("audio/music/Song.ogg");
+
+	menu_music_file_name = config.child("menu_music").attribute("file").as_string("");
+	game_music_file_name = config.child("game_music").attribute("file").as_string("");
+
+	PlayMusic(menu_music_file_name.GetString());
 
 
 	music_volume = MIX_MAX_VOLUME;
@@ -202,4 +206,14 @@ void j1Audio::Modify_fx_volume(int value)
 		fx_volume = MIX_MAX_VOLUME;
 
 	Mix_Volume(-1, fx_volume); 
+}
+
+void j1Audio::Play_Game_Music()
+{
+	PlayMusic(game_music_file_name.GetString());
+}
+
+void j1Audio::Play_Menu_Music()
+{
+	PlayMusic(menu_music_file_name.GetString());
 }

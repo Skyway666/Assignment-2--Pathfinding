@@ -25,6 +25,7 @@ Player::Player(int x, int y, Player_Initial_Inf initial_inf) : GroundEntity(x, y
 	contact.y = 0;
 	collider = App->collision->AddCollider(collider_rect, COLLIDER_PLAYER, App->entities);
 	animation = &idle;
+	lives = 3;
 }
 
 
@@ -79,7 +80,23 @@ void Player::Update(float dt)
 
 		if (animation->Finished())
 		{
-			App->transition->Make_transition(&player_reset_current_map, nullptr);
+			if (lives > 0)
+			{
+				if (!App->transition->transitioning)
+				{
+					App->transition->Make_transition(&player_reset_current_map);
+				}
+
+			}
+			else 
+			{
+				if(!App->transition->transitioning)
+				{ 
+					App->audio->Play_Menu_Music();
+					App->transition->Make_transition(&App->scene->want_load_main_menu, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
+				}
+			}
+
 		}
 	}
 
@@ -454,13 +471,6 @@ void Player::OnCollision(Collider* collider)
 	{		
 		lives--;
 		dead = true;
-
-		if (lives <= 0)
-		{
-			lives = 3;
-			App->scene->want_load_main_menu = true;
-			App->scene->want_unload_HUD = true;
-		}
 	}
 }
 void Player::WinScreen(float dt)
