@@ -325,8 +325,6 @@ bool j1Entities::Save(pugi::xml_node& data) const
 	pugi::xml_node enemies = data.append_child("enemies");
 	for (uint i = 0; i < entities.count(); ++i)
 	{
-		if (entities[i] != nullptr)
-		{
 			if(entities[i]->type == AIR_ENEMY)
 			{ 
 				pugi::xml_node air_enemy = enemies.append_child("air_enemy");
@@ -337,7 +335,6 @@ bool j1Entities::Save(pugi::xml_node& data) const
 				pugi::xml_node ground_enemy = enemies.append_child("ground_enemy");
 				entities[i]->Save(ground_enemy);
 			}
-		}
 	}
 	
 	return true;

@@ -22,12 +22,12 @@ AirEnemy::AirEnemy(int x, int y, Flying_Enemy_Initial_Inf initial_inf): Entity(x
 	collider = App->collision->AddCollider({x, y, scaledw_h.x,scaledw_h.y}, COLLIDER_DEADLY, App->entities);
 	idle.loop = true;
 
-	side_fly_time = initial_inf.side_fly_time; //Could be initialized with an argument
-	agro_distance = initial_inf.agro_distance; //Could be initialized with an argument	
-	tired_distance = initial_inf.tired_distance; //Could be initialized with an argument
-	idle_speed = -initial_inf.idle_speed; //Could be initialized with an argument	
-	speed_modifier.x = initial_inf.speed_modifier.x; //Could be initialized with an argument
-	speed_modifier.y = initial_inf.speed_modifier.y; //Could be initialized with an argument
+	side_fly_time = initial_inf.side_fly_time; 
+	agro_distance = initial_inf.agro_distance; 
+	tired_distance = initial_inf.tired_distance; 
+	idle_speed = -initial_inf.idle_speed; 
+	speed_modifier.x = initial_inf.speed_modifier.x; 
+	speed_modifier.y = initial_inf.speed_modifier.y;
 
 
 	is_idle = true;

@@ -99,6 +99,17 @@ bool j1App::Awake()
 	save_game = "save_game";
 	load_game = "save_game";
 
+	
+	//See if there is already a saved game
+	pugi::xml_document data;
+	pugi::xml_parse_result result = data.load_file(load_game.GetString());
+
+	if (result.status == pugi::xml_parse_status::status_file_not_found)
+		have_saved_game = false;
+	else
+		have_saved_game = true;
+
+
 	if(config.empty() == false)
 	{
 		ret = true;
@@ -390,7 +401,7 @@ bool j1App::LoadGameNow()
 
 	pugi::xml_parse_result result = data.load_file(load_game.GetString());
 
-	if(result != NULL)
+	if(result.status != pugi::xml_parse_status::status_file_not_found)
 	{
 		LOG("Loading new Game State from %s...", load_game.GetString());
 
@@ -421,7 +432,6 @@ bool j1App::LoadGameNow()
 bool j1App::SavegameNow() const
 {
 	bool ret = true;
-
 	LOG("Saving Game State to %s...", save_game.GetString());
 
 	pugi::xml_document data;

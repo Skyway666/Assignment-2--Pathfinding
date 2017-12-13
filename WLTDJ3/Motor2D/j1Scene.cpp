@@ -147,11 +147,16 @@ bool j1Scene::Update(float dt)
 		}
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && App->map->map_loaded)
 		App->LoadGame();
 
-	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN  && App->map->map_loaded)
+	{
+		App->have_saved_game = true;
 		App->SaveGame();
+	}
+		
+
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 50 * dt;
@@ -406,14 +411,19 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == continuee)
 			{		
-				//Load saved game
-				App->LoadGame();
-				//Create new player when continuing from menu
-				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
-				//Unload main menu adn load hud
-				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
-				//Play game music
-				App->audio->Play_Game_Music();
+				if (App->have_saved_game)
+				{
+					//Load saved game
+					App->LoadGame();
+					//Create new player when continuing from menu
+					App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+					//Unload main menu adn load hud
+					App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
+					//Play game music
+					App->audio->Play_Game_Music();
+				}
+				else
+					LOG("No game saved yet");
 			}
 			if (element == exit)
 			{
@@ -439,8 +449,6 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			{	
 				//Load main menu and Unload HUD and Game Unloading
 				App->transition->Make_transition(&want_load_main_menu, &want_unload_HUD, &want_unload_map);
-				//Play menu music
-				App->audio->Play_Menu_Music();
 			}
 
 		//Credits menu
