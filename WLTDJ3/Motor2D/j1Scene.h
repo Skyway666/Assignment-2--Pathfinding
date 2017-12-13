@@ -103,11 +103,14 @@ private:
 	// HUD setup
 	Icon* hourglass = nullptr;
 	Icon* coins = nullptr;
+	Icon* lives = nullptr;
 	char currentcoins[500];
 	char time[20];
 	Text* hourglass_time;
 	Text* current_coins;
 	void UpdateTime();
+	int PrevLives = 3;
+	int LivesFrame = 0;
 
 	//Paths to load assets from config
 	p2SString main_menu_background_file_name;

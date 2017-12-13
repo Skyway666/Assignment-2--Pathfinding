@@ -109,6 +109,18 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	// Lives icon management
+	if (lives != nullptr)
+	{
+		if (App->entities->player->lives < PrevLives)
+		{
+			LivesFrame++;
+			PrevLives = App->entities->player->lives;
+		}
+
+		lives->animation->SetFrame(LivesFrame);
+	}
+
 	// Playtime counter
 	if (hourglass != nullptr)
 	{
@@ -491,6 +503,7 @@ void j1Scene::Load_HUD()
 {
 	hourglass = App->gui->Add_icon(920, 580);
 	coins = App->gui->Add_icon(-20, -20);
+	lives = App->gui->Add_icon(0, 620);
 
 	int row = 0;
 	for (int i = 0; i < 16; i++)
@@ -520,13 +533,23 @@ void j1Scene::Load_HUD()
 	coins->animation = &coins->anim;
 	coins->scale = 0.5;
 
+	for (int i = 3; i < 7; i++)
+		lives->anim.PushBack({ 229 * 2 * i, 345 * row, 229 * 2, 345 });
+	
+	lives->anim.loop = false;
+	lives->anim.manual = true;
+	lives->animation = &lives->anim;
+	lives->scale = 0.5;
 
 	hourglass_time = App->gui->Add_text(0, 0, "00:00:00");
-	hourglass->Link_ui_element(hourglass_time, -50, 120);
+	hourglass->Link_ui_element(hourglass_time, -80, 120);
 	playtime.Start();
 
 	current_coins = App->gui->Add_text(0, 0, "x0");
 	coins->Link_ui_element(current_coins, 65, 85);
+
+	PrevLives = 3;
+	LivesFrame = 0;
 }
 
 void j1Scene::UnLoad_HUD()
@@ -535,6 +558,8 @@ void j1Scene::UnLoad_HUD()
 	hourglass = nullptr;
 	App->gui->Erase_Ui_element(coins);
 	coins = nullptr;
+	App->gui->Erase_Ui_element(lives);
+	lives = nullptr;
 }
 
 void j1Scene::UpdateTime()
@@ -610,6 +635,8 @@ bool j1Scene::Save(pugi::xml_node& data) const
 	data.append_attribute("m2") = m2;
 	data.append_attribute("h") = h;
 	data.append_attribute("h2") = h2;
+	data.append_attribute("PrevLives") = PrevLives;
+	data.append_attribute("LivesFrame") = LivesFrame;
 
 	return true;
 }
@@ -622,6 +649,8 @@ bool j1Scene::Load(pugi::xml_node& data)
 	m2 = data.attribute("m2").as_int();
 	h = data.attribute("h").as_int();
 	h2 = data.attribute("h2").as_int();
+	PrevLives = data.attribute("PrevLives").as_int();
+	LivesFrame = data.attribute("LivesFrame").as_int();
 
 	playtime.ResumeFromSec(s);
 
