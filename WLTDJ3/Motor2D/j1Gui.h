@@ -69,7 +69,7 @@ public:
 	//Add button
 	Button* Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_type = STATE_CHANGE);
 	//Add text as UI
-	Text* Add_text(int x, int y, const char* text, _TTF_Font* font = nullptr);
+	Text* Add_text(int x, int y, const char* text, SDL_Color color = {0,0,0,255}, _TTF_Font* font = nullptr);
 	//Add window
 	Window* Add_window(int x, int y);
 	//Add StatBar

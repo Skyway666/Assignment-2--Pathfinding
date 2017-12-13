@@ -161,9 +161,9 @@ Button* j1Gui::Add_button(int x, int y, j1Module* _listener, BUTTON_TYPE button_
 	return new_ui_element;
 }
 
-Text* j1Gui::Add_text(int x, int y, const char* text, _TTF_Font* font)
+Text* j1Gui::Add_text(int x, int y, const char* text, SDL_Color color, _TTF_Font* font)
 {
-	Text* new_text = new Text(x, y, text, font);
+	Text* new_text = new Text(x, y, text,color, font);
 	texts.add(new_text);
 
 	return new_text;

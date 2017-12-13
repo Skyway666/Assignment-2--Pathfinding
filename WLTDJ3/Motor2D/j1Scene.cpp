@@ -321,7 +321,7 @@ void j1Scene::UnLoad_credits()
 
 void j1Scene::Load_pause()
 {
-	Text* titola = App->gui->Add_text(0, 0, "PAUSE MENU", title);
+	//Text* titola = App->gui->Add_text(0, 0, "PAUSE MENU", title);
 	Pause_Window = App->gui->Add_window(300, 100);
 
 	resume = App->gui->Add_button(0, 0, (j1Module*)this);
@@ -334,7 +334,7 @@ void j1Scene::Load_pause()
 
 	Pause_Window->Link_ui_element(resume, 120, 100);
 	Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
-	Pause_Window->Link_ui_element(titola, 120, 30);
+	//Pause_Window->Link_ui_element(titola, 120, 30);
 }
 
 void j1Scene::UnLoad_pause()

@@ -6,15 +6,19 @@
 #include "j1Gui.h"
 
 
-Text::Text(int x, int y, const char* _string, _TTF_Font* font) : Ui_element(x, y)
+Text::Text(int x, int y, const char* _string, SDL_Color _color, _TTF_Font* _font) : Ui_element(x, y)
 {
 	if(font != nullptr)
-		graphic = App->fonts->Print(_string, { 0,0,0,255 }, font);
+	{ 
+		graphic = App->fonts->Print(_string, _color, font);
+		font = _font;
+	}
 	else
 	{
-		graphic = App->fonts->Print(_string, { 0,0,0,255 });
+		graphic = App->fonts->Print(_string, _color);
 	}
 	type = TEXT;
+	color = _color;
 }
 
 
@@ -30,5 +34,8 @@ void Text::Draw()
 
 void Text::UpdateText(char* text)
 {
-	graphic = App->fonts->Print(text);
+	if (font != nullptr)
+		graphic = App->fonts->Print(text, color, font);
+	else
+		graphic = App->fonts->Print(text, color);
 }
