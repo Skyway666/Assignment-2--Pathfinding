@@ -18,6 +18,8 @@ public:
 	//Load the assets for the transition animation
 	bool Start();
 
+	//Update animation speed
+	bool Update(float dt);
 	//If it is transitioning, make animation appear for the duration of the transition and turn bools to true in the middle of the animation
 	bool PostUpdate();
 

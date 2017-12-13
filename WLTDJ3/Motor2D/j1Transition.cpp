@@ -45,12 +45,19 @@ bool j1Transition::Start()
 	transition2.PushBack({ 0,0,1024,768 });
 
 	transition2.loop = false;
-	transition2.speed = 0.5;
+	transition2.speed = 0.25;
 
 	current_state = NOTHING;
 	return true;
 }
 
+bool j1Transition::Update(float dt)
+{
+	transition1.speed = 0.25*dt;
+	transition2.speed = 0.25*dt;
+
+	return true;
+}
 bool j1Transition::PostUpdate()
 {
 	switch (current_state) {
