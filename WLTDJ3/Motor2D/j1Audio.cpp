@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1Audio.h"
 #include "p2List.h"
+#include "j1App.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -142,6 +143,7 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 	}
 
 	LOG("Successfully playing %s", path);
+	App->loading_frame = true;
 	return ret;
 }
 
