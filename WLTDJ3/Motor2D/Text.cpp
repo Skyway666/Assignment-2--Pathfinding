@@ -8,10 +8,9 @@
 
 Text::Text(int x, int y, const char* _string, SDL_Color _color, _TTF_Font* _font) : Ui_element(x, y)
 {
-	if(font != nullptr)
+	if(_font != nullptr)
 	{ 
-		graphic = App->fonts->Print(_string, _color, font);
-		font = _font;
+		graphic = App->fonts->Print(_string, _color, _font);
 	}
 	else
 	{
@@ -19,6 +18,7 @@ Text::Text(int x, int y, const char* _string, SDL_Color _color, _TTF_Font* _font
 	}
 	type = TEXT;
 	color = _color;
+	font = _font;
 }
 
 
