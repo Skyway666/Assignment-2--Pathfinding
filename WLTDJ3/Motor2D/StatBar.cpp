@@ -39,5 +39,5 @@ void StatBar::Update()
 
 void StatBar::Draw()
 {
-	App->render->DrawQuad(bar, 255, 0, 0, 255, true, false);
+	App->render->DrawQuad(bar, 253, 212, 62, 255, true, false);
 }
