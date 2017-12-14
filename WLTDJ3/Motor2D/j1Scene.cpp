@@ -135,7 +135,7 @@ bool j1Scene::Update(float dt)
 	// Update points
 	if (coins != nullptr)
 	{
-		sprintf_s(currentcoins, 500, "x%i", App->entities->player->points);
+		sprintf_s(currentcoins, 500, "x%i", App->entities->player->coins);
 		current_coins->UpdateText(currentcoins);
 		
 		if (coin_animation)

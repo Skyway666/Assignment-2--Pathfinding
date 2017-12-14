@@ -34,7 +34,7 @@ public:
 	bool sliding = false;
 	bool StickToWall = false;
 	iPoint pathfinding_distance;
-	int points = 0;
+	int coins = 0;
 	int lives = 3;
 
 private:
