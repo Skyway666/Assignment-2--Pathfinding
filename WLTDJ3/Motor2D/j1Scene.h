@@ -49,15 +49,15 @@ public:
 	//Unloads current map and loads the map indicated in the argument. If there is no map loaded, it just loads the indicated map
 	void Change_to_map(int);
 	//Unloads current map
-	void Unload_map(); bool want_unload_map;
+	void Unload_map(); bool want_unload_map = false;
 
 	// Load / Save
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
 	//Functions to load and unload Ui setups and bools to execute them safely
-	void Load_main_menu(); bool want_load_main_menu = false; //Also plays menu music
-	void UnLoad_main_menu(); bool want_unload_main_menu = false;
+	void Load_main_menu(); bool want_load_main_menu = false; 
+	void UnLoad_main_menu(); bool want_unload_main_menu = false; 
 	void Load_credits(); bool want_load_credits = false;
 	void UnLoad_credits(); bool want_unload_credits = false;
 	void Load_pause(); bool want_load_pause = false;
@@ -65,7 +65,7 @@ public:
 	void Load_options(); bool want_load_options = false;
 	void UnLoad_options(); bool want_unload_options = false;
 	void Load_HUD(); bool want_load_HUD = false;
-	void UnLoad_HUD(); bool want_unload_HUD = false; //(Also unloads player)
+	void UnLoad_HUD(); bool want_unload_HUD = false; // Also unloads player and plays menu music
 
 	SDL_Texture* win_screen;
 	bool exit_app = false;

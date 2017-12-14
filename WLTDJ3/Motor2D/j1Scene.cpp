@@ -74,6 +74,7 @@ bool j1Scene::PreUpdate()
 		{
 			UnLoad_HUD();
 			App->entities->ErasePlayer();
+			App->audio->Play_Menu_Music();
 			want_unload_HUD = false;
 		}
 		if (want_unload_map)
@@ -85,7 +86,6 @@ bool j1Scene::PreUpdate()
 		if (want_load_main_menu)
 		{
 			Load_main_menu();
-			App->audio->Play_Menu_Music();
 			want_load_main_menu = false;
 		}
 		if (want_load_credits)
