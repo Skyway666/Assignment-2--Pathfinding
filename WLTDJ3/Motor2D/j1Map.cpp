@@ -44,7 +44,7 @@ void j1Map::CreateCollidersAndEnemies()
 
 		uint height = 0; // Used to calculate wall tile height
 
-		while (counter < data.layer_array.At(1)->data->height*data.layer_array.At(1)->data->width)
+		while (counter < data.layer_array.At(1)->data->height * data.layer_array.At(1)->data->width)
 		{
 			int id = data.layer_array.At(1)->data->data[counter];
 			int x = counter; 
@@ -64,10 +64,13 @@ void j1Map::CreateCollidersAndEnemies()
 			//Now they are in pixels
 			if (id == 11)
 			{ 
-				for (uint i = 1; data.layer_array.At(1)->data->data[counter - data.width * i] == 11; i++)
-					column_height++;
-				for (uint i = 1; data.layer_array.At(1)->data->data[counter + data.width * i] == 11; i++)
-					column_height++;
+				if (data.layer_array.At(1)->data->data != nullptr && counter != 0)
+				{
+					for (uint i = 1; data.layer_array.At(1)->data->data[counter - data.width * i] == 11; i++)
+						column_height++;
+					for (uint i = 1; data.layer_array.At(1)->data->data[counter + data.width * i] == 11; i++)
+						column_height++;
+				}
 
 				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL, (j1Module*)nullptr, 1, height, column_height);
 
@@ -98,7 +101,7 @@ void j1Map::CreateCollidersAndEnemies()
 			else if (id == 20)
 			{
 				coin_counter++;
-				App->entities->Add_waiting_entity(ENTITY_TYPES::COIN, x, y);
+				App->entities->Add_waiting_entity(ENTITY_TYPES::COIN, x, y - data.tile_height);
 
 			}
 			counter++;

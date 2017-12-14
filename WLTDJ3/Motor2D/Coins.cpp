@@ -63,6 +63,7 @@ void Coins::OnCollision(Collider* collider)
 		if (!given_points)
 		{
 			App->entities->player->coins++;
+			App->entities->player->points++;
 			given_points = true;
 		}
 	}

@@ -77,6 +77,7 @@ void Player::Update(float dt)
 	{
 		animation = &death;
 		coins = 0;
+		points = 0;
 
 		if (animation->Finished())
 		{
@@ -214,6 +215,7 @@ void Player::Update(float dt)
 			position.x = App->map->data.player_starting_value.x;
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
 			coins = 0;
+			points = 0;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		{
@@ -222,6 +224,7 @@ void Player::Update(float dt)
 			position.x = App->map->data.player_starting_value.x;
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
 			coins = 0;
+			points = 0;
 		}
 	}
 
@@ -496,6 +499,7 @@ void Player::Save(pugi::xml_node& data)
 	data.append_attribute("y") = position.y;
 	data.append_attribute("map") = App->map->map;
 	data.append_attribute("coins") = coins;
+	data.append_attribute("points") = points;
 	data.append_attribute("lives") = lives;
 }
 
@@ -504,6 +508,7 @@ void Player::Load(pugi::xml_node& data)
 	position.x = data.attribute("x").as_float();
 	position.y = data.attribute("y").as_float() - gravity * 2;
 	coins = data.attribute("coins").as_int();
+	points = data.attribute("points").as_int();
 	lives = data.attribute("lives").as_int();
 }
 

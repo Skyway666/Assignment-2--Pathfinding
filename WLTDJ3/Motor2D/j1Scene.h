@@ -104,11 +104,15 @@ private:
 	Icon* hourglass = nullptr;
 	Icon* coins = nullptr;
 	Icon* lives = nullptr;
-	char currentcoins[500];
-	char time[20];
+	Icon* pointsicon = nullptr;
+	char currentcoins[10];
+	char currentpoints[10];
+	char time[10];
 	Text* hourglass_time;
 	Text* current_coins;
+	Text* current_points;
 	void UpdateTime();
+	void ResetPlaytime();
 	int PrevLives = 3;
 	int LivesFrame = 0;
 

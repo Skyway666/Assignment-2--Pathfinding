@@ -1,9 +1,10 @@
-
 #include "j1Scene.h"
 #include "j1Gui.h"
 #include "Player.h"
 #include "j1Fonts.h"
 #include "j1Transition.h"
+
+#include "Brofiler/Brofiler.h"
 
 
 j1Scene::j1Scene() : j1Module()
@@ -135,7 +136,7 @@ bool j1Scene::Update(float dt)
 	// Update points
 	if (coins != nullptr)
 	{
-		sprintf_s(currentcoins, 500, "x%i", App->entities->player->coins);
+		sprintf_s(currentcoins, 10, "x%i", App->entities->player->coins);
 		current_coins->UpdateText(currentcoins);
 		
 		if (coin_animation)
@@ -145,6 +146,18 @@ bool j1Scene::Update(float dt)
 		}
 		if (App->pause)
 			coins->animation->Reset();
+	}
+
+	if (pointsicon != nullptr)
+	{
+		sprintf_s(currentpoints, 10, "x%i", App->entities->player->points);
+		current_points->UpdateText(currentpoints);
+
+		if (App->entities->player->points % 10 == 0)
+			pointsicon->animation->Reset();
+
+		if (App->pause)
+			pointsicon->animation->Reset();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
@@ -253,6 +266,7 @@ void j1Scene::Change_to_map(int _map)
 
 void j1Scene::Unload_map()
 {
+	BROFILER_CATEGORY("Unload Map", 0xFF6495ED);
 	App->entities->EraseEntities();
 	App->collision->Erase_Non_Player_Colliders();
 	App->entities->Clear_waiting_list();
@@ -517,9 +531,12 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 
 void j1Scene::Load_HUD()
 {
+	BROFILER_CATEGORY("Load HUD", 0xFF008B8B);
+
 	hourglass = App->gui->Add_icon(920, 580);
 	coins = App->gui->Add_icon(-20, -20);
 	lives = App->gui->Add_icon(0, 620);
+	pointsicon = App->gui->Add_icon(850, -20);
 
 	int row = 0;
 	for (int i = 0; i < 16; i++)
@@ -557,12 +574,24 @@ void j1Scene::Load_HUD()
 	lives->animation = &lives->anim;
 	lives->scale = 0.5;
 
+
+	pointsicon->anim.PushBack({ 229 * 14, 345 * row, 229, 345 });
+
+	pointsicon->anim.loop = false;
+	pointsicon->animation = &pointsicon->anim;
+	pointsicon->scale = 0.5;
+
 	hourglass_time = App->gui->Add_text(0, 0, "00:00:00");
 	hourglass->Link_ui_element(hourglass_time, -80, 120);
 	playtime.Start();
 
+	ResetPlaytime();
+
 	current_coins = App->gui->Add_text(0, 0, "x0");
 	coins->Link_ui_element(current_coins, 65, 85);
+
+	current_points = App->gui->Add_text(0, 0, "x0");
+	pointsicon->Link_ui_element(current_points, 10, 135);
 
 	if (!continuing)
 	{
@@ -581,6 +610,8 @@ void j1Scene::UnLoad_HUD()
 	coins = nullptr;
 	App->gui->Erase_Ui_element(lives);
 	lives = nullptr;
+	App->gui->Erase_Ui_element(pointsicon);
+	pointsicon = nullptr;
 }
 
 void j1Scene::UpdateTime()
@@ -649,6 +680,35 @@ void j1Scene::UpdateTime()
 	{
 		playtime.ResumeFromSec(s);
 	}
+}
+
+void j1Scene::ResetPlaytime()
+{
+	int i = 0;
+	time[i] = 48;
+	i++;
+	time[i] = 48;
+	i++;
+	time[i] = 58;
+	i++;
+	time[i] = 48;
+	i++;
+	time[i] = 48;
+	i++;
+	time[i] = 58;
+	i++;
+	time[i] = 48;
+	i++;
+	time[i] = 48;
+	i++;
+	time[i] = '\0';
+	s = 0;
+	s2 = 0;
+	m = 0;
+	m2 = 0;
+	h = 0;
+	h2 = 0;
+	playtime.Start();
 }
 
 bool j1Scene::Save(pugi::xml_node& data) const
