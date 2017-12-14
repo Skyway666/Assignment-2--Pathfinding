@@ -20,7 +20,8 @@ public:
 	void Pause();
 	void Resume();
 	void Save(pugi::xml_node& data);
-	void Load(pugi::xml_node& data);
+	void Set_id(int _id);
+	int Get_id();
 
 private:
 
@@ -30,5 +31,6 @@ private:
 	bool pa_started = false; // pa = play animation
 	bool animation_played = false;
 	Chronometer play_animation;
+	int id; //What coin is
 };
 

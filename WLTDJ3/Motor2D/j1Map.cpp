@@ -39,7 +39,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 void j1Map::CreateCollidersAndEnemies()
 {
 	int counter = 0;
-	
+	int coin_counter = 0;
 	
 
 		uint height = 0; // Used to calculate wall tile height
@@ -97,7 +97,9 @@ void j1Map::CreateCollidersAndEnemies()
 			}
 			else if (id == 20)
 			{
+				coin_counter++;
 				App->entities->Add_waiting_entity(ENTITY_TYPES::COIN, x, y);
+
 			}
 			counter++;
 		}

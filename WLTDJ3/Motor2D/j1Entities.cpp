@@ -186,10 +186,18 @@ void j1Entities::Spawn_waiting_entities()
 {
 	if(waiting_queue.Count() != 0)
 	{ 
+		int coins_number = 0;
 		for (int i = 0; i < waiting_queue.Count(); i++)
 		{
 			Entity_info enemy_info = *waiting_queue.Peek(i);
-			AddEntity(enemy_info.type, enemy_info.position.x, enemy_info.position.y);
+			Entity* added_entity = AddEntity(enemy_info.type, enemy_info.position.x, enemy_info.position.y);
+
+			if (added_entity->type == COIN)
+			{
+				Coins* added_coin = (Coins*)added_entity;
+				added_coin->Set_id(coins_number);
+				coins_number++;
+			}
 		}
 	}
 }
@@ -199,26 +207,27 @@ void j1Entities::Clear_waiting_list()
 	waiting_queue.Clear();
 }
 
-void j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
+Entity* j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 {
+	Entity* new_ent = nullptr;
 	switch(type){
 		case ENTITY_TYPES::AIR_ENEMY: 
 		{
-			Entity* new_ent = new AirEnemy(x, y, fe_ini_inf);
+			new_ent = new AirEnemy(x, y, fe_ini_inf);
 			entities.add(new_ent);
 			break;
 		}
 		
 		case ENTITY_TYPES::GROUND_ENEMY:
 		{
-			GroundEnemy* new_ent = new GroundEnemy(x, y, ge_ini_inf);
+			new_ent = new GroundEnemy(x, y, ge_ini_inf);
 			entities.add(new_ent);
 			break;
 		}
 
 		case ENTITY_TYPES::COIN:
 		{
-			Entity* new_ent = new Coins(x, y);
+			new_ent = new Coins(x, y);
 			entities.add(new_ent);
 			break;
 		}
@@ -226,18 +235,20 @@ void j1Entities::AddEntity(ENTITY_TYPES type, int x, int y)
 		case ENTITY_TYPES::PLAYER:
 		{
 			
-			Player* new_ent = new Player(x, y, p_ini_inf);
+			new_ent = new Player(x, y, p_ini_inf);
 			if(player == nullptr)
-			player = new_ent;
+			player = (Player*)new_ent;
 			else
 			{
 				player->collider->to_delete = true;
 				delete player;
-				player = new_ent;
+				player = (Player*)new_ent;
 			}
 			break;
 		}
 	}
+
+	return new_ent;
 }
 
 void j1Entities::OnCollision(Collider* c1, Collider* c2) 
@@ -322,6 +333,7 @@ bool j1Entities::Save(pugi::xml_node& data) const
 
 	player->Save(player_);
 
+	//Save all enemies
 	pugi::xml_node enemies = data.append_child("enemies");
 	for (uint i = 0; i < entities.count(); ++i)
 	{
@@ -336,7 +348,17 @@ bool j1Entities::Save(pugi::xml_node& data) const
 				entities[i]->Save(ground_enemy);
 			}
 	}
-	
+	//Save all coins
+	pugi::xml_node coins = data.append_child("coins");
+	for (uint i = 0; i < entities.count(); ++i)
+	{
+		if (entities[i]->type == COIN)
+		{
+			pugi::xml_node coin = coins.append_child("coin");
+			entities[i]->Save(coin);
+		}
+	}
+
 	return true;
 }
 void j1Entities::Load_entities(pugi::xml_node& data)
@@ -344,20 +366,42 @@ void j1Entities::Load_entities(pugi::xml_node& data)
 	pugi::xml_node player_ = data.child("player");
 	player->Load(player_);
 
-	pugi::xml_node entity_iterator = data.child("enemies").first_child();
+	//Load all enemies
+	pugi::xml_node enemy_iterator = data.child("enemies").first_child();
 	for (uint i = 0; i < entities.count(); ++i)
 {
 		if (entities[i]->type == AIR_ENEMY)
 		{
-			entities[i]->Load(entity_iterator);
+			entities[i]->Load(enemy_iterator);
 		}
 		else if (entities[i]->type == GROUND_ENEMY)
 		{
-			entities[i]->Load(entity_iterator);
+			entities[i]->Load(enemy_iterator);
 		}
 		if(entities[i]->type != COIN)
-		entity_iterator = entity_iterator.next_sibling();
+		enemy_iterator = enemy_iterator.next_sibling();
 	}
+
+	//Delete coins which where not saved
+	pugi::xml_node coins_iterator = data.child("coins").first_child();
+	for (uint i = 0; i < entities.count(); ++i)
+	{
+		if (entities[i]->type == COIN)
+		{
+			int saved_coin_id = coins_iterator.attribute("id").as_int();
+			Coins* current_coin = (Coins*)entities[i];
+
+			if (saved_coin_id != current_coin->Get_id())
+			{
+				current_coin->to_delete = true;
+			}
+			else
+			{
+				coins_iterator = coins_iterator.next_sibling();
+			}
+		}
+	}
+
 }
 
 void j1Entities::ErasePlayer()
