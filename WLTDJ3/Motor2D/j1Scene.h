@@ -116,6 +116,7 @@ private:
 	p2SString main_menu_background_file_name;
 
 	_TTF_Font* title = nullptr;
+	bool continuing = false;
 
 public:
 	// Seconds, minutes and hours (should not be public, but their load and save is currently being managed in player)
