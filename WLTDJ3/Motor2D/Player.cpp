@@ -468,6 +468,7 @@ void Player::OnCollision(Collider* collider)
 	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD
 		&& this->collider->type != COLLIDER_SUPER_GOD)
 	{		
+		App->audio->PlayFx(5);
 		lives--;
 		dead = true;
 	}

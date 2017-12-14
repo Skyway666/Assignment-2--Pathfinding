@@ -41,6 +41,7 @@ void Coins::Update(float dt, bool dologic)
 		
 		if (!pa_started)
 		{
+			App->audio->PlayFx(3);
 			play_animation.Start(0.6);
 			pa_started = true;
 		}

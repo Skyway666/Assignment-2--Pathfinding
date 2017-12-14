@@ -54,6 +54,9 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	LoadFx("audio/fx/hai.wav");
 	LoadFx("audio/fx/nye2.wav");
+	LoadFx("audio/fx/Bone.wav");
+	LoadFx("audio/fx/Button.wav");
+	LoadFx("audio/fx/Death.wav");
 
 	menu_music_file_name = config.child("menu_music").attribute("file").as_string("");
 	game_music_file_name = config.child("game_music").attribute("file").as_string("");

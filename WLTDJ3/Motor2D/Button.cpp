@@ -8,6 +8,7 @@
 #include "Pathfinding.h"
 #include "j1Entities.h"
 #include "Pathfinding.h"
+#include "j1Audio.h"
 
 
 
@@ -75,5 +76,6 @@ void Button::OnMouseEvent(UI_EVENT event)
 	if (event == MOUSE_STOP_CLICK)
 	{
 		animation = &Shiny;
+		App->audio->PlayFx(4);
 	}
 }
