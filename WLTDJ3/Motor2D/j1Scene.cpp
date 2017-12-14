@@ -422,7 +422,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				App->audio->Play_Game_Music();
 			}
 			if (element == continuee)
-			{		
+			{	
+				continuing = true;
 				if (App->have_saved_game)
 				{
 					//Load saved game
@@ -548,8 +549,13 @@ void j1Scene::Load_HUD()
 	current_coins = App->gui->Add_text(0, 0, "x0");
 	coins->Link_ui_element(current_coins, 65, 85);
 
-	PrevLives = 3;
-	LivesFrame = 0;
+	if (!continuing)
+	{
+		PrevLives = 3;
+		LivesFrame = 0;
+	}
+
+	continuing = false;
 }
 
 void j1Scene::UnLoad_HUD()
