@@ -627,9 +627,8 @@ void j1Scene::UpdateTime()
 		i++;
 		time[i] = s + 48;
 		i++;
-		time[i] = 92;
-		i++;
-		time[i] = 48;
+		time[i] = '\0';
+
 	}
 	else
 	{
