@@ -326,14 +326,14 @@ void j1Scene::Load_pause()
 
 	resume = App->gui->Add_button(0, 0, (j1Module*)this);
 	Text* text_to_link = App->gui->Add_text(0, 0, "RESUME");
-	resume->Link_ui_element(text_to_link, 80, 22);
+	resume->Link_ui_element(text_to_link, 90, 30);
 
 	exit_main_menu_fg = App->gui->Add_button(0, 0, (j1Module*)this);
 	text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
 	exit_main_menu_fg->Link_ui_element(text_to_link, 70, 30);
 
-	Pause_Window->Link_ui_element(resume, 120, 100);
-	Pause_Window->Link_ui_element(exit_main_menu_fg, 120, 300);
+	Pause_Window->Link_ui_element(resume, 90, 100);
+	Pause_Window->Link_ui_element(exit_main_menu_fg, 90, 300);
 	//Pause_Window->Link_ui_element(titola, 120, 30);
 }
 
@@ -626,6 +626,10 @@ void j1Scene::UpdateTime()
 		time[i] = s2 + 48;
 		i++;
 		time[i] = s + 48;
+		i++;
+		time[i] = 92;
+		i++;
+		time[i] = 48;
 	}
 	else
 	{

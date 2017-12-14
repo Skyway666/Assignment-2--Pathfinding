@@ -107,7 +107,7 @@ bool j1Gui::PostUpdate()
 		for (uint i = 0; i < windows.count(); ++i)
 		{
 			if (windows[i] != nullptr)
-				windows[i]->Draw(atlas);
+				windows[i]->Draw(HUD);
 		}
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
 		for (uint i = 0; i < icons.count(); ++i)
