@@ -469,6 +469,7 @@ void Player::OnCollision(Collider* collider)
 			}
 			else if (App->map->map == 1)
 			{
+				points *= (1 + 1 / lives);
 				App->transition->Make_transition(&App->scene->want_load_credits, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
 			}
 		}
@@ -490,7 +491,7 @@ void Player::WinScreen(float dt)
 		win = false;
 	}
 	if(!Win_timer.IsOver())
-	App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
+		App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
 }
 
 void Player::Save(pugi::xml_node& data)

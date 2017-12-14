@@ -27,6 +27,7 @@ public:
 private:
 	bool is_idle; //bool to know when the enemy should stop ideling and follow the player
 	Chronometer side_fly_timer; //Timer to mesure when enemy should be moving
+	Chronometer chase_timer; // Timer to mesure how much time the player is being chased
 	p2DynArray<iPoint> path_to_follow;//Path that the enemy must follow
 	int next_tile; //Tile that the enemy has to reach
 	int idle_speed; //speed at which the enemy idles	

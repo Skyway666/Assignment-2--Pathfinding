@@ -74,7 +74,7 @@ void j1Map::CreateCollidersAndEnemies()
 
 				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL, (j1Module*)nullptr, 1, height, column_height);
 
-				if (data.layer_array.At(1)->data->data[counter - data.width] != 11) // Set Walkable areas
+				if ((data.layer_array.At(1)->data->data != nullptr && counter != 0) && data.layer_array.At(1)->data->data[counter - data.width] != 11) // Set Walkable areas
 					App->collision->AddCollider({ x, y - data.tilesets.At(0)->data->tile_height, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALKABLE);
 			}
 			else if (id == 12)

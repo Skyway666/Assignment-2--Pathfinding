@@ -112,6 +112,8 @@ void AirEnemy::Update(float dt, bool do_logic)
 }
 void AirEnemy::Exec_idle()
 {
+	chase_timer.Reset();
+
 	if (side_fly_timer.IsOver())
 	{
 		idle_speed = -idle_speed;
@@ -120,12 +122,15 @@ void AirEnemy::Exec_idle()
 
 	speed.x = idle_speed;
 	speed.y = 0;
-
-	
 }
 
 void AirEnemy::Exec_path()
 {
+	if (chase_timer.IsOver())
+	{
+		App->entities->player->points += 5;
+		chase_timer.Start(2);
+	}
 	iPoint monster_map_pos(center.x, center.y);
 	App->map->WorldToMap(&monster_map_pos.x, &monster_map_pos.y);
 
@@ -246,10 +251,13 @@ void AirEnemy::Pause()
 {
 	animation->Reset();
 	side_fly_timer.Pause();
+	chase_timer.Pause();
 }
 
 void AirEnemy::Resume()
 {
 	side_fly_timer.StartAfterPause();
 	side_fly_timer.ResetPause();
+	chase_timer.StartAfterPause();
+	chase_timer.ResetPause();
 }
