@@ -76,6 +76,5 @@ void Button::OnMouseEvent(UI_EVENT event)
 	if (event == MOUSE_STOP_CLICK)
 	{
 		animation = &Shiny;
-		App->audio->PlayFx(4);
 	}
 }

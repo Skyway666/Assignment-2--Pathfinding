@@ -94,6 +94,11 @@ bool j1Gui::Update(float dt)
 			icons[i]->animation->speed = icons[i]->animation_speed * dt;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	{
+		debug_draw = !debug_draw;
+	}
+
 	return true;
 }
 
@@ -135,7 +140,7 @@ bool j1Gui::PostUpdate()
 		}
 
 
-	if(App->collision->debug)
+	if(debug_draw)
 	click_manager->DebugDraw();
 
 	return true;

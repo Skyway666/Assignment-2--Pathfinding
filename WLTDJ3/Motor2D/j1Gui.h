@@ -113,6 +113,9 @@ private:
 	p2List<Window*> windows;
 	//Statbars list
 	p2List<StatBar*> statbars;
+
+	//If true, it allows debug draw for ui
+	bool debug_draw = false; 
 	
 
 

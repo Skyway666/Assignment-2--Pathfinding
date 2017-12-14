@@ -138,7 +138,7 @@ bool j1Scene::Update(float dt)
 		
 		if (coin_animation)
 		{
-			coins->animation->Reset();
+			coins->animation->Reset();	
 			coin_animation = false;
 		}
 		if (App->pause)
@@ -413,7 +413,9 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		//Main menu
 			if (element == start)
 			{
-				//Game loading (JUST FOR TESTING)
+				//Play button sound effect
+				App->audio->PlayFx(4);
+				//Game loading
 				Change_to_map(0);
 				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y); 
 				//Unload main menu adn load hud
@@ -426,6 +428,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 				continuing = true;
 				if (App->have_saved_game)
 				{
+					//Play button sound effect
+					App->audio->PlayFx(4);
 					//Load saved game
 					App->LoadGame();
 					//Create new player when continuing from menu
@@ -440,16 +444,22 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == exit)
 			{
+				//Play button sound effect
+				App->audio->PlayFx(4);
 				//Exit app
 				App->transition->Make_transition(&exit_app);
 			}
 			if (element == credits)
 			{
+				//Play button sound effect
+				App->audio->PlayFx(4);
 				//Unload main menu and Load credits
 				App->transition->Make_transition(&want_unload_main_menu, &want_load_credits);
 			}
 			if (element == options)
 			{
+				//Play button sound effect
+				App->audio->PlayFx(4);
 				//Unload main menu and load options
 				App->transition->Make_transition(&want_unload_main_menu, &want_load_options);
 			}
@@ -467,6 +477,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 		//Credits menu
 			if (element == exit_main_menu_fc)
 			{
+				//Play button sound effect
+				App->audio->PlayFx(4);
 				//Unload credits and Load main menu
 				App->transition->Make_transition(&want_unload_credits, &want_load_main_menu);
 			}
@@ -491,6 +503,8 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			}
 			if (element == exit_main_menu_fo) 
 			{
+				//Play button sound effect
+				App->audio->PlayFx(4);
 				//Unload main menu and load options
 				App->transition->Make_transition(&want_load_main_menu, &want_unload_options);
 			}
