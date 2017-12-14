@@ -36,6 +36,8 @@ bool j1Scene::Start()
 	//Menu setup
 	Load_main_menu();
 
+
+
 	return true;
 }
 
@@ -281,6 +283,10 @@ void j1Scene::Load_main_menu()
 	text_to_link = App->gui->Add_text(0, 0, "EXIT");
 	exit->Link_ui_element(text_to_link, 105, 30);
 
+	if (!App->have_saved_game)
+	{
+		continuee->SetActive(false);
+	}
 
 	
 
@@ -426,21 +432,16 @@ void j1Scene::OnMouseEvent(UI_EVENT event, Ui_element* element)
 			if (element == continuee)
 			{	
 				continuing = true;
-				if (App->have_saved_game)
-				{
-					//Play button sound effect
-					App->audio->PlayFx(4);
-					//Load saved game
-					App->LoadGame();
-					//Create new player when continuing from menu
-					App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
-					//Unload main menu adn load hud
-					App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
-					//Play game music
-					App->audio->Play_Game_Music();
-				}
-				else
-					LOG("No game saved yet");
+				//Play button sound effect
+				App->audio->PlayFx(4);
+				//Load saved game
+				App->LoadGame();
+				//Create new player when continuing from menu
+				App->entities->AddEntity(ENTITY_TYPES::PLAYER, App->map->data.player_starting_value.x, App->map->data.player_starting_value.y);
+				//Unload main menu adn load hud
+				App->transition->Make_transition(&want_unload_main_menu, &want_load_HUD);
+				//Play game music
+				App->audio->Play_Game_Music();
 			}
 			if (element == exit)
 			{

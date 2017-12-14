@@ -111,31 +111,31 @@ bool j1Gui::PostUpdate()
 		//Blit all windows
 		for (uint i = 0; i < windows.count(); ++i)
 		{
-			if (windows[i] != nullptr)
+			if (windows[i] != nullptr && windows[i]->active)
 				windows[i]->Draw(HUD);
 		}
 		//Blit all icons (Maybe they should be able to blit from their own texture like texts)
 		for (uint i = 0; i < icons.count(); ++i)
 		{
-			if (icons[i] != nullptr)
+			if (icons[i] != nullptr && icons[i]->active)
 				icons[i]->Draw(HUD, icons[i]->scale);
 		}
 		//Blit all buttons
 		for (uint i = 0; i < buttons.count(); ++i)
 		{
-			if (buttons[i] != nullptr)
+			if (buttons[i] != nullptr && buttons[i]->active)
 				buttons[i]->Draw(atlas2);
 		}
 		//Blit all statbars
 		for (uint i = 0; i < statbars.count(); ++i)
 		{
-			if (statbars[i] != nullptr)
+			if (statbars[i] != nullptr && statbars[i]->active)
 				statbars[i]->Draw();
 		}
 		//Blit all texts
 		for (uint i = 0; i < texts.count(); ++i)
 		{
-			if (texts[i] != nullptr)
+			if (texts[i] != nullptr && texts[i]->active)
 				texts[i]->Draw();
 		}
 
