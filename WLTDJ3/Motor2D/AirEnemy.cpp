@@ -227,6 +227,8 @@ void AirEnemy::Save(pugi::xml_node& data)
 	data.append_attribute("returning") = returning;
 	data.append_attribute("is_idle") = is_idle;
 	data.append_attribute("idle_speed") = idle_speed;
+
+	side_fly_timer.Save();
 }
 
 void AirEnemy::Load(pugi::xml_node& data)
@@ -236,6 +238,8 @@ void AirEnemy::Load(pugi::xml_node& data)
 	returning = data.attribute("returning").as_bool();
 	is_idle = data.attribute("is_idle").as_bool();
 	idle_speed = data.attribute("idle_speed").as_int();
+
+	side_fly_timer.Load();
 }
 
 void AirEnemy::Pause()
