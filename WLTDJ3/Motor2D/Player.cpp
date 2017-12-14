@@ -112,6 +112,15 @@ void Player::Update(float dt)
 		player_reset_current_map = false;
 	}
 
+	if (want_transition_1)
+	{
+		App->scene->Change_to_map(1);
+		position.x = App->map->data.player_starting_value.x;
+		position.y = App->map->data.player_starting_value.y - gravity * 4;
+		speed.y = speed.x = 0;
+		want_transition_1 = false;
+	}
+
 	if (Win_timer.IsOver() && !dead)
 	{
 		// Godmode
@@ -449,20 +458,16 @@ void Player::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_BONE)
 	{
-		if (App->map->map == 0)
-		{
-			App->scene->Change_to_map(1);
-			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y - gravity * 4;
-			speed.y = speed.x = 0;
-		}
-		else if (App->map->map == 1)
-		{
-			App->scene->Change_to_map(0);
-			position.x = App->map->data.player_starting_value.x;
-			position.y = App->map->data.player_starting_value.y - gravity * 4;
-			speed.y = speed.x = 0;
-			win = true;
+		if(!App->transition->transitioning)
+		{ 
+			if (App->map->map == 0)
+			{
+				App->transition->Make_transition(&want_transition_1);
+			}
+			else if (App->map->map == 1)
+			{
+				App->transition->Make_transition(&App->scene->want_load_credits, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
+			}
 		}
 	}
 	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD
@@ -475,7 +480,7 @@ void Player::OnCollision(Collider* collider)
 }
 void Player::WinScreen(float dt)
 {
-	// Win condition timer (Should not be done here, and timer should be the good one
+	// Win condition timer (Should not be done here)
 	if (win == true)
 	{
 		Win_timer.Start(5);

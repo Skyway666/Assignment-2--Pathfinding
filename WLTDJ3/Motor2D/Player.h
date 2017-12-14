@@ -43,6 +43,9 @@ private:
 	void Jump(float dt);
 	void Slide(float dt);
 
+	//Transitates from map 1 to map 2
+	 bool want_transition_1 = false;
+
 	void Animation_Loading();
 	SDL_Rect rect_after_sliding;	
 
