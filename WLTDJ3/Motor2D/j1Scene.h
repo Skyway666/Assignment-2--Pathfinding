@@ -113,7 +113,6 @@ private:
 	Text* current_points;
 	void UpdateTime();
 	void ResetPlaytime();
-	int PrevLives = 3;
 	int LivesFrame = 0;
 
 	//Paths to load assets from config

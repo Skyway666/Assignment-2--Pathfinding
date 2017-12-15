@@ -115,11 +115,14 @@ bool j1Scene::Update(float dt)
 	// Lives icon management
 	if (lives != nullptr)
 	{
-		if (App->entities->player->lives < PrevLives)
-		{
-			LivesFrame++;
-			PrevLives = App->entities->player->lives;
-		}
+		if (App->entities->player->lives == 3)
+			LivesFrame = 0;
+		else if (App->entities->player->lives == 2)
+			LivesFrame = 1;
+		else if (App->entities->player->lives == 1)
+			LivesFrame = 2;
+		else if (App->entities->player->lives == 0)
+			LivesFrame = 3;
 
 		lives->animation->SetFrame(LivesFrame);
 	}
@@ -131,6 +134,9 @@ bool j1Scene::Update(float dt)
 		hourglass_time->UpdateText(time);
 		if (App->pause)
 			hourglass->animation->Reset();
+
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+			ResetPlaytime();
 	}
 
 	// Update points
@@ -585,8 +591,6 @@ void j1Scene::Load_HUD()
 	hourglass->Link_ui_element(hourglass_time, -80, 120);
 	playtime.Start();
 
-	ResetPlaytime();
-
 	current_coins = App->gui->Add_text(0, 0, "x0");
 	coins->Link_ui_element(current_coins, 65, 85);
 
@@ -594,10 +598,9 @@ void j1Scene::Load_HUD()
 	pointsicon->Link_ui_element(current_points, 10, 135);
 
 	if (!continuing)
-	{
-		PrevLives = 3;
-		LivesFrame = 0;
-	}
+		ResetPlaytime();
+
+	playtime.ResumeFromSec(s);
 
 	continuing = false;
 }
@@ -618,8 +621,6 @@ void j1Scene::UpdateTime()
 {
 	if (!App->pause)
 	{
-		s = playtime.ReadSec();
-
 		if (s >= 10)
 		{
 			s = 0;
@@ -675,6 +676,7 @@ void j1Scene::UpdateTime()
 		i++;
 		time[i] = '\0';
 
+		s = playtime.ReadSec();
 	}
 	else
 	{
@@ -719,8 +721,6 @@ bool j1Scene::Save(pugi::xml_node& data) const
 	data.append_attribute("m2") = m2;
 	data.append_attribute("h") = h;
 	data.append_attribute("h2") = h2;
-	data.append_attribute("PrevLives") = PrevLives;
-	data.append_attribute("LivesFrame") = LivesFrame;
 
 	return true;
 }
@@ -733,8 +733,6 @@ bool j1Scene::Load(pugi::xml_node& data)
 	m2 = data.attribute("m2").as_int();
 	h = data.attribute("h").as_int();
 	h2 = data.attribute("h2").as_int();
-	PrevLives = data.attribute("PrevLives").as_int();
-	LivesFrame = data.attribute("LivesFrame").as_int();
 
 	playtime.ResumeFromSec(s);
 

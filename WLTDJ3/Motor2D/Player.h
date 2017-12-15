@@ -35,6 +35,8 @@ public:
 	bool StickToWall = false;
 	iPoint pathfinding_distance;
 	int coins = 0;
+	int lvl2coins = 0;
+	int lvl2points = 0;
 	int points = 0;
 	int lives = 3;
 

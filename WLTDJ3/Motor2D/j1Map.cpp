@@ -64,17 +64,17 @@ void j1Map::CreateCollidersAndEnemies()
 			//Now they are in pixels
 			if (id == 11)
 			{ 
-				if (data.layer_array.At(1)->data->data != nullptr && counter != 0)
+				if (data.layer_array.At(1)->data->data != nullptr && x != 0 && x != data.width * data.tile_width)
 				{
-					for (uint i = 1; data.layer_array.At(1)->data->data[counter - data.width * i] == 11; i++)
-						column_height++;
-					for (uint i = 1; data.layer_array.At(1)->data->data[counter + data.width * i] == 11; i++)
-						column_height++;
+						for (uint i = 1; data.layer_array.At(1)->data->data[counter - data.width * i] == 11; i++)
+							column_height++;
+						for (uint i = 1; data.layer_array.At(1)->data->data[counter + data.width * i] == 11; i++)
+							column_height++;
 				}
 
 				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL, (j1Module*)nullptr, 1, height, column_height);
 
-				if ((data.layer_array.At(1)->data->data != nullptr && counter != 0) && data.layer_array.At(1)->data->data[counter - data.width] != 11) // Set Walkable areas
+				if (data.layer_array.At(1)->data->data != nullptr && y != 0 && data.layer_array.At(1)->data->data[counter - data.width] != 11) // Set Walkable areas
 					App->collision->AddCollider({ x, y - data.tilesets.At(0)->data->tile_height, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALKABLE);
 			}
 			else if (id == 12)

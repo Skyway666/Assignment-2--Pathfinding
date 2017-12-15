@@ -76,8 +76,16 @@ void Player::Update(float dt)
 	if (dead)
 	{
 		animation = &death;
-		coins = 0;
-		points = 0;
+		if (App->map->map == 0)
+		{
+			coins = 0;
+			points = 0;
+		}
+		else if (App->map->map == 1)
+		{
+			coins = lvl2coins;
+			points = lvl2points;
+		}
 
 		if (animation->Finished())
 		{
@@ -216,6 +224,7 @@ void Player::Update(float dt)
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
 			coins = 0;
 			points = 0;
+			lives = 3;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		{
@@ -225,6 +234,7 @@ void Player::Update(float dt)
 			position.y = App->map->data.player_starting_value.y - gravity * 2;
 			coins = 0;
 			points = 0;
+			lives = 3;
 		}
 	}
 
@@ -465,11 +475,20 @@ void Player::OnCollision(Collider* collider)
 		{ 
 			if (App->map->map == 0)
 			{
+				lvl2points = points;
+				lvl2coins = coins;
 				App->transition->Make_transition(&want_transition_1);
 			}
 			else if (App->map->map == 1)
 			{
-				points *= (1 + 1 / lives);
+				points = points * (1 + 1 / lives);
+				if (App->scene->m == 1)
+					points += 300;
+				else if (App->scene->m == 2)
+					points += 200;
+				else if (App->scene->m == 3)
+					points += 100;
+
 				App->transition->Make_transition(&App->scene->want_load_credits, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
 			}
 		}
@@ -501,6 +520,8 @@ void Player::Save(pugi::xml_node& data)
 	data.append_attribute("map") = App->map->map;
 	data.append_attribute("coins") = coins;
 	data.append_attribute("points") = points;
+	data.append_attribute("lvl2coins") = lvl2coins;
+	data.append_attribute("lvl2points") = lvl2points;
 	data.append_attribute("lives") = lives;
 }
 
@@ -510,7 +531,15 @@ void Player::Load(pugi::xml_node& data)
 	position.y = data.attribute("y").as_float() - gravity * 2;
 	coins = data.attribute("coins").as_int();
 	points = data.attribute("points").as_int();
+	lvl2coins = data.attribute("lvl2coins").as_int();
+	lvl2points = data.attribute("lvl2points").as_int();
 	lives = data.attribute("lives").as_int();
+
+	if (App->map->map == 1)
+	{
+		coins = lvl2coins;
+		points = lvl2points;
+	}
 }
 
 void Player::Pause()
