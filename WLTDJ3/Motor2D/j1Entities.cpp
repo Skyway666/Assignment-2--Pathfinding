@@ -144,7 +144,6 @@ bool j1Entities::Update(float dt)
 
 	if (player != nullptr)
 	{
-		player->WinScreen(dt); //Provisional
 		player->Draw(player_sprites);
 	}
 

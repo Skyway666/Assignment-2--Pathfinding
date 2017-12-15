@@ -67,7 +67,6 @@ public:
 	void Load_HUD(); bool want_load_HUD = false;
 	void UnLoad_HUD(); bool want_unload_HUD = false; // Also unloads player and plays menu music
 
-	SDL_Texture* win_screen;
 	bool exit_app = false;
 	bool coin_animation = false;
 
@@ -88,7 +87,6 @@ private:
 	bool pause_menu_spawned = true;
 	
 	//Credits setup
-	//SDL_Texture* win_screen;
 	Button* exit_main_menu_fc;
 	Text*   main_title; //All the other text labels will be child of main title
 	

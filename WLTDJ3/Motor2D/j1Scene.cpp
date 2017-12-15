@@ -32,7 +32,6 @@ bool j1Scene::Start()
 
 	
 	main_menu_background = App->tex->Load(main_menu_background_file_name.GetString());
-	win_screen = App->tex->Load("textures/WinScreen.png"); //Could be loaded from xml
 	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
 	title = App->fonts->Load("fonts/open_sans/OpenSans-Bold.ttf", 50);
 	text_body = App->fonts->Load("fonts/open_sans/OpenSans-Bold.ttf", 15);
@@ -245,7 +244,6 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	App->tex->UnLoad(win_screen);
 	App->tex->UnLoad(App->map->bone_graphics);
 	return true;
 }

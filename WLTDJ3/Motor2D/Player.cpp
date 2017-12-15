@@ -498,17 +498,6 @@ void Player::OnCollision(Collider* collider)
 		dead = true;
 	}
 }
-void Player::WinScreen(float dt)
-{
-	// Win condition timer (Should not be done here)
-	if (win == true)
-	{
-		Win_timer.Start(5);
-		win = false;
-	}
-	if(!Win_timer.IsOver())
-		App->render->Blit(App->scene->win_screen, position.x - 400, position.y - 400);
-}
 
 void Player::Save(pugi::xml_node& data)
 {
