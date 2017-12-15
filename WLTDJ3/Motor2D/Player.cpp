@@ -270,6 +270,14 @@ void Player::Update(float dt)
 			collider->SetPos(position.x + 30, position.y + 547 * 0.2 - App->map->data.tile_height - 1 + 50);
 		}
 	}
+
+	//If player is below the map level, kill the player
+	if (position.y > App->map->data.height* App->map->data.tile_height && !dead)
+	{
+		App->audio->PlayFx(5);
+		lives--;
+		dead = true;
+	}
 }
 
 void Player::WallSlide()

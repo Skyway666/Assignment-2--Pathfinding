@@ -103,10 +103,11 @@ Audio from:
 
 https://www.youtube.com/watch?v=jgETNzUqDP0
 https://www.youtube.com/watch?v=mKnDjMMsdAo ("Price Ali" instrumental, from the Disney movie "Aladin")
+https://www.youtube.com/watch?v=vkHiTnm_P3Y (Coin sound from Street Fighter 2)
 
 Animations and map textures from:
 
 https://www.gameart2d.com
 https://www.spriters-resource.com/fullview/98810/
-(add links for art)
+
 
