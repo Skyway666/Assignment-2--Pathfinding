@@ -30,9 +30,13 @@ bool j1Scene::Awake(pugi::xml_node& conf)
 bool j1Scene::Start()
 {
 
-	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
+	
 	main_menu_background = App->tex->Load(main_menu_background_file_name.GetString());
 	win_screen = App->tex->Load("textures/WinScreen.png"); //Could be loaded from xml
+	App->map->path_indicator = App->tex->Load("textures/path_indicator.png");
+	title = App->fonts->Load("fonts/open_sans/OpenSans-Bold.ttf", 50);
+	text_body = App->fonts->Load("fonts/open_sans/OpenSans-Bold.ttf", 15);
+
 
 	//Menu setup
 	Load_main_menu();
@@ -331,14 +335,73 @@ void j1Scene::UnLoad_main_menu()
 
 void j1Scene::Load_credits()
 {
+	//Text in credits 
+	main_title = App->gui->Add_text(10, 40, "Credits", { 255,255,255,255 }, title); //Main text
+
+	Text* credits_1 = App->gui->Add_text(0, 0, "Thanks for playing 'Who let the dog Jump?', your maximum score was:", { 255,255,255,255 }, text_body);
+	Text* credits_2 = App->gui->Add_text(0, 0, "Game by Lucas García Mateu and Genís Bayó Salgado", { 255,255,255,255 }, text_body); 
+
+	Text* licence   = App->gui->Add_text(0, 0, "Licence", { 255,255,255,255 }, title);
+
+	Text* licence_1 = App->gui->Add_text(0, 0, "Copyright (c) 2017 Lucas García Mateu, Genís Bayó Salgado", { 255,255,255,255 }, text_body);
+	Text* licence_2 = App->gui->Add_text(0, 0, "Permission is hereby granted, free of charge, to any person obtaining a copy", { 255,255,255,255 }, text_body);
+	Text* licence_3 = App->gui->Add_text(0, 0, "of this software and associated documentation files (the 'Software'), to deal", { 255,255,255,255 }, text_body);
+	Text* licence_4 = App->gui->Add_text(0, 0, "in the Software without restriction, including without limitation the rights", { 255,255,255,255 }, text_body);
+	Text* licence_5 = App->gui->Add_text(0, 0, "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell", { 255,255,255,255 }, text_body);
+	Text* licence_6 = App->gui->Add_text(0, 0, "copies of the Software, and to permit persons to whom the Software is", { 255,255,255,255 }, text_body);
+	Text* licence_7 = App->gui->Add_text(0, 0, "furnished to do so, subject to the following conditions:", { 255,255,255,255 }, text_body);
+	Text* licence_8 = App->gui->Add_text(0, 0, "Copyright (c) 2017 Lucas García Mateu, Genís Bayó Salgado", { 255,255,255,255 }, text_body);
+
+	Text* licence_9 = App->gui->Add_text(0, 0, "The above copyright notice and this permission notice shall be included in all", { 255,255,255,255 }, text_body);
+	Text* licence_10 = App->gui->Add_text(0, 0, "copies or substantial portions of the Software.", { 255,255,255,255 }, text_body);
+
+	Text* licence_11 = App->gui->Add_text(0, 0, "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR", { 255,255,255,255 }, text_body);
+	Text* licence_12 = App->gui->Add_text(0, 0, "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,", { 255,255,255,255 }, text_body);
+	Text* licence_13 = App->gui->Add_text(0, 0, "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE", { 255,255,255,255 }, text_body);
+	Text* licence_14 = App->gui->Add_text(0, 0, "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER", { 255,255,255,255 }, text_body);
+	Text* licence_15 = App->gui->Add_text(0, 0, "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,", { 255,255,255,255 }, text_body);
+	Text* licence_16 = App->gui->Add_text(0, 0, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE", { 255,255,255,255 }, text_body);
+	Text* licence_17 = App->gui->Add_text(0, 0, "SOFTWARE.", { 255,255,255,255 }, text_body);
+
+	//Link all texts to title
+		//Credits
+		main_title->Link_ui_element(credits_1, 20, 80);
+		main_title->Link_ui_element(credits_2, 20, 120);
+		//Licence
+		main_title->Link_ui_element(licence, 0, 170);
+		
+		main_title->Link_ui_element(licence_1, 20, 250);
+		main_title->Link_ui_element(licence_2, 20, 290);
+		main_title->Link_ui_element(licence_3, 20, 310);
+		main_title->Link_ui_element(licence_4, 20, 330);
+		main_title->Link_ui_element(licence_5, 20, 350);
+		main_title->Link_ui_element(licence_6, 20, 370);
+		main_title->Link_ui_element(licence_7, 20, 390);
+		main_title->Link_ui_element(licence_8, 20, 410);
+
+		main_title->Link_ui_element(licence_9, 20, 450);
+		main_title->Link_ui_element(licence_10, 20, 470);
+
+		main_title->Link_ui_element(licence_11, 20, 510);
+		main_title->Link_ui_element(licence_12, 20, 530);
+		main_title->Link_ui_element(licence_13, 20, 550);
+		main_title->Link_ui_element(licence_14, 20, 570);
+		main_title->Link_ui_element(licence_15, 20, 590);
+		main_title->Link_ui_element(licence_16, 20, 610);
+		main_title->Link_ui_element(licence_17, 20, 630);
+
+
+	//Button to exit to main menu from credits
 	Text* text_to_link = App->gui->Add_text(0, 0, "MAIN MENU");
-	exit_main_menu_fc = App->gui->Add_button(500, 500, (j1Module*)this);
+	exit_main_menu_fc = App->gui->Add_button(750, 650, (j1Module*)this);
 	exit_main_menu_fc->Link_ui_element(text_to_link, 70, 30);
 
-	App->gui->Set_backgrond(win_screen);
+	App->gui->Set_backgrond(nullptr);
 }
 void j1Scene::UnLoad_credits()
 {
+	App->gui->Erase_Ui_element(main_title);
+	main_title = nullptr;
 	App->gui->Erase_Ui_element(exit_main_menu_fc);
 	exit_main_menu_fc = nullptr;
 

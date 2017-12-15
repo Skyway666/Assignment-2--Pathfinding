@@ -90,6 +90,7 @@ private:
 	//Credits setup
 	//SDL_Texture* win_screen;
 	Button* exit_main_menu_fc;
+	Text*   main_title; //All the other text labels will be child of main title
 	
 	//Options setup
 	Button* exit_main_menu_fo = nullptr;
@@ -119,6 +120,7 @@ private:
 	p2SString main_menu_background_file_name;
 
 	_TTF_Font* title = nullptr;
+	_TTF_Font* text_body = nullptr;
 	bool continuing = false;
 
 public:
