@@ -6,23 +6,23 @@ with information for the player).
 
 Controls:
 
-A -> Move Left
-D -> Move Right
-W -> Jump
-S -> Slide
-P -> Pause/Unpause the game
+A	->	Move Left
+D	->	Move Right
+W	->	Jump
+S	->	Slide
+P	->	Pause/Unpause the game
 
 
 Debug Features:
 
-F1 -> Restart from first level
-F2 -> Restart from current level
-F5 -> Save
-F6 -> Load
-F8 -> See Graphic User Interface logic (only interactables use logic)
-F9 -> See colliders and pathfinding
-F10-> Enter godmode(ignore any collisions and gravity)
-F11-> Enable/Disable FPS cap to 30
+F1	->	Restart from first level
+F2	->	Restart from current level
+F5	->	Save
+F6	->	Load
+F8	->	See Graphic User Interface logic (only interactables use logic)
+F9	->	See colliders and pathfinding
+F10	->	Enter godmode(ignore any collisions and gravity, move large distances if pressing X / C)
+F11	->	Enable/Disable FPS cap to 30
 
 
 Rules:
@@ -33,20 +33,20 @@ there are no levels left (currently there are two levels). There are some coins 
 the score, but they are not mandatory to beat the game. The player also gets rewarded for long enemy persecutions and 
 not dying. Ending a level also provides points.
 
-The punctuation system works exactly like this:
--
--
--
--
--
+Punctuation system:
+- Every small bone gives 1 point
+- Beating level 1 gives 200 points
+- Win 5 points every 2 seconds while being chased by flying enemies
+- Upon beating the game, your points will be increased depending on
+  how much time it took you do so and how many remaining lives you have.
 
 
 Mechanics:
 
-Wall slide -> Jump next to a wall and advance towards it to start sliding on it
-Wall jump -> When sliding on a wall, press "W" to jump again
-Slide -> Slide to go faster and pass under certain obstacles
-Spikes -> If hit by one, the player must restart the current level
+Wall slide	->	Jump next to a wall and advance towards it to start sliding on it
+Wall jump	->	When sliding on a wall, press "W" to jump again
+Slide		->	Slide to go faster and pass under certain obstacles
+Spikes		->	If hit by one, the player must restart the current level
 
 
 Enemies:

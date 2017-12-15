@@ -89,6 +89,7 @@ private:
 	//Credits setup
 	Button* exit_main_menu_fc;
 	Text*   main_title; //All the other text labels will be child of main title
+	char max_points_text[10];
 	
 	//Options setup
 	Button* exit_main_menu_fo = nullptr;

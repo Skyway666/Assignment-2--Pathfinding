@@ -336,7 +336,10 @@ void j1Scene::Load_credits()
 	//Text in credits 
 	main_title = App->gui->Add_text(10, 40, "Credits", { 255,255,255,255 }, title); //Main text
 
+	sprintf_s(max_points_text, 10, "%i", App->max_punctuation);
+
 	Text* credits_1 = App->gui->Add_text(0, 0, "Thanks for playing 'Who let the dog Jump?', your maximum score was:", { 255,255,255,255 }, text_body);
+	Text* max_points = App->gui->Add_text(0, 0, max_points_text, { 255,255,255,255 }, text_body);
 	Text* credits_2 = App->gui->Add_text(0, 0, "Game by Lucas García Mateu and Genís Bayó Salgado", { 255,255,255,255 }, text_body); 
 
 	Text* licence   = App->gui->Add_text(0, 0, "Licence", { 255,255,255,255 }, title);
@@ -362,9 +365,11 @@ void j1Scene::Load_credits()
 	Text* licence_17 = App->gui->Add_text(0, 0, "SOFTWARE.", { 255,255,255,255 }, text_body);
 
 	//Link all texts to title
-		//Credits
+		//Credits and score
 		main_title->Link_ui_element(credits_1, 20, 80);
+		main_title->Link_ui_element(max_points, 560, 80);
 		main_title->Link_ui_element(credits_2, 20, 120);
+		
 		//Licence
 		main_title->Link_ui_element(licence, 0, 170);
 		
