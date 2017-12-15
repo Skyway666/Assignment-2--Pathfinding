@@ -56,7 +56,6 @@ private:
 	bool dead = false;
 	bool win = false;
 	bool godmode = false;
-	bool super_godmode = false;
 	bool making_transition = false; //Bool so code that has to be executed when player dies is executed just once
 	int jcontact = 0; // for Jump() function
 

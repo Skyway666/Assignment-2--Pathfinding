@@ -51,13 +51,11 @@ void Player::Update(float dt)
 	wallslideleft.speed = 0.1 * dt;
 	App->map->bone_animation.speed = 0.2 * dt;
 
-	if (contact.y != 0 && !super_godmode)
+	if (contact.y != 0 && !godmode)
 		speed.y = speed_modifier.y;
 
 	if (godmode)
 		collider->type = COLLIDER_GOD;
-	else if (super_godmode)
-		collider->type = COLLIDER_SUPER_GOD;
 	else
 		collider->type = COLLIDER_PLAYER;
 
@@ -132,22 +130,9 @@ void Player::Update(float dt)
 
 	if (Win_timer.IsOver() && !dead)
 	{
-		// Godmode
-		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		// God mode
+		if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		{
-			if (godmode)
-				godmode = false;
-
-			if (super_godmode)
-				super_godmode = false;
-			else
-				super_godmode = true;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-		{
-			if (super_godmode)
-				super_godmode = false;
-
 			if (godmode)
 				godmode = false;
 			else
@@ -155,12 +140,14 @@ void Player::Update(float dt)
 		}
 
 		// Sliding
-		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
+		if (!godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
 		{
+			App->scene->m = 0;
+			App->scene->m2 = 2;
 			slide_timer.Reset();
 			sliding = true;
 		}
-		else if (super_godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		else if (godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 			speed.y = speed_modifier.y;
 
 		// Moving right
@@ -196,7 +183,7 @@ void Player::Update(float dt)
 		WallSlide();
 
 		// Jumping
-		if (!super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
+		if (!godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !sliding)
 		{
 				if (contact.y == 1)
 				{
@@ -209,7 +196,7 @@ void Player::Update(float dt)
 					walljumping = true;
 				}
 		}
-		else if (super_godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		else if (godmode && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			speed.y = -speed_modifier.y;
 
 		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
@@ -250,7 +237,7 @@ void Player::Update(float dt)
 	if (!walljumping)
 		position.x += speed.x * dt;
 
-	if (contact.y != 1 && !super_godmode)
+	if (contact.y != 1 && !godmode)
 	{
 		if (StickToWall)
 			position.y += gravity / 2 * dt;
@@ -258,7 +245,7 @@ void Player::Update(float dt)
 			position.y += gravity * dt;
 	}
 
-	if (super_godmode)
+	if (godmode)
 	{
 		position.y += speed.y * dt;
 		speed.y = 0;
@@ -482,19 +469,20 @@ void Player::OnCollision(Collider* collider)
 			else if (App->map->map == 1)
 			{
 				points = points * (1 + 1 / lives);
-				if (App->scene->m == 1)
-					points += 300;
-				else if (App->scene->m == 2)
+				if (App->scene->m == 0 && App->scene->m2 == 0)
 					points += 200;
-				else if (App->scene->m == 3)
+				else if (App->scene->m == 1)
+					points += 150;
+				else if (App->scene->m == 2)
 					points += 100;
+				else if (App->scene->m == 3)
+					points += 50;
 
 				App->transition->Make_transition(&App->scene->want_load_credits, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
 			}
 		}
 	}
-	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD
-		&& this->collider->type != COLLIDER_SUPER_GOD)
+	else if ((collider->type == COLLIDER_DEADLY || collider->type == COLLIDER_ENEMY_GROUND) && !dead && this->collider->type != COLLIDER_GOD)
 	{		
 		App->audio->PlayFx(5);
 		lives--;

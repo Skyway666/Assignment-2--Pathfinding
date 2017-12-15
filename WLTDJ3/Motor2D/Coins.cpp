@@ -58,7 +58,7 @@ void Coins::Update(float dt, bool dologic)
 
 void Coins::OnCollision(Collider* collider)
 {
-	if (collider->type == COLLIDER_PLAYER || collider->type == COLLIDER_GOD || collider->type == COLLIDER_SUPER_GOD)
+	if (collider->type == COLLIDER_PLAYER || collider->type == COLLIDER_GOD)
 	{
 		if (!given_points)
 		{

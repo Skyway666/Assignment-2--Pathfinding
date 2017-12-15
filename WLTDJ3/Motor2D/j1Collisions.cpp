@@ -15,7 +15,6 @@ j1Collisions::j1Collisions()
 
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_BONE] = true;
-	matrix[COLLIDER_SUPER_GOD][COLLIDER_BONE] = true;
 	matrix[COLLIDER_GOD][COLLIDER_BONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_DEADLY] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_GROUND] = true;
@@ -25,8 +24,6 @@ j1Collisions::j1Collisions()
 	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = true;
 	matrix[COLLIDER_COIN][COLLIDER_GOD] = true;
 	matrix[COLLIDER_GOD][COLLIDER_COIN] = true;
-	matrix[COLLIDER_COIN][COLLIDER_SUPER_GOD] = true;
-	matrix[COLLIDER_SUPER_GOD][COLLIDER_COIN] = true;
 }
 
 // Destructor
@@ -118,9 +115,6 @@ void j1Collisions::DebugDraw()
 		case COLLIDER_GOD: // black
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
 			break;
-		case COLLIDER_SUPER_GOD: // black
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
-			break;
 		case COLLIDER_WALL: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha, false);
 			break;
@@ -186,8 +180,7 @@ void j1Collisions::Erase_Non_Player_Colliders()
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		if (colliders[i] != nullptr && colliders[i]->type != COLLIDER_PLAYER && colliders[i]->type != COLLIDER_SUPER_GOD
-			&& colliders[i]->type != COLLIDER_GOD)
+		if (colliders[i] != nullptr && colliders[i]->type != COLLIDER_PLAYER && colliders[i]->type != COLLIDER_GOD)
 		{
 			delete colliders[i];
 			colliders[i] = nullptr;
@@ -305,10 +298,10 @@ void j1Collisions::ManageGroundCollisions(GroundEntity* entity, float dt)
 	{
 		// skip empty and non-wall colliders
 		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE || colliders[i]->type == COLLIDER_PLAYER || colliders[i]->type == COLLIDER_BONE
-			|| colliders[i]->type == COLLIDER_ENEMY || colliders[i]->type == COLLIDER_GOD || colliders[i]->type == COLLIDER_SUPER_GOD)
+			|| colliders[i]->type == COLLIDER_ENEMY || colliders[i]->type == COLLIDER_GOD)
 			continue;
 
-		if (entity->collider != nullptr && entity->collider->type != COLLIDER_SUPER_GOD && (colliders[i]->type == COLLIDER_WALL || (colliders[i]->type == COLLIDER_PIT && entity->collider->type == COLLIDER_GOD)))
+		if (entity->collider != nullptr && entity->collider->type != COLLIDER_GOD && colliders[i]->type == COLLIDER_WALL)
 		{
 			colliders[i]->WillCollide(entity, dt);
 
