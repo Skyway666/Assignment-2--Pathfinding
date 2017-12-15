@@ -142,6 +142,7 @@ public:
 	bool    loading_frame; //If it is a loading frame, tell the player
 	int		security_frames = 0; //Let 3 frames pass after a loading frame
 	bool	have_saved_game = false; //Game has been already saved or not
+	int max_punctuation = 0;
 };
 
 extern j1App* App;

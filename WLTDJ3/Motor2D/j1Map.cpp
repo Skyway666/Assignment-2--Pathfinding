@@ -64,12 +64,32 @@ void j1Map::CreateCollidersAndEnemies()
 			//Now they are in pixels
 			if (id == 11)
 			{ 
-				if (data.layer_array.At(1)->data->data != nullptr && x != 0 && x != data.width * data.tile_width)
+				if (data.layer_array.At(1)->data->data != nullptr)
 				{
-						for (uint i = 1; data.layer_array.At(1)->data->data[counter - data.width * i] == 11; i++)
-							column_height++;
-						for (uint i = 1; data.layer_array.At(1)->data->data[counter + data.width * i] == 11; i++)
-							column_height++;
+						for (uint i = 1; y - data.tile_height * i > 0 && i < data.height; i++)
+						{
+							int c = counter - data.width * i;
+
+							if (c > 0)
+							{
+								if (data.layer_array.At(1)->data->data[counter - data.width * i] == 11)
+									column_height++;
+								else
+									break;
+							}
+						}
+						for (uint i = 1; y + data.tile_height * i < data.tile_height * data.height && i < data.height; i++)
+						{
+							int c = counter + data.width * i;
+							if (c < (data.width * data.height))
+							{
+								if (data.layer_array.At(1)->data->data[counter + data.width * i] == 11)
+									column_height++;
+								else
+									break;
+							}
+						}
+
 				}
 
 				App->collision->AddCollider({ x, y, data.tilesets.At(0)->data->tile_width, data.tilesets.At(0)->data->tile_height }, COLLIDER_WALL, (j1Module*)nullptr, 1, height, column_height);

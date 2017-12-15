@@ -40,6 +40,8 @@ void Player::Update(float dt)
 	center.x = position.x + (481 * scale) / 2;
 	center.y = position.y + (547 * scale) / 2;
 
+	if (App->max_punctuation < points)
+		App->max_punctuation = points;
 
 	idle.speed = 0.8 * dt;
 	run.speed = 0.4 * dt;
@@ -139,11 +141,14 @@ void Player::Update(float dt)
 				godmode = true;
 		}
 
+		if (godmode && App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+			position.x += 2000;
+		else if (godmode && App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+			position.x -= 2000;
+
 		// Sliding
 		if (!godmode && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && contact.y == 1)
 		{
-			App->scene->m = 0;
-			App->scene->m2 = 2;
 			slide_timer.Reset();
 			sliding = true;
 		}
@@ -462,13 +467,14 @@ void Player::OnCollision(Collider* collider)
 		{ 
 			if (App->map->map == 0)
 			{
+				points += 200;
 				lvl2points = points;
 				lvl2coins = coins;
 				App->transition->Make_transition(&want_transition_1);
 			}
 			else if (App->map->map == 1)
 			{
-				points = points * (1 + 1 / lives);
+				points = points * (float)(1 + 1 / lives);
 				if (App->scene->m == 0 && App->scene->m2 == 0)
 					points += 200;
 				else if (App->scene->m == 1)
@@ -477,6 +483,9 @@ void Player::OnCollision(Collider* collider)
 					points += 100;
 				else if (App->scene->m == 3)
 					points += 50;
+
+				if (App->max_punctuation < points)
+					App->max_punctuation = points;
 
 				App->transition->Make_transition(&App->scene->want_load_credits, &App->scene->want_unload_HUD, &App->scene->want_unload_map);
 			}
@@ -511,6 +520,7 @@ void Player::Save(pugi::xml_node& data)
 	data.append_attribute("lvl2coins") = lvl2coins;
 	data.append_attribute("lvl2points") = lvl2points;
 	data.append_attribute("lives") = lives;
+	data.append_attribute("max_punctuation") = App->max_punctuation;
 }
 
 void Player::Load(pugi::xml_node& data)
@@ -522,6 +532,7 @@ void Player::Load(pugi::xml_node& data)
 	lvl2coins = data.attribute("lvl2coins").as_int();
 	lvl2points = data.attribute("lvl2points").as_int();
 	lives = data.attribute("lives").as_int();
+	App->max_punctuation = data.attribute("max_punctuation").as_int();
 
 	if (App->map->map == 1)
 	{
