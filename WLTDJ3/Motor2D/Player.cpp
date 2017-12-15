@@ -474,7 +474,7 @@ void Player::OnCollision(Collider* collider)
 			}
 			else if (App->map->map == 1)
 			{
-				points = points * (float)(1 + 1 / lives);
+				points = points * (float)(1 + (float)1 / (float)lives);
 				if (App->scene->m == 0 && App->scene->m2 == 0)
 					points += 200;
 				else if (App->scene->m == 1)
