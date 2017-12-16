@@ -87,8 +87,13 @@ Tips of the developers:
 Also, if timed correctly, slide can go under flying enemies.
 
 
+Links:
+
 GitHub Link to previous project: https://github.com/Skyway666/Assignment-1--2D-Platformer
+
 GitHub Link to this project(from commit "Assignment 2 finished. Beggining assignment 3" onwards): https://github.com/Skyway666/Assignment-3--UI
+
+Link to the website of the game: https://skyway666.github.io/Assignment-3--UI/
 
 
 Game by:
@@ -98,6 +103,8 @@ Genís Bayó Salgado: github.com/retsnom9
 Lucas García Mateu: github.com/Skyway666
 
 ----------------------------------------------------------------------------------------------------
+Credits:
+
 
 Audio from:
 
