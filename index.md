@@ -10,7 +10,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 <br><img src="LINKDELAFOTO?raw=true" width = "2448" height = "2288" alt="Error loading img"><br>
 
 ### Lucas García Mateu
-<br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/LucasWebPic.jpg?raw=true" width = "972" height = "1296" alt="Error loading img"><br>
+<br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/LucasWebPic.jpg?raw=true" width = "243" height = "324" alt="Error loading img"><br>
 -Implementing map and colliders loading from XML
 -Implementing load and save methods for the player and maps
 -Designing and implementing entity system
@@ -19,7 +19,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 -Implementing main menu, options and pause windows
 
 ### Genís Bayó Salgado
-<br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/Gen%C3%ADsWebPic.jpg?raw=true" width = "2448" height = "2288" alt="Error loading img"><br>
+<br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/Gen%C3%ADsWebPic.jpg?raw=true" width = "245" height = "229" alt="Error loading img"><br>
 -Designing and implementing collision system
 -Implementing a method to measure the length and height of adjacent colliders
 -Designing and implementing player’s character and its mechanics
