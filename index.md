@@ -7,7 +7,7 @@ Who let the dog jump? was born as the product of three different University assi
 Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 ### Lucas García and Genís Bayó
-<br><img src="LINKDELAFOTO?raw=true" width = "2448" height = "2288" alt="Error loading img"><br>
+<br><img src="LINK?raw=true" width = "2448" height = "2288" alt="Error loading img"><br>
 
 ### Lucas García Mateu
 <br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/LucasWebPic.jpg?raw=true" width = "243" height = "324" alt="Error loading img"><br>
