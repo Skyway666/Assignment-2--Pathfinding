@@ -1,4 +1,4 @@
-# WHO LET THE DOG JUMP?
+﻿# WHO LET THE DOG JUMP?
 ### By Genís Bayó Salgado and Lucas García Mateu
 
 ## Team
@@ -64,7 +64,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 ·Adjacent colliders' lenght and height are measured in order to determine whether the ground enemies can jump over them or not
 
-·There is a "main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
+·There is a "Main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
 
 ## Links
 [Code repository](https://github.com/Skyway666/Assignment-3--UI)
