@@ -114,7 +114,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ·Upon beating the game, your points will be increased depending on how much time it took you do so and how many remaining lives you have
 
 ## Art
-### Audio from
+### Audio
 
 [Menu music](https://www.youtube.com/watch?v=jgETNzUqDP0)
 
@@ -124,7 +124,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 [Picking up coin sound](https://freesound.org/people/sergeeo/sounds/202575/)
 
-### Animations and map textures from
+### Animations and map textures
 
 [Map and characters art](https://www.gameart2d.com)
 
