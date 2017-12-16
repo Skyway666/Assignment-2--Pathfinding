@@ -45,6 +45,8 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 -Implementing HUD, collectable coins, lives, time and punctuation system
 
+-Implementing profiling
+
 ## Subsystems
 ·Every important variable is load from an XML file named confing.xml
 
