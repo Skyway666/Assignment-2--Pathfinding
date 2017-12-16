@@ -47,25 +47,25 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 ## Subsystems
 
--Every important variable is load from an XML file named confing.xml
+·Every important variable is load from an XML file named confing.xml
 
--Maps are made with Tiled and loaded via XML
+·Maps are made with Tiled and loaded via XML
 
--The player can save/load the game by pressing F5/F6 (or “Continue” from the main menu)
+·The player can save/load the game by pressing F5/F6 (or “Continue” from the main menu)
 
--FPS can be capped to 30 or uncapped upon pressing F11. The cap can also be changed from config file
+·FPS can be capped to 30 or uncapped upon pressing F11. The cap can also be changed from config file
 
--Game audio can be lowered or highered from the “Options” menu
+·Game audio can be lowered or highered from the “Options” menu
 
--Player can pause the game at any point by pressing P
+·Player can pause the game at any point by pressing P
 
--Player can press F8, F9 and F10 in order to enter the debug modes for UI, colliders and godmode
+·Player can press F8, F9 and F10 in order to enter the debug modes for UI, colliders and godmode
 
--Fying enemies pathfind to the player if the terrain is accessible, and ground enemies follow the player by jumping pits and platforms if they are able to do so
+·Fying enemies pathfind to the player if the terrain is accessible, and ground enemies follow the player by jumping pits and platforms if they are able to do so
 
--Adjacent colliders' lenght and height are measured in order to determine whether the ground enemies can jump over them or not
+·Adjacent colliders' lenght and height are measured in order to determine whether the ground enemies can jump over them or not
 
--There is a "main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
+·There is a "main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
 
 ## Links
 
@@ -74,3 +74,73 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 [Latest release](https://github.com/Skyway666/Assignment-3--UI/releases/tag/2.0)
 
 [One minute video](https://www.youtube.com/watch?v=N-DDTzSzeDo)
+
+## Instructions
+
+### Controls
+
+·A	→	Move Left
+·D	→	Move Right
+·W	→	Jump
+·S	→	Slide
+·P	→	Pause/Unpause the game
+
+### Mechanics
+
+·Wall slide → Jump next to a wall and advance towards it to start sliding on it
+·Wall jump	→	When sliding on a wall, press "W" to jump again
+·Slide      →	Slide to go faster and pass under certain obstacles
+
+### Enemies and obstacles
+
+·Pits         → If the player falls down a pit, he/she dies
+
+·Spikes       →	If hit by one, the player dies
+
+·Flying enemy → It pathfinds towards the player, avoiding non-accessible terrain, but if it gets too far from his starting point, it                     goes back to idle state
+
+·Ground enemy → Runs from one side to the other jumping over pits and falling down platforms, and follows the player if nearby. If the                   player is too far away, it starts running from one side to the other again
+
+*If the player gets hit by any enemy or obstacle (dies), he/she loses a life and must restart from the current level
+
+### Punctuation system
+
+·Every small bone gives 1 point
+·Beating level 1 gives 200 points
+·Win 5 points every 2 seconds while being chased by flying enemies
+·Upon beating the game, your points will be increased depending on how much time it took you do so and how many remaining lives you have
+
+## Art
+
+### Audio from
+·https://www.youtube.com/watch?v=jgETNzUqDP0 https://www.youtube.com/watch?v=mKnDjMMsdAo ("Price Ali" instrumental, from the Disney movie "Aladin")
+·https://www.youtube.com/watch?v=vkHiTnm_P3Y (Coin sound from Street Fighter 2)
+
+Animations and map textures from:
+
+·https://www.gameart2d.com
+·https://www.spriters-resource.com/fullview/98810/
+
+## License
+
+MIT License
+
+Copyright (c) 2017 Lucas García Mateu, Genís Bayó Salgado
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
