@@ -306,6 +306,8 @@ bool j1Entities::Load(pugi::xml_node& data)
 {
 	if (App->map->map == data.child("player").attribute("map").as_int())
 	{
+		EraseEntities();
+		Spawn_waiting_entities();
 		Load_entities(data);
 	}
 	else
