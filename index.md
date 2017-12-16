@@ -122,11 +122,14 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ## Art
 
 ### Audio from
-·https://www.youtube.com/watch?v=jgETNzUqDP0 https://www.youtube.com/watch?v=mKnDjMMsdAo ("Price Ali" instrumental, from the Disney movie "Aladin")
 
-·https://www.youtube.com/watch?v=vkHiTnm_P3Y (Coin sound from Street Fighter 2)
+·https://www.youtube.com/watch?v=jgETNzUqDP0
 
-Animations and map textures from:
+·https://www.youtube.com/watch?v=mKnDjMMsdAo
+
+·https://www.youtube.com/watch?v=vkHiTnm_P3Y
+
+### Animations and map textures from:
 
 ·https://www.gameart2d.com
 
