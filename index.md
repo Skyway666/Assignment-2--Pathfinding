@@ -11,15 +11,23 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 ### Lucas García Mateu
 <br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/LucasWebPic.jpg?raw=true" width = "243" height = "324" alt="Error loading img"><br>
+[GitHub](https://github.com/Skyway666)
+
 -Implementing map and colliders loading from XML
+
 -Implementing load and save methods for the player and maps
+
 -Designing and implementing entity system
+
 -Implementing flying, pathfinding enemies, as well as their save and load methods
+
 -Designing and implementing User Interface system
+
 -Implementing main menu, options and pause windows
 
 ### Genís Bayó Salgado
 <br><img src="https://github.com/Skyway666/Assignment-3--UI/blob/master/Webpage%20pictures/Gen%C3%ADsWebPic.jpg?raw=true" width = "245" height = "229" alt="Error loading img"><br>
+[GitHub](https://github.com/retsnom9)
 
 -Designing and implementing collision system
 
