@@ -309,6 +309,7 @@ bool j1Entities::Load(pugi::xml_node& data)
 		EraseEntities();
 		Spawn_waiting_entities();
 		Load_entities(data);
+		App->loading_frame = true;
 	}
 	else
 	{
