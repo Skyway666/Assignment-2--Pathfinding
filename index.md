@@ -64,7 +64,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 ·Adjacent colliders' lenght and height are measured in order to determine whether the ground enemies can jump over them or not
 
-·There is a "Main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
+·There is a "main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
 
 ## Links
 [Code repository](https://github.com/Skyway666/Assignment-3--UI)
@@ -116,17 +116,19 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ## Art
 ### Audio from
 
-·https://www.youtube.com/watch?v=jgETNzUqDP0
+·[Menu music](https://www.youtube.com/watch?v=jgETNzUqDP0)
 
-·https://www.youtube.com/watch?v=mKnDjMMsdAo
+·[In game music](https://www.youtube.com/watch?v=mKnDjMMsdAo)
 
-·https://www.youtube.com/watch?v=vkHiTnm_P3Y
+·[Pushing button sound](https://www.youtube.com/watch?v=vkHiTnm_P3Y)
+
+·[Picking up coin sound](https://freesound.org/people/sergeeo/sounds/202575/)
 
 ### Animations and map textures from:
 
-·https://www.gameart2d.com
+·[Map and characters art](https://www.gameart2d.com)
 
-·https://www.spriters-resource.com/fullview/98810/
+·[Hourglass sprites](https://www.spriters-resource.com/fullview/98810/)
 
 ## License
 MIT License
