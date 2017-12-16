@@ -124,7 +124,7 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
 [Picking up coin sound](https://freesound.org/people/sergeeo/sounds/202575/)
 
-### Animations and map textures from:
+### Animations and map textures from
 
 [Map and characters art](https://www.gameart2d.com)
 
