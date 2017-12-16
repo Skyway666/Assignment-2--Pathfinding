@@ -116,19 +116,19 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ## Art
 ### Audio from
 
-·[Menu music](https://www.youtube.com/watch?v=jgETNzUqDP0)
+[Menu music](https://www.youtube.com/watch?v=jgETNzUqDP0)
 
-·[In game music](https://www.youtube.com/watch?v=mKnDjMMsdAo)
+[In game music](https://www.youtube.com/watch?v=mKnDjMMsdAo)
 
-·[Pushing button sound](https://www.youtube.com/watch?v=vkHiTnm_P3Y)
+[Pushing button sound](https://www.youtube.com/watch?v=vkHiTnm_P3Y)
 
-·[Picking up coin sound](https://freesound.org/people/sergeeo/sounds/202575/)
+[Picking up coin sound](https://freesound.org/people/sergeeo/sounds/202575/)
 
 ### Animations and map textures from:
 
-·[Map and characters art](https://www.gameart2d.com)
+[Map and characters art](https://www.gameart2d.com)
 
-·[Hourglass sprites](https://www.spriters-resource.com/fullview/98810/)
+[Hourglass sprites](https://www.spriters-resource.com/fullview/98810/)
 
 ## License
 MIT License
