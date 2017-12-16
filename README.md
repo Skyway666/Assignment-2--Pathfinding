@@ -7,21 +7,32 @@ with information for the player).
 Controls:
 
 A	->	Move Left
+
 D	->	Move Right
+
 W	->	Jump
+
 S	->	Slide
+
 P	->	Pause/Unpause the game
 
 
 Debug Features:
 
 F1	->	Restart from first level
+
 F2	->	Restart from current level
+
 F5	->	Save
+
 F6	->	Load
+
 F8	->	See Graphic User Interface logic (only interactables use logic)
+
 F9	->	See colliders and pathfinding
+
 F10	->	Enter godmode(ignore any collisions and gravity, move large distances if pressing X / C)
+
 F11	->	Enable/Disable FPS cap to 30
 
 
@@ -34,18 +45,26 @@ the score, but they are not mandatory to beat the game. The player also gets rew
 not dying. Ending a level also provides points.
 
 Punctuation system:
+
 - Every small bone gives 1 point
+
 - Beating level 1 gives 200 points
+
 - Win 5 points every 2 seconds while being chased by flying enemies
+
 - Upon beating the game, your points will be increased depending on
-  how much time it took you do so and how many remaining lives you have.
+
+  how much time it took you do so and how many remaining lives you have
 
 
 Mechanics:
 
 Wall slide	->	Jump next to a wall and advance towards it to start sliding on it
+
 Wall jump	->	When sliding on a wall, press "W" to jump again
+
 Slide		->	Slide to go faster and pass under certain obstacles
+
 Spikes		->	If hit by one, the player must restart the current level
 
 
@@ -71,13 +90,19 @@ Pause Menu: It is a draggable window which allows to return to the main menu or 
 Innovations:
 
 From previous project:
+
 - Enemies are loaded from the map xml
+
 - Enemy initial values and ground enemies' pathfinding distance can be set from the config xml
+
 - Every entity in the entity system has its own save and load
-- Walls' height and pits' width are calulated, so the ground enemies know whether if they can jump them or not.
-- "Walkable tiles" for ground enemies are positioned automatically on top of wall colliders without anything on top of them.
+
+- Walls' height and pits' width are calulated, so the ground enemies know whether if they can jump them or not
+
+- "Walkable tiles" for ground enemies are positioned automatically on top of wall colliders without anything on top of them
 
 From this project:
+
 - Pause implemented
 
 
@@ -98,9 +123,9 @@ Link to the website of the game: https://skyway666.github.io/Assignment-3--UI/
 
 Game by:
 
-Genís Bayó Salgado: github.com/retsnom9
+GenÃ­s BayÃ³ Salgado: github.com/retsnom9
 
-Lucas García Mateu: github.com/Skyway666
+Lucas GarcÃ­a Mateu: github.com/Skyway666
 
 ----------------------------------------------------------------------------------------------------
 Credits:
@@ -109,12 +134,17 @@ Credits:
 Audio from:
 
 https://www.youtube.com/watch?v=jgETNzUqDP0
+
 https://www.youtube.com/watch?v=mKnDjMMsdAo ("Price Ali" instrumental, from the Disney movie "Aladin")
+
 https://www.youtube.com/watch?v=vkHiTnm_P3Y (Coin sound from Street Fighter 2)
+
+https://freesound.org/people/sergeeo/sounds/202575/
 
 Animations and map textures from:
 
 https://www.gameart2d.com
+
 https://www.spriters-resource.com/fullview/98810/
 
 
