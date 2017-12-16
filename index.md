@@ -2,7 +2,7 @@
 ### By Genís Bayó Salgado and Lucas García Mateu
 
 ## Team
-Who let the dog jump? was born as the product of three different University assignments, made by Genís Bayó and Lucas García, students from the UPC. The assignments consisted on creating a 2D platform game with Artificial Intelligence and a User Interface, as well as implementing several tech aspects, such as FPS management or XML loading variables.
+Who let the dog jump? was born as the product of three different University assignments, made by Genís Bayó and Lucas García, students from the UPC. The assignments consisted on creating a 2D platformer game with Artificial Intelligence and a User Interface, as well as implementing several tech aspects, such as FPS management or XML loading variables.
 
 Everything was developed in C++, using SDL2, Tiled and PugiXML.
 
@@ -46,7 +46,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 -Implementing HUD, collectable coins, lives, time and punctuation system
 
 ## Subsystems
-
 ·Every important variable is load from an XML file named confing.xml
 
 ·Maps are made with Tiled and loaded via XML
@@ -68,7 +67,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ·There is a "main menu" in which the player can choose between starting a new game, continuing from the last saved point, modifying the game volume, consulting the credits, license and his/her maximum score and exiting
 
 ## Links
-
 [Code repository](https://github.com/Skyway666/Assignment-3--UI)
 
 [Latest release](https://github.com/Skyway666/Assignment-3--UI/releases/tag/2.0)
@@ -76,7 +74,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 [One minute video](https://www.youtube.com/watch?v=N-DDTzSzeDo)
 
 ## Instructions
-
 ### Controls
 
 ·A	→	Move Left
@@ -90,7 +87,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ·P	→	Pause/Unpause the game
 
 ### Mechanics
-
 ·Wall slide → Jump next to a wall and advance towards it to start sliding on it
 
 ·Wall jump	→	When sliding on a wall, press "W" to jump again
@@ -98,7 +94,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ·Slide      →	Slide to go faster and pass under certain obstacles
 
 ### Enemies and obstacles
-
 ·Pits         → If the player falls down a pit, he/she dies
 
 ·Spikes       →	If hit by one, the player dies
@@ -110,7 +105,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 *If the player gets hit by any enemy or obstacle (dies), he/she loses a life and must restart from the current level
 
 ### Punctuation system
-
 ·Every small bone gives 1 point
 
 ·Beating level 1 gives 200 points
@@ -120,7 +114,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ·Upon beating the game, your points will be increased depending on how much time it took you do so and how many remaining lives you have
 
 ## Art
-
 ### Audio from
 
 ·https://www.youtube.com/watch?v=jgETNzUqDP0
@@ -136,7 +129,6 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ·https://www.spriters-resource.com/fullview/98810/
 
 ## License
-
 MIT License
 
 Copyright (c) 2017 Lucas García Mateu, Genís Bayó Salgado
