@@ -80,15 +80,21 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ### Controls
 
 ·A	→	Move Left
+
 ·D	→	Move Right
+
 ·W	→	Jump
+
 ·S	→	Slide
+
 ·P	→	Pause/Unpause the game
 
 ### Mechanics
 
 ·Wall slide → Jump next to a wall and advance towards it to start sliding on it
+
 ·Wall jump	→	When sliding on a wall, press "W" to jump again
+
 ·Slide      →	Slide to go faster and pass under certain obstacles
 
 ### Enemies and obstacles
@@ -106,19 +112,24 @@ Everything was developed in C++, using SDL2, Tiled and PugiXML.
 ### Punctuation system
 
 ·Every small bone gives 1 point
+
 ·Beating level 1 gives 200 points
+
 ·Win 5 points every 2 seconds while being chased by flying enemies
+
 ·Upon beating the game, your points will be increased depending on how much time it took you do so and how many remaining lives you have
 
 ## Art
 
 ### Audio from
 ·https://www.youtube.com/watch?v=jgETNzUqDP0 https://www.youtube.com/watch?v=mKnDjMMsdAo ("Price Ali" instrumental, from the Disney movie "Aladin")
+
 ·https://www.youtube.com/watch?v=vkHiTnm_P3Y (Coin sound from Street Fighter 2)
 
 Animations and map textures from:
 
 ·https://www.gameart2d.com
+
 ·https://www.spriters-resource.com/fullview/98810/
 
 ## License
